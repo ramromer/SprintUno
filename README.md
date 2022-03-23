@@ -1,8 +1,8 @@
 # grupo_3_bicicletas
 Descripcion Parcial y modificable. Incluimos Wireframes
 
-Tematica del sitio y publico objetivo: El sitio buscará ser un ecommerce de bicicletas, incluyendo kids, urbano y deportivas.  
-El publico objetivo seran las personas interesadas en comprar una bicicleta.  
+Tematica del sitio y publico objetivo: El sitio buscará ser un ecommerce de bicicletas de competencia.
+El publico objetivo seran las personas interesadas en comprar una bicicleta de mountain bike o carrera.
 
 
 Breve descripcion de los integrantes del equipo:
