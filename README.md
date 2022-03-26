@@ -7,17 +7,31 @@ El publico objetivo seran las personas interesadas en comprar una bicicleta de m
 
 Breve descripcion de los integrantes del equipo:
 Juan Albarracin: 
-Luis Mora:  
+Luis Javier Iglesias:  
 Ramiro Romero: 
 Daiana Stoffel:  
 
 
 Listado de al menos cinco referentes: 
-1.
-2.
-3.
-4. 
-5.
+
+- https://www.biciescapa.com/es/:
+    Esquema de colores y diseño minimalista
+    La forma en que muestra el producto
+
+- https://rodarelectric.com/:
+    Esquema y distribución.
+
+- https://www.specialized.com/co/es:
+    Esuqema y distribución.
+
+- https://www.probike.com/:
+    Muestra una cantidad importante en el home.
+    Login y registro sin carrusel.
+    
+-https://www.topmega.com.ar/
+    Diseño, distribución.
+    Productos a un clic. 
+    Esquema de colores.
 
 
 
