@@ -5,8 +5,9 @@ Tematica del sitio y publico objetivo: El sitio buscará ser un ecommerce de bic
 El publico objetivo seran las personas interesadas en comprar una bicicleta de mountain bike o carrera.
 
 
-Breve descripcion de los integrantes del equipo:
-Juan Albarracin: 
+Breve descripcion de los integrantes del equipo
+
+Juan Albarracin: base de datos, troubleshooting //
 Luis Javier Iglesias:  
 Ramiro Romero: 
 Daiana Stoffel:  
@@ -22,13 +23,13 @@ Listado de al menos cinco referentes:
     Esquema y distribución.
 
 - https://www.specialized.com/co/es:
-    Esuqema y distribución.
+    Esquema y distribución.
 
 - https://www.probike.com/:
     Muestra una cantidad importante en el home.
     Login y registro sin carrusel.
     
--https://www.topmega.com.ar/
+- https://www.topmega.com.ar/
     Diseño, distribución.
     Productos a un clic. 
     Esquema de colores.
