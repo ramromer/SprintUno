@@ -8,7 +8,7 @@ El publico objetivo seran las personas interesadas en comprar una bicicleta de m
 Breve descripcion de los integrantes del equipo
 
 Juan Albarracin: base de datos, troubleshooting //
-Luis Javier Iglesias:  
+Luis Javier Iglesias: mecatronico, Programación de microcontroladores, ventas industriales.
 Ramiro Romero: 
 Daiana Stoffel:  
 
