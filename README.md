@@ -10,7 +10,7 @@ Breve descripcion de los integrantes del equipo
 Juan Albarracin: base de datos, troubleshooting //
 Luis Javier Iglesias: mecatronico, Programación de microcontroladores, ventas industriales.
 Ramiro Romero: 
-Daiana Stoffel:  
+Daiana Stoffel:  ventas online
 
 
 Listado de al menos cinco referentes: 
