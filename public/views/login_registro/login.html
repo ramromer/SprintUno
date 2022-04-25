@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Login</title>
+</head>
+<body>
+    <header id="header">
+        <div class="topnav" id="myTopnav">
+            <div id="containerLogo">
+                <a href="#home" id="linkLogo" ><img  id ="logo" src="../../images/logo_kleta.png"></a>
+            </div>
+            <div id="containerMenu">
+                <a href="#login"><i class="fas fa-user"></i></a>
+                <a href="#car"><i class="fas fa-shopping-cart"></i></a>
+                <a href="#hamburguer"><i class="fas fa-bars"></i></a>
+                <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+    <main>
+    <section id="container-slider">
+        <a href="javascript: fntExecuteSlide('prev');" class="arrowPrev"><i class="fas fa-chevron-circle-left"></i></a>
+        <a href="javascript: fntExecuteSlide('next');" class="arrowNext"><i class="fas fa-chevron-circle-right"></i></a>
+        <ul class="listslider">
+            <li><a itlist="itList_0" href="#" class="item-select-slid"></a></li>
+            <li><a itlist="itList_1" href="#"></a></li>
+            <li><a itlist="itList_2" href="#"></a></li>
+        </ul>
+        <ul id="slider">
+            <li
+                style="background-image: url('https://cdn.pixabay.com/photo/2020/04/15/11/20/telework-5046230_1280.jpg'); z-index:0; opacity: 1;">
+                <div class="content_slider">
+                    <div>
+                        <h2>Emprendimiento empresarial</h2>
+                        <p>Descubra en qué consiste el emprendimiento empresarial por medio de 5 estrategias
+                            fundamentales.</p>
+                        <a href="#" class="btnSlider">Ver más</a>
+                    </div>
+                </div>
+            </li>
+            <li
+                style="background-image: url('https://cdn.pixabay.com/photo/2018/02/20/10/28/business-3167295_960_720.jpg'); ">
+                <div class="content_slider">
+                    <div>
+                        <h2>Negocios</h2>
+                        <p>Recursos, guías, herramientas y consejos para emprender, crear tu empresa o iniciar un
+                            negocio exitoso</p>
+                        <a href="#" class="btnSlider">Ver más</a>
+                    </div>
+                </div>
+            </li>
+            <li
+                style="background-image: url('https://cdn.pixabay.com/photo/2015/07/17/22/42/typing-849806_960_720.jpg'); ">
+                <div class="content_slider">
+                    <div>
+                        <h2>Estrategias de negocio</h2>
+                        <p>Las estrategias de negocio representan planes o métodos...</p>
+                        <a href="#" class="btnSlider">Ver más</a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </section>
+
+        <div class="login">
+            <form action="/" method="POST">
+                <div class="login-name">
+                    <label>Ingresá tu nombre de usuario</label>
+                     <input class="input-name" type="text" name="user" placeholder="Nombre de usuario">    
+                </div>
+
+                <div class="login-password">
+                    <label>Ingresá tu contraseña</label>
+                    <input class="input-password" type="password" name="pass" placeholder="Contraseña">
+                    <input class="button" type="submit" value="Enviar">
+                </div>
+                <div class="forgot-password" ><a href="#">Olvidaste tu contraseña?</a></div>
+            </form>
+
+        </div>
+   
+</main>
+
+    <footer>
+        <i class="fab fa-facebook iconosRedes"></i>
+        <i class="fab fa-instagram iconosRedes"></i>
+        <i class="fab fa-twitter iconosRedes"></i>
+    </footer>
+
+
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+    <script defer src="detalle_productoo.js"></script>
+</body>
+
+</html>
