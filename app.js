@@ -22,6 +22,6 @@ app.get('/register', (req,res)=>{
 app.get('/login', (req,res)=>{
     res.sendFile(__dirname + '/public/views/login_registro/login.html')
 })
-app.get('/login', (req,res)=>{
-    res.sendFile(__dirname + '/public/views/carrito_registro/carrito.html')
+app.get('/carrito', (req,res)=>{
+    res.sendFile(__dirname + '/public/views/carrito/carrito.html')
 })

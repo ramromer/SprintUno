@@ -2,6 +2,16 @@
     box-sizing: border-box;
 }
 
+.topnav{
+    display:flex;
+}
+#containerLogo{
+    max-width: 30%;
+}
+#containerLogo a{
+    max-width: 30%;
+}
+
 i{
     font-size: 30px;
     margin-bottom: 10px;
