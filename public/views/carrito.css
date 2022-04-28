@@ -7,6 +7,7 @@ i{
     margin-bottom: 10px;
 }
 
+
 .carro{
     font-size: 16px;
     font-style: italic;
@@ -22,7 +23,7 @@ i{
     flex-direction: column;
     justify-content: space-around;
     /* border: solid 1px black; */
-    align-items: center;
+    /* align-items: center; */
     
 }
 
@@ -45,9 +46,14 @@ article label {
 
 article{
     display: flex;
-   background-color: rgb(189, 178, 224);
-    width: 100%;
     
+    /* border-radius: 15px; */
+    /* margin-left: 10px; */
+    border: solid 1px black;
+    /* border-radius: 15px; */
+    /* background-color: rgb(240, 234, 234); */
+    width: 100%;
+
 }
 
 article div{
@@ -56,3 +62,111 @@ article div{
     justify-content: space-between;
     align-items: center;
 }
+
+.btn-segcompr{
+    width: 35%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: black;
+    color: white;
+    border-radius: 5px;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+.btn-segcompr i{
+    font-size: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+    text-align: center;
+    padding-top: 10px;
+}
+
+
+.detalle-pago{
+    display: flex;
+    padding: 5%;
+    border: solid 2px black;
+    width: 90%;
+    border-radius: 10px;
+    margin: auto; 
+    flex-direction:column;
+    background-color:lightgray;
+}
+
+div.resumen{
+    display: flex;
+    flex-direction: row;
+    border-bottom: solid 1px white;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 18px;
+    font-weight: bold;
+    font-style: italic;
+    justify-content: center;
+    align-items: center;
+}
+
+.resumen i{
+    margin-right: 10px;
+    color: white;
+    font-size: 25px;
+}
+
+div.detalle-cart{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    
+    justify-content: space-between;
+    align-items: center;
+}
+
+.products-pr {
+    text-align: right;
+
+}
+.envio-tipo{
+    text-align: right;
+}
+
+div.detalle-cart p{
+    width: 50%;
+
+}
+
+div.comprar{
+    display: flex;
+    flex-direction: row;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 18px;
+    font-weight: bold;
+    justify-content: center;
+}
+.total{
+    display: flex;
+    justify-content: space-between;
+}
+.promocion{
+    display: flex;
+    justify-content: center;
+}
+
+
+@media(min-width:769px){
+    .body-cart {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .detalle-compra{
+        width: 45%
+        
+    }
+    .detalle-pago{
+        width: 45%;
+    }
+  }

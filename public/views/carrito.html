@@ -1,83 +1,89 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="/static/css/styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Document</title>
-</head>
-<body>
-    <header>
-    </header>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="/static/css/styles.css">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 
-    <main>
-        <section>
-            <div class="carrito">
-                
-                <i class="fas fa-shopping-cart"></i>
-                <label class="carro" for="">Mi Carrito</label>
-            </div>
-            <div class="detalle-compra">
-                <article>
-                        <img src="/static/images/bicicleta-orbea-rise-m20.jpg" alt="Bicicleta">
-                        <div>
-                            <a href="">Bicicleta Orbea Rise M20 (2021 Orbea Days)</a>
+        <title>Document</title>
+    </head>
+    <body>
+        <header>
+        </header>
 
-                            <label for="cantidad">Cantidad</label>
-                            
-                            <input type="number" name="cantidad" id="cantidad">
-
-                            <label for="precio">Precio: $150.000</label>
+        <main>
+            <section>
+                <div class="body-cart">
+                    <div class="detalle-compra">
+                        <div class="carrito">
+                        
+                            <i class="fas fa-shopping-cart"></i>
+                            <label class="carro" for="">Mi Carrito</label>
                         </div>
-                </article>
+                        <article>
+                                <img src="/static/images/bicicleta-orbea-rise-m20.jpg" alt="Bicicleta">
+                                <div>
+                                    <p>Bicicleta Orbea Rise -M21 (2021 Orbea Days)</p>
 
-                <article>
-                       <img src="/static/images/bicicleta-orbea-rise-m21.jpg" alt="Bicicleta">
-                       <div>
-                            <a href="">Bicicleta Orbea Rise M20 (2021 Orbea Days)</a>
+                                    <label for="cantidad">Cantidad</label>
+                                    
+                                    <input type="number" name="cantidad" id="cantidad">
 
-                            <label for="cantidad">Cantidad</label>
-                            
-                            <input type="number" name="cantidad" id="cantidad">
+                                    <label for="precio">Precio: $150.000</label>
+                                    <i class="far fa-trash-alt"></i>
+                                </div>
+                        </article>
 
-                            <label for="precio">Precio: $130.000</label>                  
-                       </div>
-                </article>
-            </div>
-           
-            <h4 class="description"> continuar comprando </h4>
+                        <article>
+                            <img src="/static/images/bicicleta-orbea-rise-m21.jpg" alt="Bicicleta">
+                            <div>
+                                <p>Bicicleta Orbea Rise M20 (2021 Orbea Days)</p>
 
-            <i class="fas fa-arrow-circle-left"></i>
-        
-            <div class="detalle-pago"> 
-                <div class="resumen">
-                    <p>RESUMEN</p>
-                </div>
-                <div class="detalle-cart">
-                    <p>Productos</p>
-                    <p>$ 280000</p>
+                                    <label for="cantidad">Cantidad</label>
+                                    
+                                    <input type="number" name="cantidad" id="cantidad">
+
+                                    <label for="precio">Precio: $130.000</label> 
+                                    <i class="far fa-trash-alt"></i>                 
+                            </div>
+                        </article>
+                        <a class="btn-segcompr" href=""><i class="fas fa-angle-left"></i>Continuar Comprando</a>
+                    </div>
                 
-                </div>
-                <div class="total">
-                    <h4>Total</h4>
-                    <p>$280000</p>
-                </div>
-                <div class="comprar">
-                    <a href="">COMPRAR</a>
-                </div> 
-                <div>
-                    <p><i class=""></i>¿Tienes un código promocional?</p>
-                </div> 
-            </div>
-    </section>
-</main>
+                    
+                
+                    <div class="detalle-pago"> 
+                        <div class="resumen">
+                            <i class="fas fa-shopping-bag"></i><p>RESUMEN</p>
+                        </div>
+                        <div class="detalle-cart">
+                                <p class="products">Productos</p>
+                                <p class="products-pr">$ 280000</p>
+                                <p class="envio">Envio</p>
+                                <p class="envio-tipo">Gratis</p>
+                        </div>
+                        <div class="total">
+                            <h4>Total</h4>
+                            <h4>$ 280000</h4>
+                        </div>
+                        <div class="comprar">
+                            <a href="">COMPRAR</a>
+                        </div> 
+                        <div class="promocion">
+                            <p>¿Tienes un código promocional?</p>
+                        </div> 
+                    </div>
 
-<footer>
-</footer>
-</body>
-</html>  
+                </div>
+                
+            </section>
+        </main>
+        <footer>
+        </footer>
+    </body>
+    </html>
