@@ -1,0 +1,77 @@
+<%- include('partials/head.ejs')%>
+  <body>
+    <%- include('partials/header.ejs')%>
+    <main>
+      <section class="enlaces">
+        <a href="/MTB">MTB</a>
+        <a href="/Ruta">Ruta</a>
+        <a href="/Urbanas">Urbanas</a>
+        <a href="/Accesorios">Accesorios</a>
+      </section>
+        <h3 class="sections">Nuestras ofertas para vos!</h3>
+      <section>
+          <article class="product">
+              <img src="/images/bicicleta-orbea-rise-m20.jpg" alt="Mountain Bike">
+              <div class="producto-descripcion">
+                  <div class="price-bar">
+                      <p class="precio">$10.000</p>
+                      <p class="precio1">$9000</p>
+                      <p class="descuento">10% off</p>
+                  </div>
+                  <h4 class="description">Mountain Bike</h4>
+              </div>
+          </article>
+          <article class="product">
+              <img src="/images/bicicleta-orbea-rise-m21.jpg" alt="Mountain Bike 2">
+              <div class="producto-descripcion">
+                  <div class="price-bar">
+                      <p class="precio">$13.000</p>
+                      <p class="precio1">$11.700</p>
+                      <p class="descuento">10% off</p>
+                  </div>
+                  <h4 class="description">Mountain Bike 2</h4>
+              </div>
+          </article>
+          <article class="product">
+            <img src="/images/bicicleta-orbea-rise-m20.jpg" alt="Mountain Bike">
+            <div class="producto-descripcion">
+                <div class="price-bar">
+                    <p class="precio">$10.000<p>
+                    <p class="precio1">$9000</p>
+                    <p class="descuento">10% off</p>
+                </div>
+                <h4 class="description">Mountain Bike</h4>
+            </div>
+        </article>
+        <article class="product">
+            <img src="/images/bicicleta-orbea-rise-m21.jpg" alt="Mountain Bike 2">
+            <div class="producto-descripcion">
+                <div class="price-bar">
+                    <p class="precio">$13.000</p>
+                    <p class="precio1">$11.700</p>
+                    <p class="descuento">10% off</p>
+                </div>
+                <h4 class="description">Mountain Bike 2</h4>
+            </div>
+        </article>
+      </section>
+      <h3 class="sections">DESTACADOS</h3>
+      <section class="slider">
+          <!-- SLIDER -->
+          <div class="slider-display-container">
+            <img class="sliderImagen" src="/images/bicicleta-orbea-rise-m20.jpg" style="width:100%">
+            <img class="sliderImagen" src="/images/bicicleta-orbea-rise-m21.jpg" style="width:100%">
+            <!-- 
+            <img class="sliderImagen" src="" style="width:100%">
+            <img class="sliderImagen" src="" style="width:100%"> 
+            -->
+            <button class="btnIzq" onclick="siguiente(-1)">&#10094;</button>
+            <button class="btnDer" onclick="siguiente(1)">&#10095;</button>
+          </div>
+          <!-- SLIDER SCRIPT (MUST INCLUDE)-->
+          <%- include('partials/slider.ejs')%>
+      </section>
+  </main>
+    <%- include('partials/footer.ejs')%>
+  </body>
+</html>
