@@ -5,4 +5,6 @@ var mainController = require('../controllers/mainController.js');
 /* GET home page. */
 router.get('/', mainController.index);
 
+router.get('/detalleproducto', mainController.detalleProducto);
+
 module.exports = router;
