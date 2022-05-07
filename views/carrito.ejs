@@ -1,0 +1,89 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+
+        <link rel="stylesheet" href="/stylesheets/carrito.css">
+        <!-- <link rel='stylesheet' href='/stylesheets/style.css' /> -->
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+        <title>Document</title>
+    </head>
+    <body>
+        <%- include('partials/header.ejs')%>
+        <main>
+            <section>
+                <div class="body-cart">
+                    <div class="detalle-compra">
+                        <div class="carrito">
+                        
+                            <i class="fas fa-shopping-cart"></i>
+                            <label class="carro" for="">Mi Carrito</label>
+                        </div>
+                        <article>
+                                <img src="/images/bicicleta-orbea-rise-m20.jpg" alt="Bicicleta">
+                                <div>
+                                    <p>Bicicleta Orbea Rise -M21 (2021 Orbea Days)</p>
+
+                                    <label for="cantidad">Cantidad</label>
+                                    
+                                    <input type="number" name="cantidad" id="cantidad">
+
+                                    <label for="precio">Precio: $150.000</label>
+                                    <i class="far fa-trash-alt"></i>
+                                </div>
+                        </article>
+
+                        <article>
+                            <img src="/images/bicicleta-orbea-rise-m21.jpg" alt="Bicicleta">
+                            <div>
+                                <p>Bicicleta Orbea Rise M20 (2021 Orbea Days)</p>
+
+                                    <label for="cantidad">Cantidad</label>
+                                    
+                                    <input type="number" name="cantidad" id="cantidad">
+
+                                    <label for="precio">Precio: $130.000</label> 
+                                    <i class="far fa-trash-alt"></i>                 
+                            </div>
+                        </article>
+                        <a class="btn-segcompr" href=""><i class="fas fa-angle-left"></i>Continuar Comprando</a>
+                    </div>
+                
+                    
+                
+                    <div class="detalle-pago"> 
+                        <div class="resumen">
+                            <i class="fas fa-shopping-bag"></i><p>RESUMEN</p>
+                        </div>
+                        <div class="detalle-cart">
+                                <p class="products">Productos</p>
+                                <p class="products-pr">$ 280000</p>
+                                <p class="envio">Envio</p>
+                                <p class="envio-tipo">Gratis</p>
+                        </div>
+                        <div class="total">
+                            <h4>Total</h4>
+                            <h4>$ 280000</h4>
+                        </div>
+                        <div class="comprar">
+                            <a href="">COMPRAR</a>
+                        </div> 
+                        <div class="promocion">
+                            <p>¿Tienes un código promocional?</p>
+                        </div> 
+                    </div>
+
+                </div>
+                
+            </section>
+        </main>
+        <footer>
+        </footer>
+    </body>
+    </html>
