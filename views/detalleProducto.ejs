@@ -1,59 +1,74 @@
 <%- include('partials/head.ejs')%>
+
   <body>
     <%- include('partials/header.ejs')%>
-    <main>
-      <section class="enlaces">
-        <a href="/MTB">MTB</a>
-        <a href="/Ruta">Ruta</a>
-        <a href="/Urbanas">Urbanas</a>
-        <a href="/Accesorios">Accesorios</a>
-      </section>
-    
-    
-      <section class="slider">
+      <main>
+        <section class="enlaces">
+          <a href="/MTB">MTB</a>
+          <a href="/Ruta">Ruta</a>
+          <a href="/Urbanas">Urbanas</a>
+          <a href="/Accesorios">Accesorios</a>
+        </section>
+
+
+        <section class="slider">
           <!-- SLIDER -->
           <div class="slider-display-container">
-            <img class="sliderImagen" src="/images/bicicleta-orbea-rise-m20.jpg" style="width:100%">
-            <img class="sliderImagen" src="/images/bicicleta-orbea-rise-m21.jpg" style="width:100%">
-    
-            <button class="btnIzq" onclick="siguiente(-1)">&#10094;</button>
-            <button class="btnDer" onclick="siguiente(1)">&#10095;</button>
+            <%producto.img.forEach(bici=> { %>
+              <img class="sliderImagen" src="/images/<%= bici %>" style="width:100%">
+              <%})%>
+
+                <button class="btnIzq" onclick="siguiente(-1)">&#10094;</button>
+                <button class="btnDer" onclick="siguiente(1)">&#10095;</button>
           </div>
           <!-- SLIDER SCRIPT (MUST INCLUDE)-->
           <%- include('partials/slider.ejs')%>
-      </section>
-      <section >
-        <form class="flexcontainer" id="infoProducto" action="none" method="post">
-          <div id="tituloProducto" class="flexcontainer">
-            <h3>Nombre producto</h3>
-          </div>
-          <div class="flexcontainer" id="precioProducto">
-            <h4>Precio: </h4><h4>$$$.$$$</h4>
-          </div>
-          <div class="flexcontainer" id="colorProducto">
-            <h4>Color: </h4> <a class="iconCircle red"></a> <a class="iconCircle white"></a><a class="iconCircle black"></a>
+        </section>
+        <section>
+          <form class="flexcontainer" id="infoProducto" action="none" method="post">
+            <div id="tituloProducto" class="flexcontainer">
+              <h3>
+                <%= producto.titulo %>
+              </h3>
 
-          </div>
-          <div class="flexcontainer" id="tamanioProducto">
-            <h4>Tamaño: </h4> <div class="iconCircle white">S</div> <div class="iconCircle white">M</div><div class="iconCircle white">L</div>
-          </div>
-          <div class="flexcontainer" id="cantidadProducto">
-            <h4>Cantidad: </h4> <input type="number">
-          </div>
-          <div id ="containerBtn" class="flexcontainer" >
-            <button id="btnCompraAhora">Compra ahora</button>
-          </div>
-        </form>
+            </div>
+            <div class="flexcontainer" id="precioProducto">
+              <h4>Precio: </h4>
+              <h4>$<%= producto.precio %>
+              </h4>
+            </div>
+            <div class="flexcontainer" id="colorProducto">
+              <h4>Color: </h4> <a class="iconCircle red"></a> <a class="iconCircle white"></a><a
+                class="iconCircle black"></a>
 
-        <div id="descripcionProducto">
-          <h4>Descripción</h4>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in molestie arcu. Aenean congue pretium urna ut egestas. Nunc eget enim mauris. Vivamus diam eros, dapibus quis ipsum id, volutpat rutrum nisi. Vestibulum tempor fringilla magna, quis imperdiet ex hendrerit a. Aliquam vestibulum eros a risus commodo, pulvinar posuere augue volutpat. Praesent dolor arcu, consectetur quis eleifend quis, suscipit ac magna. Maecenas gravida, mi a pulvinar porttitor, metus purus volutpat lectus, in tincidunt mauris ipsum in metus. Donec suscipit fringilla turpis, vel gravida tortor malesuada eget. Sed bibendum, augue elementum luctus congue, eros lorem efficitur quam, ut faucibus sem dolor a justo. Quisque auctor tincidunt blandit. </p>
-        </div>
+            </div>
+            <div class="flexcontainer" id="tamanioProducto">
+              <h4>Tamaño: </h4>
+              <div class="iconCircle white">S</div>
+              <div class="iconCircle white">M</div>
+              <div class="iconCircle white">L</div>
+            </div>
+            <div class="flexcontainer" id="cantidadProducto">
+              <h4>Cantidad: </h4> <input type="number">
+              <h4 class="textGray">tenemos <%= producto.cantidadDisponible %> unidades diponibles!</h4>
+            </div>
+            <div id="containerBtn" class="flexcontainer">
+              <button id="btnCompraAhora">Compra ahora</button>
+            </div>
+          </form>
+
+          <div id="descripcionProducto">
+            <h4>Descripción</h4>
+            <p>
+              <%= producto.descripcionDetallada %>
+            </p>
+          </div>
 
 
-      </section>
+        </section>
 
-  </main>
-    <%- include('partials/footer.ejs')%>
+      </main>
+      <%- include('partials/footer.ejs')%>
   </body>
-</html>
+
+  </html>
