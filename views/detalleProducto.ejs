@@ -2,65 +2,63 @@
 
   <body>
     <%- include('partials/header.ejs')%>
-      <main>
+      <main class="flexContainer">
         <%- include('partials/navMenu.ejs')%>
-
-
-        <section class="slider">
-          <!-- SLIDER -->
-          <div class="slider-display-container">
-            <%producto.img.forEach(bici=> { %>
-              <img class="sliderImagen" src="/images/<%= bici %>" style="width:100%">
-              <%})%>
-
+          <div id="containerSlider">
+            <section id="slider">
+              <!-- SLIDER -->
+              <div class="slider-display-container">
                 <button class="btnIzq" onclick="siguiente(-1)">&#10094;</button>
+                <%producto.img.forEach(bici=> { %>
+                  <img class="sliderImagen" src="/images/<%= bici %>">
+                <%})%>
                 <button class="btnDer" onclick="siguiente(1)">&#10095;</button>
+              </div>
+              <!-- SLIDER SCRIPT (MUST INCLUDE)-->
+              <%- include('partials/slider.ejs')%>
+            </section>
           </div>
-          <!-- SLIDER SCRIPT (MUST INCLUDE)-->
-          <%- include('partials/slider.ejs')%>
-        </section>
-        <section>
-          <form class="flexcontainer" id="infoProducto" action="none" method="post">
-            <div id="tituloProducto" class="flexcontainer">
-              <h3>
-                <%= producto.titulo %>
-              </h3>
+          <section id="formDetalleProdcuto">
+            <form class="flexContainer" id="infoProducto" action="none" method="post">
+              <div id="tituloProducto" class="flexContainer">
+                <h3>
+                  <%= producto.titulo %>
+                </h3>
 
-            </div>
-            <div class="flexcontainer" id="precioProducto">
-              <h4>Precio: </h4>
-              <h4>$<%= producto.precio %>
-              </h4>
-            </div>
-            <div class="flexcontainer" id="colorProducto">
-              <h4>Color: </h4> <a class="iconCircle red"></a> <a class="iconCircle white"></a><a
-                class="iconCircle black"></a>
+              </div>
+              <div class="flexContainer" id="precioProducto">
+                <h4>Precio: </h4>
+                <h4>$<%= producto.precio %>
+                </h4>
+              </div>
+              <div class="flexContainer" id="colorProducto">
+                <h4>Color: </h4> <a class="iconCircle red"></a> <a class="iconCircle white"></a><a
+                  class="iconCircle black"></a>
 
+              </div>
+              <div class="flexContainer" id="tamanioProducto">
+                <h4>Tamaño: </h4>
+                <div class="iconCircle white">S</div>
+                <div class="iconCircle white">M</div>
+                <div class="iconCircle white">L</div>
+              </div>
+              <div class="flexContainer" id="cantidadProducto">
+                <h4>Cantidad: </h4> <input type="number">
+                <h4 class="textGray">tenemos <%= producto.cantidadDisponible %> unidades diponibles!</h4>
+              </div>
+              <div id="containerBtn" class="flexContainer">
+                <button id="btnCompraAhora">Compra ahora</button>
+              </div>
+            </form>
+          </section>
+          <section id="descripcionProducto">
+            <div id="">
+              <h4>Descripción</h4>
+              <p>
+                <%= producto.descripcionDetallada %>
+              </p>
             </div>
-            <div class="flexcontainer" id="tamanioProducto">
-              <h4>Tamaño: </h4>
-              <div class="iconCircle white">S</div>
-              <div class="iconCircle white">M</div>
-              <div class="iconCircle white">L</div>
-            </div>
-            <div class="flexcontainer" id="cantidadProducto">
-              <h4>Cantidad: </h4> <input type="number">
-              <h4 class="textGray">tenemos <%= producto.cantidadDisponible %> unidades diponibles!</h4>
-            </div>
-            <div id="containerBtn" class="flexcontainer">
-              <button id="btnCompraAhora">Compra ahora</button>
-            </div>
-          </form>
-
-          <div id="descripcionProducto">
-            <h4>Descripción</h4>
-            <p>
-              <%= producto.descripcionDetallada %>
-            </p>
-          </div>
-
-
-        </section>
+          </section>
 
       </main>
       <%- include('partials/footer.ejs')%>

@@ -7,7 +7,7 @@ router.get('/', mainController.index);
 router.get('/carrito', mainController.carrito);
 router.get('/detalleproducto/:id', mainController.detalleProducto);
 
-router.get('/productoNuevo', mainController.productoNuevo);
+router.get('/productonuevo', mainController.productoNuevo);
 
 router.get('error', mainController.error);
 router.get('*', mainController.notFound);

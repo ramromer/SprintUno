@@ -23,15 +23,15 @@
           <%})%>
         </section>
         <h3 class="sections">DESTACADOS</h3>
-        <section class="slider">
+        <section id="slider">
           <!-- SLIDER -->
           <div class="slider-display-container">
+            <button class="btnIzq" onclick="siguiente(-1)">&#10094;</button>
             <%listaBicis.forEach(bici => { %>
               <%bici.img.forEach(img => { %>
                 <img class="sliderImagen" src="/images/<%= img %>" style="width:100%">
               <%})%>
             <%})%>
-            <button class="btnIzq" onclick="siguiente(-1)">&#10094;</button>
             <button class="btnDer" onclick="siguiente(1)">&#10095;</button>
           </div>
           <!-- SLIDER SCRIPT (MUST INCLUDE)-->

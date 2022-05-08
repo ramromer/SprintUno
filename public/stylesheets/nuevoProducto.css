@@ -1,0 +1,14 @@
+/* Inicio nuevo producto */
+
+#uploadImages {
+    height: 30vh;
+    width: 80%;
+    align-self: center;
+    justify-content: center;
+    align-items: center;
+    background-color: aliceblue;
+    margin: 50px 0px;
+  }
+  
+  /* fin nuevo producto */
+  

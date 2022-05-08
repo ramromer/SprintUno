@@ -1,0 +1,95 @@
+/* ****Detalle Producto***** */
+
+
+  
+  .red {
+    background-color: red !important;
+  }
+  
+  .white {
+    background-color: white !important;
+  }
+  
+  .black {
+    background-color: black !important;
+  }
+  
+  .flexContainer {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .iconCircle {
+    border-radius: 50%;
+    border: 1px solid;
+    width: 30px;
+    height: 30px;
+    margin-left: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #containerSlider{
+    width: 60%;
+    height: 20rem;
+  }
+
+  #infoProducto {
+    flex-direction: column;
+    align-items: start;
+    width: 100%;
+    margin-bottom: 15px;
+  }
+  
+  #precioProducto h4 {
+    margin-right: 5px;
+  }
+  
+  #tamanioProducto {
+    align-items: center;
+  }
+  
+
+  #colorProducto {
+    align-items: center;
+  }
+
+  #cantidadProducto {
+    align-items: center;
+    height: 30px;
+  }
+  
+  #cantidadProducto h4 {
+    margin-right: 5px;
+  }
+  
+  #cantidadProducto input {
+    width: 40px;
+    margin-right: 10px;
+  }
+  
+  #containerBtn {
+    margin-top: 30px;
+    width: 100%;
+    justify-content: center;
+  }
+  
+  #tituloProducto {
+    width: 100%;
+    justify-content: center;
+  }
+
+  #formDetalleProdcuto{
+    width: 40%;
+    height:20rem;
+  }
+  
+  #descripcionProducto {
+    text-align: justify;
+    background-color: rgba(0, 0, 0, 0.059);
+    padding: 3px;
+    width: 100%;
+  }
+  
+  /* fin detalle producto */

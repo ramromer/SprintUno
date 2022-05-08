@@ -1,0 +1,26 @@
+
+.logo-search {
+    display: flex;
+    /* flex-wrap: wrap; */
+    flex-basis: 70%;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding: 0px 5px 0px 5px;
+    height: 200px;
+  }
+  .logo-search img {
+    width: 200px;
+    height: 200px;
+    min-width: 100px;
+    min-height: 100px;
+    border-bottom-left-radius: 15%;
+    border-top-right-radius: 15%;
+  }
+  .search-container {
+    display: flex;
+  }
+  .search-container input {
+    align-self: center;
+    width: 30vw;
+  
+  }

@@ -1,0 +1,25 @@
+
+.enlaces {
+  min-width: 200px;
+  margin-top: 10px;
+  font-size: 1.2em;
+  justify-content: space-around;
+}
+
+.enlaces li:hover {
+  transform: scale(1.25);
+  transition: all 300ms ease-in-out;
+}
+
+.enlaces li a {
+  text-decoration: none;
+  color: black;
+}
+
+.enlaces li {
+  list-style: none;
+}
+
+#navBar {
+  width: 100%;
+}

@@ -1,0 +1,61 @@
+#slider {
+  justify-content: center;
+  height: 100%;
+}
+.slider-display-container {
+  max-width: 70%;
+  display: flex;
+  align-items: center;
+}
+.sliderImagen {
+  display: none;
+  aspect-ratio: 1/1;
+  height: 20em;
+}
+
+.btnIzq {
+  opacity: 0.5;
+  transform: translate(0%, -50%);
+}
+
+.btnIzq:hover {
+  animation: movIzq 800ms infinite ease-in-out;
+}
+
+.btnDer {
+  opacity: 0.5;
+  transform: translate(0%, -50%);
+}
+.btnDer:hover {
+  animation: movDer 800ms infinite ease-in-out;
+}
+
+@keyframes movIzq {
+  0% {
+    left: 18%;
+    opacity: 0.8;
+  }
+  50% {
+    left: 17.5%;
+    opacity: 0.6;
+  }
+  100% {
+    left: 18%;
+    opacity: 0.8;
+  }
+}
+
+@keyframes movDer {
+  0% {
+    right: 18%;
+    opacity: 0.8;
+  }
+  50% {
+    right: 17.5%;
+    opacity: 0.6;
+  }
+  100% {
+    right: 18%;
+    opacity: 0.8;
+  }
+}
