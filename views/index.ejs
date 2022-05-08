@@ -13,7 +13,7 @@
         <section>
           <%listaBicis.forEach(bici => { %>
             <article class="product">
-                <img src="/images/<%=bici.img%>" alt="<%=bici.alt%>">
+                <img src="/images/<%=bici.img[0]%>" alt="<%=bici.alt%>">
                 <div class="producto-descripcion">
                   <div class="price-bar">
                     <p class="precio"><%=bici.precio%></p>
@@ -31,7 +31,9 @@
           <!-- SLIDER -->
           <div class="slider-display-container">
             <%listaBicis.forEach(bici => { %>
-              <img class="sliderImagen" src="/images/<%=bici.img%>" style="width:100%">
+              <%bici.img.forEach(img => { %>
+                <img class="sliderImagen" src="/images/<%= img %>" style="width:100%">
+              <%})%>
             <%})%>
             <button class="btnIzq" onclick="siguiente(-1)">&#10094;</button>
             <button class="btnDer" onclick="siguiente(1)">&#10095;</button>

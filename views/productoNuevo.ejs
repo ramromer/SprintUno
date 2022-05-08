@@ -1,0 +1,59 @@
+<%- include('partials/head.ejs')%>
+
+  <body>
+    <%- include('partials/header.ejs')%>
+      <main>
+        <section class="enlaces">
+          <a href="/MTB">MTB</a>
+          <a href="/Ruta">Ruta</a>
+          <a href="/Urbanas">Urbanas</a>
+          <a href="/Accesorios">Accesorios</a>
+        </section>
+
+
+        <section>
+          <form class="flexcontainer" id="infoProducto" action="none" method="post">
+            <div id="uploadImages" class="flexcontainer">
+              <label for="avatar">Arrastra y suelta tus imagenes aquí o seleccionalas:</label>
+              <input type="file" id="imagenes" name="image" multiple accept="image/*" />
+            </div>
+
+            <div id="tituloProductoNuevo" class="flexcontainer">
+              <label for="nombre"> Nombre del Producto:</label> <input type="text" id="nombre" name="nombre" />
+            </div>
+            <div class="flexcontainer" id="precioProducto">
+              <label for="precioNuevo"> Precio:</label> <input type="number" id="precio" name="precio" />
+            </div>
+            <div class="flexcontainer" id="colorProductoNuevo">
+              <h4>Color: </h4> <a class="iconCircle red"></a> <a class="iconCircle white"></a><a
+                class="iconCircle black"></a>
+
+            </div>
+            <div class="flexcontainer" id="tamanioProductoNuevo">
+              <h4>Tamaño: </h4>
+              <div class="iconCircle white">S</div>
+              <div class="iconCircle white">M</div>
+              <div class="iconCircle white">L</div>
+            </div>
+            <div class="flexcontainer" id="cantidadProductoNuevo">
+              <label for="cantidad"> Precio:</label> <input type="number" id="cantidad" name="cantidad" />
+            </div>
+
+
+            <div id="descripcionProductoNuevo">
+
+              <label for="descripcionProductoNuevo"> Descripción:</label> <textarea id="descripcionProductoNuevo" name="descripcionProductoNuevo"> </textarea>
+
+            </div>
+
+        <div id ="containerBtn" class="flexcontainer" >
+          <button id="btnProductoNuevo">Guardar</button>
+        </div>
+      </form>
+
+      </section>
+
+    </main>
+    <%- include('partials/footer.ejs')%>
+  </body>
+</html>
