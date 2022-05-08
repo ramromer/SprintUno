@@ -1,4 +1,4 @@
-const path = require('path');
+
 
 const listaBicis = [
     {
@@ -143,6 +143,10 @@ let mainController = {
         res.render('index.ejs',{listaBicis:listaBicis})
     },
 
+    carrito: (req,res) => {
+        res.render('carrito');
+    },
+
     detalleProducto: (req, res) => {
         let reqId = listaBicis.find(element => element.id == req.params.id);
         res.render('detalleProducto', {producto:reqId})
@@ -150,6 +154,13 @@ let mainController = {
 
     productoNuevo: (req, res) => {
         res.render('productoNuevo')
+    },
+    error: (req, res) => {
+        res.render('error')
+    },
+
+    notFound: (req, res) => {
+        res.render('notFound')
     },
 }
 

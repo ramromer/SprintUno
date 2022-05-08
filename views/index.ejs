@@ -3,16 +3,12 @@
   <body>
     <%- include('partials/header.ejs')%>
       <main>
-        <section class="enlaces">
-          <a href="/MTB">MTB</a>
-          <a href="/Ruta">Ruta</a>
-          <a href="/Urbanas">Urbanas</a>
-          <a href="/Accesorios">Accesorios</a>
-        </section>
+        <%- include('partials/navMenu.ejs')%>
+        
         <h3 class="sections">Nuestras ofertas para vos!</h3>
         <section>
           <%listaBicis.forEach(bici => { %>
-            <article class="product">
+            <a href="/detalleproducto/<%=bici.id%>" class="product article">
                 <img src="/images/<%=bici.img[0]%>" alt="<%=bici.alt%>">
                 <div class="producto-descripcion">
                   <div class="price-bar">
@@ -23,7 +19,7 @@
                   </div>
                   <h4 class="description"><%=bici.titulo%></h4>
                 </div>
-            </article>
+              </a>
           <%})%>
         </section>
         <h3 class="sections">DESTACADOS</h3>

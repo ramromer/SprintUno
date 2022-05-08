@@ -62,7 +62,7 @@ main section {
   transform: scale(1.25);
   transition: all 300ms ease-in-out;
 }
-main article {
+main .article {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -70,7 +70,7 @@ main article {
   background-color: beige;
   max-width: 25%;
 }
-main article img {
+main .article img {
   width: 100%;
   height: 100%;
 }
@@ -83,7 +83,7 @@ main article img {
   margin-top: 1%;
 }
 
-main article img {
+main .article img {
   width: 100%;
 }
 .slider {
@@ -224,13 +224,14 @@ footer i {
 /* fin nuevo producto */
 
 @media (min-width: 361px) {
-  main article {
+  main .article {
     width: 45%;
     margin-left: 2.5%;
     transition: all 500ms ease;
   }
 
-  main article:hover {
+  main .article:hover {
+    cursor: pointer;
     box-shadow: 0px 0px 10px rgb(100, 100, 100);
   }
 }
@@ -239,13 +240,14 @@ footer i {
   main section {
     padding: 5px;
   }
-  main article {
+  main .article {
     justify-content: space-between;
     align-content: space-between;
     width: 20vw;
     margin-left: 1%;
   }
-  main article:hover {
+  main .article:hover {
+    cursor: pointer;
     box-shadow: 0px 0px 10px rgb(100, 100, 100);
   }
 }
