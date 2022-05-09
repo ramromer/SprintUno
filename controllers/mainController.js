@@ -1,6 +1,14 @@
 
 
-const listaBicis = [
+var listaUsers =[
+    {
+        usuarioId: 1,
+        nombreCompleto: 'Usuario de Prueba',
+        fechaNac: '01/01/2000',
+    },
+];
+
+var listaBicis = [
     {
         id: 1,
         titulo: 'Orbea Rise',
@@ -155,6 +163,7 @@ let mainController = {
     productoNuevo: (req, res) => {
         res.render('productoNuevo')
     },
+<<<<<<< HEAD
     error: (req, res) => {
         res.render('error')
     },
@@ -163,5 +172,8 @@ let mainController = {
         res.render('notFound')
     },
 }
+=======
+};
+>>>>>>> fea27b13b2c488aa2767865cea512ef43258baf4
 
 module.exports = mainController;
