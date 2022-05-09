@@ -1,14 +1,6 @@
 
 
-var listaUsers =[
-    {
-        usuarioId: 1,
-        nombreCompleto: 'Usuario de Prueba',
-        fechaNac: '01/01/2000',
-    },
-];
-
-var listaBicis = [
+const listaBicis = [
     {
         id: 1,
         titulo: 'Orbea Rise',
