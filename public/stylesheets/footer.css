@@ -1,7 +1,15 @@
 footer {
     display: flex;
     justify-content: flex-end;
+    background-color: rgb(28, 114, 147);
+    margin-top: 20px;
+
+  }
+
+  footer a{
+    align-items: center;
   }
   footer i {
-    padding: 5px;
+    margin: 5px;
+    margin-left: 10px;
   }
