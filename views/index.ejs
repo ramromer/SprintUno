@@ -13,7 +13,9 @@
         <section>
           <%listaBicis.forEach(bici => { %>
             <article class="product" onclick="location.href='/detalleproducto/<%=bici.id%>';" style="cursor: pointer;">
-                <img src="/images/<%=bici.img[0]%>" alt="<%=bici.alt%>">
+                <div class="image-product">
+                  <img src="/images/<%=bici.img[0]%>" alt="<%=bici.alt%>">
+                </div>
                 <div class="producto-descripcion">
                   <div class="price-bar">
                     <p class="precio"><%=bici.precio%></p>

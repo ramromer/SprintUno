@@ -73,9 +73,13 @@ main article {
   min-height: 275px;
   max-height: 275px;
 }
-main article img {
-  max-height: 185px;
-  height: 100%;
+main article img{
+  width: 100%;
+}
+main article .image-product {
+  max-height: 170px;
+  max-width: 170px;
+  align-self: center;
 }
 
 .sections {
