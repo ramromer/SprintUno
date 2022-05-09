@@ -1,0 +1,47 @@
+#containerSliderEP{
+    width:45%;
+}
+
+#uploadImagesEP {
+    height: 30vh;
+    width: 50%;
+    align-self: center;
+    justify-content: center;
+    align-items: center;
+    background-color: aliceblue;
+    margin: 50px 0px;
+
+  }
+
+  #uploadImagesEP label{
+    margin-right: 5px;
+  }
+
+  #colorEP{
+      justify-content: space-evenly;
+  }
+
+  #tamanioEP{
+    justify-content: space-evenly;
+}
+
+  #infoEP {
+    color: rgb(28, 114, 147);
+    justify-content: center;
+    align-items: center;
+  }
+
+  #nombreEP{
+      color: black;
+      text-align: center;
+  }
+
+  #precioEP {
+    color: black;
+    text-align: center;
+}
+
+#cantidadEP {
+    color: black;
+    text-align: center;
+}

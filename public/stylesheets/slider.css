@@ -13,20 +13,20 @@
   height: 20em;
 }
 
-.btnIzq {
+#btnIzq {
   opacity: 0.5;
   transform: translate(0%, -50%);
 }
 
-.btnIzq:hover {
+#btnIzq:hover {
   animation: movIzq 800ms infinite ease-in-out;
 }
 
-.btnDer {
+#btnDer {
   opacity: 0.5;
   transform: translate(0%, -50%);
 }
-.btnDer:hover {
+#btnDer:hover {
   animation: movDer 800ms infinite ease-in-out;
 }
 

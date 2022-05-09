@@ -1,0 +1,81 @@
+<%- include('partials/head.ejs')%>
+
+  <body>
+    <%- include('partials/header.ejs')%>
+      <main>
+        <%- include('partials/navMenu.ejs')%>
+
+
+          <section class="">
+            <form class="flexContainer" id="infoEP" action="none" method="post">
+              <div id="containerSliderEP">
+                <section class="flexContainer" id="slider">
+                  <!-- SLIDER -->
+                  <div class="slider-display-container">
+                    <button id="btnIzq" type="button" onclick="siguiente(-1)">&#10094;</button>
+                    <%producto.img.forEach(bici=> { %>
+                      <img class="sliderImagen" src="/images/<%= bici %>">
+                    <%})%>
+                    <button id="btnDer" type="button" onclick="siguiente(1)">&#10095;</button>
+                  </div>
+                  <!-- SLIDER SCRIPT (MUST INCLUDE)-->
+                  <%- include('partials/slider.ejs')%>
+                </section>
+              </div>
+              <div id="uploadImagesEP" class="flexContainer">
+                <label for="avatar">Arrastra y suelta tus imagenes aquí o seleccionalas:</label>
+                <input type="file" id="imagenes" name="image" multiple accept="image/*" />
+              </div>
+              <div id="contenedorInputs" class="flexContainer">
+                <div id="tituloEP" class="flexContainer">
+                  <label for="nombreEP"> Nombre del Producto:</label>
+                  <input type="text"  autocomplete="off" id="nombreEP" name="nombreEP" disabled placeholder="<%= producto.titulo %>" required/>
+                </div>
+                <div class="flexContainer" id="precioProducto">
+                  <label for="precioEP"> Precio:</label>
+                  <input type="number" min="1" autocomplete="off" id="precioEP" name="precio" value=<%= producto.precio %> required/>
+
+                </div>
+                <div class="flexContainer" >
+                  <label>Color:</label> 
+                  <div class="flexContainer" id="colorEP">
+                    <a class="iconCircle red"></a>
+                    <a class="iconCircle white"></a>
+                    <a class="iconCircle black"></a>
+                  </div>
+                </div>
+                <div class="flexContainer" >
+                  <label>Tamaño: </label>
+                  <div class="flexContainer" id="tamanioEP" >
+                    <div class="iconCircle white">S</div>
+                    <div class="iconCircle white">M</div>
+                    <div class="iconCircle white">L</div>
+                  </div>
+                </div>
+                <div class="flexContainer" id="cantidadEP">
+                  <label for="cantidadEP"> Cantidad:</label>
+                  <input type="number"  autocomplete="off" min="1" id="cantidadEP" name="cantidad" value=<%=producto.cantidadDisponible%>  />
+                </div>
+
+
+                <div id="descripcionProductoNuevo">
+
+                <label for="descripcionProductoNuevo"> Descripción:</label>
+                <textarea id="descripcionProductoNuevo" autocomplete="off" name="descripcionProductoNuevo"><%=producto.descripcionDetallada%> </textarea>
+
+                </div>
+
+                <div id="containerBtn" class="flexContainer">
+                  <button id="btnEP">Guardar</button>
+                </div>
+              </div>
+
+            </form>
+
+          </section>
+
+      </main>
+      <%- include('partials/footer.ejs')%>
+  </body>
+
+  </html>

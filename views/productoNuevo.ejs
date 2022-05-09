@@ -14,10 +14,12 @@
               </div>
               <div id="contenedorInputs" class="flexContainer">
                 <div id="tituloProductoNuevo" class="flexContainer">
-                  <label for="nombre"> Nombre del Producto:</label> <input type="text" id="nombre" name="nombre" />
+                  <label for="nombre"> Nombre del Producto:</label>
+                  <input type="text"  autocomplete="off" id="nombre" name="nombre" />
                 </div>
                 <div class="flexContainer" id="precioProducto">
-                  <label for="precioNuevo"> Precio:</label> <input type="number" id="precio" name="precio" />
+                  <label for="precioNuevo"> Precio:</label> 
+                  <input type="number" min="1" autocomplete="off" id="precio" name="precio" />
                 </div>
                 <div class="flexContainer" >
                   <label>Color:</label> 
@@ -36,15 +38,15 @@
                   </div>
                 </div>
                 <div class="flexContainer" id="cantidadProductoNuevo">
-                  <label for="cantidad"> Precio:</label>
-                  <input type="number" id="cantidad" name="cantidad" />
+                  <label for="cantidad"> Cantidad:</label>
+                  <input type="number" min="1" autocomplete="off" id="cantidad" name="cantidad" />
                 </div>
 
 
                 <div id="descripcionProductoNuevo">
 
                 <label for="descripcionProductoNuevo"> Descripción:</label>
-                <textarea id="descripcionProductoNuevo" name="descripcionProductoNuevo"> </textarea>
+                <textarea id="descripcionProductoNuevo"  autocomplete="off" name="descripcionProductoNuevo"> </textarea>
 
                 </div>
 

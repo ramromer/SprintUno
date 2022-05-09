@@ -8,11 +8,11 @@
             <section class="flexContainer" id="slider">
               <!-- SLIDER -->
               <div class="slider-display-container">
-                <button class="btnIzq" onclick="siguiente(-1)">&#10094;</button>
+                <button type="button" id="btnIzq" onclick="siguiente(-1)">&#10094;</button>
                 <%producto.img.forEach(bici=> { %>
                   <img class="sliderImagen" src="/images/<%= bici %>">
                 <%})%>
-                <button class="btnDer" onclick="siguiente(1)">&#10095;</button>
+                <button type="button" id="btnDer" onclick="siguiente(1)">&#10095;</button>
               </div>
               <!-- SLIDER SCRIPT (MUST INCLUDE)-->
               <%- include('partials/slider.ejs')%>
@@ -49,6 +49,9 @@
               <div id="containerBtn" class="flexContainer">
                 <button id="btnCompraAhora">Compra ahora</button>
               </div>
+              <a  id="editarProducto" href="/editarproducto/<%= producto.id %>">
+                <i  class="fas fa-edit"></i>
+              </a>
             </form>
           </section>
           <section id="descripcionProducto">

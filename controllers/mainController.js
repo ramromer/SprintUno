@@ -9,7 +9,7 @@ const listaBicis = [
         colorDisponible: ["white", "red", "black"],
         tamañoDisponible: ["S", "M", "L"],
         cantidadDisponible: 10,
-        precio: '10.000',
+        precio: '10000',
         img: ['bicicleta-orbea-rise-m20.jpg', 'bicicleta-orbea-rise-m21.jpg'],
         alt: 'bici',
     },
@@ -21,7 +21,7 @@ const listaBicis = [
         colorDisponible: ["white", "red", "black"],
         tamañoDisponible: ["S", "M", "L"],
         cantidadDisponible: 3,
-        precio: '11.000',
+        precio: '11000',
         img: [ 'bicicleta-orbea-rise-m21.jpg'],
         alt: 'bici',
     },
@@ -33,7 +33,7 @@ const listaBicis = [
         colorDisponible: ["white", "red", "black"],
         tamañoDisponible: ["S", "M", "L"],
         cantidadDisponible: 8,
-        precio: '12.000',
+        precio: '12000',
         descuento: '10%',
         img: [ 'bicicleta-aurorita-cyan.png'],
         alt: 'bici',
@@ -46,7 +46,7 @@ const listaBicis = [
         colorDisponible: ["white", "red", "black"],
         tamañoDisponible: ["S", "M", "L"],
         cantidadDisponible: 30,
-        precio: '12.000',
+        precio: '12000',
         img: [ 'bicicleta-aurorita-green.png'],
         alt: 'bici',
     },
@@ -58,7 +58,7 @@ const listaBicis = [
         colorDisponible: ["white", "red", "black"],
         tamañoDisponible: ["S", "M", "L"],
         cantidadDisponible: 40,
-        precio: '12.000',
+        precio: '12000',
         img: [ 'bicicleta-aurorita-orange.png'],
         alt: 'bici',
     },
@@ -70,7 +70,7 @@ const listaBicis = [
         colorDisponible: ["white", "red", "black"],
         tamañoDisponible: ["S", "M", "L"],
         cantidadDisponible: 2,
-        precio: '12.000',
+        precio: '12000',
         img: [ 'bicicleta-aurorita-paleyellow.png'],
         alt: 'bici',
     },
@@ -82,7 +82,7 @@ const listaBicis = [
         colorDisponible: ["white", "red", "black"],
         tamañoDisponible: ["S", "M", "L"],
         cantidadDisponible: 5,
-        precio: '13.000',
+        precio: '13000',
         descuento: '10%',
         img: [ 'bicicleta-topmega-cyan.png'],
         alt: 'bici',
@@ -95,7 +95,7 @@ const listaBicis = [
         colorDisponible: ["white", "red", "black"],
         tamañoDisponible: ["S", "M", "L"],
         cantidadDisponible: 13,
-        precio: '13.000',
+        precio: '13000',
         img: [ 'bicicleta-topmega-yellow.png'],
         alt: 'bici',
     },
@@ -107,7 +107,7 @@ const listaBicis = [
         colorDisponible: ["white", "red", "black"],
         tamañoDisponible: ["S", "M", "L"],
         cantidadDisponible: 6,
-        precio: '13.000',
+        precio: '13000',
         img: [ 'bicicleta-topmega-red.png'],
         alt: 'bici',
     },
@@ -119,7 +119,7 @@ const listaBicis = [
         colorDisponible: ["white", "red", "black"],
         tamañoDisponible: ["S", "M", "L"],
         cantidadDisponible: 7,
-        precio: '9.000',
+        precio: '9000',
         img: [ 'bicicleta-slp-yellow.png'],
         alt: 'bici',
     },
@@ -131,7 +131,7 @@ const listaBicis = [
         colorDisponible: ["white", "red", "black"],
         tamañoDisponible: ["S", "M", "L"],
         cantidadDisponible: 10,
-        precio: '9.000',
+        precio: '9000',
         img: [ 'bicicleta-slp-white.png'],
         alt: 'bici',
     }
@@ -155,6 +155,12 @@ let mainController = {
     productoNuevo: (req, res) => {
         res.render('productoNuevo')
     },
+
+    editarProducto: (req, res) => {
+        let reqId = listaBicis.find(element => element.id == req.params.id);
+        res.render('editarProducto', {producto:reqId})
+    },
+
     error: (req, res) => {
         res.render('error')
     },
