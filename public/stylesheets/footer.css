@@ -1,10 +1,12 @@
 footer {
-    display: flex;
-    justify-content: flex-end;
-    background-color: rgb(28, 114, 147);
-    margin-top: 20px;
-    color: white;
 
+  justify-content: flex-end;
+  background-color: rgb(28, 114, 147);
+  margin-top: 20px;
+  color: white;
+  position: relative;
+  bottom: 0px;
+  width: 100%;
   }
 
   footer a{

@@ -1,8 +1,5 @@
 
 
-*{
-    box-sizing: border-box;
-}
 
 i{
     font-size: 30px;
@@ -24,39 +21,41 @@ i{
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    /* border: solid 1px black; */
-    /* align-items: center; */
     
 }
 
-article img{
+.articulo img{
     width: 30%;
     padding: 5%;
 }
-article input{
+.articulo input{
     width: 10%;
 }
 
-article a{
+.articulo a{
     padding-right: 10px;
 }
   
-article label {
+.articulo label {
     font-weight: bold;
     padding-left: 10px;
 }
 
-article{
+.articulo{
     display: flex;
     border: solid 1px black;
     width: 100%;
 }
 
-article div{
+.articulo div{
+    padding:2%;
     width: 70%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+.articulo div > *{
+    margin: 5px;
 }
 
 .btn-segcompr{
@@ -64,7 +63,7 @@ article div{
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: flex-start;
+    margin-top: 10px;
     background-color: black;
     color: white;
     border-radius: 5px;
@@ -83,16 +82,17 @@ article div{
 
 .detalle-pago{
     display: flex;
-    padding: 5%;
+    padding: 2%;
     border: solid 2px black;
-    width: 90%;
+    width: 25%;
     border-radius: 10px;
     margin: auto; 
     flex-direction:column;
     background-color:lightgray;
+
 }
 
-div.resumen{
+div .resumen{
     display: flex;
     flex-direction: row;
     border-bottom: solid 1px white;
@@ -110,7 +110,7 @@ div.resumen{
     font-size: 25px;
 }
 
-div.detalle-cart{
+div .detalle-cart{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -127,12 +127,12 @@ div.detalle-cart{
     text-align: right;
 }
 
-div.detalle-cart p{
+div .detalle-cart p{
     width: 50%;
 
 }
 
-div.comprar{
+div .comprar{
     display: flex;
     flex-direction: row;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
@@ -155,14 +155,14 @@ div.comprar{
       display: flex;
       flex-direction: row;
       justify-content: space-between;
-      flex-wrap: wrap;
+      /* flex-wrap: wrap; */
       align-items: center;
     }
     .detalle-compra{
         width: 45%
         
     }
-    .detalle-pago{
+    /* .detalle-pago{
         width: 45%;
-    }
+    } */
   }

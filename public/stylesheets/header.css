@@ -28,7 +28,9 @@
 
 .actions li{
 margin: 10px;
+font-size: 30px;
   }
+
 
   .fas{
     color: rgb(230, 230, 230) !important;
