@@ -30,9 +30,10 @@ body {
 
 
 #mainIndex .article {
-
+  text-decoration: none;
+  color:rgb(28, 114, 147);
   margin: 5px 5px;
-  background-color: beige;
+  background-color: rgba(255, 199, 142, 0.503);
   max-width: 20%;
 }
 #mainIndex .article img {
@@ -64,13 +65,7 @@ justify-content: space-around;
 width: 100%;
 }
 
-.fas{
-  color: rgb(230, 230, 230) !important;
-}
 
-.fas:hover{
-  color: rgb(255, 168, 82) !important;
-}
 
 
 @media (min-width: 361px) {

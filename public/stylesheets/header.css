@@ -1,10 +1,8 @@
-
 .logo-search {
     display: flex;
     justify-content: space-between;
   }
   .logo-search img {
-    /* width: 100px; */
     height: 15vh;
     min-width: 100px;
     min-height: 100px;
@@ -30,6 +28,14 @@
 
 .actions li{
 margin: 10px;
+  }
+
+  .fas{
+    color: rgb(230, 230, 230) !important;
+  }
+  
+  .fas:hover{
+    color: rgb(255, 168, 82) !important;
   }
 
   #header{
