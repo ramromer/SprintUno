@@ -163,7 +163,6 @@ let mainController = {
     productoNuevo: (req, res) => {
         res.render('productoNuevo')
     },
-<<<<<<< HEAD
     error: (req, res) => {
         res.render('error')
     },
@@ -172,8 +171,5 @@ let mainController = {
         res.render('notFound')
     },
 }
-=======
-};
->>>>>>> fea27b13b2c488aa2767865cea512ef43258baf4
 
 module.exports = mainController;
