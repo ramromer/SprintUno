@@ -164,10 +164,6 @@ let mainController = {
     error: (req, res) => {
         res.render('error')
     },
-
-    notFound: (req, res) => {
-        res.render('notFound')
-    },
 }
 
 module.exports = mainController;

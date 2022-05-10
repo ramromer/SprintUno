@@ -6,6 +6,10 @@ let usersController = {
     register: (req,res) => {
         res.render('register.ejs');
     },
+    
+    notFound: (req, res) => {
+        res.render('notFound')
+    }
 }
 
 module.exports = usersController;
