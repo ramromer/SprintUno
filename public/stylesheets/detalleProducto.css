@@ -46,8 +46,8 @@
 
   }
   
-  #precioProducto h4 {
-    margin-right: 5px;
+  #precioProducto {
+   align-items: center;
   }
   
   #tamanioProducto {
@@ -110,8 +110,20 @@
   }
 
   #editarProducto > i:hover{
-    color:orange !important;
+    color:rgb(255, 165, 0) !important;
   }
+
+  #infoProducto > div > label{
+    position: relative;
+    left:0px;
+  }
+
+  #infoProducto > div> * {
+    position: relative;
+    right:0px;
+    width: 200px;
+  }
+
 
   
   /* fin detalle producto */

@@ -20,30 +20,38 @@
           </div>
           <section id="formDetalleProdcuto">
             <form class="flexContainer" id="infoProducto" action="none" method="post">
-              <div id="tituloProducto" class="flexContainer">
-                <h3>
+              <div id="tituloProducto" class="flexContainer margin10px">
+                <label>
                   <%= producto.titulo %>
-                </h3>
+                </label>
 
               </div>
               <div class="flexContainer" id="precioProducto">
-                <h4>Precio: </h4>
-                <h4>$<%= producto.precio %>
-                </h4>
+                <label for="precioDP">Precio: </label>
+                <h4 class="margin10px flexContainer centradoxy" id="precioDP">$<%= producto.precio %></h4>
               </div>
               <div class="flexContainer" id="colorProducto">
-                <h4>Color: </h4> <a class="iconCircle red"></a> <a class="iconCircle white"></a><a
-                  class="iconCircle black"></a>
-
+                <label>Color: </label>
+                <div class="flexContainer centradoxy space-evenly margin10px">
+                  <a class="iconCircle red"></a> 
+                  <a class="iconCircle white"></a>
+                  <a class="iconCircle black"></a>
+                </div>
+                  
               </div>
+
               <div class="flexContainer" id="tamanioProducto">
-                <h4>Tamaño: </h4>
-                <div class="iconCircle white">S</div>
-                <div class="iconCircle white">M</div>
-                <div class="iconCircle white">L</div>
+                <label>Tamaño: </label>
+                <div class="flexContainer centradoxy space-evenly margin10px">
+                  <div class="iconCircle white">S</div>
+                  <div class="iconCircle white">M</div>
+                  <div class="iconCircle white">L</div>
+
+                </div>
               </div>
               <div class="flexContainer" id="cantidadProducto">
-                <h4>Cantidad: </h4> <input type="number">
+                <label>Cantidad: </label> 
+                <input class="textocentrado "type="number" >
                 <h4 class="textGray">tenemos <%= producto.cantidadDisponible %> unidades diponibles!</h4>
               </div>
               <div id="containerBtn" class="flexContainer">

@@ -1,4 +1,19 @@
+.margin10px{
+  margin: 10px;
+}
 
+.centradoxy{
+  align-items: center;
+  justify-content: center;
+}
+
+.textocentrado{
+  text-align: center;
+}
+
+.space-evenly{
+  justify-content: space-evenly;
+}
 
 .textGray {
   color: rgb(185, 185, 185);

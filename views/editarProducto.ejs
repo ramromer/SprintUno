@@ -7,8 +7,12 @@
 
 
           <section class="">
-            <form class="flexContainer" id="infoEP" action="none" method="post">
-              <div id="containerSliderEP">
+            <form class="flexContainer centradoxy" id="infoEP" action="none" method="post">
+              <div class="flexContainer" id="containerSliderEP">
+                <div class="flexContainer centradoxy" id="containerDeleteIMG">
+                  <i class="fas fa-trash-alt"></i>
+                </div>
+
                 <section class="flexContainer" id="slider">
                   <!-- SLIDER -->
                   <div class="slider-display-container">
@@ -22,23 +26,23 @@
                   <%- include('partials/slider.ejs')%>
                 </section>
               </div>
-              <div id="uploadImagesEP" class="flexContainer">
+              <div id="uploadImagesEP" class="flexContainer centradoxy">
                 <label for="avatar">Arrastra y suelta tus imagenes aquí o seleccionalas:</label>
                 <input type="file" id="imagenes" name="image" multiple accept="image/*" />
               </div>
               <div id="contenedorInputs" class="flexContainer">
                 <div id="tituloEP" class="flexContainer">
                   <label for="nombreEP"> Nombre del Producto:</label>
-                  <input type="text"  autocomplete="off" id="nombreEP" name="nombreEP" disabled placeholder="<%= producto.titulo %>" required/>
+                  <input class="textocentrado" type="text"  autocomplete="off" id="nombreEP" name="nombreEP" disabled placeholder="<%= producto.titulo %>" required/>
                 </div>
                 <div class="flexContainer" id="precioProducto">
                   <label for="precioEP"> Precio:</label>
-                  <input type="number" min="1" autocomplete="off" id="precioEP" name="precio" value=<%= producto.precio %> required/>
+                  <input class="textocentrado" type="number" min="1" autocomplete="off" id="precioEP" name="precio" value=<%= producto.precio %> required/>
 
                 </div>
                 <div class="flexContainer" >
                   <label>Color:</label> 
-                  <div class="flexContainer" id="colorEP">
+                  <div class="flexContainer centradoxy space-evenly" >
                     <a class="iconCircle red"></a>
                     <a class="iconCircle white"></a>
                     <a class="iconCircle black"></a>
@@ -46,7 +50,7 @@
                 </div>
                 <div class="flexContainer" >
                   <label>Tamaño: </label>
-                  <div class="flexContainer" id="tamanioEP" >
+                  <div class="flexContainer centradoxy space-evenly" >
                     <div class="iconCircle white">S</div>
                     <div class="iconCircle white">M</div>
                     <div class="iconCircle white">L</div>
@@ -54,7 +58,7 @@
                 </div>
                 <div class="flexContainer" id="cantidadEP">
                   <label for="cantidadEP"> Cantidad:</label>
-                  <input type="number"  autocomplete="off" min="1" id="cantidadEP" name="cantidad" value=<%=producto.cantidadDisponible%>  />
+                  <input class="textocentrado" type="number"  autocomplete="off" min="1" id="cantidadEP" name="cantidad" value=<%=producto.cantidadDisponible%>  />
                 </div>
 
 
