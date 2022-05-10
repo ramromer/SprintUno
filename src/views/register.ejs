@@ -3,12 +3,12 @@
     <body>
         <%- include('partials/header.ejs')%>
             <main id="mainRegister">
-                <%- include('partials/navMenu.ejs')%>
                     <form id="form-register" action="/register" method="POST">
                         <label>Datos Personales</label>
                         <input name="fullName" type="text" id="fullname" placeholder="Nombre y Apellido" required pattern="\S+.*" />
                         <input name="fullAddress" type="text" id="fulladdress" placeholder="Domicilio" required pattern="\S+.*" />
                         <input name="email" type="email" id="email" placeholder="E-mail" required />
+                        <input name="emailRep" type="email" id="email" placeholder="Repita su E-mail" required />
 
                         <label for="bday">Fecha de Nacimiento</label>
                         <input name="bday" type="date" id="bday" value="2022-04-17" required />
@@ -27,8 +27,8 @@
                             <input type="reset" value="Borrar">
                         </div>
                     </form>
-                    <%- include('partials/footer.ejs')%>
             </main>
+        <%- include('partials/footer.ejs')%>
     </body>
 
     </html>

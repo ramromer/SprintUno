@@ -1,0 +1,15 @@
+#mainRegister{
+    display: flex;
+    justify-content: center;
+}
+
+#form-register{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    align-items: center;
+}
+
+#form-register input {
+    margin: 10px 0px 10px 0px;
+}
