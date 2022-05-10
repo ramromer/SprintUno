@@ -1,25 +1,24 @@
 /* ****Detalle Producto***** */
 
+.red {
+  background-color: red !important;
 
-  
-  .red {
-    background-color: red !important;
-  }
-  
-  .white {
-    background-color: white !important;
-  }
-  
-  .black {
-    background-color: black !important;
-  }
-  
-  .flexContainer {
-    display: flex;
-    flex-wrap: wrap;
-  }
-  
-  .iconCircle {
+}
+
+.white {
+  background-color: white !important;
+}
+
+.black {
+  background-color: black !important;
+}
+
+.flexContainer {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* .iconCircle {
     border-radius: 50%;
     border: 1px solid;
     width: 30px;
@@ -28,102 +27,158 @@
     display: flex;
     justify-content: center;
     align-items: center;
-  }
+  } */
 
-  #containerSlider{
-    width: 60%;
-    height: 20rem;
-    display: flex;
-    justify-content: center;
-    background-color: rgba(131, 131, 131, 0.102);
-  }
-
-  #infoProducto {
-    flex-direction: column;
-    align-items: start;
-    width: 100%;
-    margin-bottom: 15px;
-
-  }
-  
-  #precioProducto {
-   align-items: center;
-  }
-  
-  #tamanioProducto {
-    align-items: center;
-  }
-  
-
-  #colorProducto {
-    align-items: center;
-  }
-
-  #cantidadProducto {
-    align-items: center;
-    height: 30px;
-  }
-  
-  #cantidadProducto h4 {
-    margin-right: 5px;
-  }
-  
-  #cantidadProducto input {
-    width: 40px;
-    margin-right: 10px;
-  }
-  
-  #containerBtn {
-    margin-top: 30px;
-    width: 100%;
-    justify-content: center;
-  }
-  
-  #tituloProducto {
-    width: 100%;
-    justify-content: center;
-  }
-
-  #formDetalleProdcuto{
-    width: 40%;
-    height:20rem;
-    background-color: rgba(131, 131, 131, 0.102);
-  }
-  
-  #descripcionProducto {
-    margin-top: 30px;
-    text-align: justify;
-    background-color: rgba(131, 131, 131, 0.102);
-    padding: 30px;
-    width: 100%;
-    min-height:30vh;
-  }
-
-  #editarProducto{
-    position: relative;
-    left: 90%;
-    bottom: 5vh !important;
-  }
-
-  #editarProducto > i{
-    color:black !important;
-  }
-
-  #editarProducto > i:hover{
-    color:rgb(255, 165, 0) !important;
-  }
-
-  #infoProducto > div > label{
-    position: relative;
-    left:0px;
-  }
-
-  #infoProducto > div> * {
-    position: relative;
-    right:0px;
-    width: 200px;
-  }
+.iconCircle {
+  height: 30px;
+  width: 29px;
+  position: relative;
 
 
-  
-  /* fin detalle producto */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.iconCircle:after {
+  position: absolute;
+  right: -28.5px;
+  content: "";
+  border-top: 15px solid transparent;
+  border-right: 15px solid transparent;
+}
+
+.iconCircle:before {
+  position: absolute;
+  content: "";
+  left: -28.5px;
+  border-bottom: 15.5px solid transparent;
+  border-left: 15px solid transparent;
+}
+
+.red.iconCircle:after {
+
+  border-bottom:15.5px solid red; 
+  border-left:15px solid red; 
+}
+
+.red.iconCircle:before {
+  border-top: 15px solid red; 
+  border-right: 15px solid red; 
+}
+
+.white.iconCircle:after {
+
+  border-bottom:15.5px solid white; 
+  border-left:15px solid white; 
+}
+
+.white.iconCircle:before {
+  border-top: 15px solid white; 
+  border-right: 15px solid white; 
+}
+
+.black.iconCircle:after {
+
+  border-bottom:15.5px solid black; 
+  border-left:15px solid black; 
+}
+
+.black.iconCircle:before {
+  border-top: 15px solid black; 
+  border-right: 15px solid black; 
+}
+
+#containerSlider {
+  width: 60%;
+  height: 20rem;
+  display: flex;
+  justify-content: center;
+  background-color: rgba(131, 131, 131, 0.102);
+}
+
+#infoProducto {
+  flex-direction: column;
+  align-items: start;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+#precioProducto {
+  align-items: center;
+}
+
+#tamanioProducto {
+  align-items: center;
+}
+
+#colorProducto {
+  align-items: center;
+}
+
+#cantidadProducto {
+  align-items: center;
+  height: 30px;
+}
+
+#cantidadProducto h4 {
+  margin-right: 5px;
+}
+
+#cantidadProducto input {
+  width: 40px;
+  margin-right: 10px;
+}
+
+#containerBtn {
+  margin-top: 30px;
+  width: 100%;
+  justify-content: center;
+}
+
+#tituloProducto {
+  width: 100%;
+  justify-content: center;
+}
+
+#formDetalleProdcuto {
+  width: 40%;
+  height: 20rem;
+  background-color: rgba(131, 131, 131, 0.102);
+}
+
+#descripcionProducto {
+  margin-top: 30px;
+  text-align: justify;
+  background-color: rgba(131, 131, 131, 0.102);
+  padding: 30px;
+  width: 100%;
+  min-height: 30vh;
+}
+
+#editarProducto {
+  position: relative;
+  left: 90%;
+  bottom: 5vh !important;
+}
+
+#editarProducto > i {
+  color: black !important;
+}
+
+#editarProducto > i:hover {
+  color: rgb(255, 165, 0) !important;
+}
+
+#infoProducto > div > label {
+  position: relative;
+  left: 0px;
+}
+
+#infoProducto > div > * {
+  position: relative;
+  right: 0px;
+  width: 300px;
+}
+
+/* fin detalle producto */
