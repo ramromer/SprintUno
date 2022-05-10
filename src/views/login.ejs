@@ -1,0 +1,16 @@
+<%- include('partials/head.ejs')%>
+
+    <body>
+        <%- include('partials/header.ejs')%>
+            <main id="mainLogin">
+                <%- include('partials/navMenu.ejs')%>
+                    <form id="form-login" action="/login" method="POST">
+                        <input name="user" type="text" id="ucer" placeholder="Nombre de Usuari@" required pattern="\S+.*"/>
+                        <input name="key" type="password" id="pasword" placeholder="Elegí una contraseña segura" required/>
+                        <button type="submit">Enviar</button>
+                    </form>
+                <%- include('partials/footer.ejs')%>
+            </main>
+    </body>
+
+</html>
