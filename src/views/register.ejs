@@ -1,0 +1,34 @@
+<%- include('partials/head.ejs')%>
+
+    <body>
+        <%- include('partials/header.ejs')%>
+            <main id="mainRegister">
+                <%- include('partials/navMenu.ejs')%>
+                    <form id="form-register" action="/register" method="POST">
+                        <label>Datos Personales</label>
+                        <input name="fullName" type="text" id="fullname" placeholder="Nombre y Apellido" required pattern="\S+.*" />
+                        <input name="fullAddress" type="text" id="fulladdress" placeholder="Domicilio" required pattern="\S+.*" />
+                        <input name="email" type="email" id="email" placeholder="E-mail" required />
+
+                        <label for="bday">Fecha de Nacimiento</label>
+                        <input name="bday" type="date" id="bday" value="2022-04-17" required />
+
+                        <label>Datos de tu cuenta</label>
+                        <input name="user" type="text" id="resu0" placeholder="Nombre de usuario" required />
+                        <input name="key" type="password" id="drowssap0" placeholder="Contraseña" required />
+                        <input name="keyAgain" type="password" id="drowssap1" placeholder="Confirmar contraseña" required />
+
+                        <div>
+                            <label>Foto de usuari@</label>
+                            <input name="foto" type="file" id="profilepic" accept=".jpg, .jpeg, .png, .bmp" multiple>
+                        </div>
+                        <div class="button-register">
+                            <input type="submit" value="Enviar">
+                            <input type="reset" value="Borrar">
+                        </div>
+                    </form>
+                    <%- include('partials/footer.ejs')%>
+            </main>
+    </body>
+
+    </html>
