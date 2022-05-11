@@ -8,7 +8,6 @@ let listaBicis = fs.readFileSync(path.join(__dirname,'../data/data.json'));
 
 let mainController = {
     index: (req, res) => {
-        console.log(JSON.stringify(listaBicis));
 
         res.render('index.ejs',{listaBicis:listaBicis})
     },
