@@ -19,3 +19,20 @@
     text-decoration: none;
   
 }
+
+a:visited {
+    color: rgb(28, 114, 147);
+}
+
+
+#btnRegistro{
+    background-color:white;
+}
+
+#btnRegistro:hover{
+    background-color: rgb(28, 114, 147);
+}
+
+#btnRegistro:hover a{
+    color: white;
+}

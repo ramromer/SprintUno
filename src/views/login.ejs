@@ -16,19 +16,22 @@
                             <label for="passwordLogin">Contraseña:</label>
                             <input class="textocentrado margin10px"  name="key" autocomplete="off" type="password" id="passworLogin" placeholder="Contraseña"  required/>
                         </div>
+
+                        <a  class="margin10px" href="/users/register">¿Olvisate tu contraseña?</a>
                         
                         <div id="botonesLogin" class="flexContainer  margin10px">
-                            <button class="margin10px" type="reset">Limpiar</button>
-                            <button class="margin10px" type="submit">Enviar</button>
+                            <button class="margin10px" type="submit">Entrar</button>
+                            <label for="recordarLogin" class="margin10px ">¿Recordarme?</label>
+                            <input class="centradoxy" type="checkbox" name="recordarLogin" id="recordarLogin">
                         </div> 
                         
                         <div id="checkboxLogin" class="flexContainer centradoxy margin10px">
-                            <label for="recordarLogin" class="margin10px ">¿Recordarme?</label>
-                            <input class="centradoxy" type="checkbox" name="recordarLogin" id="recordarLogin">
                         </div>
 
-                        <a  class="margin10px" href="/users/register">¿Olvisate tu contraseña?</a>
-                        <a class="margin10px" href="/users/register">¿Aún no te registras?</a>
+                        <div id="btnRegistro" class="flexContainer centradoxy margin10px">
+                            <a class="margin10px" href="/users/register">¿Aún no te registras?</a>
+                        </div>
+
                     </form>
                 <%- include('partials/footer.ejs')%>
             </main>
