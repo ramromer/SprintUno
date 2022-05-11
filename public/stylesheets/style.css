@@ -92,7 +92,7 @@ width: 100%;
 
 @media (min-width: 361px) {
   #mainIndex .article {
-    width: 45%;
+    min-width: 45%;
     transition: all 500ms ease;
   }
 
@@ -109,7 +109,7 @@ width: 100%;
   #mainIndex .article {
     justify-content: space-between;
     align-content: space-between;
-    width: 20vw;
+    min-width: 24%;
   }
   #mainIndex .article:hover {
     cursor: pointer;
