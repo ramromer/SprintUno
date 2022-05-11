@@ -1,9 +1,9 @@
-<%- include('partials/head.ejs')%>
+<%- include('../partials/head.ejs')%>
 
     <body>
-        <%- include('partials/header.ejs')%>
+        <%- include('../partials/header.ejs')%>
             <main class="margin10px flexContainer centradoxy" id="mainLogin">
-                <%- include('partials/navMenu.ejs')%>
+                <%- include('../partials/navMenu.ejs')%>
                    
                     <form  autocomplete="off" class="margin10px bgGray flexContainer" id="form-login" action="/login" method="POST">
                         <h1 class="margin10px flexContainer centradoxy"> Ingresa a tu cuenta</h1>
@@ -30,7 +30,7 @@
                         <a  class="margin10px" href="/users/register">¿Olvisate tu contraseña?</a>
                         <a class="margin10px" href="/users/register">¿Aún no te registras?</a>
                     </form>
-                <%- include('partials/footer.ejs')%>
+                <%- include('../partials/footer.ejs')%>
             </main>
     </body>
 

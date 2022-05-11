@@ -7,12 +7,13 @@
         
         <h3 class="sections">Ultimos productos vistos</h3>
         <section class="containerTarjetas">
-          <%listaBicis.forEach(bici => { %>
+          <%let biciVisited=listaBicis.filter(bici => bici.category == 'visited') %>
+          <%biciVisited.forEach(bici => { %>
             <a href="/detalleproducto/<%=bici.id%>" class="product article">
                 <img src="/images/<%=bici.img[0]%>" alt="<%=bici.alt%>">
                 <div class="producto-descripcion flexContainer">
                   <div class="price-bar flexContainer">
-                    <p class="precio"><%=bici.precio%></p>
+                    <p class="precio">$ <%=bici.precio%></p>
                     <%if(bici.descuento){%>
                       <p class="descuento"><%=bici.descuento%></p>
                     <%}%>
@@ -25,14 +26,15 @@
 
         <h3 class="sections">Nuestras ofertas para vos!</h3>
         <section class="containerTarjetas">
-          <%listaBicis.forEach(bici => { %>
+          <%let biciDescuentos=listaBicis.filter(bici => bici.descuento) %>
+          <%biciDescuentos.forEach(bici => { %>
             <a href="/detalleproducto/<%=bici.id%>" class="product article">
                 <img src="/images/<%=bici.img[0]%>" alt="<%=bici.alt%>">
                 <div class="producto-descripcion flexContainer">
                   <div class="price-bar flexContainer">
-                    <p class="precio"><%=bici.precio%></p>
+                    <p class="precio" style="text-decoration: line-through">$ <%=bici.precio%></p>
                     <%if(bici.descuento){%>
-                      <p class="descuento"><%=bici.descuento%></p>
+                      <p class="descuento">$ <%=bici.precio-(bici.precio * bici.descuento / 100)%></p>
                     <%}%>
                   </div>
                   <h4 class="description"><%=bici.titulo%></h4>
@@ -48,6 +50,7 @@
             <%listaBicis.forEach(bici => { %>
               <%bici.img.forEach(img => { %>
                 <img class="sliderImagen" src="/images/<%= img %>" style="width:100%">
+                <!-- <p class="sliderImagen"><%=bici.precio%></p> -->
               <%})%>
             <%})%>
             <button type="button" id="btnDer" onclick="siguiente(1)">&#10095;</button>

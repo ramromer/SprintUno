@@ -12,21 +12,21 @@ let mainController = {
     },
 
     carrito: (req,res) => {
-        res.render('carrito');
+        res.render('./products/carrito');
     },
 
     detalleProducto: (req, res) => {
         let reqId = listaBicis.find(element => element.id == req.params.id);
-        res.render('detalleProducto', {producto:reqId})
+        res.render('./products/detalleProducto', {producto:reqId})
     },
 
     productoNuevo: (req, res) => {
-        res.render('productoNuevo')
+        res.render('./products/productoNuevo')
     },
 
     editarProducto: (req, res) => {
         let reqId = listaBicis.find(element => element.id == req.params.id);
-        res.render('editarProducto', {producto:reqId})
+        res.render('./products/editarProducto', {producto:reqId})
     },
 
     error: (req, res) => {

@@ -16,6 +16,7 @@
         ],
         "cantidadDisponible": 10,
         "precio": "10000",
+        "category": "visited",
         "img": [
             "bicicleta-orbea-rise-m20.jpg",
             "bicicleta-orbea-rise-m21.jpg"
@@ -39,6 +40,7 @@
         ],
         "cantidadDisponible": 3,
         "precio": "11000",
+        "category": "visited",
         "img": [
             "bicicleta-orbea-rise-m21.jpg"
         ],
@@ -61,7 +63,7 @@
         ],
         "cantidadDisponible": 8,
         "precio": "12000",
-        "descuento": "10%",
+        "descuento": "10",
         "img": [
             "bicicleta-aurorita-cyan.png"
         ],
@@ -106,6 +108,7 @@
         ],
         "cantidadDisponible": 40,
         "precio": "12000",
+        "category": "visited",
         "img": [
             "bicicleta-aurorita-orange.png"
         ],
@@ -150,7 +153,7 @@
         ],
         "cantidadDisponible": 5,
         "precio": "13000",
-        "descuento": "10%",
+        "descuento": "10",
         "img": [
             "bicicleta-topmega-cyan.png"
         ],
@@ -173,6 +176,7 @@
         ],
         "cantidadDisponible": 13,
         "precio": "13000",
+        "category": "visited",
         "img": [
             "bicicleta-topmega-yellow.png"
         ],
@@ -195,6 +199,7 @@
         ],
         "cantidadDisponible": 6,
         "precio": "13000",
+        "category": "visited",
         "img": [
             "bicicleta-topmega-red.png"
         ],
