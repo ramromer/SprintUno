@@ -3,13 +3,11 @@ const fs=require('fs');
 const path=require('path');
 
 
-let listaBicis = fs.readFileSync(path.join(__dirname,'../data/data.json'));
-
+let listaBicisFile = fs.readFileSync(path.join(__dirname,'../data/data.json'));
+let listaBicis = JSON.parse(listaBicisFile);
 
 let mainController = {
     index: (req, res) => {
-        console.log(JSON.stringify(listaBicis));
-
         res.render('index.ejs',{listaBicis:listaBicis})
     },
 
