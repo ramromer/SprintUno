@@ -7,10 +7,10 @@
 
 
           <section>
-            <form class="flexContainer bgGray margin10px padding10px"" id="infoProductoNuevo" action="none" method="post">
+            <form class="flexContainer bgGray margin10px padding10px" id="infoProductoNuevo" action="/productonuevo" method="POST" enctype="multipart/form-data">
               <div id="uploadImages" class="flexContainer">
                 <label for="avatar">Arrastra y suelta tus imagenes aquí o seleccionalas:</label>
-                <input type="file" id="imagenes" name="image" multiple accept="image/*" />
+                <input type="file" id="imagenes" name="image" accept="image/*" />
               </div>
               <div id="contenedorInputs" class="flexContainer">
                 <div id="tituloProductoNuevo" class="flexContainer">
@@ -51,7 +51,7 @@
                 </div>
 
                 <div id="containerBtn" class="flexContainer">
-                  <button id="btnProductoNuevo">Guardar</button>
+                  <button type="submit" id="btnProductoNuevo">Guardar</button>
                 </div>
               </div>
 
