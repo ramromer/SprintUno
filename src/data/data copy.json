@@ -24,29 +24,29 @@
   "alt": "bici"
  },
  {
-  "id": 2,
-  "titulo": "Orbea Rise",
-  "descripcionCorta": "Bicicleta",
-  "descripcionDetallada": "Descripcion Ampliada",
-  "colorDisponible": [
-   "white",
-   "red",
-   "black"
-  ],
-  "tamañoDisponible": [
-   "S",
-   "M",
-   "L"
-  ],
-  "cantidadDisponible": 10,
-  "precio": "10000",
-  "category": "visited",
-  "img": [
-   "bicicleta-orbea-rise-m20.jpg",
-   "bicicleta-orbea-rise-m21.jpg"
-  ],
-  "alt": "bici"
- },
+    "id": 2,
+    "titulo": "Orbea Rise",
+    "descripcionCorta": "Bicicleta",
+    "descripcionDetallada": "Descripcion Ampliada",
+    "colorDisponible": [
+     "white",
+     "red",
+     "black"
+    ],
+    "tamañoDisponible": [
+     "S",
+     "M",
+     "L"
+    ],
+    "cantidadDisponible": 10,
+    "precio": "10000",
+    "category": "visited",
+    "img": [
+     "bicicleta-orbea-rise-m20.jpg",
+     "bicicleta-orbea-rise-m21.jpg"
+    ],
+    "alt": "bici"
+   },
  {
   "id": 3,
   "titulo": "Aurorita Plegable",
@@ -95,8 +95,8 @@
  {
   "id": 5,
   "titulo": "Aurorita Plegable",
-  "descripcionCorta": "Descripcion Ampliada 2434",
-  "descripcionDetallada": "4234234v2rstsr",
+  "descripcionCorta": "Bicicleta plegable",
+  "descripcionDetallada": "Descripcion Ampliada",
   "colorDisponible": [
    "white",
    "red",
@@ -107,8 +107,8 @@
    "M",
    "L"
   ],
-  "cantidadDisponible": 124,
-  "precio": "2005234",
+  "cantidadDisponible": 40,
+  "precio": "12000",
   "category": "visited",
   "img": [
    "bicicleta-aurorita-orange.png"
@@ -359,29 +359,6 @@
   "category": "visited",
   "img": [
    "1652407797301_img_.png"
-  ],
-  "alt": "bici"
- },
- {
-  "id": 17,
-  "titulo": "chineese",
-  "descripcionCorta": " epic",
-  "descripcionDetallada": "Descripcion Ampliada",
-  "colorDisponible": [
-   "white",
-   "red",
-   "black"
-  ],
-  "tamañoDisponible": [
-   "S",
-   "M",
-   "L"
-  ],
-  "cantidadDisponible": "1",
-  "precio": "213321",
-  "category": "visited",
-  "img": [
-   "1652840081925_img_.jpeg"
   ],
   "alt": "bici"
  }
