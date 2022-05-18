@@ -24,29 +24,29 @@
   "alt": "bici"
  },
  {
-  "id": 2,
-  "titulo": "Orbea Rise",
-  "descripcionCorta": "Bicicleta",
-  "descripcionDetallada": "Descripcion Ampliada",
-  "colorDisponible": [
-   "white",
-   "red",
-   "black"
-  ],
-  "tamañoDisponible": [
-   "S",
-   "M",
-   "L"
-  ],
-  "cantidadDisponible": 10,
-  "precio": "10000",
-  "category": "visited",
-  "img": [
-   "bicicleta-orbea-rise-m20.jpg",
-   "bicicleta-orbea-rise-m21.jpg"
-  ],
-  "alt": "bici"
- },
+    "id": 2,
+    "titulo": "Orbea Rise",
+    "descripcionCorta": "Bicicleta",
+    "descripcionDetallada": "Descripcion Ampliada",
+    "colorDisponible": [
+     "white",
+     "red",
+     "black"
+    ],
+    "tamañoDisponible": [
+     "S",
+     "M",
+     "L"
+    ],
+    "cantidadDisponible": 10,
+    "precio": "10000",
+    "category": "visited",
+    "img": [
+     "bicicleta-orbea-rise-m20.jpg",
+     "bicicleta-orbea-rise-m21.jpg"
+    ],
+    "alt": "bici"
+   },
  {
   "id": 3,
   "titulo": "Aurorita Plegable",
@@ -95,8 +95,8 @@
  {
   "id": 5,
   "titulo": "Aurorita Plegable",
-  "descripcionCorta": "Descripcion Ampliada 2434",
-  "descripcionDetallada": "4234234v2rstsr",
+  "descripcionCorta": "Bicicleta plegable",
+  "descripcionDetallada": "Descripcion Ampliada",
   "colorDisponible": [
    "white",
    "red",
@@ -107,8 +107,8 @@
    "M",
    "L"
   ],
-  "cantidadDisponible": 124,
-  "precio": "2005234",
+  "cantidadDisponible": 40,
+  "precio": "12000",
   "category": "visited",
   "img": [
    "bicicleta-aurorita-orange.png"
@@ -359,167 +359,6 @@
   "category": "visited",
   "img": [
    "1652407797301_img_.png"
-  ],
-  "alt": "bici"
- },
- {
-  "id": 17,
-  "titulo": "1",
-  "descripcionCorta": " 11",
-  "descripcionDetallada": "Descripcion Ampliada",
-  "colorDisponible": [
-   "white",
-   "red",
-   "black"
-  ],
-  "tamañoDisponible": [
-   "S",
-   "M",
-   "L"
-  ],
-  "cantidadDisponible": "11",
-  "precio": "11",
-  "category": "visited",
-  "img": [
-   "1652455910196_img_.png"
-  ],
-  "alt": "bici"
- },
- {
-  "id": 18,
-  "titulo": "1",
-  "descripcionCorta": " 11",
-  "descripcionDetallada": "Descripcion Ampliada",
-  "colorDisponible": [
-   "white",
-   "red",
-   "black"
-  ],
-  "tamañoDisponible": [
-   "S",
-   "M",
-   "L"
-  ],
-  "cantidadDisponible": "11",
-  "precio": "11",
-  "category": "visited",
-  "img": [
-   "1652455939352_img_.png"
-  ],
-  "alt": "bici"
- },
- {
-  "id": 19,
-  "titulo": "1",
-  "descripcionCorta": " 11",
-  "descripcionDetallada": "Descripcion Ampliada",
-  "colorDisponible": [
-   "white",
-   "red",
-   "black"
-  ],
-  "tamañoDisponible": [
-   "S",
-   "M",
-   "L"
-  ],
-  "cantidadDisponible": "11",
-  "precio": "11",
-  "category": "visited",
-  "img": [
-   "1652456024274_img_.png"
-  ],
-  "alt": "bici"
- },
- {
-  "id": 20,
-  "titulo": "22",
-  "descripcionCorta": " 22",
-  "descripcionDetallada": "Descripcion Ampliada",
-  "colorDisponible": [
-   "white",
-   "red",
-   "black"
-  ],
-  "tamañoDisponible": [
-   "S",
-   "M",
-   "L"
-  ],
-  "cantidadDisponible": "22",
-  "precio": "2222",
-  "category": "visited",
-  "img": [
-   "1652456271381_img_.png"
-  ],
-  "alt": "bici"
- },
- {
-  "id": 21,
-  "titulo": "22",
-  "descripcionCorta": " 22",
-  "descripcionDetallada": "Descripcion Ampliada",
-  "colorDisponible": [
-   "white",
-   "red",
-   "black"
-  ],
-  "tamañoDisponible": [
-   "S",
-   "M",
-   "L"
-  ],
-  "cantidadDisponible": "22",
-  "precio": "2222",
-  "category": "visited",
-  "img": [
-   "1652456463526_img_.png"
-  ],
-  "alt": "bici"
- },
- {
-  "id": 22,
-  "titulo": "22",
-  "descripcionCorta": " 22",
-  "descripcionDetallada": "Descripcion Ampliada",
-  "colorDisponible": [
-   "white",
-   "red",
-   "black"
-  ],
-  "tamañoDisponible": [
-   "S",
-   "M",
-   "L"
-  ],
-  "cantidadDisponible": "22",
-  "precio": "2222",
-  "category": "visited",
-  "img": [
-   "1652456695399_img_.png"
-  ],
-  "alt": "bici"
- },
- {
-  "id": 23,
-  "titulo": "22",
-  "descripcionCorta": " 22",
-  "descripcionDetallada": "Descripcion Ampliada",
-  "colorDisponible": [
-   "white",
-   "red",
-   "black"
-  ],
-  "tamañoDisponible": [
-   "S",
-   "M",
-   "L"
-  ],
-  "cantidadDisponible": "22",
-  "precio": "2222",
-  "category": "visited",
-  "img": [
-   "1652456725829_img_.png"
   ],
   "alt": "bici"
  }

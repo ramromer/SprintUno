@@ -17,10 +17,16 @@ const uploadFile=multer({storage:storage});
 router.get('/', mainController.index);
 router.get('/carrito', mainController.carrito);
 router.get('/detalleproducto/:id', mainController.detalleProducto);
+router.get('/productos', mainController.productos);
 router.get('/productonuevo', mainController.productoNuevo);
 router.get('/editarproducto/:id', mainController.editarProducto);
 router.get('error', mainController.error);
 
 router.post('/productonuevo', uploadFile.single('image'), mainController.crearproductoNuevo);
+
+router.put('/editarproducto/:id', uploadFile.single('image'), mainController.modificarProducto);
+// agregar nuevo elemento al array (push) y luego hacer JSON.stringify()
+// fileWrite. res.redirect....
+
 
 module.exports = router;

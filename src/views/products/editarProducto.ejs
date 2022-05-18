@@ -7,7 +7,7 @@
 
 
           <section class="">
-            <form class="flexContainer centradoxy bgGray margin10px padding10px" id="infoEP" action="none" method="post">
+            <form class="flexContainer centradoxy bgGray margin10px padding10px" id="infoEP" action="../editarproducto/<%=producto.id%>?_method=PUT" method="POST" enctype="multipart/form-data">
               <div class="flexContainer" id="containerSliderEP">
                 <div class="flexContainer centradoxy" id="containerDeleteIMG">
                   <i class="fas fa-trash-alt"></i>
@@ -70,7 +70,7 @@
                 </div>
 
                 <div id="containerBtn" class="flexContainer">
-                  <button id="btnEP">Guardar</button>
+                  <button type="submit" id="btnEP">Guardar</button>
                 </div>
               </div>
 
