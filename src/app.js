@@ -6,7 +6,10 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var adminRouter = require('./routes/admin');//clase#25
 
+var userLogs = require('./middlewares/userLogs'); //clase#25
+var checkAdmin = require('./middlewares/checkAdmin');//clase#25
 var app = express();
 
 const methodOverride = require('method-override');
@@ -24,7 +27,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+// app.use('/users', userLogs, usersRouter); //asi era hasta la clase 24
+app.use('/users', userLogs, usersRouter); //clase#25
+app.use('/admin', checkAdmin, adminRouter); //clase#25
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,0 +1,7 @@
+El usuario ingresó a la ruta: /login
+El usuario ingresó a la ruta: /register
+El usuario ingresó a la ruta: /
+El usuario ingresó a la ruta: /
+El usuario ingresó a la ruta: /
+El usuario ingresó a la ruta: /?user=Ada
+El usuario ingresó a la ruta: /
