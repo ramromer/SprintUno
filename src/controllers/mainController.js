@@ -66,6 +66,8 @@ let mainController = {
   },
 
   editarProducto: (req, res) => {
+    let listaBicisFile = fs.readFileSync(path.join(__dirname, '../data/data.json'));
+    let listaBicis = JSON.parse(listaBicisFile);
     let reqId = listaBicis.find((element) => element.id == req.params.id);
     res.render("./products/editarProducto", { producto: reqId });
   },

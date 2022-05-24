@@ -522,5 +522,28 @@
    "1652456725829_img_.png"
   ],
   "alt": "bici"
+ },
+ {
+  "id": 24,
+  "titulo": "srthdtyaqt",
+  "descripcionCorta": " rgwrtheytjrukukfyu",
+  "descripcionDetallada": "Descripcion Ampliada lgkuyrrsdf ",
+  "colorDisponible": [
+   "white",
+   "red",
+   "black"
+  ],
+  "tamañoDisponible": [
+   "S",
+   "M",
+   "L"
+  ],
+  "cantidadDisponible": 23,
+  "precio": "56",
+  "category": "visited",
+  "img": [
+   "1653435636763_img_.jpg"
+  ],
+  "alt": "bici"
  }
 ]
