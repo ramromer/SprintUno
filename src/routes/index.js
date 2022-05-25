@@ -25,8 +25,7 @@ router.get('error', mainController.error);
 router.post('/productonuevo', uploadFile.single('image'), mainController.crearproductoNuevo);
 
 router.put('/editarproducto/:id', uploadFile.single('image'), mainController.modificarProducto);
-// agregar nuevo elemento al array (push) y luego hacer JSON.stringify()
-// fileWrite. res.redirect....
+//router.delete('/editarproducto/:id', mainController.borrarProducto);
 
 
 module.exports = router;
