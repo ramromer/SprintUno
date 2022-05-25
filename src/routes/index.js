@@ -18,6 +18,7 @@ router.get('/', mainController.index);
 router.get('/carrito', mainController.carrito);
 router.get('/detalleproducto/:id', mainController.detalleProducto);
 router.get('/productos', mainController.productos);
+router.delete('/productos/:id',mainController.eliminarProducto);
 router.get('/productonuevo', mainController.productoNuevo);
 router.get('/editarproducto/:id', mainController.editarProducto);
 router.get('error', mainController.error);

@@ -59,8 +59,11 @@
               </div>
               <a  id="editarProducto" href="/editarproducto/<%= producto.id %>">
                 <i  class="fas fa-edit"></i>
-              </a>
+              </a> 
             </form>
+            <form action="/productos/<%= producto.id%>?_method=DELETE"  method="POST" style="display: inline-flex">
+              <button type="submit" class="action-button delete">ELIMINAR</button>
+            </form>  
           </section>
           <section id="descripcionProducto">
             <div id="">

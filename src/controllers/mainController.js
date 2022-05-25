@@ -87,23 +87,22 @@ let mainController = {
     res.redirect(`../detalleproducto/${listaBicis[reqId].id}`);
 },
 
-// borrarProducto:  (req, res) => {
-//   let listaBicisFile = fs.readFileSync(path.join(__dirname, '../data/data.json'));
-//   let listaBicis = JSON.parse(listaBicisFile);
-//   // let ultimoElmnt = listaBicis[listaBicis.length - 1];
-//   let reqId = listaBicis.findIndex(element => element.id == req.params.id);
-//   listaBicis[reqId].descripcionDetallada = req.body.descripcionProductoNuevo;
-//   listaBicis[reqId].cantidadDisponible = Number(req.body.cantidad);
-//   listaBicis[reqId].precio = req.body.precio;
-//   console.log(req.body);
-//   let salida = JSON.stringify(listaBicis, null, " ");
-//   fs.writeFile(path.join(__dirname, '../data/data.json'), salida, () => { });
-
-//   res.redirect(`../detalleproducto/${listaBicis[reqId].id}`);
-// },
+eliminarProducto : (req, res) => {
+  let listaBicisFile = fs.readFileSync(path.join(__dirname, '../data/data.json'));
+  let listaBicis = JSON.parse(listaBicisFile);
+  let pto=listaBicis.find(function(pr){
+    return pr.id==req.params.id;
+  });
+  let i=listaBicis.indexOf(pto);
+  listaBicis.splice (i, 1);
+  fs.writeFileSync(path.join(__dirname, '../data/data.json'),JSON.stringify(listaBicis));
+  res.redirect("/productos");
+},
 
 productos: (req, res) => {
-    res.render('./products/products.ejs', { listaBicis })
+  let listaBicisFile = fs.readFileSync(path.join(__dirname, '../data/data.json'));
+  let listaBicis = JSON.parse(listaBicisFile);
+  res.render('./products/products.ejs', { listaBicis })
 },
 
   error: (req, res) => {
