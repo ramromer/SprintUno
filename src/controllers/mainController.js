@@ -87,6 +87,19 @@ let mainController = {
     res.redirect(`../detalleproducto/${listaBicis[reqId].id}`);
 },
 
+// destroy : (req, res) => {
+//   let pto=products.find(function(pr){
+//     return pr.id==req.params.id;
+//   });
+//   let i=products.indexOf(pto);
+//   products.splice (i, 1);
+//   res.redirect("/products");
+//   fs.writeFileSync(productsFilePath,JSON.stringify(products));
+//   //products.splice
+//   //products.splice
+//   // Do the magic
+// }, 
+
 productos: (req, res) => {
     res.render('./products/products.ejs', { listaBicis })
 },
