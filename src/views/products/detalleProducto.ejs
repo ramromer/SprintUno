@@ -30,25 +30,23 @@
                 <label for="precioDP">Precio: </label>
                 <h4 class="margin10px flexContainer centradoxy" id="precioDP">$<%= producto.precio %></h4>
               </div>
-              <div class="flexContainer" id="colorProducto">
-                <label>Color: </label>
-                <div class="flexContainer centradoxy space-evenly margin10px">
-                  <a class="iconCircle red"></a> 
-                  <a class="iconCircle white"></a>
-                  <a class="iconCircle black"></a>
+              <div class="flexContainer" >
+                <label>Color:</label> 
+                <div class="flexContainer centradoxy space-evenly" >
+                  <label for=""> Rojo</label><input type="radio" name="color" value="red">
+                  <label for=""> Blanco</label><input type="radio" name="color" value="white">
+                  <label for=""> Negro</label><input type="radio" name="color" value="black">
                 </div>
-                  
               </div>
-
-              <div class="flexContainer" id="tamanioProducto">
+              <div class="flexContainer" >
                 <label>Tamaño: </label>
-                <div class="flexContainer centradoxy space-evenly margin10px">
-                  <div class="iconCircle white">S</div>
-                  <div class="iconCircle white">M</div>
-                  <div class="iconCircle white">L</div>
-
+                <div class="flexContainer centradoxy space-evenly" >
+                  <label for=""> Small</label><input type="radio" name="tamanio" value="red">
+                  <label for=""> Medium</label><input type="radio" name="tamanio" value="white">
+                  <label for=""> Large</label><input type="radio" name="tamanio" value="black">
                 </div>
-              </div>
+                <br>
+                <br>
               <div class="flexContainer" id="cantidadProducto">
                 <label>Cantidad: </label> 
                 <input class="textocentrado "type="number" >
@@ -61,9 +59,7 @@
                 <i  class="fas fa-edit"></i>
               </a> 
             </form>
-            <form action="/productos/<%= producto.id%>?_method=DELETE"  method="POST" style="display: inline-flex">
-              <button type="submit" class="action-button delete">ELIMINAR</button>
-            </form>  
+            
           </section>
           <section id="descripcionProducto">
             <div id="">
