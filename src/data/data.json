@@ -27,16 +27,16 @@
   "id": 2,
   "titulo": "Orbea Rise",
   "descripcionCorta": "Bicicleta",
-  "descripcionDetallada": "Descripcion Ampliada",
+  "descripcionDetallada": "Descripcion Ampliada ",
   "colorDisponible": {
-   "red": true,
-   "white": true,
-   "black": false
+   "red": "disabled",
+   "white": "disabled",
+   "black": ""
   },
   "tamanio": {
-   "S": true,
-   "M": true,
-   "L": false
+   "S": "disabled",
+   "M": "disabled",
+   "L": ""
   },
   "cantidadDisponible": 10,
   "precio": "10000",
