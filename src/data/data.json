@@ -4,16 +4,16 @@
   "titulo": "Orbea Rise",
   "descripcionCorta": "Bicicleta",
   "descripcionDetallada": "Descripcion Ampliada",
-  "colorDisponible": [
-   "white",
-   "red",
-   "black"
-  ],
-  "tamañoDisponible": [
-   "S",
-   "M",
-   "L"
-  ],
+  "colorDisponible": {
+   "red": true,
+   "white": true,
+   "black": false
+  },
+  "tamanio": {
+   "S": true,
+   "M": true,
+   "L": false
+  },
   "cantidadDisponible": 10,
   "precio": "10000",
   "category": "visited",
@@ -28,16 +28,16 @@
   "titulo": "Orbea Rise",
   "descripcionCorta": "Bicicleta",
   "descripcionDetallada": "Descripcion Ampliada",
-  "colorDisponible": [
-   "white",
-   "red",
-   "black"
-  ],
-  "tamañoDisponible": [
-   "S",
-   "M",
-   "L"
-  ],
+  "colorDisponible": {
+   "red": true,
+   "white": true,
+   "black": false
+  },
+  "tamanio": {
+   "S": true,
+   "M": true,
+   "L": false
+  },
   "cantidadDisponible": 10,
   "precio": "10000",
   "category": "visited",
@@ -52,16 +52,16 @@
   "titulo": "Aurorita Plegable",
   "descripcionCorta": "Bicicleta plegable",
   "descripcionDetallada": "Descripcion Ampliada",
-  "colorDisponible": [
-   "white",
-   "red",
-   "black"
-  ],
-  "tamañoDisponible": [
-   "S",
-   "M",
-   "L"
-  ],
+  "colorDisponible": {
+   "red": true,
+   "white": true,
+   "black": false
+  },
+  "tamanio": {
+   "S": true,
+   "M": true,
+   "L": false
+  },
   "cantidadDisponible": 8,
   "precio": "12000",
   "descuento": "10",
@@ -75,16 +75,16 @@
   "titulo": "Aurorita Plegable",
   "descripcionCorta": "Bicicleta plegable",
   "descripcionDetallada": "Descripcion Ampliada",
-  "colorDisponible": [
-   "white",
-   "red",
-   "black"
-  ],
-  "tamañoDisponible": [
-   "S",
-   "M",
-   "L"
-  ],
+  "colorDisponible": {
+   "red": true,
+   "white": true,
+   "black": false
+  },
+  "tamanio": {
+   "S": true,
+   "M": true,
+   "L": false
+  },
   "cantidadDisponible": 30,
   "precio": "12000",
   "img": [
@@ -97,16 +97,16 @@
   "titulo": "Aurorita Plegable",
   "descripcionCorta": "Bicicleta plegable",
   "descripcionDetallada": "Descripcion Ampliada",
-  "colorDisponible": [
-   "white",
-   "red",
-   "black"
-  ],
-  "tamañoDisponible": [
-   "S",
-   "M",
-   "L"
-  ],
+  "colorDisponible": {
+   "red": true,
+   "white": true,
+   "black": false
+  },
+  "tamanio": {
+   "S": true,
+   "M": true,
+   "L": false
+  },
   "cantidadDisponible": 2,
   "precio": "12000",
   "img": [
@@ -119,16 +119,16 @@
   "titulo": "Topmega",
   "descripcionCorta": "Bicicleta MTB",
   "descripcionDetallada": "Descripcion Ampliada",
-  "colorDisponible": [
-   "white",
-   "red",
-   "black"
-  ],
-  "tamañoDisponible": [
-   "S",
-   "M",
-   "L"
-  ],
+  "colorDisponible": {
+   "red": true,
+   "white": true,
+   "black": false
+  },
+  "tamanio": {
+   "S": true,
+   "M": true,
+   "L": false
+  },
   "cantidadDisponible": 5,
   "precio": "13000",
   "descuento": "10",
@@ -141,16 +141,16 @@
   "id": 9,
   "titulo": "Topmega",
   "descripcionDetallada": "Descripcion Ampliada ",
-  "colorDisponible": [
-   "white",
-   "red",
-   "black"
-  ],
-  "tamañoDisponible": [
-   "S",
-   "M",
-   "L"
-  ],
+  "colorDisponible": {
+   "red": true,
+   "white": true,
+   "black": false
+  },
+  "tamanio": {
+   "S": true,
+   "M": true,
+   "L": false
+  },
   "category": "visited",
   "img": [
    "bicicleta-topmega-red.png"
@@ -164,16 +164,16 @@
   "titulo": "SLP",
   "descripcionCorta": "Bicicleta plegable SLP",
   "descripcionDetallada": "Descripcion Ampliada",
-  "colorDisponible": [
-   "white",
-   "red",
-   "black"
-  ],
-  "tamañoDisponible": [
-   "S",
-   "M",
-   "L"
-  ],
+  "colorDisponible": {
+   "red": true,
+   "white": true,
+   "black": false
+  },
+  "tamanio": {
+   "S": true,
+   "M": true,
+   "L": false
+  },
   "cantidadDisponible": 7,
   "precio": "9000",
   "img": [
@@ -186,16 +186,16 @@
   "titulo": "SLP",
   "descripcionCorta": "Bicicleta plegable SLP",
   "descripcionDetallada": "Descripcion Ampliada",
-  "colorDisponible": [
-   "white",
-   "red",
-   "black"
-  ],
-  "tamañoDisponible": [
-   "S",
-   "M",
-   "L"
-  ],
+  "colorDisponible": {
+   "red": true,
+   "white": true,
+   "black": false
+  },
+  "tamanio": {
+   "S": true,
+   "M": true,
+   "L": false
+  },
   "cantidadDisponible": 10,
   "precio": "9000",
   "img": [
@@ -207,19 +207,19 @@
   "id": 18,
   "titulo": "1",
   "descripcionCorta": " 11",
-  "descripcionDetallada": "Descripcion Ampliada 234234   ",
-  "colorDisponible": [
-   "white",
-   "red",
-   "black"
-  ],
-  "tamañoDisponible": [
-   "S",
-   "M",
-   "L"
-  ],
-  "cantidadDisponible": 11243,
-  "precio": "1135",
+  "descripcionDetallada": "Descripcion Ampliada 234234  gsfd         ",
+  "colorDisponible": {
+   "red": "disabled",
+   "black": "disabled",
+   "white": ""
+  },
+  "tamanio": {
+   "S": "",
+   "M": "disabled",
+   "L": "disabled"
+  },
+  "cantidadDisponible": 113,
+  "precio": "12344",
   "category": "visited",
   "img": [
    "1652455939352_img_.png"
@@ -231,16 +231,16 @@
   "titulo": "1",
   "descripcionCorta": " 11",
   "descripcionDetallada": "Descripcion Ampliada",
-  "colorDisponible": [
-   "white",
-   "red",
-   "black"
-  ],
-  "tamañoDisponible": [
-   "S",
-   "M",
-   "L"
-  ],
+  "colorDisponible": {
+   "red": true,
+   "white": true,
+   "black": false
+  },
+  "tamanio": {
+   "S": true,
+   "M": true,
+   "L": false
+  },
   "cantidadDisponible": "11",
   "precio": "11",
   "category": "visited",
@@ -254,16 +254,16 @@
   "titulo": "22",
   "descripcionCorta": " 22",
   "descripcionDetallada": "Descripcion Ampliada",
-  "colorDisponible": [
-   "white",
-   "red",
-   "black"
-  ],
-  "tamañoDisponible": [
-   "S",
-   "M",
-   "L"
-  ],
+  "colorDisponible": {
+   "red": true,
+   "white": true,
+   "black": false
+  },
+  "tamanio": {
+   "S": true,
+   "M": true,
+   "L": false
+  },
   "cantidadDisponible": "22",
   "precio": "2222",
   "category": "visited",
@@ -277,16 +277,16 @@
   "titulo": "22",
   "descripcionCorta": " 22",
   "descripcionDetallada": "Descripcion Ampliada ",
-  "colorDisponible": [
-   "white",
-   "red",
-   "black"
-  ],
-  "tamañoDisponible": [
-   "S",
-   "M",
-   "L"
-  ],
+  "colorDisponible": {
+   "red": true,
+   "white": true,
+   "black": false
+  },
+  "tamanio": {
+   "S": true,
+   "M": true,
+   "L": false
+  },
   "cantidadDisponible": 22,
   "precio": "35435222",
   "category": "visited",
@@ -300,16 +300,16 @@
   "titulo": "srthdtyaqt",
   "descripcionCorta": " rgwrtheytjrukukfyu",
   "descripcionDetallada": "Descripcion Ampliada lgkuyrrsdf ",
-  "colorDisponible": [
-   "white",
-   "red",
-   "black"
-  ],
-  "tamañoDisponible": [
-   "S",
-   "M",
-   "L"
-  ],
+  "colorDisponible": {
+   "red": true,
+   "white": true,
+   "black": false
+  },
+  "tamanio": {
+   "S": true,
+   "M": true,
+   "L": false
+  },
   "cantidadDisponible": 23,
   "precio": "56",
   "category": "visited",

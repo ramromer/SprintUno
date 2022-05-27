@@ -80,6 +80,12 @@ let mainController = {
     listaBicis[reqId].descripcionDetallada = req.body.descripcionProductoNuevo;
     listaBicis[reqId].cantidadDisponible = Number(req.body.cantidad);
     listaBicis[reqId].precio = req.body.precio;
+    if(req.body.colorRed){listaBicis[reqId].colorDisponible.red = "";} else {listaBicis[reqId].colorDisponible.red = "disabled";};
+    if(req.body.colorWhite){listaBicis[reqId].colorDisponible.white ="";}else {listaBicis[reqId].colorDisponible.white = "disabled";};
+    if(req.body.colorBlack){listaBicis[reqId].colorDisponible.black ="";}else {listaBicis[reqId].colorDisponible.black = "disabled";};
+    if(req.body.tamanioS){listaBicis[reqId].tamanio.S =""}else{listaBicis[reqId].tamanio.S="disabled"};
+    if(req.body.tamanioM){listaBicis[reqId].tamanio.M=""}else{listaBicis[reqId].tamanio.M="disabled"};
+    if(req.body.tamanioL){listaBicis[reqId].tamanio.L =""}else{listaBicis[reqId].tamanio.L="disabled"};
     console.log(req.body);
     let salida = JSON.stringify(listaBicis, null, " ");
     fs.writeFile(path.join(__dirname, '../data/data.json'), salida, () => { });

@@ -33,17 +33,18 @@
               <div class="flexContainer" >
                 <label>Color:</label> 
                 <div class="flexContainer centradoxy space-evenly" >
-                  <label for=""> Rojo</label><input type="radio" name="color" value="red">
-                  <label for=""> Blanco</label><input type="radio" name="color" value="white">
-                  <label for=""> Negro</label><input type="radio" name="color" value="black">
+                  <label for=""> Rojo</label><input type="radio" name="color"  <%=producto.colorDisponible.red%> value="red">
+                  <label for=""> Blanco</label><input type="radio" name="color" <%=producto.colorDisponible.white%> value="white">
+                  <label for=""> Negro</label><input type="radio" name="color"  <%=producto.colorDisponible.black%> value="black">
                 </div>
               </div>
               <div class="flexContainer" >
                 <label>Tamaño: </label>
                 <div class="flexContainer centradoxy space-evenly" >
-                  <label for=""> Small</label><input type="radio" name="tamanio" value="red">
-                  <label for=""> Medium</label><input type="radio" name="tamanio" value="white">
-                  <label for=""> Large</label><input type="radio" name="tamanio" value="black">
+                  
+                  <label for=""> 20</label><input type="radio" <%=producto.tamanio.S%> name="tamanio" value="S">
+                  <label for=""> 26</label><input type="radio" <%=producto.tamanio.M%> name="tamanio" value="M">
+                  <label for=""> 29</label><input type="radio" <%=producto.tamanio.L%> name="tamanio" value="L">
                 </div>
                 <br>
                 <br>
