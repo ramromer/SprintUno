@@ -27,26 +27,29 @@ let mainController = {
       );
       let listaBicis = JSON.parse(listaBicisFile);
       let ultimoElmnt = listaBicis[listaBicis.length - 1];
+      let red;
+      let black;
+      let white;
+      let tamanioS;
+      let tamanioM;
+      let tamanioL;
+      if(req.body.colorRed){red =""}else{red="disabled"};
+      if(req.body.colorWhite){black =""}else{black="disabled"};
+      if(req.body.colorBlack){white =""}else{white="disabled"};
+      if(req.body.tamanioS){tamanioS =""}else{tamanioS="disabled"};
+      if(req.body.tamanioM){tamanioM =""}else{tamanioM="disabled"};
+      if(req.body.tamanioL){tamanioL =""}else{tamanioL="disabled"};
+
       let productoNuevo = {
         id: ultimoElmnt.id + 1,
         titulo: req.body.nombre,
         descripcionCorta: req.body.descripcionProductoNuevo,
-        descripcionDetallada: "Descripcion Ampliada", //req.body.descripcionAmpliada,
-        colorDisponible: [
-          //req.body.color
-          "white",
-          "red",
-          "black",
-        ],
-        tamañoDisponible: [
-          //req.body.tamanio
-          "S",
-          "M",
-          "L",
-        ],
+        descripcionDetallada: "Descripcion Ampliada",
+        colorDisponible: {red:red, white:white, black:black},
+        tamanio:{S:tamanioS,M:tamanioM,L:tamanioL},
         cantidadDisponible: req.body.cantidad,
         precio: req.body.precio,
-        category: "visited", //req.body.category
+        category: "visited", 
         img: [req.file.filename],
         alt: "bici",
       };

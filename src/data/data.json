@@ -3,16 +3,16 @@
   "id": 1,
   "titulo": "Orbea Rise",
   "descripcionCorta": "Bicicleta",
-  "descripcionDetallada": "Descripcion Ampliada",
+  "descripcionDetallada": "Descripcion Ampliada  ",
   "colorDisponible": {
-   "red": true,
-   "white": true,
-   "black": false
+   "red": "",
+   "white": "disabled",
+   "black": ""
   },
   "tamanio": {
-   "S": true,
-   "M": true,
-   "L": false
+   "S": "disabled",
+   "M": "",
+   "L": ""
   },
   "cantidadDisponible": 10,
   "precio": "10000",
@@ -204,98 +204,6 @@
   "alt": "bici"
  },
  {
-  "id": 18,
-  "titulo": "1",
-  "descripcionCorta": " 11",
-  "descripcionDetallada": "Descripcion Ampliada 234234  gsfd         ",
-  "colorDisponible": {
-   "red": "disabled",
-   "black": "disabled",
-   "white": ""
-  },
-  "tamanio": {
-   "S": "",
-   "M": "disabled",
-   "L": "disabled"
-  },
-  "cantidadDisponible": 113,
-  "precio": "12344",
-  "category": "visited",
-  "img": [
-   "1652455939352_img_.png"
-  ],
-  "alt": "bici"
- },
- {
-  "id": 19,
-  "titulo": "1",
-  "descripcionCorta": " 11",
-  "descripcionDetallada": "Descripcion Ampliada",
-  "colorDisponible": {
-   "red": true,
-   "white": true,
-   "black": false
-  },
-  "tamanio": {
-   "S": true,
-   "M": true,
-   "L": false
-  },
-  "cantidadDisponible": "11",
-  "precio": "11",
-  "category": "visited",
-  "img": [
-   "1652456024274_img_.png"
-  ],
-  "alt": "bici"
- },
- {
-  "id": 20,
-  "titulo": "22",
-  "descripcionCorta": " 22",
-  "descripcionDetallada": "Descripcion Ampliada",
-  "colorDisponible": {
-   "red": true,
-   "white": true,
-   "black": false
-  },
-  "tamanio": {
-   "S": true,
-   "M": true,
-   "L": false
-  },
-  "cantidadDisponible": "22",
-  "precio": "2222",
-  "category": "visited",
-  "img": [
-   "1652456271381_img_.png"
-  ],
-  "alt": "bici"
- },
- {
-  "id": 21,
-  "titulo": "22",
-  "descripcionCorta": " 22",
-  "descripcionDetallada": "Descripcion Ampliada ",
-  "colorDisponible": {
-   "red": true,
-   "white": true,
-   "black": false
-  },
-  "tamanio": {
-   "S": true,
-   "M": true,
-   "L": false
-  },
-  "cantidadDisponible": 22,
-  "precio": "35435222",
-  "category": "visited",
-  "img": [
-   "1652456463526_img_.png"
-  ],
-  "alt": "bici"
- },
- {
   "id": 24,
   "titulo": "srthdtyaqt",
   "descripcionCorta": " rgwrtheytjrukukfyu",
@@ -315,6 +223,52 @@
   "category": "visited",
   "img": [
    "1653435636763_img_.jpg"
+  ],
+  "alt": "bici"
+ },
+ {
+  "id": 25,
+  "titulo": "Bicicleta Aurorita",
+  "descripcionCorta": " Bici Aurorita",
+  "descripcionDetallada": "Descripcion Ampliada",
+  "colorDisponible": {
+   "red": "",
+   "white": "disabled",
+   "black": ""
+  },
+  "tamanio": {
+   "S": "disabled",
+   "M": "",
+   "L": ""
+  },
+  "cantidadDisponible": "32",
+  "precio": "3452",
+  "category": "visited",
+  "img": [
+   "1653616784925_img_.png"
+  ],
+  "alt": "bici"
+ },
+ {
+  "id": 26,
+  "titulo": "Bici Aurorita",
+  "descripcionCorta": " Bicicleta Aurorita plegable",
+  "descripcionDetallada": "Descripcion Ampliada",
+  "colorDisponible": {
+   "red": "",
+   "white": "disabled",
+   "black": ""
+  },
+  "tamanio": {
+   "S": "disabled",
+   "M": "",
+   "L": ""
+  },
+  "cantidadDisponible": "67",
+  "precio": "2344",
+  "category": "visited",
+  "img": [
+   "1653616831964_img_.png"
   ],
   "alt": "bici"
  }
