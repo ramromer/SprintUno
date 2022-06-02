@@ -5,6 +5,11 @@
             <main id="mainRegister">
                     <form id="form-register" action="/register" method="POST">
                         <label>Datos Personales</label>
+                        <!-- <% if (locals && locals.errors) { %>
+                            <% for (let error in errors) {%>
+                                <p> <%=errors[error].msg %></p>
+                            <%}%>
+                        <%}%> -->
                         <input name="fullName" type="text" id="fullname" placeholder="Nombre y Apellido" required pattern="\S+.*" />
                         <input name="fullAddress" type="text" id="fulladdress" placeholder="Domicilio" required pattern="\S+.*" />
                         <input name="email" type="email" id="email" placeholder="E-mail" required />
