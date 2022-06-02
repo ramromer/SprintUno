@@ -3,7 +3,7 @@ let router = express.Router();
 let mainController = require('../controllers/mainController.js');
 let multer = require('multer');
 let path = require('path');
-let loggerProducts = require('../middlewares/products_log');
+
 const storage = multer.diskStorage({
     destination:  function(req, file, cb) {
         cb(null,'./public/images');
@@ -13,6 +13,7 @@ const storage = multer.diskStorage({
     }
 })
 const uploadFile=multer({storage:storage});
+let loggerProducts = require('../middlewares/products_log');
 
 router.get('/', mainController.index);
 router.get('/carrito', mainController.carrito);

@@ -3,13 +3,13 @@
     <body>
         <%- include('../partials/header.ejs')%>
             <main id="mainRegister">
-                    <form id="form-register" action="/register" method="POST">
+                    <form id="form-register" action="/users/register" method="POST" enctype="multipart/form-data">
                         <label>Datos Personales</label>
-                        <!-- <% if (locals && locals.errors) { %>
+                        <% if (locals && locals.errors) { %>
                             <% for (let error in errors) {%>
                                 <p> <%=errors[error].msg %></p>
                             <%}%>
-                        <%}%> -->
+                        <%}%>
                         <input name="fullName" type="text" id="fullname" placeholder="Nombre y Apellido" required pattern="\S+.*" />
                         <input name="fullAddress" type="text" id="fulladdress" placeholder="Domicilio" required pattern="\S+.*" />
                         <input name="email" type="email" id="email" placeholder="E-mail" required />
@@ -25,7 +25,7 @@
 
                         <div>
                             <label>Foto de usuari@</label>
-                            <input name="foto" type="file" id="profilepic" accept=".jpg, .jpeg, .png, .bmp" multiple>
+                            <input name="image" type="file" id="profilepic" accept=".jpg, .jpeg, .png, .bmp" multiple>
                         </div>
                         <div class="button-register">
                             <input type="submit" value="Enviar">
