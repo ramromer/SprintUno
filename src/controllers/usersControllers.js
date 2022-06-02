@@ -3,11 +3,16 @@ const path = require("path");
 
 const { validationResult } = require('express-validator');
 
-
+function getListaUsers() {
+    let listaUsersFile = fs.readFileSync(
+      path.join(__dirname, "../data/usersData.json")
+    );
+    let listaUsers = JSON.parse(listaUsersFile);
+    return listaUsers;
+  }
 
 let usersController = {
     login: (req, res) => {
-        //let errors = validationResult(req);
         res.render('./users/login.ejs')
     },
     register: (req,res) => {
@@ -16,14 +21,15 @@ let usersController = {
 
     registerWrite: (req, res) => {
         let fullPath = path.join(__dirname, "../data/usersData.json");
-        let errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return res.render('./users/register.ejs', { errors: errors.mapped() });
+        let errores = validationResult(req);
+        if (errores.isEmpty()) {
+            //  res.send(req.body);
+            res.render('./users/register.ejs', { errores: errores.mapped() });
         } else {
+            // res.send('todo bien');
             if (req.file) {
-                let listaUsuariosFile = fs.readFileSync(fullPath);
-                let listaUsuarios = JSON.parse(listaUsuariosFile);
-                let ultimoElmnt = listaUsuarios[listaUsuarios.length - 1];
+            getListaUsers();
+                let ultimoElmnt = listaUsers[listaUsers.length - 1];
 
                 let usuarioNuevo = {
                     id: ultimoElmnt.id + 1,
@@ -37,9 +43,9 @@ let usersController = {
                     dateCreation: null, //somekind of timestamp??
                 };
 
-                listaUsuarios.push(usuarioNuevo);
+                listaUsers.push(usuarioNuevo);
 
-                let salida = JSON.stringify(listaUsuarios, null, " ");
+                let salida = JSON.stringify(listaUsers, null, " ");
 
 
                 fs.writeFileSync(fullPath, salida);

@@ -5,27 +5,27 @@
             <main id="mainRegister">
                     <form id="form-register" action="/users/register" method="POST" enctype="multipart/form-data">
                         <label>Datos Personales</label>
-                        <% if (locals && locals.errors) { %>
+                        <% if (locals.errors) { %>
                             <% for (let error in errors) {%>
                                 <p> <%=errors[error].msg %></p>
                             <%}%>
                         <%}%>
-                        <input name="fullName" type="text" id="fullname" placeholder="Nombre y Apellido" required pattern="\S+.*" />
-                        <input name="fullAddress" type="text" id="fulladdress" placeholder="Domicilio" required pattern="\S+.*" />
-                        <input name="email" type="email" id="email" placeholder="E-mail" required />
-                        <input name="emailRep" type="email" id="email" placeholder="Repita su E-mail" required />
+                        <input name="fullName" type="text" id="fullname" placeholder="Nombre y Apellido"  pattern="\S+.*" />
+                        <input name="fullAddress" type="text" id="fulladdress" placeholder="Domicilio"  pattern="\S+.*" />
+                        <input name="email" type="email" id="email" placeholder="E-mail"  />
+                        <input name="emailRep" type="email" id="email" placeholder="Repita su E-mail"  />
 
                         <label for="bday">Fecha de Nacimiento</label>
-                        <input name="bday" type="date" id="bday" value="2022-04-17" required />
+                        <input name="bday" type="date" id="bday" value="2022-04-17"  />
 
                         <label>Datos de tu cuenta</label>
-                        <input name="user" type="text" id="resu0" placeholder="Nombre de usuario" required />
-                        <input name="key" type="password" id="drowssap0" placeholder="Contraseña" required />
-                        <input name="keyAgain" type="password" id="drowssap1" placeholder="Confirmar contraseña" required />
+                        <input name="user" type="text" id="resu0" placeholder="Nombre de usuario"  />
+                        <input name="key" type="password" id="drowssap0" placeholder="Contraseña"  />
+                        <input name="keyAgain" type="password" id="drowssap1" placeholder="Confirmar contraseña"  />
 
                         <div>
                             <label>Foto de usuari@</label>
-                            <input name="image" type="file" id="profilepic" accept=".jpg, .jpeg, .png, .bmp" multiple>
+                            <input name="image" type="file" id="profilepic" accept=".jpg, .jpeg, .png, .bmp" single>
                         </div>
                         <div class="button-register">
                             <input type="submit" value="Enviar">
