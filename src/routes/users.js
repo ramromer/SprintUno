@@ -6,7 +6,7 @@ let path = require('path');
 
 const storage = multer.diskStorage({
     destination:  function(req, file, cb) {
-        cb(null,'./public/images');
+        cb(null,'./public/users/avatars');
     },
     filename: function (req,file,cb){
         cb(null,`${Date.now()}_img_${path.extname(file.originalname)}`);
@@ -26,7 +26,7 @@ const validateUserRegister = [
     body('key').notEmpty().withMessage('Por favor ingrese una contraseña'),
     body('keyAgain').notEmpty().withMessage('Por favor repita la contraseña elegida'),   
 ]
-router.post('/register', validateUserRegister, uploadFile.single('image'), usersController.registerWrite);
+router.post('/register', uploadFile.single('image'), validateUserRegister, usersController.registerWrite);
 
 /* GET users listing. */
 router.get('/login', usersController.login);

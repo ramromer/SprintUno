@@ -22,13 +22,13 @@ let usersController = {
     registerWrite: (req, res) => {
         let fullPath = path.join(__dirname, "../data/usersData.json");
         let errores = validationResult(req);
-        if (errores.isEmpty()) {
+        if (errores.errors.length > 0) {
             //  res.send(req.body);
             res.render('./users/register.ejs', { errores: errores.mapped() });
         } else {
             // res.send('todo bien');
             if (req.file) {
-            getListaUsers();
+            let listaUsers = getListaUsers();
                 let ultimoElmnt = listaUsers[listaUsers.length - 1];
 
                 let usuarioNuevo = {
