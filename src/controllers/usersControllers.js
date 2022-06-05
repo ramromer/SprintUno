@@ -34,10 +34,12 @@ let usersController = {
     },
 
     registerWrite: (req, res) => {
+        let emails = getEmails();
+        let usuarios = getUsers();
         let fullPath = path.join(__dirname, "../data/usersData.json");
         let errores = validationResult(req);
         if (errores.errors.length > 0) {
-            res.render('./users/register.ejs', { errores: errores.mapped(), oldData: req.body });
+            res.render('./users/register.ejs', { errores: errores.mapped(), oldData: req.body, usuarios:usuarios, emails:emails });
         } else {
             let listaUsers = getListaUsers();
                 let ultimoElmnt = listaUsers[listaUsers.length - 1];

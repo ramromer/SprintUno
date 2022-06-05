@@ -30,3 +30,11 @@ p{
 #yaexisteemail{
     display:none;
 }
+
+#emailRepErr{
+    display:none;
+}
+
+#passRepErr{
+    display:none;
+}

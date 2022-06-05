@@ -19,7 +19,8 @@
                         <% if (locals.errores && errores.email) { %>
                                 <p> <%=errores.email.msg %></p>
                         <%}%>
-                        <input name="emailRep" type="email" id="email" value="<%= locals.oldData? oldData.emailRep : null %>" placeholder="Repita su E-mail"  />
+                        <input name="emailRep" type="email" id="emailRep" value="<%= locals.oldData? oldData.emailRep : null %>" placeholder="Repita su E-mail"  />
+                        <p id="emailRepErr">Las direcciones de correo no coinciden.</p>
                         <% if (locals.errores && errores.emailRep) { %>
                                 <p> <%=errores.emailRep.msg %></p>
                         <%}%>
@@ -41,6 +42,7 @@
                                 <p> <%=errores.key.msg %></p>
                         <%}%>
                         <input name="keyAgain" type="password" id="drowssap1" placeholder="Confirmar contraseña"  />
+                        <p id="passRepErr">Las contraseñas no coinciden.</p>
                         <% if (locals.errores && errores.keyAgain) { %>
                                 <p> <%=errores.keyAgain.msg %></p>
                         <%}%>
@@ -50,14 +52,15 @@
                             <input name="image" type="file" id="profilepic" accept=".jpg, .jpeg, .png, .bmp" single>
                         </div>
                         <div class="button-register">
-                            <input type="submit" value="Enviar">
+                            <input id="submitBtn" type="submit" value="Enviar">
+                            <!-- disabled="true" ??? disabled="false" -->
                             <input type="reset" value="Borrar">
                         </div>
                     </form>
                     <!-- username taken? stuff -->
                     <script>
                         function userValidation(e) {
-                            let listaUsers = '<%- usuarios%>';
+                            let listaUsers = '<%= usuarios%>';
                             let arrayUsers = listaUsers.split(',');
                             for (let i=0; i<arrayUsers.length;i++) {
                                 if (this.value == arrayUsers[i]) {
@@ -66,7 +69,7 @@
                                 }
                             }
                             for (let i=0; i<arrayUsers.length;i++) {
-                                if(this.value !== arrayUsers[i]){
+                                if(this.value != arrayUsers[i]){
                                     document.getElementById("yaexiste").style.display='none';
                                 }
                             }
@@ -81,13 +84,44 @@
                                 }
                             }
                             for (let i=0; i<arrayEmails.length;i++) {
-                                if(this.value !== arrayEmails[i]){
+                                if(this.value != arrayEmails[i]){
                                     document.getElementById("yaexisteemail").style.display='none';
                                 }
                             }
                         }
+                        function emailRepValidation(e) {
+                            let email = document.getElementById("email").value;
+                                if (this.value != email) {
+                                    document.getElementById("emailRepErr").style.display='block';
+                                    // document.querySelector('#submitBtn').disabled = true;
+                                    return;
+                                }
+                                if (this.value == email) {
+                                    document.getElementById("emailRepErr").style.display='none';
+                                    // document.querySelector('#submitBtn').disabled = false;
+                                }
+                        }
+                        function passValidation(e) {
+                            let pass = document.getElementById("drowssap");
+                                if (this != pass) {
+                                    document.getElementById("passRepErr").style.display='block';
+                                    console.log('esta sucediendo');
+                                    console.log(this);
+                                    console.log(pass);
+
+                                    // document.querySelector('#submitBtn').disabled = true;
+                                    return;
+                                }
+                                if (this == pass) {
+                                    document.getElementById("passRepErr").style.display='none';
+                                    console.log('esta leyendo aqui');
+                                    // document.querySelector('#submitBtn').disabled = false;
+                                }
+                        }
                         document.getElementById("resu0").addEventListener("keyup",userValidation);
                         document.getElementById("email").addEventListener("keyup",emailValidation);
+                        document.getElementById("emailRep").addEventListener("keyup",emailRepValidation);
+                        // document.getElementById("drowssap1").addEventListener("keyup",passValidation);
                     </script>
             </main>
         <%- include('../partials/footer.ejs')%>
