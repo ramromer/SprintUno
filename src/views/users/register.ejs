@@ -31,6 +31,7 @@
 
                         <label>Datos de tu cuenta</label>
                         <input name="user" type="text" id="resu0" value="<%= locals.oldData? oldData.user : null %>" placeholder="Nombre de usuario"  />
+                        <p id="yaexiste">Ya existe otro usuario con ese nombre. Por favor escriba uno distinto.</p>
                         <% if (locals.errores && errores.user) { %>
                                 <p> <%=errores.user.msg %></p>
                         <%}%>
@@ -52,6 +53,25 @@
                             <input type="reset" value="Borrar">
                         </div>
                     </form>
+                    <!-- username taken? stuff -->
+                    <script>
+                        function userValidation(e) {
+                            let listaUsers = '<%- usuarios%>';
+                            let arrayUsers = listaUsers.split(',');
+                            for (let i=0; i<arrayUsers.length;i++) {
+                                if (this.value == arrayUsers[i]) {
+                                    document.getElementById("yaexiste").style.display='block';
+                                    return;
+                                }
+                            }
+                            for (let i=0; i<arrayUsers.length;i++) {
+                                if(this.value !== arrayUsers[i]){
+                                    document.getElementById("yaexiste").style.display='none';
+                                }
+                            }
+                        }
+                        document.getElementById("resu0").addEventListener("keyup",userValidation);
+                    </script>
             </main>
         <%- include('../partials/footer.ejs')%>
     </body>

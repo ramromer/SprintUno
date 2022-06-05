@@ -22,3 +22,7 @@ p{
     color: darkred;
     font-size: smaller;
 }
+
+#yaexiste{
+    display: none;
+}

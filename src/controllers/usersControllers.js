@@ -10,24 +10,28 @@ function getListaUsers() {
     let listaUsers = JSON.parse(listaUsersFile);
     return listaUsers;
   }
+function getUsers() {
+    let listaUsers=getListaUsers();
+    let _users_ = [];
+    for(let i=0; i<listaUsers.length; i++){_users_.push(listaUsers[i].user);};
+    return _users_;
+  }
 
 let usersController = {
     login: (req, res) => {
         res.render('./users/login.ejs')
     },
     register: (req,res) => {
-        res.render('./users/register.ejs');
+        let usuarios = getUsers();
+        res.render('./users/register.ejs',{usuarios:usuarios});
     },
 
     registerWrite: (req, res) => {
         let fullPath = path.join(__dirname, "../data/usersData.json");
         let errores = validationResult(req);
         if (errores.errors.length > 0) {
-            //  res.send(errores.mapped());
             res.render('./users/register.ejs', { errores: errores.mapped(), oldData: req.body });
         } else {
-            // res.send('todo bien');
-            
             let listaUsers = getListaUsers();
                 let ultimoElmnt = listaUsers[listaUsers.length - 1];
                 let picture;
