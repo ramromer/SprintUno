@@ -17,3 +17,8 @@
 #form-register label {
     margin: 10px 0px 10px 0px;
 }
+
+p{
+    color: darkred;
+    font-size: smaller;
+}

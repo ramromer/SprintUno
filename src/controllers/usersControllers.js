@@ -23,14 +23,15 @@ let usersController = {
         let fullPath = path.join(__dirname, "../data/usersData.json");
         let errores = validationResult(req);
         if (errores.errors.length > 0) {
-            //  res.send(req.body);
+            //  res.send(errores.mapped());
             res.render('./users/register.ejs', { errores: errores.mapped() });
         } else {
             // res.send('todo bien');
-            if (req.file) {
+            
             let listaUsers = getListaUsers();
                 let ultimoElmnt = listaUsers[listaUsers.length - 1];
-
+                let picture;
+                if (req.file) {picture= [req.file.filename]}else{picture= 'porDefecto'};
                 let usuarioNuevo = {
                     id: ultimoElmnt.id + 1,
                     fullName: req.body.fullName,
@@ -39,7 +40,7 @@ let usersController = {
                     bday: req.body.bday,
                     user: req.body.user,
                     key: req.body.key, //encriptar???
-                    foto: req.body.foto,
+                    foto: picture,
                     dateCreation: null, //somekind of timestamp??
                 };
 
@@ -51,7 +52,7 @@ let usersController = {
                 fs.writeFileSync(fullPath, salida);
 
                 res.redirect(`./users/${usuarioNuevo.id}`);
-            }
+            
         }
     },
 
