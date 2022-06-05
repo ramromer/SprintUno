@@ -6,31 +6,31 @@
                     <form id="form-register" action="/users/register" method="POST" enctype="multipart/form-data">
                         <label>Datos Personales</label>
                                             
-                        <input class="form-control <%= locals.errores && errores.fullName ? 'is-invalid' : null %>" name="fullName" type="text" id="fullname" placeholder="Nombre y Apellido"/>
+                        <input name="fullName" type="text" id="fullname" value="<%= locals.oldData? oldData.fullName : null %>" placeholder="Nombre y Apellido"/>
                         <% if (locals.errores && errores.fullName) { %>
                                 <div><p> <%=errores.fullName.msg %></p></div>
                         <%}%>
-                        <input name="fullAddress" type="text" id="fulladdress" placeholder="Domicilio"/>
+                        <input name="fullAddress" type="text" id="fulladdress" value="<%= locals.oldData? oldData.fullAddress : null %>" placeholder="Domicilio"/>
                         <% if (locals.errores && errores.fullAddress) { %>
                                <div><p> <%=errores.fullAddress.msg %></p></div>
                         <%}%>
-                        <input name="email" type="email" id="email" placeholder="E-mail"  />
+                        <input name="email" type="email" id="email" value="<%= locals.oldData? oldData.email : null %>" placeholder="E-mail"  />
                         <% if (locals.errores && errores.email) { %>
                                 <p> <%=errores.email.msg %></p>
                         <%}%>
-                        <input name="emailRep" type="email" id="email" placeholder="Repita su E-mail"  />
+                        <input name="emailRep" type="email" id="email" value="<%= locals.oldData? oldData.emailRep : null %>" placeholder="Repita su E-mail"  />
                         <% if (locals.errores && errores.emailRep) { %>
                                 <p> <%=errores.emailRep.msg %></p>
                         <%}%>
 
                         <label for="bday">Fecha de Nacimiento</label>
-                        <input name="bday" type="date" id="bday" value="2022-04-17"  />
+                        <input name="bday" type="date" id="bday" value="<%= locals.oldData? oldData.bday : null %>" />
                         <% if (locals.errores && errores.bday) { %>
                                 <p> <%=errores.bday.msg %></p>
                         <%}%>
 
                         <label>Datos de tu cuenta</label>
-                        <input name="user" type="text" id="resu0" placeholder="Nombre de usuario"  />
+                        <input name="user" type="text" id="resu0" value="<%= locals.oldData? oldData.user : null %>" placeholder="Nombre de usuario"  />
                         <% if (locals.errores && errores.user) { %>
                                 <p> <%=errores.user.msg %></p>
                         <%}%>

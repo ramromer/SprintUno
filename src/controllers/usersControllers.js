@@ -24,7 +24,7 @@ let usersController = {
         let errores = validationResult(req);
         if (errores.errors.length > 0) {
             //  res.send(errores.mapped());
-            res.render('./users/register.ejs', { errores: errores.mapped() });
+            res.render('./users/register.ejs', { errores: errores.mapped(), oldData: req.body });
         } else {
             // res.send('todo bien');
             
