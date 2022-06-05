@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const bcrypt = require('bcrypt');
 
 const { validationResult } = require('express-validator');
 
@@ -44,6 +45,7 @@ let usersController = {
             let listaUsers = getListaUsers();
                 let ultimoElmnt = listaUsers[listaUsers.length - 1];
                 let picture;
+                let key = bcrypt.hashSync(req.body.key, 10);
                 if (req.file) {picture= [req.file.filename]}else{picture= 'porDefecto'};
                 let usuarioNuevo = {
                     id: ultimoElmnt.id + 1,
@@ -52,7 +54,7 @@ let usersController = {
                     email: req.body.email,
                     bday: req.body.bday,
                     user: req.body.user,
-                    key: req.body.key, //encriptar???
+                    key: key,
                     foto: picture,
                     dateCreation: null, //somekind of timestamp??
                 };
