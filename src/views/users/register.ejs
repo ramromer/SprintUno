@@ -15,6 +15,7 @@
                                <div><p> <%=errores.fullAddress.msg %></p></div>
                         <%}%>
                         <input name="email" type="email" id="email" value="<%= locals.oldData? oldData.email : null %>" placeholder="E-mail"  />
+                        <p id="yaexisteemail">Ya existe otro usuario con ese email. Por favor registrese con uno distinto, o ingrese <a href="/users/login">aqui</a>.</p>
                         <% if (locals.errores && errores.email) { %>
                                 <p> <%=errores.email.msg %></p>
                         <%}%>
@@ -31,7 +32,7 @@
 
                         <label>Datos de tu cuenta</label>
                         <input name="user" type="text" id="resu0" value="<%= locals.oldData? oldData.user : null %>" placeholder="Nombre de usuario"  />
-                        <p id="yaexiste">Ya existe otro usuario con ese nombre. Por favor escriba uno distinto.</p>
+                        <p id="yaexiste">Ya existe otro usuario con ese nombre. Por favor escriba uno distinto, o ingrese <a href="/users/login">aqui</a>.</p>
                         <% if (locals.errores && errores.user) { %>
                                 <p> <%=errores.user.msg %></p>
                         <%}%>
@@ -70,7 +71,23 @@
                                 }
                             }
                         }
+                        function emailValidation(e) {
+                            let listaEmails = '<%- emails%>';
+                            let arrayEmails = listaEmails.split(',');
+                            for (let i=0; i<arrayEmails.length;i++) {
+                                if (this.value == arrayEmails[i]) {
+                                    document.getElementById("yaexisteemail").style.display='block';
+                                    return;
+                                }
+                            }
+                            for (let i=0; i<arrayEmails.length;i++) {
+                                if(this.value !== arrayEmails[i]){
+                                    document.getElementById("yaexisteemail").style.display='none';
+                                }
+                            }
+                        }
                         document.getElementById("resu0").addEventListener("keyup",userValidation);
+                        document.getElementById("email").addEventListener("keyup",emailValidation);
                     </script>
             </main>
         <%- include('../partials/footer.ejs')%>

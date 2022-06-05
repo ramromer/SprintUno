@@ -9,21 +9,28 @@ function getListaUsers() {
     );
     let listaUsers = JSON.parse(listaUsersFile);
     return listaUsers;
-  }
+}
 function getUsers() {
     let listaUsers=getListaUsers();
     let _users_ = [];
     for(let i=0; i<listaUsers.length; i++){_users_.push(listaUsers[i].user);};
     return _users_;
-  }
+}
+function getEmails() {
+    let listaUsers=getListaUsers();
+    let _emails_ = [];
+    for(let i=0; i<listaUsers.length; i++){_emails_.push(listaUsers[i].email);};
+    return _emails_;
+}
 
 let usersController = {
     login: (req, res) => {
         res.render('./users/login.ejs')
     },
     register: (req,res) => {
+        let emails = getEmails();
         let usuarios = getUsers();
-        res.render('./users/register.ejs',{usuarios:usuarios});
+        res.render('./users/register.ejs',{usuarios:usuarios,emails:emails});
     },
 
     registerWrite: (req, res) => {
