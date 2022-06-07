@@ -26,11 +26,18 @@ const validateUserRegister = [
     body('key').notEmpty().withMessage('Por favor ingrese una contraseña'),
     body('keyAgain').notEmpty().withMessage('Por favor repita la contraseña elegida'),   
 ]
+
+const guestMiddleware = require('../middlewares/guestMiddleware');
+const authMiddleware = require('../middlewares/authMiddleware');
+
 router.post('/register', uploadFile.single('image'), validateUserRegister, usersController.registerWrite);
 
 /* GET users listing. */
-router.get('/login', usersController.login);
-router.get('/register', usersController.register);
+router.get('/login',guestMiddleware, usersController.login);
+router.post('/login',usersController.loginProcess);
+router.get('/register',guestMiddleware, usersController.register);
+router.get('/profile',authMiddleware,usersController.profile);
+router.get('/logout', usersController.logout);
 router.get('*', usersController.notFound);
 
 

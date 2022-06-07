@@ -1,6 +1,9 @@
 const fs = require("fs");
 const path = require("path");
-const bcrypt = require('bcrypt');
+
+const bcryptjs = require('bcryptjs');
+
+const User = require('../models/User');
 
 const { validationResult } = require('express-validator');
 
@@ -26,8 +29,52 @@ function getEmails() {
 
 let usersController = {
     login: (req, res) => {
-        res.render('./users/login.ejs')
+        res.render('./users/login.ejs');
     },
+
+    loginProcess: (req, res) => {
+
+		let userToLogin = User.findByField('email', req.body.email);
+		
+		if(userToLogin) {
+            console.log('llego');
+			let isOkThePassword = bcryptjs.compareSync(req.body.key, userToLogin.key);
+			if (isOkThePassword) {
+				delete userToLogin.key;
+				req.session.userLogged = userToLogin;
+
+				if(req.body.remember_user) {
+					res.cookie('userEmail', req.body.email, { maxAge: (1000 * 60) * 60 })
+				}
+
+				return res.redirect('/users/profile');
+			} 
+			return res.render('./users/login.ejs', {
+				errors: {
+					email: {
+						msg: 'Las credenciales son inválidas'
+					}
+				}
+			});
+		}
+
+		return res.render('./users/login.ejs', {
+			errors: {
+				email: {
+					msg: 'No se encuentra este email en nuestra base de datos'
+				}
+			}
+		});
+	},
+    profile: (req, res) => {
+     	return res.render('./users/profile.ejs', {
+			user: req.session.userLogged
+		});
+	},
+    logout: (req, res) => {
+		req.session.destroy();
+		res.redirect('/');
+	},
     register: (req,res) => {
         let emails = getEmails();
         let usuarios = getUsers();
