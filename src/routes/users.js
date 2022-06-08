@@ -1,6 +1,6 @@
-var express = require('express');
-var router = express.Router();
-var usersController = require('../controllers/usersControllers.js');
+let express = require('express');
+let router = express.Router();
+let usersController = require('../controllers/usersControllers.js');
 let multer = require('multer');
 let path = require('path');
 
