@@ -548,5 +548,31 @@
   "key": "O5zrVsyr5J",
   "foto": "PhasellusIdSapien.jpeg",
   "dateCreation": "9/15/2021"
+ },
+ {
+  "id": 51,
+  "fullName": "Un Usuario Nuevo",
+  "fullAddress": "Siempre 1187",
+  "email": "ramromer@gmail.com",
+  "bday": "2022-06-13",
+  "user": "aNEwUser",
+  "key": "$2b$10$jDzWwnEsM8smc6cfylHniODBXCqGdG50nyP2eHt9bx8VJPzM/GKPe",
+  "foto": [
+   "1654817763238_img_.jpg"
+  ],
+  "dateCreation": null
+ },
+ {
+  "id": 52,
+  "fullName": "Un Usuario Nuevo",
+  "fullAddress": "Siempre 1187",
+  "email": "nouse@fake.com",
+  "bday": "2022-06-01",
+  "user": "aNEwUse",
+  "key": "$2b$10$qwzVjP.GtaXyl6xhlvdDBep.04VauNufdQJcbv9yYl74XpNebFYMu",
+  "foto": [
+   "1654818163804_img_.jpeg"
+  ],
+  "dateCreation": null
  }
 ]
