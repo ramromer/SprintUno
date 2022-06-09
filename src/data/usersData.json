@@ -551,7 +551,6 @@
  },
  {
   "id": 51,
-<<<<<<< HEAD
   "fullName": "pepito pepon",
   "fullAddress": "peron 1985",
   "email": "asd@gmail.com",
@@ -559,7 +558,6 @@
   "user": "pepitopepon",
   "key": "$2b$10$5BjKcAZu/K0S94UQFnaCS.nuQhNdJXB0qh2aT1w87ohACgFTToENK",
   "foto": "porDefecto",
-=======
   "fullName": "Un Usuario Nuevo",
   "fullAddress": "Siempre 1187",
   "email": "ramromer@gmail.com",
@@ -582,7 +580,6 @@
   "foto": [
    "1654818163804_img_.jpeg"
   ],
->>>>>>> Sprint5
   "dateCreation": null
  }
 ]
