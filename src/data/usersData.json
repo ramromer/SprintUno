@@ -551,6 +551,7 @@
  },
  {
   "id": 51,
+<<<<<<< HEAD
   "fullName": "pepito pepon",
   "fullAddress": "peron 1985",
   "email": "asd@gmail.com",
@@ -558,6 +559,30 @@
   "user": "pepitopepon",
   "key": "$2b$10$5BjKcAZu/K0S94UQFnaCS.nuQhNdJXB0qh2aT1w87ohACgFTToENK",
   "foto": "porDefecto",
+=======
+  "fullName": "Un Usuario Nuevo",
+  "fullAddress": "Siempre 1187",
+  "email": "ramromer@gmail.com",
+  "bday": "2022-06-13",
+  "user": "aNEwUser",
+  "key": "$2b$10$jDzWwnEsM8smc6cfylHniODBXCqGdG50nyP2eHt9bx8VJPzM/GKPe",
+  "foto": [
+   "1654817763238_img_.jpg"
+  ],
+  "dateCreation": null
+ },
+ {
+  "id": 52,
+  "fullName": "Un Usuario Nuevo",
+  "fullAddress": "Siempre 1187",
+  "email": "nouse@fake.com",
+  "bday": "2022-06-01",
+  "user": "aNEwUse",
+  "key": "$2b$10$qwzVjP.GtaXyl6xhlvdDBep.04VauNufdQJcbv9yYl74XpNebFYMu",
+  "foto": [
+   "1654818163804_img_.jpeg"
+  ],
+>>>>>>> Sprint5
   "dateCreation": null
  }
 ]
