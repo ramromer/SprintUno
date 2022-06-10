@@ -34,7 +34,14 @@ p{
 #emailRepErr{
     display:none;
 }
-
+#eye{
+    font-size: small;
+    padding-left: 5px;
+}
+#eye2{
+    font-size: small;
+    padding-left: 5px;
+}
 #passRepErr{
     display:none;
 }

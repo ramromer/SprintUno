@@ -37,15 +37,75 @@
                         <% if (locals.errores && errores.user) { %>
                                 <p> <%=errores.user.msg %></p>
                         <%}%>
-                        <input name="key" type="password" id="drowssap0" placeholder="Contraseña"  />
-                        <% if (locals.errores && errores.key) { %>
-                                <p> <%=errores.key.msg %></p>
-                        <%}%>
-                        <input name="keyAgain" type="password" id="drowssap1" placeholder="Confirmar contraseña"  />
+                        <div>
+                        <input name="key" type="password" id="drowssap0" placeholder="Contraseña"  /><i class="fa fa-eye" id="eye"></i>
+                            <% if (locals.errores && errores.key) { %>
+                                    <p> <%=errores.key.msg %></p>
+                            <%}%>
+                        </div>
+                        <script>
+                            function show() {
+                            var p = document.getElementById('drowssap0');
+                            p.setAttribute('type', 'text');
+                            }
+
+                            function hide() {
+                                var p = document.getElementById('drowssap0');
+                                p.setAttribute('type', 'password');
+                            }
+
+                            var pwShown = 0;
+
+                            document.getElementById("eye").addEventListener("click", function () {
+                                if (pwShown == 0) {
+                                    pwShown = 1;	
+                                            document.getElementById("eye").classList.add("fa-eye-slash");
+                                            document.getElementById("eye").classList.remove("fa-eye");
+                                    show();
+                                } else {
+                                    pwShown = 0;
+                                        document.getElementById("eye").classList.add("fa-eye");
+                                        document.getElementById("eye").classList.remove("fa-eye-slash");
+                                    hide();
+                                }
+                            }, false);
+                        </script>
+                        <div>
+                        <input name="keyAgain" type="password" id="drowssap1" placeholder="Confirmar contraseña" /><i class="fa fa-eye" id="eye2"></i>
                         <p id="passRepErr">Las contraseñas no coinciden.</p>
                         <% if (locals.errores && errores.keyAgain) { %>
                                 <p> <%=errores.keyAgain.msg %></p>
                         <%}%>
+                        </div>
+
+                        <script>
+                            function show1() {
+                            var p1 = document.getElementById('drowssap1');
+                            p1.setAttribute('type', 'text');
+                            }
+
+                            function hide1() {
+                                var p1 = document.getElementById('drowssap1');
+                                p1.setAttribute('type', 'password');
+                            }
+
+                            var pwShown1 = 0;
+
+                            document.getElementById("eye2").addEventListener("click", function () {
+                                if (pwShown1 == 0) {
+                                    pwShown1 = 1;	
+                                        document.getElementById("eye2").classList.add("fa-eye-slash");
+                                        document.getElementById("eye2").classList.remove("fa-eye");
+                                    show1();
+                                } else {
+                                    pwShown1 = 0;
+                                        document.getElementById("eye2").classList.add("fa-eye");
+                                        document.getElementById("eye2").classList.remove("fa-eye-slash");
+                                    hide1();
+                                }
+                            }, false);
+                        </script>
+
 
                         <div>
                             <label>Foto de usuari@</label>
@@ -57,9 +117,9 @@
                             <input type="reset" value="Borrar">
                         </div>
                     </form>
-                    <!-- username taken? stuff -->
+                    <!-- username/email taken stuff -->
                     <script>
-                        function userValidation(e) {
+                        function userValidation() {
                             let listaUsers = '<%= usuarios%>';
                             let arrayUsers = listaUsers.split(',');
                             for (let i=0; i<arrayUsers.length;i++) {
@@ -74,7 +134,7 @@
                                 }
                             }
                         }
-                        function emailValidation(e) {
+                        function emailValidation() {
                             let listaEmails = '<%- emails%>';
                             let arrayEmails = listaEmails.split(',');
                             for (let i=0; i<arrayEmails.length;i++) {
@@ -89,7 +149,7 @@
                                 }
                             }
                         }
-                        function emailRepValidation(e) {
+                        function emailRepValidation() {
                             let email = document.getElementById("email").value;
                                 if (this.value != email) {
                                     document.getElementById("emailRepErr").style.display='block';
@@ -101,18 +161,23 @@
                                     // document.querySelector('#submitBtn').disabled = false;
                                 }
                         }
-                        function passValidation(e) {
-                            let pass = document.getElementById("drowssap");
-                                if (this != pass) {
+                        function passValidation() {
+                            var compare0, compare1;
+                            function getPassValue() {
+                                compare0 = document.getElementById('drowssap0').value;
+                            }
+                            function getPass2Value() {
+                                compare1 = document.getElementById('drowssap1').value;
+                            }
+                            getPassValue();
+                            getPass2Value();
+                                                           
+                                if (compare0 != compare1) {
                                     document.getElementById("passRepErr").style.display='block';
-                                    console.log('esta sucediendo');
-                                    console.log(this);
-                                    console.log(pass);
-
                                     // document.querySelector('#submitBtn').disabled = true;
                                     return;
                                 }
-                                if (this == pass) {
+                                if (compare0 == compare1) {
                                     document.getElementById("passRepErr").style.display='none';
                                     console.log('esta leyendo aqui');
                                     // document.querySelector('#submitBtn').disabled = false;
@@ -121,7 +186,8 @@
                         document.getElementById("resu0").addEventListener("keyup",userValidation);
                         document.getElementById("email").addEventListener("keyup",emailValidation);
                         document.getElementById("emailRep").addEventListener("keyup",emailRepValidation);
-                        // document.getElementById("drowssap1").addEventListener("keyup",passValidation);
+                        document.getElementById("drowssap1").addEventListener("keyup",passValidation);
+                        document.getElementById("drowssap0").addEventListener("keyup",passValidation);
                     </script>
             </main>
         <%- include('../partials/footer.ejs')%>
