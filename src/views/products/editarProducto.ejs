@@ -1,17 +1,17 @@
-<%- include('partials/head.ejs')%>
+<%- include('../partials/head.ejs')%>
 
   <body>
-    <%- include('partials/header.ejs')%>
+    <%- include('../partials/header.ejs')%>
       <main>
-        <%- include('partials/navMenu.ejs')%>
+        <%- include('../partials/navMenu.ejs')%>
 
 
           <section class="">
-            <form class="flexContainer centradoxy bgGray margin10px padding10px" id="infoEP" action="none" method="post">
+            <form class="flexContainer centradoxy bgGray margin10px padding10px" id="infoEP" action="../editarproducto/<%=producto.id%>?_method=PUT" method="POST" enctype="multipart/form-data">
               <div class="flexContainer" id="containerSliderEP">
-                <div class="flexContainer centradoxy" id="containerDeleteIMG">
+                <!-- <div class="flexContainer centradoxy" id="containerDeleteIMG">
                   <i class="fas fa-trash-alt"></i>
-                </div>
+                </div> -->
 
                 <section class="flexContainer" id="slider">
                   <!-- SLIDER -->
@@ -23,7 +23,7 @@
                     <button id="btnDer" type="button" onclick="siguiente(1)">&#10095;</button>
                   </div>
                   <!-- SLIDER SCRIPT (MUST INCLUDE)-->
-                  <%- include('partials/slider.ejs')%>
+                  <%- include('../partials/slider.ejs')%>
                 </section>
               </div>
               <div id="uploadImagesEP" class="flexContainer centradoxy">
@@ -43,19 +43,20 @@
                 <div class="flexContainer" >
                   <label>Color:</label> 
                   <div class="flexContainer centradoxy space-evenly" >
-                    <a class="iconCircle red"></a>
-                    <a class="iconCircle white"></a>
-                    <a class="iconCircle black"></a>
+                    <label for=""> Rojo</label><input type="checkbox" name="colorRed" value="red" <%if(producto.colorDisponible.red==""){%>checked<%}%>>
+                    <label for=""> Blanco</label><input type="checkbox" name="colorWhite"  value="white" <%if(producto.colorDisponible.white==""){%>checked<%}%>>
+                    <label for=""> Negro</label><input type="checkbox" name="colorBlack" value="black" <%if(producto.colorDisponible.black==""){%>checked<%}%>>
                   </div>
                 </div>
                 <div class="flexContainer" >
                   <label>Tamaño: </label>
                   <div class="flexContainer centradoxy space-evenly" >
-                    <div class="iconCircle white">S</div>
-                    <div class="iconCircle white">M</div>
-                    <div class="iconCircle white">L</div>
+                    <label for="">Rodado 20</label><input type="checkbox" name="tamanioS" value="S" <%if(producto.tamanio.S==""){%>checked<%}%>>
+                    <label for="">Rodado 26</label><input type="checkbox" name="tamanioM" value="M" <%if(producto.tamanio.M==""){%>checked<%}%>>
+                    <label for="">Rodado 29</label><input type="checkbox" name="tamanioL" value="L" <%if(producto.tamanio.L==""){%>checked<%}%>>
                   </div>
-                </div>
+                  <br>
+                  <br>
                 <div class="flexContainer" id="cantidadEP">
                   <label for="cantidadEP"> Cantidad:</label>
                   <input class="textocentrado" type="number"  autocomplete="off" min="1" id="cantidadEP" name="cantidad" value=<%=producto.cantidadDisponible%>  />
@@ -70,16 +71,24 @@
                 </div>
 
                 <div id="containerBtn" class="flexContainer">
-                  <button id="btnEP">Guardar</button>
+                  <button type="submit" id="btnEP">Guardar</button> 
+                  <div>
+                  
+                </div>
+<!--                   
+                  <button type="submit" action="../editarproducto/<%=producto.id%>?_method=PUT" method="DELETE" id="btnDEL">BORRAR</button> -->
                 </div>
               </div>
 
             </form>
+            <form action="/productos/<%= producto.id%>?_method=DELETE"  method="POST" style="display: inline-flex">
+              <button type="submit" class="action-button delete">ELIMINAR</button>
+            </form> 
 
           </section>
 
       </main>
-      <%- include('partials/footer.ejs')%>
+      <%- include('../partials/footer.ejs')%>
   </body>
 
   </html>

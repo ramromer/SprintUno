@@ -1,16 +1,16 @@
-<%- include('partials/head.ejs')%>
+<%- include('../partials/head.ejs')%>
 
   <body>
-    <%- include('partials/header.ejs')%>
+    <%- include('../partials/header.ejs')%>
       <main>
-        <%- include('partials/navMenu.ejs')%>
+        <%- include('../partials/navMenu.ejs')%>
 
 
           <section>
-            <form class="flexContainer bgGray margin10px padding10px"" id="infoProductoNuevo" action="none" method="post">
+            <form class="flexContainer bgGray margin10px padding10px" id="infoProductoNuevo" action="/productonuevo" method="POST" enctype="multipart/form-data">
               <div id="uploadImages" class="flexContainer">
                 <label for="avatar">Arrastra y suelta tus imagenes aquí o seleccionalas:</label>
-                <input type="file" id="imagenes" name="image" multiple accept="image/*" />
+                <input type="file" id="imagenes" name="image" accept="image/*" />
               </div>
               <div id="contenedorInputs" class="flexContainer">
                 <div id="tituloProductoNuevo" class="flexContainer">
@@ -23,20 +23,20 @@
                 </div>
                 <div class="flexContainer" >
                   <label>Color:</label> 
-                  <div class="flexContainer" id="colorProductoNuevo">
-                    <a class="iconCircle red"></a>
-                    <a class="iconCircle white"></a>
-                    <a class="iconCircle black"></a>
+                  <div class="flexContainer centradoxy space-evenly" >
+                    <label for=""> Rojo</label><input type="checkbox" name="colorRed" value="red">
+                    <label for=""> Blanco</label><input type="checkbox" name="colorWhite" value="white">
+                    <label for=""> Negro</label><input type="checkbox" name="colorBlack" value="black">
                   </div>
                 </div>
                 <div class="flexContainer" >
                   <label>Tamaño: </label>
-                  <div class="flexContainer" id="tamanioProductoNuevo" >
-                    <div class="iconCircle white">S</div>
-                    <div class="iconCircle white">M</div>
-                    <div class="iconCircle white">L</div>
+                  <div class="flexContainer centradoxy space-evenly" >
+                    <label for="">Rodado 20</label><input type="checkbox" name="tamanioS" value="S">
+                    <label for="">Rodado 26</label><input type="checkbox" name="tamanioM" value="M">
+                    <label for="">Rodado 29</label><input type="checkbox" name="tamanioL" value="L">
                   </div>
-                </div>
+                  <br>
                 <div class="flexContainer" id="cantidadProductoNuevo">
                   <label for="cantidad"> Cantidad:</label>
                   <input class="textocentrado" type="number" min="1" autocomplete="off" id="cantidad" name="cantidad" />
@@ -51,7 +51,7 @@
                 </div>
 
                 <div id="containerBtn" class="flexContainer">
-                  <button id="btnProductoNuevo">Guardar</button>
+                  <button type="submit" id="btnProductoNuevo">Guardar</button>
                 </div>
               </div>
 
@@ -60,7 +60,7 @@
           </section>
 
       </main>
-      <%- include('partials/footer.ejs')%>
+      <%- include('../partials/footer.ejs')%>
   </body>
 
   </html>

@@ -8,31 +8,12 @@
  
 }
 
-
+.text-danger{color:#dc3545!important}
 
 #form-login > h1 {
     font-size: 24px;
-  
 }
 
 #form-login a {
     text-decoration: none;
-  
-}
-
-a:visited {
-    color: rgb(28, 114, 147);
-}
-
-
-#btnRegistro{
-    background-color:white;
-}
-
-#btnRegistro:hover{
-    background-color: rgb(28, 114, 147);
-}
-
-#btnRegistro:hover a{
-    color: white;
 }

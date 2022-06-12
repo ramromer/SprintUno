@@ -1,0 +1,190 @@
+<%- include('../partials/head.ejs')%>
+
+    <body>
+        <%- include('../partials/header.ejs')%>
+            <main id="mainRegister">
+                    <form id="form-register" action="/users/register" method="POST" enctype="multipart/form-data">
+                        <label>Datos Personales</label>
+                                            
+                        <input name="fullName" type="text" id="fullname" value="<%= locals.oldData? oldData.fullName : null %>" placeholder="Nombre y Apellido"/>
+                        <% if (locals.errores && errores.fullName) { %>
+                                <div><p> <%=errores.fullName.msg %></p></div>
+                        <%}%>
+                        <input name="fullAddress" type="text" id="fulladdress" value="<%= locals.oldData? oldData.fullAddress : null %>" placeholder="Domicilio"/>
+                        <% if (locals.errores && errores.fullAddress) { %>
+                               <div><p> <%=errores.fullAddress.msg %></p></div>
+                        <%}%>
+                        <input name="email" type="email" id="email" value="<%= locals.oldData? oldData.email : null %>" placeholder="E-mail"  />
+                        <p id="yaexisteemail">Ya existe otro usuario con ese email. Por favor registrese con uno distinto, o ingrese <a href="/users/login">aqui</a>.</p>
+                        <% if (locals.errores && errores.email) { %>
+                                <p> <%=errores.email.msg %></p>
+                        <%}%>
+                        <input name="emailRep" type="email" id="emailRep" value="<%= locals.oldData? oldData.emailRep : null %>" placeholder="Repita su E-mail"  />
+                        <p id="emailRepErr">Las direcciones de correo no coinciden.</p>
+                        <% if (locals.errores && errores.emailRep) { %>
+                                <p> <%=errores.emailRep.msg %></p>
+                        <%}%>
+
+                        <label for="bday">Fecha de Nacimiento</label>
+                        <input name="bday" type="date" id="bday" value="<%= locals.oldData? oldData.bday : null %>" />
+                        <% if (locals.errores && errores.bday) { %>
+                                <p> <%=errores.bday.msg %></p>
+                        <%}%>
+
+                        <label>Datos de tu cuenta</label>
+                        <input name="user" type="text" id="resu0" value="<%= locals.oldData? oldData.user : null %>" placeholder="Nombre de usuario"  />
+                        <p id="yaexiste">Ya existe otro usuario con ese nombre. Por favor escriba uno distinto, o ingrese <a href="/users/login">aqui</a>.</p>
+                        <% if (locals.errores && errores.user) { %>
+                                <p> <%=errores.user.msg %></p>
+                        <%}%>
+                        <div>
+                        <input name="key" type="password" id="drowssap0" placeholder="Contraseña"  /><i class="fa fa-eye" id="eye"></i>
+                            <% if (locals.errores && errores.key) { %>
+                                    <p> <%=errores.key.msg %></p>
+                            <%}%>
+                        </div>
+                        <script>
+                            function show() {
+                            var p = document.getElementById('drowssap0');
+                            p.setAttribute('type', 'text');
+                            }
+
+                            function hide() {
+                                var p = document.getElementById('drowssap0');
+                                p.setAttribute('type', 'password');
+                            }
+
+                            var pwShown = 0;
+
+                            document.getElementById("eye").addEventListener("click", function () {
+                                if (pwShown == 0) {
+                                    pwShown = 1;	
+                                            document.getElementById("eye").classList.add("fa-eye-slash");
+                                            document.getElementById("eye").classList.remove("fa-eye");
+                                    show();
+                                } else {
+                                    pwShown = 0;
+                                        document.getElementById("eye").classList.add("fa-eye");
+                                        document.getElementById("eye").classList.remove("fa-eye-slash");
+                                    hide();
+                                }
+                            }, false);
+                        </script>
+                        <div>
+                        <input name="keyAgain" type="password" id="drowssap1" placeholder="Confirmar contraseña" /><i class="fa fa-eye" id="eye2"></i>
+                        <p id="passRepErr">Las contraseñas no coinciden.</p>
+                        <% if (locals.errores && errores.keyAgain) { %>
+                                <p> <%=errores.keyAgain.msg %></p>
+                        <%}%>
+                        </div>
+
+                        <script>
+                            function show1() {
+                            var p1 = document.getElementById('drowssap1');
+                            p1.setAttribute('type', 'text');
+                            }
+
+                            function hide1() {
+                                var p1 = document.getElementById('drowssap1');
+                                p1.setAttribute('type', 'password');
+                            }
+
+                            var pwShown1 = 0;
+
+                            document.getElementById("eye2").addEventListener("click", function () {
+                                if (pwShown1 == 0) {
+                                    pwShown1 = 1;	
+                                        document.getElementById("eye2").classList.add("fa-eye-slash");
+                                        document.getElementById("eye2").classList.remove("fa-eye");
+                                    show1();
+                                } else {
+                                    pwShown1 = 0;
+                                        document.getElementById("eye2").classList.add("fa-eye");
+                                        document.getElementById("eye2").classList.remove("fa-eye-slash");
+                                    hide1();
+                                }
+                            }, false);
+                        </script>
+
+
+                        <div>
+                            <label>Foto de usuari@</label>
+                            <input name="image" type="file" id="profilepic" accept=".jpg, .jpeg, .png, .bmp" single>
+                        </div>
+                        <div class="button-register">
+                            <input id="submitBtn" type="submit" value="Enviar">
+                            <!-- disabled="true" ??? disabled="false" -->
+                            <input type="reset" value="Borrar">
+                        </div>
+                    </form>
+                    <!-- username/email taken stuff -->
+                    <script>
+                        function userValidation() {
+                            let listaUsers = '<%= usuarios%>';
+                            let arrayUsers = listaUsers.split(',');
+                            for (let i=0; i<arrayUsers.length;i++) {
+                                if (this.value == arrayUsers[i]) {
+                                    document.getElementById("yaexiste").style.display='block';
+                                    return;
+                                }
+                            }
+                            for (let i=0; i<arrayUsers.length;i++) {
+                                if(this.value != arrayUsers[i]){
+                                    document.getElementById("yaexiste").style.display='none';
+                                }
+                            }
+                        }
+                        function emailValidation() {
+                            let listaEmails = '<%- emails%>';
+                            let arrayEmails = listaEmails.split(',');
+                            for (let i=0; i<arrayEmails.length;i++) {
+                                if (this.value == arrayEmails[i]) {
+                                    document.getElementById("yaexisteemail").style.display='block';
+                                    return;
+                                }
+                            }
+                            for (let i=0; i<arrayEmails.length;i++) {
+                                if(this.value != arrayEmails[i]){
+                                    document.getElementById("yaexisteemail").style.display='none';
+                                }
+                            }
+                        }
+                        function emailRepValidation() {
+                            let email = document.getElementById("email").value;
+                                if (this.value != email) {
+                                    document.getElementById("emailRepErr").style.display='block';
+                                    // document.querySelector('#submitBtn').disabled = true;
+                                    return;
+                                }
+                                if (this.value == email) {
+                                    document.getElementById("emailRepErr").style.display='none';
+                                    // document.querySelector('#submitBtn').disabled = false;
+                                }
+                        }
+                        function passValidation() {
+                            var compare0, compare1;
+                                compare0 = document.getElementById('drowssap0').value;
+                                compare1 = document.getElementById('drowssap1').value;
+                                                           
+                                if (compare0 != compare1) {
+                                    document.getElementById("passRepErr").style.display='block';
+                                    // document.querySelector('#submitBtn').disabled = true;
+                                    return;
+                                }
+                                if (compare0 == compare1) {
+                                    document.getElementById("passRepErr").style.display='none';
+                                    console.log('esta leyendo aqui');
+                                    // document.querySelector('#submitBtn').disabled = false;
+                                }
+                        }
+                        document.getElementById("resu0").addEventListener("keyup",userValidation);
+                        document.getElementById("email").addEventListener("keyup",emailValidation);
+                        document.getElementById("emailRep").addEventListener("keyup",emailRepValidation);
+                        document.getElementById("drowssap1").addEventListener("keyup",passValidation);
+                        document.getElementById("drowssap0").addEventListener("keyup",passValidation);
+                    </script>
+            </main>
+        <%- include('../partials/footer.ejs')%>
+    </body>
+
+    </html>

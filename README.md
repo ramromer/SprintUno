@@ -40,3 +40,6 @@ Listado de al menos cinco referentes:
 NOTAS:
 #Wireframe
 Invite link al board de MIRO (HOME Wireframe): https://miro.com/welcomeonboard/TVpuSHBHYU5wS3lPa0xmUDB3aU1WVnFySXZ2M1BTdXhxWWxpVkRCOVVUWkRBYTFUWEhnV1lJMEtJR3Y3SlJnd3wzNDU4NzY0NTIxNTcwNTg4NTM3?invite_link_id=413006897110
+
+#Trello
+ https://trello.com/invite/b/UyxAOhJR/3f84d0bc6da20513574e42a0a951a804/sprint-2

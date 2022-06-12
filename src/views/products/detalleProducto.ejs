@@ -1,0 +1,86 @@
+<%- include('../partials/head.ejs')%>
+
+  <body>
+    <%- include('../partials/header.ejs')%>
+      <main class="flexContainer">
+        <%- include('../partials/navMenu.ejs')%>
+          <div id="containerSlider">
+            <section class="flexContainer" id="slider">
+              <!-- SLIDER -->
+              <div class="slider-display-container">
+                <button type="button" id="btnIzq" onclick="siguiente(-1)">&#10094;</button>
+                <%producto.img.forEach(bici=> { %>
+                  <img class="sliderImagen" src="/images/<%= bici %>">
+                  <%})%>
+                    <button type="button" id="btnDer" onclick="siguiente(1)">&#10095;</button>
+              </div>
+              <!-- SLIDER SCRIPT (MUST INCLUDE)-->
+              <%- include('../partials/slider.ejs')%>
+            </section>
+          </div>
+          <section id="formDetalleProdcuto">
+            <form class="flexContainer" id="infoProducto" action="none" method="post">
+              <div id="tituloProducto" class="flexContainer margin10px">
+                <label>
+                  <%= producto.titulo %>
+                </label>
+
+              </div>
+              <div class="flexContainer" id="precioProducto">
+                <label for="precioDP">Precio: </label>
+                <h4 class="margin10px flexContainer centradoxy" id="precioDP">$<%= producto.precio %>
+                </h4>
+              </div>
+              <div class="flexContainer">
+                <label>Color:</label>
+                <div class="flexContainer centradoxy space-evenly">
+                  <label for=""> Rojo</label><input type="radio" name="color" <%=producto.colorDisponible.red%>
+                  value="red">
+                  <label for=""> Blanco</label><input type="radio" name="color" <%=producto.colorDisponible.white%>
+                  value="white">
+                  <label for=""> Negro</label><input type="radio" name="color" <%=producto.colorDisponible.black%>
+                  value="black">
+                </div>
+              </div>
+              <br>
+              <br>
+              <div class="flexContainer">
+                <label>Tamaño: </label>
+                <div class="flexContainer centradoxy space-evenly">
+
+                  <label for=""> 20</label><input type="radio" <%=producto.tamanio.S%> name="tamanio" value="S">
+                  <label for=""> 26</label><input type="radio" <%=producto.tamanio.M%> name="tamanio" value="M">
+                  <label for=""> 29</label><input type="radio" <%=producto.tamanio.L%> name="tamanio" value="L">
+                </div>
+              </div>
+              <br>
+              <br>
+              <div class="flexContainer" id="cantidadProducto">
+                <label>Cantidad: </label><input class="textocentrado " type="number">
+                <h4 class="textGray">tenemos <%= producto.cantidadDisponible %> unidades diponibles!</h4>
+              </div>
+              <div id="containerBtn" class="flexContainer">
+                <button id="btnCompraAhora">Compra ahora</button>
+              </div>
+              
+                <a id="editarProducto" href="/editarproducto/<%= producto.id %>">
+                  <i class="fas fa-edit"></i>
+                </a>
+             
+            </form>
+
+          </section>
+          <section id="descripcionProducto">
+            <div id="">
+              <h4>Descripción</h4>
+              <p>
+                <%= producto.descripcionDetallada %>
+              </p>
+            </div>
+          </section>
+
+      </main>
+      <%- include('../partials/footer.ejs')%>
+  </body>
+
+  </html>

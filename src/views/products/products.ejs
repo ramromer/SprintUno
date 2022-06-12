@@ -1,0 +1,29 @@
+<%- include('../partials/head.ejs')%>
+
+  <body>
+    <%- include('../partials/header.ejs')%>
+      <main id="mainIndex">
+        <%- include('../partials/navMenu.ejs')%>
+        
+        <h3 class="sections">Lista de Productos</h3>
+        <section class="containerTarjetas">
+          <%listaBicis.forEach(bici => { %>
+            <a href="/detalleproducto/<%=bici.id%>" class="product article">
+                <img src="/images/<%=bici.img[0]%>" alt="<%=bici.alt%>">
+                <div class="producto-descripcion flexContainer">
+                  <div class="price-bar flexContainer">
+                    <p class="precio">$ <%=bici.precio%></p>
+                    <%if(bici.descuento){%>
+                      <p class="descuento"><%=bici.descuento%></p>
+                    <%}%>
+                  </div>
+                  <h4 class="description"><%=bici.titulo%></h4>
+                </div>
+              </a>
+          <%})%>
+        </section>
+      </main>
+      <%- include('../partials/footer.ejs')%>
+  </body>
+
+  </html>
