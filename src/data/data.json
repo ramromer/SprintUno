@@ -140,23 +140,23 @@
  {
   "id": 9,
   "titulo": "Topmega",
-  "descripcionDetallada": "Descripcion Ampliada ",
+  "descripcionDetallada": "Descripcion Ampliada  ",
   "colorDisponible": {
-   "red": true,
-   "white": true,
-   "black": false
+   "red": "disabled",
+   "white": "disabled",
+   "black": ""
   },
   "tamanio": {
-   "S": true,
-   "M": true,
-   "L": false
+   "S": "disabled",
+   "M": "disabled",
+   "L": ""
   },
   "category": "visited",
   "img": [
    "bicicleta-topmega-red.png"
   ],
   "alt": "bici",
-  "cantidadDisponible": 0,
+  "cantidadDisponible": 3,
   "precio": ""
  },
  {
@@ -269,6 +269,29 @@
   "category": "visited",
   "img": [
    "1653616831964_img_.png"
+  ],
+  "alt": "bici"
+ },
+ {
+  "id": 27,
+  "titulo": "asd",
+  "descripcionCorta": " 233",
+  "descripcionDetallada": "Descripcion Ampliada",
+  "colorDisponible": {
+   "red": "disabled",
+   "white": "disabled",
+   "black": ""
+  },
+  "tamanio": {
+   "S": "disabled",
+   "M": "",
+   "L": "disabled"
+  },
+  "cantidadDisponible": "23",
+  "precio": "23",
+  "category": "visited",
+  "img": [
+   "1655768694458_img_.png"
   ],
   "alt": "bici"
  }

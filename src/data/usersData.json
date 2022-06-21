@@ -551,13 +551,6 @@
  },
  {
   "id": 51,
-  "fullName": "pepito pepon",
-  "fullAddress": "peron 1985",
-  "email": "asd@gmail.com",
-  "bday": "1990-01-01",
-  "user": "pepitopepon",
-  "key": "$2b$10$5BjKcAZu/K0S94UQFnaCS.nuQhNdJXB0qh2aT1w87ohACgFTToENK",
-  "foto": "porDefecto",
   "fullName": "Un Usuario Nuevo",
   "fullAddress": "Siempre 1187",
   "email": "ramromer@gmail.com",
@@ -579,6 +572,19 @@
   "key": "$2b$10$qwzVjP.GtaXyl6xhlvdDBep.04VauNufdQJcbv9yYl74XpNebFYMu",
   "foto": [
    "1654818163804_img_.jpeg"
+  ],
+  "dateCreation": null
+ },
+ {
+  "id": 53,
+  "fullName": "Luis Iglesias",
+  "fullAddress": "Jamundí",
+  "email": "luisjavi@gmail.com",
+  "bday": "1990-11-27",
+  "user": "luisjavi",
+  "key": "$2a$10$xONGAMOgBuiHBNsXY/cJG.vOfJkDJbJrTcW561TlXiaFcfud5oMMq",
+  "foto": [
+   "1655063738014_img_.png"
   ],
   "dateCreation": null
  }

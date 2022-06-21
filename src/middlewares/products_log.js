@@ -1,4 +1,5 @@
 const fs = require('fs');
+const path = require("path");
 
 function loggerProducts (req,res,next){
     let listaBicisFile = fs.readFileSync(path.join(__dirname, "../data/data.json"));

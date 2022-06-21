@@ -1,10 +1,7 @@
 const fs = require("fs");
 const path = require("path");
-
 const bcryptjs = require('bcryptjs');
-
 const User = require('../models/User');
-
 const { validationResult } = require('express-validator');
 
 function getListaUsers() {
@@ -37,7 +34,6 @@ let usersController = {
 		let userToLogin = User.findByField('email', req.body.email);
 		
 		if(userToLogin) {
-            console.log('llego');
 			let isOkThePassword = bcryptjs.compareSync(req.body.key, userToLogin.key);
 			if (isOkThePassword) {
 				delete userToLogin.key;
@@ -92,7 +88,7 @@ let usersController = {
             let listaUsers = getListaUsers();
                 let ultimoElmnt = listaUsers[listaUsers.length - 1];
                 let picture;
-                let key = bcrypt.hashSync(req.body.key, 10);
+                let key = bcryptjs.hashSync(req.body.key, 10);
                 if (req.file) {picture= [req.file.filename]}else{picture= 'porDefecto'};
                 let usuarioNuevo = {
                     id: ultimoElmnt.id + 1,
@@ -120,7 +116,8 @@ let usersController = {
 
     notFound: (req, res) => {
         res.render('notFound')
-    }
+    },
+
 }
 
 module.exports = usersController;

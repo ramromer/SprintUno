@@ -13,9 +13,7 @@ const storage = multer.diskStorage({
     }
 })
 const uploadFile=multer({storage:storage});
-
 const {body} = require('express-validator');
-
 const validateUserRegister = [
     body('fullName').notEmpty().withMessage('Por favor ingresa tu nombre completo'),
     body('fullAddress').notEmpty().withMessage('Por favor ingresa tu direccion'),
@@ -25,16 +23,16 @@ const validateUserRegister = [
     body('user').notEmpty().withMessage('Por favor ingrese un nombre de usuario'),
     body('key').notEmpty().withMessage('Por favor ingrese una contraseña'),
     body('keyAgain').notEmpty().withMessage('Por favor repita la contraseña elegida'),   
-]
-
+];
 const guestMiddleware = require('../middlewares/guestMiddleware');
 const authMiddleware = require('../middlewares/authMiddleware');
 
+/* POST user */
+router.post('/login',usersController.loginProcess);
 router.post('/register', uploadFile.single('image'), validateUserRegister, usersController.registerWrite);
 
 /* GET users listing. */
 router.get('/login',guestMiddleware, usersController.login);
-router.post('/login',usersController.loginProcess);
 router.get('/register',guestMiddleware, usersController.register);
 router.get('/profile',authMiddleware,usersController.profile);
 router.get('/logout', usersController.logout);

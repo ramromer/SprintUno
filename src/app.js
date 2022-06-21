@@ -23,15 +23,15 @@ app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: false })); //URL encode  - Para que nos pueda llegar la información desde el formulario al req.body
 app.use(session( {secret: "Nuestro mensaje secreto"}));
 
 app.use(cookieParser());
 
 app.use(express.static(path.join(__dirname, '../public')));
 
-app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/', indexRouter);
 
 //session
 // app.use(session({secret:'Sec313rwrUWEncuq9Om22iGFa7q2eAk53_kL'}));

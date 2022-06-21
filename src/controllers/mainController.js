@@ -18,10 +18,12 @@ let mainController = {
   },
 
   productoNuevo: (req, res) => {
-    res.render("./products/productoNuevo");
+  
+      res.render("./products/productoNuevo");
+
   },
   crearproductoNuevo: (req, res) => {
-    if (req.file) {
+    if (req.file && req.session.userLogged ) {
       let listaBicisFile = fs.readFileSync(
         path.join(__dirname, "../data/data.json")
       );
@@ -133,6 +135,12 @@ productos: (req, res) => {
   error: (req, res) => {
     res.render("error");
   },
+  notFound: (req, res) => {
+    res.render('notFound')
+},
+accesDenied: (req, res) => {
+  res.render('accesDenied')
+}
 };
 
 function getListaBicis() {
