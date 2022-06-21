@@ -6,13 +6,19 @@
       </form>
       <div class="menu-actions flexContainer">
         <ul type="none" class="actions flexContainer">
+          
           <li><a href="/carrito"><i class="fas fa-shopping-cart"></i></a> </li>
+         <% if(!locals.isLogged){ %>
           <li><a href="/users/login"><i class="fas fa-sign-in-alt"></i></a> </li>
           <li><a href="/users/register"><i class="fas fa-id-card"></i></a></li>
+         <%} %>
+
+         <% if(locals.isLogged){ %>
+                    
           <li><a href="/productonuevo"><i class="fas fa-plus-circle"></i></a></li>
           <li><a href="/users/logout"><i class="fas fa-times"></i></a></li>
           <li><a href="/users/profile"><i class="fas fa-user"></i></a></li>
-          
+          <%} %>
         </ul>
       </div>
     </div>

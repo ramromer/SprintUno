@@ -40,7 +40,7 @@ let usersController = {
 				req.session.userLogged = userToLogin;
 
 				if(req.body.remember_user) {
-					res.cookie('userEmail', req.body.email, { maxAge: (1000 * 60) * 60 })
+					res.cookie('user', [req.body.email, req.body.key], { maxAge: (1000 * 60) * 60 })
 				}
 
 				return res.redirect('/users/profile');
@@ -98,6 +98,7 @@ let usersController = {
                     bday: req.body.bday,
                     user: req.body.user,
                     key: key,
+                    type: req.body.userType,
                     foto: picture,
                     dateCreation: null, //somekind of timestamp??
                 };
@@ -109,7 +110,7 @@ let usersController = {
 
                 fs.writeFileSync(fullPath, salida);
 
-                res.redirect(`./users/${usuarioNuevo.id}`);
+                res.redirect(`./login/`);
             
         }
     },

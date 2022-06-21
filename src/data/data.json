@@ -18,31 +18,6 @@
   "precio": "10000",
   "category": "visited",
   "img": [
-   "bicicleta-orbea-rise-m20.jpg",
-   "bicicleta-orbea-rise-m21.jpg"
-  ],
-  "alt": "bici"
- },
- {
-  "id": 2,
-  "titulo": "Orbea Rise",
-  "descripcionCorta": "Bicicleta",
-  "descripcionDetallada": "Descripcion Ampliada ",
-  "colorDisponible": {
-   "red": "disabled",
-   "white": "disabled",
-   "black": ""
-  },
-  "tamanio": {
-   "S": "disabled",
-   "M": "disabled",
-   "L": ""
-  },
-  "cantidadDisponible": 10,
-  "precio": "10000",
-  "category": "visited",
-  "img": [
-   "bicicleta-orbea-rise-m20.jpg",
    "bicicleta-orbea-rise-m21.jpg"
   ],
   "alt": "bici"
@@ -269,29 +244,6 @@
   "category": "visited",
   "img": [
    "1653616831964_img_.png"
-  ],
-  "alt": "bici"
- },
- {
-  "id": 27,
-  "titulo": "asd",
-  "descripcionCorta": " 233",
-  "descripcionDetallada": "Descripcion Ampliada",
-  "colorDisponible": {
-   "red": "disabled",
-   "white": "disabled",
-   "black": ""
-  },
-  "tamanio": {
-   "S": "disabled",
-   "M": "",
-   "L": "disabled"
-  },
-  "cantidadDisponible": "23",
-  "precio": "23",
-  "category": "visited",
-  "img": [
-   "1655768694458_img_.png"
   ],
   "alt": "bici"
  }

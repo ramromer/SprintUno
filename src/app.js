@@ -3,6 +3,7 @@ let express = require('express');
 let path = require('path');
 let cookieParser = require('cookie-parser');
 let logger = require('morgan');
+let userLoggedMiddleware = require('./middlewares/userLoggedMiddleware')
 
 
 //session
@@ -29,6 +30,8 @@ app.use(session( {secret: "Nuestro mensaje secreto"}));
 app.use(cookieParser());
 
 app.use(express.static(path.join(__dirname, '../public')));
+
+app.use(userLoggedMiddleware);
 
 app.use('/users', usersRouter);
 app.use('/', indexRouter);
