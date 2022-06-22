@@ -1,9 +1,10 @@
-que debemos comenzar a hacer (definir mejor tareas - trabajar por separado y adelantarlo para las reuniones - )
 
-que debemos hacer mas (coordinar mas por el trello)
+Comenzar a hacer: Acordar las tareas a realizar
 
-que debemos seguir haciendo (reuniendonos los martes y jueves a las 20... o dentro de lo posible)
+Hacer más: Usar mas trello
 
-que debemos hacer menos (elegir caminos dificiles)
+Continuar haciendo: Repartir tareas
 
-que debemos dejar de hacer (No usar para nada el trello, usarlo un poco mas)
+Hacer menos: Detalles y mas funcionalidad
+
+Dejar de hacer: Aplazar las tareas

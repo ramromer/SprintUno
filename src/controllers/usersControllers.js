@@ -1,10 +1,7 @@
 const fs = require("fs");
 const path = require("path");
-
 const bcryptjs = require('bcryptjs');
-
 const User = require('../models/User');
-
 const { validationResult } = require('express-validator');
 
 function getListaUsers() {
@@ -37,15 +34,16 @@ let usersController = {
 		let userToLogin = User.findByField('email', req.body.email);
 		
 		if(userToLogin) {
-            console.log('llego');
 			let isOkThePassword = bcryptjs.compareSync(req.body.key, userToLogin.key);
 			if (isOkThePassword) {
 				delete userToLogin.key;
+                console.log("crea session", userToLogin);
 				req.session.userLogged = userToLogin;
 
-				if(req.body.remember_user) {
-					res.cookie('userEmail', req.body.email, { maxAge: (1000 * 60) * 60 })
-				}
+				if(req.body.recordarLogin) {
+					res.cookie('user', req.body.email, { maxAge: (1000 * 60) * 60 })// esto es seguro, podemos hashear la info o usar cookies seguras
+                    console.log(res.cookie.user, "cookie recien creada")
+                }
 
 				return res.redirect('/users/profile');
 			} 
@@ -66,6 +64,9 @@ let usersController = {
 			}
 		});
 	},
+
+    
+
     profile: (req, res) => {
      	return res.render('./users/profile.ejs', {
 			user: req.session.userLogged
@@ -73,7 +74,9 @@ let usersController = {
 	},
     logout: (req, res) => {
 		req.session.destroy();
+        res.clearCookie("user");
 		res.redirect('/');
+
 	},
     register: (req,res) => {
         let emails = getEmails();
@@ -92,7 +95,7 @@ let usersController = {
             let listaUsers = getListaUsers();
                 let ultimoElmnt = listaUsers[listaUsers.length - 1];
                 let picture;
-                let key = bcrypt.hashSync(req.body.key, 10);
+                let key = bcryptjs.hashSync(req.body.key, 10);
                 if (req.file) {picture= [req.file.filename]}else{picture= 'porDefecto'};
                 let usuarioNuevo = {
                     id: ultimoElmnt.id + 1,
@@ -102,6 +105,7 @@ let usersController = {
                     bday: req.body.bday,
                     user: req.body.user,
                     key: key,
+                    type: req.body.userType,
                     foto: picture,
                     dateCreation: null, //somekind of timestamp??
                 };
@@ -113,14 +117,15 @@ let usersController = {
 
                 fs.writeFileSync(fullPath, salida);
 
-                res.redirect(`./users/${usuarioNuevo.id}`);
+                res.redirect(`./login/`);
             
         }
     },
 
     notFound: (req, res) => {
         res.render('notFound')
-    }
+    },
+
 }
 
 module.exports = usersController;

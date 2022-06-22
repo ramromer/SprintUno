@@ -62,11 +62,11 @@
               <div id="containerBtn" class="flexContainer">
                 <button id="btnCompraAhora">Compra ahora</button>
               </div>
-              
+              <% if(locals.isLogged){ %>
                 <a id="editarProducto" href="/editarproducto/<%= producto.id %>">
                   <i class="fas fa-edit"></i>
                 </a>
-             
+                <%} %>
             </form>
 
           </section>

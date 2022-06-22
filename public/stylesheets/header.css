@@ -38,6 +38,13 @@
   color: rgb(255, 168, 82) !important;
 }
 
-#header {
-  background-color: rgb(28, 114, 147);
-}
+  #header{
+    background-color: rgb(28, 114, 147);
+  }
+
+  #nombreUsuario{
+    font: 1.2em "Lucida Grande", Helvetica, Arial, sans-serif;
+    color: white;
+    margin: auto 0 auto 0;
+    font-weight: bold;
+  }
