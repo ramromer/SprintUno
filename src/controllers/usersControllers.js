@@ -37,11 +37,13 @@ let usersController = {
 			let isOkThePassword = bcryptjs.compareSync(req.body.key, userToLogin.key);
 			if (isOkThePassword) {
 				delete userToLogin.key;
+                console.log("crea session", userToLogin);
 				req.session.userLogged = userToLogin;
 
-				if(req.body.remember_user) {
-					res.cookie('user', [req.body.email, req.body.key], { maxAge: (1000 * 60) * 60 })
-				}
+				if(req.body.recordarLogin) {
+					res.cookie('user', req.body.email, { maxAge: (1000 * 60) * 60 })// esto es seguro, podemos hashear la info o usar cookies seguras
+                    console.log(res.cookie.user, "cookie recien creada")
+                }
 
 				return res.redirect('/users/profile');
 			} 
@@ -62,6 +64,9 @@ let usersController = {
 			}
 		});
 	},
+
+    
+
     profile: (req, res) => {
      	return res.render('./users/profile.ejs', {
 			user: req.session.userLogged
@@ -69,7 +74,9 @@ let usersController = {
 	},
     logout: (req, res) => {
 		req.session.destroy();
+        res.clearCookie("user");
 		res.redirect('/');
+
 	},
     register: (req,res) => {
         let emails = getEmails();

@@ -6,6 +6,7 @@ let logger = require('morgan');
 let userLoggedMiddleware = require('./middlewares/userLoggedMiddleware')
 
 
+
 //session
 let session = require('express-session');
 
@@ -25,13 +26,16 @@ app.set('view engine', 'ejs');
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false })); //URL encode  - Para que nos pueda llegar la información desde el formulario al req.body
-app.use(session( {secret: "Nuestro mensaje secreto"}));
+app.use(session( {secret: "Nuestro mensaje secreto",
+resave: false,
+saveUninitialized: true}));
 
 app.use(cookieParser());
 
 app.use(express.static(path.join(__dirname, '../public')));
 
 app.use(userLoggedMiddleware);
+
 
 app.use('/users', usersRouter);
 app.use('/', indexRouter);
