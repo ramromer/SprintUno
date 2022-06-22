@@ -205,7 +205,7 @@
   "id": 25,
   "titulo": "Bicicleta Aurorita",
   "descripcionCorta": " Bici Aurorita",
-  "descripcionDetallada": "Descripcion Ampliada ",
+  "descripcionDetallada": "Descripcion Ampliada  ",
   "colorDisponible": {
    "red": "",
    "white": "disabled",
@@ -217,7 +217,7 @@
    "L": ""
   },
   "cantidadDisponible": 32,
-  "precio": "3454",
+  "precio": "3453",
   "category": "visited",
   "img": [
    "1653616784925_img_.png"

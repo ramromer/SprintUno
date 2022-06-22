@@ -43,3 +43,10 @@ font-size: 30px;
   #header{
     background-color: rgb(28, 114, 147);
   }
+
+  #nombreUsuario{
+    font: 1.2em "Lucida Grande", Helvetica, Arial, sans-serif;
+    color: white;
+    margin: auto 0 auto 0;
+    font-weight: bold;
+  }
