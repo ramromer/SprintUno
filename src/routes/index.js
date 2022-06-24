@@ -12,11 +12,14 @@ const storage = multer.diskStorage({
     filename: function (req,file,cb){
         cb(null,`${Date.now()}_img_${path.extname(file.originalname)}`);
     }
-})
-const uploadFile=multer({storage:storage});
-const guestMiddleware = require('../middlewares/guestMiddleware');
+});
+const uploadFile = multer({storage:storage});
+
+
 const authMiddleware = require('../middlewares/authMiddleware');
 const loggerProducts = require('../middlewares/products_log');
+const uploadFileMiddleware = require('../middlewares/multerMiddleware');
+
 
 router.get('/', mainController.index);
 router.get('/carrito', mainController.carrito);

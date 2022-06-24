@@ -246,5 +246,51 @@
    "1653616831964_img_.png"
   ],
   "alt": "bici"
+ },
+ {
+  "id": 27,
+  "titulo": "23",
+  "descripcionCorta": " 2323",
+  "descripcionDetallada": "Descripcion Ampliada",
+  "colorDisponible": {
+   "red": "",
+   "white": "disabled",
+   "black": "disabled"
+  },
+  "tamanio": {
+   "S": "disabled",
+   "M": "",
+   "L": "disabled"
+  },
+  "cantidadDisponible": "3",
+  "precio": "23",
+  "category": "visited",
+  "img": [
+   "1655913720237_img_.png"
+  ],
+  "alt": "bici"
+ },
+ {
+  "id": 28,
+  "titulo": "111",
+  "descripcionCorta": " 11",
+  "descripcionDetallada": "Descripcion Ampliada",
+  "colorDisponible": {
+   "red": "",
+   "white": "disabled",
+   "black": "disabled"
+  },
+  "tamanio": {
+   "S": "",
+   "M": "disabled",
+   "L": "disabled"
+  },
+  "cantidadDisponible": "11",
+  "precio": "111",
+  "category": "visited",
+  "img": [
+   "1655915964611_img_.ico"
+  ],
+  "alt": "bici"
  }
 ]
