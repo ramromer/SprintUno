@@ -32,7 +32,7 @@ router.get('/accesDenied', mainController.accesDenied);
 router.get('/error', mainController.error);
 
 
-router.post('/productonuevo',authMiddleware, loggerProducts, uploadFile.single('image'), mainController.crearproductoNuevo);
+router.post('/productonuevo',authMiddleware, loggerProducts, uploadFileMiddleware, mainController.crearproductoNuevo);
 
 router.put('/editarproducto/:id', authMiddleware, uploadFile.single('image'), mainController.modificarProducto);
 

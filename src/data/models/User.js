@@ -1,52 +1,51 @@
-const { DataTypes } = require("sequelize/types");
 
-module.exports = (sequelize,dataTypes) => {
+module.exports = (sequelize, dataTypes) => {
     let alias = 'User';
     let cols = {
-        id: {
-            type: DataTypes.BIGINT(10).UNSIGNED,
+        idUser: {
+            type: dataTypes.BIGINT(10).UNSIGNED,
             primaryKey: true,
             autoIncrement: true
         },
         fullname:{
-            type: DataTypes.STRING(45),
+            type: dataTypes.STRING(45),
             allowNull: false
         },
         addres:{
-            type: DataTypes.STRING(45),
+            type: dataTypes.STRING(45),
             allowNull: false
         },
         email:{
-            type: DataTypes.STRING(45),
+            type: dataTypes.STRING(45),
             allowNull: false
         },
         birthday:{
-            type: DataTypes.DATEONLY,
+            type: dataTypes.DATEONLY,
         },
         user:{
-            type: DataTypes.STRING(45),
+            type: dataTypes.STRING(45),
             allowNull: false,
             unique:true,
         },
         key:{
-            type: DataTypes.STRING(45),
+            type: dataTypes.STRING(45),
             allowNull: false
         },
         userImage:{
-            type: DataTypes.STRING(45),
+            type: dataTypes.STRING(45),
             allowNull: false
         },
-        // createdAt:{
-        //     type:DataTypes.DATEONLY,
-        // },
-        // updatedAt:{
-        //     type:DataTypes.DATEONLY,
-        // },
+        createdAt:{
+            type:dataTypes.DATEONLY,
+        },
+        updatedAt:{
+            type:dataTypes.DATEONLY,
+        },
     };
     let config = {
         timestamps: true,
-        createdAt: 'created_at',
-        updatedAt: 'updated_at',
+        createdAt: 'createdAt',
+        updatedAt: 'updatedAt',
         deletedAt: false
     };
 

@@ -1,296 +1,250 @@
 [
- {
-  "id": 1,
-  "titulo": "Orbea Rise",
-  "descripcionCorta": "Bicicleta",
-  "descripcionDetallada": "Descripcion Ampliada  ",
-  "colorDisponible": {
-   "red": "",
-   "white": "disabled",
-   "black": ""
-  },
-  "tamanio": {
-   "S": "disabled",
-   "M": "",
-   "L": ""
-  },
-  "cantidadDisponible": 10,
-  "precio": "10000",
-  "category": "visited",
-  "img": [
-   "bicicleta-orbea-rise-m21.jpg"
-  ],
-  "alt": "bici"
- },
- {
-  "id": 3,
-  "titulo": "Aurorita Plegable",
-  "descripcionCorta": "Bicicleta plegable",
-  "descripcionDetallada": "Descripcion Ampliada",
-  "colorDisponible": {
-   "red": true,
-   "white": true,
-   "black": false
-  },
-  "tamanio": {
-   "S": true,
-   "M": true,
-   "L": false
-  },
-  "cantidadDisponible": 8,
-  "precio": "12000",
-  "descuento": "10",
-  "img": [
-   "bicicleta-aurorita-cyan.png"
-  ],
-  "alt": "bici"
- },
- {
-  "id": 4,
-  "titulo": "Aurorita Plegable",
-  "descripcionCorta": "Bicicleta plegable",
-  "descripcionDetallada": "Descripcion Ampliada",
-  "colorDisponible": {
-   "red": true,
-   "white": true,
-   "black": false
-  },
-  "tamanio": {
-   "S": true,
-   "M": true,
-   "L": false
-  },
-  "cantidadDisponible": 30,
-  "precio": "12000",
-  "img": [
-   "bicicleta-aurorita-green.png"
-  ],
-  "alt": "bici"
- },
- {
-  "id": 6,
-  "titulo": "Aurorita Plegable",
-  "descripcionCorta": "Bicicleta plegable",
-  "descripcionDetallada": "Descripcion Ampliada",
-  "colorDisponible": {
-   "red": true,
-   "white": true,
-   "black": false
-  },
-  "tamanio": {
-   "S": true,
-   "M": true,
-   "L": false
-  },
-  "cantidadDisponible": 2,
-  "precio": "12000",
-  "img": [
-   "bicicleta-aurorita-paleyellow.png"
-  ],
-  "alt": "bici"
- },
- {
-  "id": 7,
-  "titulo": "Topmega",
-  "descripcionCorta": "Bicicleta MTB",
-  "descripcionDetallada": "Descripcion Ampliada",
-  "colorDisponible": {
-   "red": true,
-   "white": true,
-   "black": false
-  },
-  "tamanio": {
-   "S": true,
-   "M": true,
-   "L": false
-  },
-  "cantidadDisponible": 5,
-  "precio": "13000",
-  "descuento": "10",
-  "img": [
-   "bicicleta-topmega-cyan.png"
-  ],
-  "alt": "bici"
- },
- {
-  "id": 9,
-  "titulo": "Topmega",
-  "descripcionDetallada": "Descripcion Ampliada    ",
-  "colorDisponible": {
-   "red": "disabled",
-   "white": "disabled",
-   "black": ""
-  },
-  "tamanio": {
-   "S": "disabled",
-   "M": "disabled",
-   "L": ""
-  },
-  "category": "visited",
-  "img": [
-   "bicicleta-topmega-red.png"
-  ],
-  "alt": "bici",
-  "cantidadDisponible": 3,
-  "precio": "1228"
- },
- {
-  "id": 10,
-  "titulo": "SLP",
-  "descripcionCorta": "Bicicleta plegable SLP",
-  "descripcionDetallada": "Descripcion Ampliada",
-  "colorDisponible": {
-   "red": true,
-   "white": true,
-   "black": false
-  },
-  "tamanio": {
-   "S": true,
-   "M": true,
-   "L": false
-  },
-  "cantidadDisponible": 7,
-  "precio": "9000",
-  "img": [
-   "bicicleta-slp-yellow.png"
-  ],
-  "alt": "bici"
- },
- {
-  "id": 11,
-  "titulo": "SLP",
-  "descripcionCorta": "Bicicleta plegable SLP",
-  "descripcionDetallada": "Descripcion Ampliada",
-  "colorDisponible": {
-   "red": true,
-   "white": true,
-   "black": false
-  },
-  "tamanio": {
-   "S": true,
-   "M": true,
-   "L": false
-  },
-  "cantidadDisponible": 10,
-  "precio": "9000",
-  "img": [
-   "bicicleta-slp-white.png"
-  ],
-  "alt": "bici"
- },
- {
-  "id": 24,
-  "titulo": "srthdtyaqt",
-  "descripcionCorta": " rgwrtheytjrukukfyu",
-  "descripcionDetallada": "Descripcion Ampliada lgkuyrrsdf  ",
-  "colorDisponible": {
-   "red": "disabled",
-   "white": "disabled",
-   "black": ""
-  },
-  "tamanio": {
-   "S": "disabled",
-   "M": "disabled",
-   "L": ""
-  },
-  "cantidadDisponible": 23,
-  "precio": "60",
-  "category": "visited",
-  "img": [
-   "1653435636763_img_.jpg"
-  ],
-  "alt": "bici"
- },
- {
-  "id": 25,
-  "titulo": "Bicicleta Aurorita",
-  "descripcionCorta": " Bici Aurorita",
-  "descripcionDetallada": "Descripcion Ampliada  ",
-  "colorDisponible": {
-   "red": "",
-   "white": "disabled",
-   "black": ""
-  },
-  "tamanio": {
-   "S": "disabled",
-   "M": "",
-   "L": ""
-  },
-  "cantidadDisponible": 32,
-  "precio": "3453",
-  "category": "visited",
-  "img": [
-   "1653616784925_img_.png"
-  ],
-  "alt": "bici"
- },
- {
-  "id": 26,
-  "titulo": "Bici Aurorita",
-  "descripcionCorta": " Bicicleta Aurorita plegable",
-  "descripcionDetallada": "Descripcion Ampliada",
-  "colorDisponible": {
-   "red": "",
-   "white": "disabled",
-   "black": ""
-  },
-  "tamanio": {
-   "S": "disabled",
-   "M": "",
-   "L": ""
-  },
-  "cantidadDisponible": "67",
-  "precio": "2344",
-  "category": "visited",
-  "img": [
-   "1653616831964_img_.png"
-  ],
-  "alt": "bici"
- },
- {
-  "id": 27,
-  "titulo": "23",
-  "descripcionCorta": " 2323",
-  "descripcionDetallada": "Descripcion Ampliada",
-  "colorDisponible": {
-   "red": "",
-   "white": "disabled",
-   "black": "disabled"
-  },
-  "tamanio": {
-   "S": "disabled",
-   "M": "",
-   "L": "disabled"
-  },
-  "cantidadDisponible": "3",
-  "precio": "23",
-  "category": "visited",
-  "img": [
-   "1655913720237_img_.png"
-  ],
-  "alt": "bici"
- },
- {
-  "id": 28,
-  "titulo": "111",
-  "descripcionCorta": " 11",
-  "descripcionDetallada": "Descripcion Ampliada",
-  "colorDisponible": {
-   "red": "",
-   "white": "disabled",
-   "black": "disabled"
-  },
-  "tamanio": {
-   "S": "",
-   "M": "disabled",
-   "L": "disabled"
-  },
-  "cantidadDisponible": "11",
-  "precio": "111",
-  "category": "visited",
-  "img": [
-   "1655915964611_img_.ico"
-  ],
-  "alt": "bici"
- }
-]
+    {
+     "id": 1,
+     "titulo": "Orbea Rise",
+     "descripcionCorta": "Bicicleta",
+     "descripcionDetallada": "Descripcion Ampliada  ",
+     "colorDisponible": {
+      "red": "",
+      "white": "disabled",
+      "black": ""
+     },
+     "tamanio": {
+      "S": "disabled",
+      "M": "",
+      "L": ""
+     },
+     "cantidadDisponible": 10,
+     "precio": "10000",
+     "category": "visited",
+     "img": [
+      "bicicleta-orbea-rise-m21.jpg"
+     ],
+     "alt": "bici"
+    },
+    {
+     "id": 3,
+     "titulo": "Aurorita Plegable",
+     "descripcionCorta": "Bicicleta plegable",
+     "descripcionDetallada": "Descripcion Ampliada",
+     "colorDisponible": {
+      "red": true,
+      "white": true,
+      "black": false
+     },
+     "tamanio": {
+      "S": true,
+      "M": true,
+      "L": false
+     },
+     "cantidadDisponible": 8,
+     "precio": "12000",
+     "descuento": "10",
+     "img": [
+      "bicicleta-aurorita-cyan.png"
+     ],
+     "alt": "bici"
+    },
+    {
+     "id": 4,
+     "titulo": "Aurorita Plegable",
+     "descripcionCorta": "Bicicleta plegable",
+     "descripcionDetallada": "Descripcion Ampliada",
+     "colorDisponible": {
+      "red": true,
+      "white": true,
+      "black": false
+     },
+     "tamanio": {
+      "S": true,
+      "M": true,
+      "L": false
+     },
+     "cantidadDisponible": 30,
+     "precio": "12000",
+     "img": [
+      "bicicleta-aurorita-green.png"
+     ],
+     "alt": "bici"
+    },
+    {
+     "id": 6,
+     "titulo": "Aurorita Plegable",
+     "descripcionCorta": "Bicicleta plegable",
+     "descripcionDetallada": "Descripcion Ampliada",
+     "colorDisponible": {
+      "red": true,
+      "white": true,
+      "black": false
+     },
+     "tamanio": {
+      "S": true,
+      "M": true,
+      "L": false
+     },
+     "cantidadDisponible": 2,
+     "precio": "12000",
+     "img": [
+      "bicicleta-aurorita-paleyellow.png"
+     ],
+     "alt": "bici"
+    },
+    {
+     "id": 7,
+     "titulo": "Topmega",
+     "descripcionCorta": "Bicicleta MTB",
+     "descripcionDetallada": "Descripcion Ampliada",
+     "colorDisponible": {
+      "red": true,
+      "white": true,
+      "black": false
+     },
+     "tamanio": {
+      "S": true,
+      "M": true,
+      "L": false
+     },
+     "cantidadDisponible": 5,
+     "precio": "13000",
+     "descuento": "10",
+     "img": [
+      "bicicleta-topmega-cyan.png"
+     ],
+     "alt": "bici"
+    },
+    {
+     "id": 9,
+     "titulo": "Topmega",
+     "descripcionDetallada": "Descripcion Ampliada    ",
+     "colorDisponible": {
+      "red": "disabled",
+      "white": "disabled",
+      "black": ""
+     },
+     "tamanio": {
+      "S": "disabled",
+      "M": "disabled",
+      "L": ""
+     },
+     "category": "visited",
+     "img": [
+      "bicicleta-topmega-red.png"
+     ],
+     "alt": "bici",
+     "cantidadDisponible": 3,
+     "precio": "1228"
+    },
+    {
+     "id": 10,
+     "titulo": "SLP",
+     "descripcionCorta": "Bicicleta plegable SLP",
+     "descripcionDetallada": "Descripcion Ampliada",
+     "colorDisponible": {
+      "red": true,
+      "white": true,
+      "black": false
+     },
+     "tamanio": {
+      "S": true,
+      "M": true,
+      "L": false
+     },
+     "cantidadDisponible": 7,
+     "precio": "9000",
+     "img": [
+      "bicicleta-slp-yellow.png"
+     ],
+     "alt": "bici"
+    },
+    {
+     "id": 11,
+     "titulo": "SLP",
+     "descripcionCorta": "Bicicleta plegable SLP",
+     "descripcionDetallada": "Descripcion Ampliada",
+     "colorDisponible": {
+      "red": true,
+      "white": true,
+      "black": false
+     },
+     "tamanio": {
+      "S": true,
+      "M": true,
+      "L": false
+     },
+     "cantidadDisponible": 10,
+     "precio": "9000",
+     "img": [
+      "bicicleta-slp-white.png"
+     ],
+     "alt": "bici"
+    },
+    {
+     "id": 24,
+     "titulo": "srthdtyaqt",
+     "descripcionCorta": " rgwrtheytjrukukfyu",
+     "descripcionDetallada": "Descripcion Ampliada lgkuyrrsdf  ",
+     "colorDisponible": {
+      "red": "disabled",
+      "white": "disabled",
+      "black": ""
+     },
+     "tamanio": {
+      "S": "disabled",
+      "M": "disabled",
+      "L": ""
+     },
+     "cantidadDisponible": 23,
+     "precio": "60",
+     "category": "visited",
+     "img": [
+      "1653435636763_img_.jpg"
+     ],
+     "alt": "bici"
+    },
+    {
+     "id": 25,
+     "titulo": "Bicicleta Aurorita",
+     "descripcionCorta": " Bici Aurorita",
+     "descripcionDetallada": "Descripcion Ampliada ",
+     "colorDisponible": {
+      "red": "",
+      "white": "disabled",
+      "black": ""
+     },
+     "tamanio": {
+      "S": "disabled",
+      "M": "",
+      "L": ""
+     },
+     "cantidadDisponible": 32,
+     "precio": "3454",
+     "category": "visited",
+     "img": [
+      "1653616784925_img_.png"
+     ],
+     "alt": "bici"
+    },
+    {
+     "id": 26,
+     "titulo": "Bici Aurorita",
+     "descripcionCorta": " Bicicleta Aurorita plegable",
+     "descripcionDetallada": "Descripcion Ampliada",
+     "colorDisponible": {
+      "red": "",
+      "white": "disabled",
+      "black": ""
+     },
+     "tamanio": {
+      "S": "disabled",
+      "M": "",
+      "L": ""
+     },
+     "cantidadDisponible": "67",
+     "precio": "2344",
+     "category": "visited",
+     "img": [
+      "1653616831964_img_.png"
+     ],
+     "alt": "bici"
+    }
+   ]

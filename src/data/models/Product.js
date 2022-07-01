@@ -1,32 +1,32 @@
-const { DataTypes } = require("sequelize/types");
+
 
 module.exports = (sequelize,dataTypes) => {
     let alias = 'Product';
     let cols = {
         idProduct: {
-            type: DataTypes.BIGINT(10).UNSIGNED,
+            type: dataTypes.BIGINT(10).UNSIGNED,
             primaryKey: true,
             autoIncrement: true
         },
         title:{
-            type: DataTypes.STRING(45),
+            type: dataTypes.STRING(45),
         },
         description:{
-            type: DataTypes.STRING(45),
+            type: dataTypes.STRING(45),
         },
         descriptionLong:{
-            type: DataTypes.STRING(45),
+            type: dataTypes.STRING(45),
         },
         stock:{
-            type: DataTypes.INTEGER,
+            type: dataTypes.INTEGER,
             allowNull: false,
         },
         price:{
-            type: DataTypes.FLOAT,
+            type: dataTypes.FLOAT,
             allowNull: false,
         },
         productscol:{
-            type: DataTypes.STRING(45)
+            type: dataTypes.STRING(45)
         }
 
     };
