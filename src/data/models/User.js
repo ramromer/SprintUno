@@ -40,7 +40,7 @@ module.exports = (sequelize, dataTypes) => {
         },
         updatedAt:{
             type:dataTypes.DATEONLY,
-        },
+        }
     };
     let config = {
         timestamps: true,

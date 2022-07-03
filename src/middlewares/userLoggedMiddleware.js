@@ -13,24 +13,6 @@ const db = require('../data/models');
         userLogged = req.session.userLogged.user
     }
     
-    // if(userLogged){
-    //     db.User.findOne({
-    //         where:{
-    //         user: userLogged
-    //       }
-    //     }).then((user) => { 
-    //         req.session.userLogged = user.user;
-           
-    //         if ( req.session.userLogged) {
-    //             res.locals.isLogged = true;
-    //             res.locals.userLogged = req.session.userLogged;
-    //         }
-    //         next();
-    //     }).catch(err => {
-    //         console.log("error userLoggedMiddleware: ", err);
-    //         return res.redirect('/users/login');
-    //     })
-    // }
     try{
         if(userLogged){
             let user = await db.User.findOne({
@@ -45,7 +27,6 @@ const db = require('../data/models');
                 res.locals.isLogged = true;
                 res.locals.userLogged = req.session.userLogged.user;
             }
-            // next();
         }
     }    
     catch(err){

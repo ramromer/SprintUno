@@ -12,10 +12,10 @@ module.exports = (sequelize,dataTypes) => {
             type: dataTypes.STRING(45),
         },
         description:{
-            type: dataTypes.STRING(45),
+            type: dataTypes.STRING(100),
         },
         descriptionLong:{
-            type: dataTypes.STRING(45),
+            type: dataTypes.STRING(200),
         },
         stock:{
             type: dataTypes.INTEGER,
@@ -25,15 +25,18 @@ module.exports = (sequelize,dataTypes) => {
             type: dataTypes.FLOAT,
             allowNull: false,
         },
-        productscol:{
-            type: dataTypes.STRING(45)
+        createdAt:{
+            type:dataTypes.DATEONLY,
+        },
+        updatedAt:{
+            type:dataTypes.DATEONLY,
         }
 
     };
     let config = {
         timestamps: true,
-        createdAt: 'created_at',
-        updatedAt: 'updated_at',
+        createdAt: 'createdAt',
+        updatedAt: 'updatedAt',
         deletedAt: false
     };
 

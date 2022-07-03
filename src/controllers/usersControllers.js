@@ -1,12 +1,6 @@
-const fs = require("fs");
-const path = require("path");
 const bcryptjs = require("bcryptjs");
-const User = require("../models/user");
 const { validationResult } = require("express-validator");
-const { Op } = require("sequelize");
 const db = require('../data/models');
-const sequelize = db.sequelize;
-
 
 let usersController = {
   login: (req, res) => {
