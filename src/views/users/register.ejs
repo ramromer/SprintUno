@@ -16,7 +16,7 @@
                         </div>
                         <%}%>
                             <input name="fullAddress" type="text" id="fulladdress"
-                                value="<%= locals.oldData? oldData.fullAddress : null %>" placeholder="Domicilio" />
+                                value="<%= locals.oldData? oldData.fullAddress : '11ull' %>" placeholder="Domicilio" />
                             <% if (locals.errores && errores.fullAddress) { %>
                                 <div>
                                     <p>
@@ -53,7 +53,7 @@
                                                         <%}%>
 
                                                             <label>Datos de tu cuenta</label>
-                                                            <input name="user" type="text" id="resu0"
+                                                            <input name="user" type="text" id="user"
                                                                 value="<%= locals.oldData? oldData.user : null %>"
                                                                 placeholder="Nombre de usuario" />
                                                             <p id="yaexiste">Ya existe otro usuario con ese nombre. Por
@@ -163,71 +163,7 @@
                         }
                     }, false);
                 </script>
-                <script>
-                    function userValidation() {
-                        let listaUsers = '<%= usuarios%>';
-                        let arrayUsers = listaUsers.split(',');
-                        for (let i = 0; i < arrayUsers.length; i++) {
-                            if (this.value == arrayUsers[i]) {
-                                document.getElementById("yaexiste").style.display = 'block';
-                                return;
-                            }
-                        }
-                        for (let i = 0; i < arrayUsers.length; i++) {
-                            if (this.value != arrayUsers[i]) {
-                                document.getElementById("yaexiste").style.display = 'none';
-                            }
-                        }
-                    }
-                    function emailValidation() {
-                        let listaEmails = '<%- emails%>';
-                        let arrayEmails = listaEmails.split(',');
-                        for (let i = 0; i < arrayEmails.length; i++) {
-                            if (this.value == arrayEmails[i]) {
-                                document.getElementById("yaexisteemail").style.display = 'block';
-                                return;
-                            }
-                        }
-                        for (let i = 0; i < arrayEmails.length; i++) {
-                            if (this.value != arrayEmails[i]) {
-                                document.getElementById("yaexisteemail").style.display = 'none';
-                            }
-                        }
-                    }
-                    function emailRepValidation() {
-                        let email = document.getElementById("email").value;
-                        if (this.value != email) {
-                            document.getElementById("emailRepErr").style.display = 'block';
-                            // document.querySelector('#submitBtn').disabled = true;
-                            return;
-                        }
-                        if (this.value == email) {
-                            document.getElementById("emailRepErr").style.display = 'none';
-                            // document.querySelector('#submitBtn').disabled = false;
-                        }
-                    }
-                    function passValidation() {
-                        var compare0, compare1;
-                        compare0 = document.getElementById('drowssap0').value;
-                        compare1 = document.getElementById('drowssap1').value;
-
-                        if (compare0 != compare1) {
-                            document.getElementById("passRepErr").style.display = 'block';
-                            // document.querySelector('#submitBtn').disabled = true;
-                            return;
-                        }
-                        if (compare0 == compare1) {
-                            document.getElementById("passRepErr").style.display = 'none';
-                            console.log('esta leyendo aqui');
-                            // document.querySelector('#submitBtn').disabled = false;
-                        }
-                    }
-                    document.getElementById("resu0").addEventListener("keyup", userValidation);
-                    document.getElementById("email").addEventListener("keyup", emailValidation);
-                    document.getElementById("emailRep").addEventListener("keyup", emailRepValidation);
-                    document.getElementById("drowssap1").addEventListener("keyup", passValidation);
-                    document.getElementById("drowssap0").addEventListener("keyup", passValidation);
-                </script>
+               
             </main>
             <%- include('../partials/footer.ejs')%>
     </body>

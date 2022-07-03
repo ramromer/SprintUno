@@ -105,7 +105,6 @@ let mainController = {
       path.join(__dirname, "../data/data.json")
     );
     let listaBicis = JSON.parse(listaBicisFile);
-    // let ultimoElmnt = listaBicis[listaBicis.length - 1];
     let reqId = listaBicis.findIndex((element) => element.id == req.params.id);
     listaBicis[reqId].descripcionDetallada = req.body.descripcionProductoNuevo;
     listaBicis[reqId].cantidadDisponible = Number(req.body.cantidad);
