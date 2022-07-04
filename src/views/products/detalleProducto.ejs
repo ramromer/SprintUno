@@ -9,8 +9,8 @@
               <!-- SLIDER -->
               <div class="slider-display-container">
                 <button type="button" id="btnIzq" onclick="siguiente(-1)">&#10094;</button>
-                <%producto.img.forEach(bici=> { %>
-                  <img class="sliderImagen" src="/images/bicicleta-orbea-rise-m21.jpg">
+                <%producto.productsImages.forEach(image=> { %>
+                  <img class="sliderImagen" src="/images/<%= image.imageProduct %>">
                   <%})%>
                     <button type="button" id="btnDer" onclick="siguiente(1)">&#10095;</button>
               </div>
@@ -22,24 +22,22 @@
             <form class="flexContainer" id="infoProducto" action="none" method="post">
               <div id="tituloProducto" class="flexContainer margin10px">
                 <label>
-                  <%= producto.titulo %>
+                  <%= producto.title %>
                 </label>
 
               </div>
               <div class="flexContainer" id="precioProducto">
                 <label for="precioDP">Precio: </label>
-                <h4 class="margin10px flexContainer centradoxy" id="precioDP">$<%= producto.precio %>
+                <h4 class="margin10px flexContainer centradoxy" id="precioDP">$<%= producto.price %>
                 </h4>
               </div>
               <div class="flexContainer">
                 <label>Color:</label>
                 <div class="flexContainer centradoxy space-evenly">
-                  <label for=""> Rojo</label><input type="radio" name="color" <%=producto.colorDisponible.red%>
-                  value="red">
-                  <label for=""> Blanco</label><input type="radio" name="color" <%=producto.colorDisponible.white%>
-                  value="white">
-                  <label for=""> Negro</label><input type="radio" name="color" <%=producto.colorDisponible.black%>
-                  value="black">
+                  <%producto.productColors.forEach(color=> { %>
+                    <label for=""> Rojo</label><input type="radio" name="color" <%=color%>
+                    value="<%=color%>">
+                    <%})%>
                 </div>
               </div>
               <br>
@@ -48,22 +46,22 @@
                 <label>Tamaño: </label>
                 <div class="flexContainer centradoxy space-evenly">
 
-                  <label for=""> 20</label><input type="radio" <%=producto.tamanio.S%> name="tamanio" value="S">
-                  <label for=""> 26</label><input type="radio" <%=producto.tamanio.M%> name="tamanio" value="M">
-                  <label for=""> 29</label><input type="radio" <%=producto.tamanio.L%> name="tamanio" value="L">
+                  <label for=""> 20</label><input type="radio" <%=producto.title%> name="tamanio" value="S">
+                  <label for=""> 26</label><input type="radio" <%=producto.title%> name="tamanio" value="M">
+                  <label for=""> 29</label><input type="radio" <%=producto.title%> name="tamanio" value="L">
                 </div>
               </div>
               <br>
               <br>
               <div class="flexContainer" id="cantidadProducto">
                 <label>Cantidad: </label><input class="textocentrado " type="number">
-                <h4 class="textGray">tenemos <%= producto.cantidadDisponible %> unidades diponibles!</h4>
+                <h4 class="textGray">tenemos <%= producto.stock %> unidades diponibles!</h4>
               </div>
               <div id="containerBtn" class="flexContainer">
                 <button id="btnCompraAhora">Compra ahora</button>
               </div>
               <% if(locals.isLogged){ %>
-                <a id="editarProducto" href="/editarproducto/<%= producto.id %>">
+                <a id="editarProducto" href="/editarproducto/<%= producto.idProduct %>">
                   <i class="fas fa-edit"></i>
                 </a>
                 <%} %>
@@ -74,7 +72,7 @@
             <div id="">
               <h4>Descripción</h4>
               <p>
-                <%= producto.descripcionDetallada %>
+                <%= producto.description %>
               </p>
             </div>
           </section>

@@ -12,13 +12,20 @@ let mainController = {
     res.render("./products/carrito");
   },
 
-  detalleProducto: (req, res) => {
-    db.User.findOne({
-      where:{
-        user: req.params.id
-      }}).then(product => {
-        res.render("./products/detalleProducto", { producto: [product] });
-      })
+  detalleProducto: async (req, res) => {
+
+      db.Product.findOne(
+        {   
+            where: {idProduct: req.params.id},
+            include:[
+              { association : "productsImages"},
+              { association : "productColors"}
+            ]
+        }
+      ).then(product => {
+        res.render("./products/detalleProducto", { producto: product });
+        }).catch(err => {console.log(err)});
+      
   },
 
   productoNuevo: (req, res) => {
