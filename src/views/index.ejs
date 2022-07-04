@@ -26,7 +26,7 @@
 
         <h3 class="sections">Nuestras ofertas para vos!</h3>
         <section class="containerTarjetas">
-          <%let biciDescuentos=listaBicis.filter(bici => bici.descuento) %>
+          <%let biciDescuentos = listaBicis.filter( bici => bici.descuento ) %>
           <%biciDescuentos.forEach(bici => { %>
             <a href="/detalleproducto/<%=bici.id%>" class="product article">
                 <img src="/images/<%=bici.img[0]%>" alt="<%=bici.alt%>">

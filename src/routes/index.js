@@ -15,10 +15,8 @@ const storage = multer.diskStorage({
 });
 const uploadFile = multer({storage:storage});
 
-
 const authMiddleware = require('../middlewares/authMiddleware');
 const loggerProducts = require('../middlewares/products_log');
-const uploadFileMiddleware = require('../middlewares/multerMiddleware');
 
 
 router.get('/', mainController.index);
@@ -32,7 +30,7 @@ router.get('/accesDenied', mainController.accesDenied);
 router.get('/error', mainController.error);
 
 
-router.post('/productonuevo',authMiddleware, loggerProducts, uploadFileMiddleware, mainController.crearproductoNuevo);
+router.post('/productonuevo',authMiddleware, loggerProducts, uploadFile.single('image'), mainController.crearproductoNuevo);
 
 router.put('/editarproducto/:id', authMiddleware, uploadFile.single('image'), mainController.modificarProducto);
 

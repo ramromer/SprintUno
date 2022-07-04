@@ -10,9 +10,11 @@ module.exports = (sequelize,dataTypes) => {
         },
         title:{
             type: dataTypes.STRING(45),
+            allowNull: false,
         },
         description:{
             type: dataTypes.STRING(100),
+            allowNull: false,
         },
         descriptionLong:{
             type: dataTypes.STRING(200),
@@ -24,6 +26,9 @@ module.exports = (sequelize,dataTypes) => {
         price:{
             type: dataTypes.FLOAT,
             allowNull: false,
+        },
+        discount:{
+            type: dataTypes.FLOAT
         },
         createdAt:{
             type:dataTypes.DATEONLY,

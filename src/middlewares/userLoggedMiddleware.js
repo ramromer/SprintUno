@@ -2,8 +2,6 @@ const db = require('../data/models');
 
  async function userLoggedMiddleware(req, res, next) {
     res.locals.isLogged = false;
-    console.log("1 cookie logged", req.cookies.user)
-    console.log("2 session logged", req.session.userLogged)
     let userLogged = false;
 
     if(req.cookies.user){

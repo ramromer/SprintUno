@@ -1,10 +1,11 @@
 const fs = require("fs");
 const path = require("path");
+const db = require('../data/models');
 
 let mainController = {
   index: (req, res) => {
     let listaBicis = getListaBicis();
-    res.render("index.ejs", { listaBicis: listaBicis });
+    res.render("index.ejs", {listaBicis });
   },
 
   carrito: (req, res) => {
@@ -12,83 +13,45 @@ let mainController = {
   },
 
   detalleProducto: (req, res) => {
-    let listaBicis = getListaBicis();
-    let reqId = listaBicis.find((element) => element.id == req.params.id);
-    res.render("./products/detalleProducto", { producto: reqId });
+    db.User.findOne({
+      where:{
+        user: req.params.id
+      }}).then(product => {
+        res.render("./products/detalleProducto", { producto: [product] });
+      })
   },
 
   productoNuevo: (req, res) => {
     res.render("./products/productoNuevo");
   },
   crearproductoNuevo: (req, res) => {
-    if (req.file) {
-      let listaBicisFile = fs.readFileSync(
-        path.join(__dirname, "../data/data.json")
-      );
-      let listaBicis = JSON.parse(listaBicisFile);
-      let ultimoElmnt = listaBicis[listaBicis.length - 1];
-      let red;
-      let black;
-      let white;
-      let tamanioS;
-      let tamanioM;
-      let tamanioL;
-      if (req.body.colorRed) {
-        red = "";
-      } else {
-        red = "disabled";
-      }
-      if (req.body.colorWhite) {
-        black = "";
-      } else {
-        black = "disabled";
-      }
-      if (req.body.colorBlack) {
-        white = "";
-      } else {
-        white = "disabled";
-      }
-      if (req.body.tamanioS) {
-        tamanioS = "";
-      } else {
-        tamanioS = "disabled";
-      }
-      if (req.body.tamanioM) {
-        tamanioM = "";
-      } else {
-        tamanioM = "disabled";
-      }
-      if (req.body.tamanioL) {
-        tamanioL = "";
-      } else {
-        tamanioL = "disabled";
-      }
 
+    let variants ={
+      red: req.body.colorRed ,
+      black: req.body.colorBlack,
+      white: req.body.colorWhite ,
+      tamanioS: req.body.tamanioS,
+      tamanioM: req.body.tamanioM,
+      tamanioL: req.body.tamanioL
+    }
       let productoNuevo = {
-        id: ultimoElmnt.id + 1,
-        titulo: req.body.nombre,
-        descripcionCorta: req.body.descripcionProductoNuevo,
-        descripcionDetallada: "Descripcion Ampliada",
-        colorDisponible: { red: red, white: white, black: black },
-        tamanio: { S: tamanioS, M: tamanioM, L: tamanioL },
-        cantidadDisponible: req.body.cantidad,
-        precio: req.body.precio,
-        category: "visited",
-        img: [req.file.filename],
-        alt: "bici",
+        title: req.body.nombre,
+        description: req.body.descripcionProductoNuevo,
+        descriptionLong: "Descripcion Ampliada",
+        // colorDisponible: { red: red, white: white, black: black },
+        // tamanio: { S: tamanioS, M: tamanioM, L: tamanioL },
+        stock: req.body.cantidad,
+        price: req.body.precio,
+        discount: 0,
+        // category: "visited",
+        // img: [req.file.filename],
+        // alt: "bici",
       };
 
-      listaBicis.push(productoNuevo);
-
-      let salida = JSON.stringify(listaBicis, null, " ");
-      let fullPath = path.join(__dirname, "../data/data.json");
-
-      fs.writeFileSync(fullPath, salida);
-
-      res.redirect(`./detalleproducto/${productoNuevo.id}`);
-    } else {
-      res.redirect("/productonuevo");
-    }
+      db.Product.create(productoNuevo).then((newProduct)=> {
+        return res.redirect(`./detalleproducto/${newProduct.idProduct}`)
+      }).catch(error => {console.log("53 new product: ", error)
+          res.redirect("/productonuevo")})
   },
 
   editarProducto: (req, res) => {
@@ -179,11 +142,9 @@ let mainController = {
   },
 
   productos: (req, res) => {
-    let listaBicisFile = fs.readFileSync(
-      path.join(__dirname, "../data/data.json")
-    );
-    let listaBicis = JSON.parse(listaBicisFile);
-    res.render("./products/products.ejs", { listaBicis });
+    db.Product.findAll().then((products) => {
+      res.render("./products/products.ejs", {listaBicis: products});
+    }).catch((err) => {console.error(err)});
   },
 
   error: (req, res) => {
@@ -203,6 +164,12 @@ function getListaBicis() {
   );
   let listaBicis = JSON.parse(listaBicisFile);
   return listaBicis;
+}
+
+function getListaBicisDB() {
+    db.Product.findAll().then((products) => {
+      return products;
+    }).catch((err) => {console.error(err)});
 }
 
 module.exports = mainController;
