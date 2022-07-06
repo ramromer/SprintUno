@@ -52,11 +52,6 @@ module.exports = (sequelize, dataTypes) => {
         timestamps: true,
       });
 
-    //   Product.hasMany(models.ColorProduct, {
-    //     as: "ProductColors",
-    //     foreignKey: "idProductsFK",
-    //     timestamps: false,
-    //   });
     Product.belongsToMany(models.ColorProduct, {
         as: "productColors",
         through: "ColorProduct",
@@ -64,13 +59,7 @@ module.exports = (sequelize, dataTypes) => {
         otherKey: "idColorFK",
         timestamps: false
     })
-    // Product.hasMany(models.ColorProduct,{
-    //     as: "ProductColors",
-    //     through: "ColorProduct",
-    //     foreignKey: "idProductsFK",
-    //     otherKey: "idColorFK",
-    //     timestamps: false,
-    // })
+
   };
 
   return Product;

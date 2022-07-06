@@ -1,11 +1,11 @@
 const fs = require("fs");
 const path = require("path");
-const db = require('../data/models');
+const db = require("../data/models");
 
 let mainController = {
   index: (req, res) => {
     let listaBicis = getListaBicis();
-    res.render("index.ejs", {listaBicis });
+    res.render("index.ejs", { listaBicis });
   },
 
   carrito: (req, res) => {
@@ -13,52 +13,57 @@ let mainController = {
   },
 
   detalleProducto: async (req, res) => {
-
-      db.Product.findOne(
-        {   
-            where: {idProduct: req.params.id},
-            include:[
-              { association : "productsImages"},
-              { association : "productColors"}
-            ]
-        }
-      ).then(product => {
+    db.Product.findOne({
+      where: { idProduct: req.params.id },
+      include: [
+        { association: "productsImages" },
+        { association: "productColors" },
+      ],
+    })
+      .then((product) => {
         res.render("./products/detalleProducto", { producto: product });
-        }).catch(err => {console.log(err)});
-      
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   },
 
   productoNuevo: (req, res) => {
     res.render("./products/productoNuevo");
   },
-  crearproductoNuevo: (req, res) => {
+  crearproductoNuevo: async (req, res) => {
 
-    let variants ={
-      red: req.body.colorRed ,
-      black: req.body.colorBlack,
-      white: req.body.colorWhite ,
-      tamanioS: req.body.tamanioS,
-      tamanioM: req.body.tamanioM,
-      tamanioL: req.body.tamanioL
-    }
-      let productoNuevo = {
-        title: req.body.nombre,
-        description: req.body.descripcionProductoNuevo,
-        descriptionLong: "Descripcion Ampliada",
-        // colorDisponible: { red: red, white: white, black: black },
-        // tamanio: { S: tamanioS, M: tamanioM, L: tamanioL },
-        stock: req.body.cantidad,
-        price: req.body.precio,
-        discount: 0,
-        // category: "visited",
-        // img: [req.file.filename],
-        // alt: "bici",
-      };
-
-      db.Product.create(productoNuevo).then((newProduct)=> {
-        return res.redirect(`./detalleproducto/${newProduct.idProduct}`)
-      }).catch(error => {console.log("53 new product: ", error)
-          res.redirect("/productonuevo")})
+    let productoNuevo = {
+      title: req.body.nombre,
+      description: req.body.descripcionProductoNuevo,
+      descriptionLong: "Descripcion Ampliada",
+      // colorDisponible: { red: red, white: white, black: black },
+      // tamanio: { S: tamanioS, M: tamanioM, L: tamanioL },
+      stock: req.body.cantidad,
+      price: req.body.precio,
+      discount: 0,
+    };
+    db.Product.create(productoNuevo)
+      .then((product) =>
+        db.ImageProduct.create({
+          idProductsFK: product.idProduct,
+          imageProduct: req.file.filename,
+        })
+      )
+      .then((product) => {
+        db.Product.findOne({
+          where: { idProduct: product.idProductsFK },
+          include: [
+            { association: "productsImages" },
+            { association: "productColors" },
+          ],
+        }).then((product) => {
+          res.render("./products/detalleProducto", { producto: product });
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   },
 
   editarProducto: (req, res) => {
@@ -149,9 +154,13 @@ let mainController = {
   },
 
   productos: (req, res) => {
-    db.Product.findAll().then((products) => {
-      res.render("./products/products.ejs", {listaBicis: products});
-    }).catch((err) => {console.error(err)});
+    db.Product.findAll()
+      .then((products) => {
+        res.render("./products/products.ejs", { listaBicis: products });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   },
 
   error: (req, res) => {
@@ -174,9 +183,13 @@ function getListaBicis() {
 }
 
 function getListaBicisDB() {
-    db.Product.findAll().then((products) => {
+  db.Product.findAll()
+    .then((products) => {
       return products;
-    }).catch((err) => {console.error(err)});
+    })
+    .catch((err) => {
+      console.error(err);
+    });
 }
 
 module.exports = mainController;
