@@ -52,7 +52,7 @@ module.exports = (sequelize, dataTypes) => {
         timestamps: true,
       });
 
-    Product.belongsToMany(models.ColorProduct, {
+    Product.belongsToMany(models.Color, {
         as: "productColors",
         through: "ColorProduct",
         foreignKey: "idProductsFK",

@@ -34,9 +34,9 @@
               <div class="flexContainer">
                 <label>Color:</label>
                 <div class="flexContainer centradoxy space-evenly">
-                  <%producto.productColors.forEach(color=> { %>
-                    <label for=""> Rojo</label><input type="radio" name="color" <%=color%>
-                    value="<%=color%>">
+                  <%producto.productColors.forEach(color => { %>
+                    <label for="<%=color.color%>"><%=color.color%></label><input type="radio" name="<%=color.color%>" 
+                    value="<%=color.color%>">
                     <%})%>
                 </div>
               </div>

@@ -21,6 +21,7 @@ let mainController = {
       ],
     })
       .then((product) => {
+        console.log("24 ", product.productColors[1])
         res.render("./products/detalleProducto", { producto: product });
       })
       .catch((err) => {
@@ -43,6 +44,7 @@ let mainController = {
       price: req.body.precio,
       discount: 0,
     };
+    
     db.Product.create(productoNuevo)
       .then((product) =>
         db.ImageProduct.create({
@@ -50,6 +52,15 @@ let mainController = {
           imageProduct: req.file.filename,
         })
       )
+      .then((product) => {
+        db.ColorProduct.create({
+            idColorFK:req.body.colorRed,
+            idProductsFK: product.idProductsFK,
+            
+          }
+          
+          
+      )})
       .then((product) => {
         db.Product.findOne({
           where: { idProduct: product.idProductsFK },
