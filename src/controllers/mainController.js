@@ -44,7 +44,7 @@ let mainController = {
       productColors:[
                       {idColorFK: 1},
                       {idColorFK: 2},
-                      // {idColorFK: 3}
+                     {idColorFK: 3}
                     ],
       // productsImages es el nombre de la relación que quiero incluir al momento de crear el producto
       productsImages:{ imageProduct : req.file.filename}
