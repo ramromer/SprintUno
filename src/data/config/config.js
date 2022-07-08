@@ -1,14 +1,14 @@
 module.exports={
-  "development": {
+  "developmentRemote": {
     "username": "uxqfkay4mojjyps6",
     "password": "7kCKVDv8ZuMiBHLbR3L7",
     "database": "bdeb7rgjsoygdjqjjjkh",
     "host": "bdeb7rgjsoygdjqjjjkh-mysql.services.clever-cloud.com",
     "dialect": "mysql",
-    "pool":{"max": 5, "min": 0}
+    // "pool":{"max": 4}
 
   },
-  "developmentLocal": {
+  "development": {
     "username": "root",
     "password": "1234",
     "database": "Kletadb",

@@ -39,12 +39,17 @@ let mainController = {
       descriptionLong: "Descripcion Ampliada",
       stock: req.body.cantidad,
       price: req.body.precio,
-      discount: 0,
-      // productColors es el nombre de la relación que quiero incluir al momento de crear el producto
+      // discount: 0,
+      productSizes: [
+        {idSizeFK: 1},
+        {idSizeFK: 2},
+        {idSizeFK: 3},
+      ],
+      // productColors es el nombre de la relación que quiero incluir al momento de crear el producto (la realcion creada en el modelo de producto)
       productColors:[
                       {idColorFK: 1},
                       {idColorFK: 2},
-                     {idColorFK: 3}
+                     {idColorFK: 3},
                     ],
       // productsImages es el nombre de la relación que quiero incluir al momento de crear el producto
       productsImages:{ imageProduct : req.file.filename}
@@ -55,7 +60,8 @@ let mainController = {
       include:[
                 {model: db.ColorProduct, as: "productColors"}, // se debe llamar el modelo de la tabla donde quiero crear el registros
                                                               // y cuando la relacion tiene un alias se debe llamar la relación de la tabla actual como as:xxx
-                {model: db.ImageProduct, as: "productsImages"}
+                {model: db.ImageProduct, as: "productsImages"},
+                {model: db.SizeProduct, as: "productSizes"}
               ]
     }).then((product) => {
       res.render("./products/detalleProducto", { producto: product });

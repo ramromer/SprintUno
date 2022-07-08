@@ -1,5 +1,3 @@
-
-
 module.exports = (sequelize, dataTypes) => {
   let alias = "Product";
   let cols = {
@@ -7,7 +5,7 @@ module.exports = (sequelize, dataTypes) => {
       type: dataTypes.BIGINT(10),
       primaryKey: true,
       autoIncrement: true,
-      unique: true
+      unique: true,
     },
     title: {
       type: dataTypes.STRING(45),
@@ -48,26 +46,23 @@ module.exports = (sequelize, dataTypes) => {
   const Product = sequelize.define(alias, cols, config);
 
   Product.associate = function (models) {
-   Product.hasMany(models.ImageProduct, {
-        as: "productsImages",
-        foreignKey: "idProductsFK",
-        timestamps: true,
-      });
+    Product.hasMany(models.ImageProduct, {
+      as: "productsImages",
+      foreignKey: "idProductsFK",
+      timestamps: true,
+    });
 
-      Product.hasMany(models.ColorProduct, {
-            as: "productColors",
-            foreignKey: "idProductsFK",
-            timestamps: false
-        })
+    Product.hasMany(models.ColorProduct, {
+      as: "productColors",
+      foreignKey: "idProductsFK",
+      timestamps: false,
+    });
 
-    //   Product.belongsToMany(models.Color, {
-    //     as: "productColors",
-    //     through: "ColorProduct",
-    //     foreignKey: "idProductsFK",
-    //     otherKey: "idColorFK",
-    //     timestamps: false
-    // })
-
+    Product.hasMany(models.SizeProduct, {
+      as: "productSizes",
+      foreignKey: "idProductsFK",
+      timestamps: false,
+    });
   };
 
   return Product;
