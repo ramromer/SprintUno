@@ -1,3 +1,5 @@
+
+
 module.exports = (sequelize, dataTypes) => {
   let alias = "Product";
   let cols = {
@@ -46,19 +48,25 @@ module.exports = (sequelize, dataTypes) => {
   const Product = sequelize.define(alias, cols, config);
 
   Product.associate = function (models) {
-    Product.hasMany(models.ImageProduct, {
+   Product.hasMany(models.ImageProduct, {
         as: "productsImages",
         foreignKey: "idProductsFK",
         timestamps: true,
       });
 
-    Product.belongsToMany(models.Color, {
-        as: "productColors",
-        through: "ColorProduct",
-        foreignKey: "idProductsFK",
-        otherKey: "idColorFK",
-        timestamps: false
-    })
+      Product.hasMany(models.ColorProduct, {
+            as: "productColors",
+            foreignKey: "idProductsFK",
+            timestamps: false
+        })
+
+    //   Product.belongsToMany(models.Color, {
+    //     as: "productColors",
+    //     through: "ColorProduct",
+    //     foreignKey: "idProductsFK",
+    //     otherKey: "idColorFK",
+    //     timestamps: false
+    // })
 
   };
 

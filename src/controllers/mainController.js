@@ -33,50 +33,35 @@ let mainController = {
     res.render("./products/productoNuevo");
   },
   crearproductoNuevo: async (req, res) => {
-
     let productoNuevo = {
       title: req.body.nombre,
       description: req.body.descripcionProductoNuevo,
       descriptionLong: "Descripcion Ampliada",
-      // colorDisponible: { red: red, white: white, black: black },
-      // tamanio: { S: tamanioS, M: tamanioM, L: tamanioL },
       stock: req.body.cantidad,
       price: req.body.precio,
       discount: 0,
+      // productColors es el nombre de la relación que quiero incluir al momento de crear el producto
+      productColors:[
+                      {idColorFK: 1},
+                      {idColorFK: 2},
+                      // {idColorFK: 3}
+                    ],
+      // productsImages es el nombre de la relación que quiero incluir al momento de crear el producto
+      productsImages:{ imageProduct : req.file.filename}
     };
-    
-    db.Product.create(productoNuevo)
-      .then((product) =>
-        db.ImageProduct.create({
-          idProductsFK: product.idProduct,
-          imageProduct: req.file.filename,
-        })
-      )
-      .then((product) => {
-        db.ColorProduct.create({
-            idColorFK:req.body.colorRed,
-            idProductsFK: product.idProductsFK,
-            
-          }
-          
-          
-      )})
-      .then((product) => {
-        db.Product.findOne({
-          where: { idProduct: product.idProductsFK },
-          include: [
-            { association: "productsImages" },
-            { association: "productColors" },
-          ],
-        }).then((product) => {
-          res.render("./products/detalleProducto", { producto: product });
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  },
 
+    db.Product.create(productoNuevo, {
+      // debo usar include para agragar los registros que quiero crear en las tablas externas en base al producto
+      include:[
+                {model: db.ColorProduct, as: "productColors"}, // se debe llamar el modelo de la tabla donde quiero crear el registros
+                                                              // y cuando la relacion tiene un alias se debe llamar la relación de la tabla actual como as:xxx
+                {model: db.ImageProduct, as: "productsImages"}
+              ]
+    }).then((product) => {
+      res.render("./products/detalleProducto", { producto: product });
+    }).catch((err) => {console.log(err);});
+
+  },
   editarProducto: (req, res) => {
     let listaBicisFile = fs.readFileSync(
       path.join(__dirname, "../data/data.json")
