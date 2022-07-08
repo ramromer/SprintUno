@@ -39,13 +39,13 @@ let mainController = {
       descriptionLong: "Descripcion Ampliada",
       stock: req.body.cantidad,
       price: req.body.precio,
-      // discount: 0,
+      // discount: 0, no está en la BD, lo vamos a usar??
       productSizes: [
         {idSizeFK: 1},
         {idSizeFK: 2},
         {idSizeFK: 3},
       ],
-      // productColors es el nombre de la relación que quiero incluir al momento de crear el producto (la realcion creada en el modelo de producto)
+      // productColors es el nombre de la relación que quiero incluir al momento de crear el producto
       productColors:[
                       {idColorFK: 1},
                       {idColorFK: 2},
