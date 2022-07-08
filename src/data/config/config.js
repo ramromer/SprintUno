@@ -4,7 +4,9 @@ module.exports={
     "password": "7kCKVDv8ZuMiBHLbR3L7",
     "database": "bdeb7rgjsoygdjqjjjkh",
     "host": "bdeb7rgjsoygdjqjjjkh-mysql.services.clever-cloud.com",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "pool":{"max": 5, "min": 0}
+
   },
   "developmentLocal": {
     "username": "root",
