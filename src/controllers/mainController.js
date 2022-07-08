@@ -40,6 +40,10 @@ let mainController = {
       stock: req.body.cantidad,
       price: req.body.precio,
       // discount: 0, no está en la BD, lo vamos a usar??
+      productCategories:  [
+        {idCategoryFK: 1},
+        {idCategoryFK: 2}
+      ],
       productSizes: [
         {idSizeFK: 1},
         {idSizeFK: 2},
@@ -61,7 +65,8 @@ let mainController = {
                 {model: db.ColorProduct, as: "productColors"}, // se debe llamar el modelo de la tabla donde quiero crear el registros
                                                               // y cuando la relacion tiene un alias se debe llamar la relación de la tabla actual como as:xxx
                 {model: db.ImageProduct, as: "productsImages"},
-                {model: db.SizeProduct, as: "productSizes"}
+                {model: db.SizeProduct, as: "productSizes"},
+                {model: db.CategoryProduct, as: "productCategories"}
               ]
     }).then((product) => {
       res.render("./products/detalleProducto", { producto: product });
