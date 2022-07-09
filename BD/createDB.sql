@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `kletadb` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `kletadb`;
 -- MySQL dump 10.13  Distrib 8.0.27, for Win64 (x86_64)
 --
 -- Host: localhost    Database: kletadb
@@ -25,18 +27,21 @@ DROP TABLE IF EXISTS `avatars`;
 CREATE TABLE `avatars` (
   `idAvatar` int NOT NULL AUTO_INCREMENT,
   `avatar` varchar(45) NOT NULL,
-  `idUsuarios` int NOT NULL,
+  `idUsuariosFK` int NOT NULL,
+  `createAt` date DEFAULT NULL,
+  `updateAt` date DEFAULT NULL,
   PRIMARY KEY (`idAvatar`),
-  UNIQUE KEY `idUsuarios_UNIQUE` (`idUsuarios`),
+  UNIQUE KEY `idUsuarios_UNIQUE` (`idUsuariosFK`),
   UNIQUE KEY `userImage_UNIQUE` (`avatar`),
   UNIQUE KEY `idImage_UNIQUE` (`idAvatar`),
-  CONSTRAINT `1` FOREIGN KEY (`idUsuarios`) REFERENCES `users` (`idUser`)
+  CONSTRAINT `1` FOREIGN KEY (`idUsuariosFK`) REFERENCES `users` (`idUser`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `avatars`
 --
+-- ORDER BY:  `idAvatar`
 
 LOCK TABLES `avatars` WRITE;
 /*!40000 ALTER TABLE `avatars` DISABLE KEYS */;
@@ -55,11 +60,17 @@ CREATE TABLE `baskets` (
   `idProductFK` int NOT NULL,
   `amount` int NOT NULL,
   `idColorProductFK` int NOT NULL,
+  `idUserFK` int NOT NULL,
+  `idSizeProductFK` int NOT NULL,
   PRIMARY KEY (`idBasket`),
   UNIQUE KEY `idBasket_UNIQUE` (`idBasket`),
   KEY `idProductFK_idx` (`idProductFK`),
   KEY `idColorProductFK_idx` (`idColorProductFK`),
+  KEY `100_idx` (`idSizeProductFK`),
+  KEY `104_idx` (`idUserFK`),
   CONSTRAINT `10` FOREIGN KEY (`idColorProductFK`) REFERENCES `colorproducts` (`idcolorProduct`),
+  CONSTRAINT `100` FOREIGN KEY (`idSizeProductFK`) REFERENCES `sizeproducts` (`idSizeProduct`),
+  CONSTRAINT `104` FOREIGN KEY (`idUserFK`) REFERENCES `users` (`idUser`),
   CONSTRAINT `9` FOREIGN KEY (`idProductFK`) REFERENCES `products` (`idProduct`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -67,6 +78,7 @@ CREATE TABLE `baskets` (
 --
 -- Dumping data for table `baskets`
 --
+-- ORDER BY:  `idBasket`
 
 LOCK TABLES `baskets` WRITE;
 /*!40000 ALTER TABLE `baskets` DISABLE KEYS */;
@@ -96,10 +108,11 @@ CREATE TABLE `categoryproducts` (
 --
 -- Dumping data for table `categoryproducts`
 --
+-- ORDER BY:  `idCategoryProducts`
 
 LOCK TABLES `categoryproducts` WRITE;
 /*!40000 ALTER TABLE `categoryproducts` DISABLE KEYS */;
-INSERT INTO `categoryproducts` VALUES (11,19,1),(12,19,2),(13,20,1),(14,20,2),(15,21,1),(16,21,2),(17,22,1),(18,22,2),(19,23,1),(20,23,2),(21,24,1),(22,24,2),(23,25,1),(24,25,2);
+INSERT INTO `categoryproducts` (`idCategoryProducts`, `idProductsFK`, `idCategoryFK`) VALUES (11,19,1),(12,19,2),(13,20,1),(14,20,2),(15,21,1),(16,21,2),(17,22,1),(18,22,2),(19,23,1),(20,23,2),(21,24,1),(22,24,2),(23,25,1),(24,25,2);
 /*!40000 ALTER TABLE `categoryproducts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -122,10 +135,11 @@ CREATE TABLE `categorys` (
 --
 -- Dumping data for table `categorys`
 --
+-- ORDER BY:  `idCategory`
 
 LOCK TABLES `categorys` WRITE;
 /*!40000 ALTER TABLE `categorys` DISABLE KEYS */;
-INSERT INTO `categorys` VALUES (2,'new'),(1,'visited');
+INSERT INTO `categorys` (`idCategory`, `category`) VALUES (1,'visited'),(2,'new');
 /*!40000 ALTER TABLE `categorys` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -152,10 +166,11 @@ CREATE TABLE `colorproducts` (
 --
 -- Dumping data for table `colorproducts`
 --
+-- ORDER BY:  `idcolorProduct`
 
 LOCK TABLES `colorproducts` WRITE;
 /*!40000 ALTER TABLE `colorproducts` DISABLE KEYS */;
-INSERT INTO `colorproducts` VALUES (105,1,19),(106,1,20),(107,1,21),(108,1,22),(109,1,23),(110,1,24),(111,2,25),(112,3,25),(113,1,25);
+INSERT INTO `colorproducts` (`idcolorProduct`, `idColorFK`, `idProductsFK`) VALUES (105,1,19),(106,1,20),(107,1,21),(108,1,22),(109,1,23),(110,1,24),(111,2,25),(112,3,25),(113,1,25);
 /*!40000 ALTER TABLE `colorproducts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -178,10 +193,11 @@ CREATE TABLE `colors` (
 --
 -- Dumping data for table `colors`
 --
+-- ORDER BY:  `idColor`
 
 LOCK TABLES `colors` WRITE;
 /*!40000 ALTER TABLE `colors` DISABLE KEYS */;
-INSERT INTO `colors` VALUES (3,'black'),(2,'red'),(1,'white');
+INSERT INTO `colors` (`idColor`, `color`) VALUES (1,'white'),(2,'red'),(3,'black');
 /*!40000 ALTER TABLE `colors` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -209,10 +225,11 @@ CREATE TABLE `imageproducts` (
 --
 -- Dumping data for table `imageproducts`
 --
+-- ORDER BY:  `idImageProduct`
 
 LOCK TABLES `imageproducts` WRITE;
 /*!40000 ALTER TABLE `imageproducts` DISABLE KEYS */;
-INSERT INTO `imageproducts` VALUES (16,19,'1657329780652_img_.webp','2022-07-08','2022-07-08'),(17,20,'1657329920770_img_.webp','2022-07-08','2022-07-08'),(18,21,'1657330101066_img_.webp','2022-07-08','2022-07-08'),(19,22,'1657330356681_img_.webp','2022-07-08','2022-07-08'),(20,23,'1657330418961_img_.webp','2022-07-08','2022-07-08'),(21,24,'1657330830156_img_.webp','2022-07-08','2022-07-08'),(22,25,'1657331179651_img_.webp','2022-07-08','2022-07-08');
+INSERT INTO `imageproducts` (`idImageProduct`, `idProductsFK`, `imageProduct`, `updatedAt`, `createdAt`) VALUES (16,19,'1657329780652_img_.webp','2022-07-08','2022-07-08'),(17,20,'1657329920770_img_.webp','2022-07-08','2022-07-08'),(18,21,'1657330101066_img_.webp','2022-07-08','2022-07-08'),(19,22,'1657330356681_img_.webp','2022-07-08','2022-07-08'),(20,23,'1657330418961_img_.webp','2022-07-08','2022-07-08'),(21,24,'1657330830156_img_.webp','2022-07-08','2022-07-08'),(22,25,'1657331179651_img_.webp','2022-07-08','2022-07-08');
 /*!40000 ALTER TABLE `imageproducts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -240,10 +257,11 @@ CREATE TABLE `products` (
 --
 -- Dumping data for table `products`
 --
+-- ORDER BY:  `idProduct`
 
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
-INSERT INTO `products` VALUES (19,'prueba102','cien ','cien ',10,1200,'2022-07-08','2022-07-08'),(20,'prueba102','cien ','cien ',10,1200,'2022-07-08','2022-07-08'),(21,'prueba102','cien ','cien ',10,1200,'2022-07-08','2022-07-08'),(22,'prueba102','cien ','cien ',10,1200,'2022-07-08','2022-07-08'),(23,'123',' ',' ',12,123,'2022-07-08','2022-07-08'),(24,'prueba 300',' asdfas',' asdfas',2,300,'2022-07-08','2022-07-08'),(25,'123',' wsw',' wsw',2,2,'2022-07-08','2022-07-08');
+INSERT INTO `products` (`idProduct`, `title`, `description`, `descriptionLong`, `stock`, `price`, `createdAt`, `updatedAt`) VALUES (19,'prueba102','cien ','cien ',10,1200,'2022-07-08','2022-07-08'),(20,'prueba102','cien ','cien ',10,1200,'2022-07-08','2022-07-08'),(21,'prueba102','cien ','cien ',10,1200,'2022-07-08','2022-07-08'),(22,'prueba102','cien ','cien ',10,1200,'2022-07-08','2022-07-08'),(23,'123',' ',' ',12,123,'2022-07-08','2022-07-08'),(24,'prueba 300',' asdfas',' asdfas',2,300,'2022-07-08','2022-07-08'),(25,'123',' wsw',' wsw',2,2,'2022-07-08','2022-07-08');
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -270,10 +288,11 @@ CREATE TABLE `sizeproducts` (
 --
 -- Dumping data for table `sizeproducts`
 --
+-- ORDER BY:  `idSizeProduct`
 
 LOCK TABLES `sizeproducts` WRITE;
 /*!40000 ALTER TABLE `sizeproducts` DISABLE KEYS */;
-INSERT INTO `sizeproducts` VALUES (32,2,24),(33,1,25),(34,2,25),(35,3,25);
+INSERT INTO `sizeproducts` (`idSizeProduct`, `idSizeFK`, `idProductsFK`) VALUES (32,2,24),(33,1,25),(34,2,25),(35,3,25);
 /*!40000 ALTER TABLE `sizeproducts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -296,64 +315,12 @@ CREATE TABLE `sizes` (
 --
 -- Dumping data for table `sizes`
 --
+-- ORDER BY:  `idSize`
 
 LOCK TABLES `sizes` WRITE;
 /*!40000 ALTER TABLE `sizes` DISABLE KEYS */;
-INSERT INTO `sizes` VALUES (1,'20'),(2,'26'),(3,'29');
+INSERT INTO `sizes` (`idSize`, `size`) VALUES (1,'20'),(2,'26'),(3,'29');
 /*!40000 ALTER TABLE `sizes` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `types`
---
-
-DROP TABLE IF EXISTS `types`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `types` (
-  `idType` int NOT NULL AUTO_INCREMENT,
-  `type` varchar(45) NOT NULL,
-  PRIMARY KEY (`idType`),
-  UNIQUE KEY `type_UNIQUE` (`type`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `types`
---
-
-LOCK TABLES `types` WRITE;
-/*!40000 ALTER TABLE `types` DISABLE KEYS */;
-/*!40000 ALTER TABLE `types` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `userbaskets`
---
-
-DROP TABLE IF EXISTS `userbaskets`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `userbaskets` (
-  `idUserBasket` int NOT NULL AUTO_INCREMENT,
-  `idBasketFK` int NOT NULL,
-  `idUsuariosFK` int NOT NULL,
-  PRIMARY KEY (`idUserBasket`),
-  UNIQUE KEY `idUserBasket_UNIQUE` (`idUserBasket`),
-  KEY `idBasketFK_idx` (`idBasketFK`),
-  KEY `idUsuarios_idx` (`idUsuariosFK`),
-  CONSTRAINT `5` FOREIGN KEY (`idBasketFK`) REFERENCES `baskets` (`idBasket`),
-  CONSTRAINT `6` FOREIGN KEY (`idUsuariosFK`) REFERENCES `users` (`idUser`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `userbaskets`
---
-
-LOCK TABLES `userbaskets` WRITE;
-/*!40000 ALTER TABLE `userbaskets` DISABLE KEYS */;
-/*!40000 ALTER TABLE `userbaskets` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -371,21 +338,26 @@ CREATE TABLE `users` (
   `birthday` date DEFAULT NULL,
   `user` varchar(45) NOT NULL,
   `key` varchar(100) NOT NULL,
+  `idUserTypeFK` int NOT NULL,
   `userImage` varchar(45) NOT NULL,
   `createdAt` date NOT NULL,
   `updatedAt` date NOT NULL,
   PRIMARY KEY (`idUser`),
-  UNIQUE KEY `user_UNIQUE` (`user`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=COMPACT;
+  UNIQUE KEY `user_UNIQUE` (`user`),
+  UNIQUE KEY `email_UNIQUE` (`email`),
+  KEY `101_idx` (`idUserTypeFK`),
+  CONSTRAINT `4` FOREIGN KEY (`idUserTypeFK`) REFERENCES `usertypes` (`idUserType`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=COMPACT;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `users`
 --
+-- ORDER BY:  `idUser`
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (4,'rama','123456','rama@rama.com','1995-07-04','rama','$2a$10$c.fdKMvTscxzKFHdPLtZr.2p0kSmv7aPqbcsOavsnBWm1z9BBz5Ze','porDefecto.jpg','2022-07-02','2022-07-02'),(5,'Luis','1187444','luis@luis.com','1990-11-27','luis','$2a$10$Ftd5/GQbIriJ2sVdZ8pAbOZRBSd2WzZT3NZNTkC3WRZYU/TxsFIPy','1656815679618_img_.png','2022-07-02','2022-07-02'),(6,'Diana','789123','daiana@daiana.com','1990-10-10','daiana','$2a$10$5M4tOVldqF1XF8e63VYvLeR77cRJ/HNFE9kZhXpSIM.equKZ1yt56','1656887344037_img_.jpg','2022-07-03','2022-07-03'),(7,'jorge','113','jorge@gmail.com','2018-02-06','2132','$2a$10$B/kb01ICdHkJ0gw8nl2PeuRK9EGXqeo4XguUblH0c.jnwCahUCPze','porDefecto.jpg','2022-07-06','2022-07-06');
+INSERT INTO `users` (`idUser`, `fullname`, `addres`, `email`, `birthday`, `user`, `key`, `idUserTypeFK`, `userImage`, `createdAt`, `updatedAt`) VALUES (4,'rama','123456','rama@rama.com','1995-07-04','rama','$2a$10$c.fdKMvTscxzKFHdPLtZr.2p0kSmv7aPqbcsOavsnBWm1z9BBz5Ze',1,'porDefecto.jpg','2022-07-02','2022-07-02'),(5,'Luis','1187444','luis@luis.com','1990-11-27','luis','$2a$10$Ftd5/GQbIriJ2sVdZ8pAbOZRBSd2WzZT3NZNTkC3WRZYU/TxsFIPy',1,'1656815679618_img_.png','2022-07-02','2022-07-02'),(6,'Diana','789123','daiana@daiana.com','1990-10-10','daiana','$2a$10$5M4tOVldqF1XF8e63VYvLeR77cRJ/HNFE9kZhXpSIM.equKZ1yt56',1,'1656887344037_img_.jpg','2022-07-03','2022-07-03'),(7,'jorge','113','jorge@gmail.com','2018-02-06','2132','$2a$10$B/kb01ICdHkJ0gw8nl2PeuRK9EGXqeo4XguUblH0c.jnwCahUCPze',1,'porDefecto.jpg','2022-07-06','2022-07-06'),(8,'guest','calle 123','guest@gmail.com','1999-06-27','guest','$2a$10$1SZll4w8hFB1PjH3NCqQI.Uj62AgPgYDh2ipRO/nk71Y1.WRGjYsa',2,'porDefecto.jpg','2022-07-09','2022-07-09');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -398,23 +370,21 @@ DROP TABLE IF EXISTS `usertypes`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `usertypes` (
   `idUserType` int NOT NULL AUTO_INCREMENT,
-  `idTypeFK` int NOT NULL,
-  `idUserFK` int NOT NULL,
+  `userType` varchar(45) NOT NULL,
   PRIMARY KEY (`idUserType`),
   UNIQUE KEY `idUserType_UNIQUE` (`idUserType`),
-  KEY `idTypeFK_idx` (`idTypeFK`),
-  KEY `idUserFK_idx` (`idUserFK`),
-  CONSTRAINT `3` FOREIGN KEY (`idTypeFK`) REFERENCES `types` (`idType`),
-  CONSTRAINT `4` FOREIGN KEY (`idUserFK`) REFERENCES `users` (`idUser`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+  UNIQUE KEY `userType_UNIQUE` (`userType`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `usertypes`
 --
+-- ORDER BY:  `idUserType`
 
 LOCK TABLES `usertypes` WRITE;
 /*!40000 ALTER TABLE `usertypes` DISABLE KEYS */;
+INSERT INTO `usertypes` (`idUserType`, `userType`) VALUES (1,'admin'),(2,'user');
 /*!40000 ALTER TABLE `usertypes` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -427,4 +397,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-07-08 20:47:42
+-- Dump completed on 2022-07-09 13:04:40

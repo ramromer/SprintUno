@@ -6,35 +6,25 @@ module.exports = (sequelize, dataTypes) => {
       primaryKey: true,
       autoIncrement: true,
     },
-    idTypeFK: {
-      type: dataTypes.BIGINT(10).UNSIGNED,
+    userType: {
+      type: dataTypes.STRING(45),
       allowNull: false,
     },
-    idUserFK: {
-      type: dataTypes.BIGINT(10).UNSIGNED,
-      allowNull: false,
-    },
-    createdAt: {
-      type: dataTypes.DATEONLY,
-    },
-    updatedAt: {
-      type: dataTypes.DATEONLY,
-    },
+
+
   };
   let config = {
-    timestamps: true,
-    createdAt: "createdAt",
-    updatedAt: "updatedAt",
-    deletedAt: false,
+    timestamps: false
   };
 
   const UserType = sequelize.define(alias, cols, config);
 
   UserType.associate = function (models) {
 
-    UserType.belongsTo(models.User, {
-          as: "UserTypes", // nombre de la relacion
-          foreignKey: "idUserFK", // nombre de la FK 
+    UserType.hasMany(models.User, {
+          as: "UsersT", // nombre de la relacion
+          foreignKey: "idUserTypeFK", // nombre de la FK 
+          timestamps: false,
         });
       };
 

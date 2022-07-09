@@ -28,7 +28,7 @@ module.exports = (sequelize, dataTypes) => {
             unique:true,
         },
         key:{
-            type: dataTypes.STRING(45),
+            type: dataTypes.STRING(100),
             allowNull: false
         },
         userImage:{
@@ -49,7 +49,19 @@ module.exports = (sequelize, dataTypes) => {
         deletedAt: false
     };
 
-    const User = sequelize.define(alias, cols, config);
+    const User = sequelize.define(alias, cols, config); 
+
+    User.associate = function (models) {
+      User.hasMany(models.Avatar, {
+        as: "userAvatar",
+        foreignKey: "idUsuariosFK",
+        timestamps: true,
+      }); 
+      User.belongsTo(models.UserType, {
+        as: "usersType", // nombre de la relacion
+        foreignKey: "idUserTypeFK", // nombre de la FK 
+      });
     
+    }
     return User;
 }

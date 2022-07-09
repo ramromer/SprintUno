@@ -6,12 +6,12 @@ module.exports = (sequelize, dataTypes) => {
       primaryKey: true,
       autoIncrement: true,
     },
-    avatar: {
-      type: dataTypes.STRING(45),
-      allowNull: false,
-    },
     idUsuariosFK: {
       type: dataTypes.BIGINT(10).UNSIGNED,
+      allowNull: false,
+    },
+    avatar: {
+      type: dataTypes.STRING(45),
       allowNull: false,
     },
     createdAt: {
@@ -33,9 +33,8 @@ module.exports = (sequelize, dataTypes) => {
   Avatar.associate = function (models) {
 
     Avatar.belongsTo(models.User, {
-          as: "Avatars", // nombre de la relacion
+          as: "avatarUser", // nombre de la relacion
           foreignKey: "idUsuariosFK", // nombre de la FK 
-          // foreignKey: "idUserFK", //Si no anda el codigo de la linea anterior, tal vez de esta otra forma??
         });
       };
 
