@@ -21,7 +21,7 @@ let mainController = {
       ],
     })
       .then((product) => {
-        console.log("24 ", product.productColors[1])
+        console.log("24 ", product.productColors[1]);
         res.render("./products/detalleProducto", { producto: product });
       })
       .catch((err) => {
@@ -33,45 +33,72 @@ let mainController = {
     res.render("./products/productoNuevo");
   },
   crearproductoNuevo: async (req, res) => {
+    let colors = [];
+    let sizes = [];
+    let categories = [];
+
+    let colorsArray = [
+      req.body.colorRed,
+      req.body.colorBlack,
+      req.body.colorWhite,
+    ];
+    let sizesArray = [
+      req.body.tamanioS,
+      req.body.tamanioM,
+      req.body.tamanioL
+    ];
+    let categoriesArray = ["1", "2"];
+    console.log("51 ", sizesArray)
+    colorsArray = colorsArray.filter(color =>  color !== undefined);
+    sizesArray = sizesArray.filter(size => size !== undefined);
+    categoriesArray= categoriesArray.filter(category => category !== undefined);
+
+    colorsArray.forEach((color) => {
+      colors.push({ idColorFK: color });
+    });
+
+    sizesArray.forEach((size) => {
+      sizes.push({ idSizeFK: size });
+    });
+
+    categoriesArray.forEach((category) => {
+      categories.push({ idCategoryFK: category });
+    });
+
     let productoNuevo = {
       title: req.body.nombre,
       description: req.body.descripcionProductoNuevo,
-      descriptionLong: "Descripcion Ampliada",
+      descriptionLong: req.body.descripcionProductoNuevo,
       stock: req.body.cantidad,
       price: req.body.precio,
       // discount: 0, no está en la BD, lo vamos a usar??
-      productCategories:  [
-        {idCategoryFK: 1},
-        {idCategoryFK: 2}
-      ],
-      productSizes: [
-        {idSizeFK: 1},
-        {idSizeFK: 2},
-        {idSizeFK: 3},
-      ],
+      productCategories: categories,
+      productSizes: sizes,
       // productColors es el nombre de la relación que quiero incluir al momento de crear el producto
-      productColors:[
-                      {idColorFK: 1},
-                      {idColorFK: 2},
-                     {idColorFK: 3},
-                    ],
+      productColors: colors,
       // productsImages es el nombre de la relación que quiero incluir al momento de crear el producto
-      productsImages:{ imageProduct : req.file.filename}
+      productsImages: { imageProduct: req.file.filename },
     };
 
-    db.Product.create(productoNuevo, {
-      // debo usar include para agragar los registros que quiero crear en las tablas externas en base al producto
-      include:[
-                {model: db.ColorProduct, as: "productColors"}, // se debe llamar el modelo de la tabla donde quiero crear el registros
-                                                              // y cuando la relacion tiene un alias se debe llamar la relación de la tabla actual como as:xxx
-                {model: db.ImageProduct, as: "productsImages"},
-                {model: db.SizeProduct, as: "productSizes"},
-                {model: db.CategoryProduct, as: "productCategories"}
-              ]
-    }).then((product) => {
-      res.render("./products/detalleProducto", { producto: product });
-    }).catch((err) => {console.log(err);});
+    console.log("83", productoNuevo)
 
+    db.Product.create(productoNuevo, {
+      // debo usar include para agregar los registros que quiero crear en las tablas externas en base al producto
+      include: [
+        { model: db.ColorProduct, as: "productColors" }, // se debe llamar el modelo de la tabla donde quiero crear el registros
+        // y cuando la relacion tiene un alias se debe llamar la relación de la tabla actual como as:xxx
+        { model: db.ImageProduct, as: "productsImages" },
+        { model: db.SizeProduct, as: "productSizes" },
+        { model: db.CategoryProduct, as: "productCategories" },
+      ],
+    })
+      .then((product) => {
+        console.log("80 products", product);
+        res.render("./products/detalleProducto", { producto: product });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   },
   editarProducto: (req, res) => {
     let listaBicisFile = fs.readFileSync(
