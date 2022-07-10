@@ -3,9 +3,24 @@ const path = require("path");
 const db = require("../data/models");
 
 let mainController = {
+  // index0: (req, res) => {
+  //   let listaBicis = getListaBicis();
+  //   res.render("index.ejs", { listaBicis });
+  // },
   index: (req, res) => {
-    let listaBicis = getListaBicis();
-    res.render("index.ejs", { listaBicis });
+    db.Product.findAll({
+      include:[
+              { association: "productsImages" },
+              { association: "productCategory"}  
+      ]
+  })
+      .then((products) => {
+        console.log(products[0].productCategory[0].category);
+        res.render("index.ejs", { listaBicis: products });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   },
 
   carrito: (req, res) => {
@@ -18,6 +33,8 @@ let mainController = {
       include: [
         { association: "productsImages" },
         { association: "productColors" },
+        { association: "productSizes" },
+        { association: "productCategories" },
       ],
     })
       .then((product) => {
@@ -188,7 +205,14 @@ let mainController = {
   },
 
   productos: (req, res) => {
-    db.Product.findAll()
+    db.Product.findAll({
+      include: [
+        { association: "productsImages" },
+        // { association: "productColors" },
+        // { association: "productSizes" },
+        // { association: "productCategories" },
+      ],
+    })
       .then((products) => {
         res.render("./products/products.ejs", { listaBicis: products });
       })
@@ -196,7 +220,6 @@ let mainController = {
         console.error(err);
       });
   },
-
   error: (req, res) => {
     res.render("error");
   },

@@ -7,9 +7,10 @@
         
         <h3 class="sections">Lista de Productos</h3>
         <section class="containerTarjetas">
-          <% for(const bici in listaBicis) { %>
+          
+            <%listaBicis.forEach(bici=> { %>
             <a href="/detalleproducto/<%=bici.idProduct%>" class="product article">
-                <img src="/images/users/avatars/porDefecto.jpg" alt="Image not found">
+                <img src="/images/<%= bici.productsImages[0].imageProduct%>" alt="Image not found">
                 <div class="producto-descripcion flexContainer">
                   <div class="price-bar flexContainer">
                     <p class="precio">$ <%=bici.price%></p>
@@ -20,7 +21,7 @@
                   <h4 class="description"><%=bici.title%></h4>
                 </div>
               </a>
-          <%}%>
+          <%})%>
         </section>
       </main>
       <%- include('../partials/footer.ejs')%>

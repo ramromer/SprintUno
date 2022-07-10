@@ -9,7 +9,7 @@ module.exports = (sequelize, dataTypes) => {
     category: {
       type: dataTypes.STRING(45),
       allowNull: false,
-    }
+    },
   };
   let config = {
     timestamps: false,
@@ -18,12 +18,19 @@ module.exports = (sequelize, dataTypes) => {
   const Category = sequelize.define(alias, cols, config);
 
   Category.associate = function (models) {
-
     Category.hasMany(models.CategoryProduct, {
-          as: "Categorys", // nombre de la relacion
-          foreignKey: "idProductsFK", // nombre de la FK 
-        });
-      };
+      as: "Categorys", // nombre de la relacion
+      foreignKey: "idCategoryFK", // nombre de la FK
+    });
+
+    Category.belongsToMany(models.Product, {
+      as: "categoryProduct",
+      through: "CategoryProduct",
+      foreignKey: "idCategoryFK",
+      otherKey: "idProductsFK",
+      timestamps: false,
+    });
+  };
 
   return Category;
 };

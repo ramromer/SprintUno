@@ -35,6 +35,7 @@ module.exports = (sequelize, dataTypes) => {
     Avatar.belongsTo(models.User, {
           as: "avatarUser", // nombre de la relacion
           foreignKey: "idUsuariosFK", // nombre de la FK 
+          timestamps: true,
         });
       };
 

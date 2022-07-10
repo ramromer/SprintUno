@@ -26,9 +26,10 @@ module.exports = (sequelize, dataTypes) => {
       type: dataTypes.FLOAT,
       allowNull: false,
     },
-    discount: {
-      type: dataTypes.FLOAT,
-    },
+    // vamos ausar el descuento, falta en la BD y en las vistas de detalle, crear y editar
+    // discount: {
+    //   type: dataTypes.FLOAT,
+    // },
     createdAt: {
       type: dataTypes.DATEONLY,
     },
@@ -67,6 +68,13 @@ module.exports = (sequelize, dataTypes) => {
     Product.hasMany(models.CategoryProduct, {
       as: "productCategories",
       foreignKey: "idProductsFK",
+      timestamps: false,
+    });
+    Product.belongsToMany(models.Category, {
+      as: "productCategory",
+      through:"CategoryProduct",
+      foreignKey: "idProductsFK",
+      otherKey:"idCategoryFK",
       timestamps: false,
     });
   };
