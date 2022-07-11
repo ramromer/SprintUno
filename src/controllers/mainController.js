@@ -11,11 +11,11 @@ let mainController = {
     db.Product.findAll({
       include:[
               { association: "productsImages" },
-              { association: "productCategory"}  
+              { association: "productCategory"}
       ]
   })
       .then((products) => {
-        console.log(products[0].productCategory[0].category);
+        console.log(products[0].productsImages[0].imageProduct);
         res.render("index.ejs", { listaBicis: products });
       })
       .catch((err) => {
@@ -38,7 +38,6 @@ let mainController = {
       ],
     })
       .then((product) => {
-        console.log("24 ", product.productColors[1]);
         res.render("./products/detalleProducto", { producto: product });
       })
       .catch((err) => {
