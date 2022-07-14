@@ -166,21 +166,39 @@ let mainController = {
       categories.push({ idCategoryFK: category });
     });
 
-    let productoNuevo = {
-      title: req.body.nombre,
-      description: req.body.descripcionProductoNuevo,
-      descriptionLong: req.body.descripcionProductoNuevo,
-      stock: req.body.cantidad,
-      price: req.body.precio,
-      // discount: 0, no está en la BD, lo vamos a usar??
-      productCategories: categories,
-      productSizes: sizes,
-      // productColors es el nombre de la relación que quiero incluir al momento de crear el producto
-      productColors: colors,
-      // productsImages es el nombre de la relación que quiero incluir al momento de crear el producto
-      // productsImages: { imageProduct: req.file.filename },
+    let fotico = req.file;
+    let productoNuevo;
+    if(fotico){
+      productoNuevo = {
+        title: req.body.nombre,
+        description: req.body.descripcionProductoNuevo,
+        descriptionLong: req.body.descripcionProductoNuevo,
+        stock: req.body.cantidad,
+        price: req.body.precio,
+        // discount: 0, no está en la BD, lo vamos a usar??
+        productCategories: categories,
+        productSizes: sizes,
+        // productColors es el nombre de la relación que quiero incluir al momento de crear el producto
+        productColors: colors,
+        // productsImages es el nombre de la relación que quiero incluir al momento de crear el producto
+        productsImages: { imageProduct: req.file.filename },
     };
-
+    }else{
+      productoNuevo = {
+        title: req.body.nombre,
+        description: req.body.descripcionProductoNuevo,
+        descriptionLong: req.body.descripcionProductoNuevo,
+        stock: req.body.cantidad,
+        price: req.body.precio,
+        // discount: 0, no está en la BD, lo vamos a usar??
+        productCategories: categories,
+        productSizes: sizes,
+        // productColors es el nombre de la relación que quiero incluir al momento de crear el producto
+        productColors: colors,
+        // productsImages es el nombre de la relación que quiero incluir al momento de crear el producto
+        // productsImages: { imageProduct: req.file.filename },
+      }
+    }
 
     db.Product.update(productoNuevo, {
       // debo usar include para agregar los registros que quiero crear en las tablas externas en base al producto
@@ -188,7 +206,7 @@ let mainController = {
       include: [
         { model: db.ColorProduct, as: "productColors" }, // se debe llamar el modelo de la tabla donde quiero crear el registros
         // y cuando la relacion tiene un alias se debe llamar la relación de la tabla actual como as:xxx
-        { model: db.ImageProduct, as: "productsImages" },
+        // { model: db.ImageProduct, as: "productsImages" },
         { model: db.SizeProduct, as: "productSizes" },
         { model: db.CategoryProduct, as: "productCategories" },
       ],
