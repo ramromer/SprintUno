@@ -57,11 +57,13 @@ module.exports = (sequelize, dataTypes) => {
         foreignKey: "idUserFK",
         timestamps: true,
       }); 
+
       User.hasMany(models.Basket, {
         as: "userBasket",
         foreignKey: "idUserFK",
         timestamps: true,
-      }); 
+      });
+       
       User.belongsTo(models.UserType, {
         as: "usersType", // nombre de la relacion
         foreignKey: "idUserTypeFK", // nombre de la FK 

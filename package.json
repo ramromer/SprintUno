@@ -26,6 +26,7 @@
     "session": "^0.1.0"
   },
   "devDependencies": {
+    "eslint": "^8.19.0",
     "nodemon": "^2.0.16"
   }
 }

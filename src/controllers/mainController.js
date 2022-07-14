@@ -3,19 +3,17 @@ const path = require("path");
 const db = require("../data/models");
 
 let mainController = {
-  // index0: (req, res) => {
-  //   let listaBicis = getListaBicis();
-  //   res.render("index.ejs", { listaBicis });
-  // },
+
   index: (req, res) => {
     db.Product.findAll({
       include:[
               { association: "productsImages" },
-              { association: "productCategory"}
+              { association: "productCategory"},
+              { association: "ProductBasket"},
       ]
   })
       .then((products) => {
-        console.log(products[0].productsImages[0].imageProduct);
+        console.log("16 prueba basket", products.ProductBasket);
         res.render("index.ejs", { listaBicis: products });
       })
       .catch((err) => {
@@ -63,8 +61,7 @@ let mainController = {
       req.body.tamanioM,
       req.body.tamanioL
     ];
-    let categoriesArray = ["1", "2"];
-    console.log("51 ", sizesArray)
+    let categoriesArray = ["1", "2"];////////////////////////////////////
     colorsArray = colorsArray.filter(color =>  color !== undefined);
     sizesArray = sizesArray.filter(size => size !== undefined);
     categoriesArray= categoriesArray.filter(category => category !== undefined);
@@ -96,7 +93,6 @@ let mainController = {
       productsImages: { imageProduct: req.file.filename },
     };
 
-    console.log("83", productoNuevo)
 
     db.Product.create(productoNuevo, {
       // debo usar include para agregar los registros que quiero crear en las tablas externas en base al producto
@@ -109,7 +105,6 @@ let mainController = {
       ],
     })
       .then((product) => {
-        console.log("80 products", product);
         res.render("./products/detalleProducto", { producto: product });
       })
       .catch((err) => {
@@ -164,7 +159,6 @@ let mainController = {
     } else {
       listaBicis[reqId].tamanio.L = "disabled";
     }
-    console.log(req.body);
     let salida = JSON.stringify(listaBicis, null, " ");
     fs.writeFile(path.join(__dirname, "../data/data.json"), salida, () => {});
 

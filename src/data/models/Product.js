@@ -70,6 +70,7 @@ module.exports = (sequelize, dataTypes) => {
       foreignKey: "idProductsFK",
       timestamps: false,
     });
+
     Product.belongsToMany(models.Category, {
       as: "productCategory",
       through:"CategoryProduct",
@@ -77,6 +78,13 @@ module.exports = (sequelize, dataTypes) => {
       otherKey:"idCategoryFK",
       timestamps: false,
     });
+
+    Product.hasMany(models.Basket, {
+      as: "ProductBasket",
+      foreignKey: "idProductFK",
+      timestamps: false,
+    });
+
   };
 
   return Product;

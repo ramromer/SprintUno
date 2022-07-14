@@ -47,10 +47,29 @@ module.exports = (sequelize, dataTypes) => {
 
     Basket.belongsTo(models.User, {
       as: "BasketUser", // nombre de la relacion
-      foreignKey: "idUserFK", // nombre de la FK 
+      foreignKey: "idUserFK", // nombre de la FK
       timestamps: true,
     });
-      };
+
+    Basket.belongsTo(models.ColorProduct, {
+      as: "BasketColorProduct", 
+      foreignKey: "idColorProductFK", 
+      timestamps: false,
+    });
+
+    Basket.belongsTo(models.Product, {
+      as: "BasketProduct", 
+      foreignKey: "idProductFK", 
+      timestamps: true,
+    });
+    
+    Basket.belongsTo(models.SizeProduct, {
+      as: "BasketSizeProduct", 
+      foreignKey: "idSizeProductFK", 
+      timestamps: false,
+    });
+
+  };
 
   return Basket;
 };

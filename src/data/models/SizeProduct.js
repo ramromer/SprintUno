@@ -35,8 +35,14 @@ module.exports = (sequelize, dataTypes) => {
     });
 
     SizeProduct.belongsTo(models.Size, {
-      as: "SizeProductsSize", // nombre de la relacion
-      foreignKey: "idSizeFK", // nombre de la FK 
+      as: "SizeProductsSize", 
+      foreignKey: "idSizeFK", 
+    });
+
+    SizeProduct.hasMany(models.Basket, {
+      as: "SizeProductBasket",
+      foreignKey: "idSizeProductFK",
+      timestamps: true,
     });
   
   }

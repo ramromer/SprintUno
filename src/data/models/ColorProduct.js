@@ -38,6 +38,12 @@ module.exports = (sequelize, dataTypes) => {
       as: "colorProductsColor", // nombre de la relacion
       foreignKey: "idColorFK", // nombre de la FK 
     });
+
+    ColorProduct.hasMany(models.Basket, {
+      as: "ColorProductBasket",
+      foreignKey: "idColorProductFK",
+      timestamps: true,
+    }); 
   
   }
 
