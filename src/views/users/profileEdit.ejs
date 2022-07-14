@@ -1,0 +1,37 @@
+<%- include('../partials/head.ejs')%>
+
+    <body>
+        <%- include('../partials/header.ejs')%>
+            <main class="margin10px flexContainer centradoxy" id="mainLogin">
+                   
+            	<div class="container" style="margin-top: 40px;">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <h2>Hi <%= user.fullname %> </h2>
+                            <img src="/users/avatars/<%= user.userImage%>">
+                            <form>
+                                <div>
+                                    <label>Subir otro avatar!</label>
+                                    <input name="image" type="file" id="profilepic"
+                                        accept=".jpg, .jpeg, .png, .bmp" single>
+                                </div>
+                                
+
+                                <br>
+                                <br>
+                                <div class="alert alert-success"><%= user.email %> </div>
+                            
+                                <div class="button-register">
+                                    <input id="submitBtn" type="submit" value="Actualizar Datos">
+                                    <input type="reset" value="Borrar">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </main>
+            <%- include('../partials/footer.ejs')%>
+    </body>
+
+</html>
