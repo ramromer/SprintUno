@@ -13,33 +13,33 @@ let usersController = {
         res.render("./users/userEdit.ejs",{Us:Us});
       })
   },
-  update:function(req,res){
-    console.log(req.params.id);
-    let picture;
-    // let key = bcryptjs.hashSync(req.body.key, 10);
-    // if (req.file) {
-    //   picture = req.file.filename;
-    // } else {
-    //   picture = "porDefecto.jpg";
-    // }
-    db.User.update({
-      fullname:req.body.fullName,
-      addres:req.body.fullAddress,
-      email:req.body.email,
-      birthday:req.body.bday,
-      user:req.body.user,
-      // key:key,
-      userImage:picture,
-    },{
-      where: {
-          
-          idUser:req.params.id
+   update:function(req,res){
+      let picture;
+      let key = bcryptjs.hashSync(req.body.key, 10);
+      if (req.file) {
+        picture = req.file.filename;
+      } else {
+        picture = "porDefecto.jpg";
       }
-    })
-      .then( 
-          res.redirect("/")
-      );
-  },
+      db.User.update({
+        fullname:req.body.fullName,
+        addres:req.body.fullAddress,
+        email:req.body.email,
+        birthday:req.body.bday,
+        user:req.body.user,
+        key:key,
+        userImage:picture,
+      },{
+        where: {
+            
+            idUser:req.params.id
+        }
+      })
+        .then( 
+            res.redirect("/")
+        );
+    },
+
   loginProcess:  (req, res) => {
      db.User.findOne({
       where:{
@@ -126,7 +126,7 @@ let usersController = {
         user: req.body.user,
         key: key,
         userImage: picture,
-        // type: req.body.userType,// es admin u otro tipo, no se ha creado en la BD
+       
       };
 
 
@@ -140,6 +140,6 @@ let usersController = {
   notFound: (req, res) => {
     res.render("notFound");
   },
-};
+}
 
 module.exports = usersController;

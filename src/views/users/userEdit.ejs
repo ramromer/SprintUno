@@ -3,7 +3,7 @@
     <body>
         <%- include('../partials/header.ejs')%>
             <main id="mainRegister">
-                <form id="form-register" action="/users/update/<%=Us.idUser%>?_method=PUT" method="POST" enctype="multipart/form-data">
+                <form id="form-register" action="/users/update/<%=Us.idUser%>?_method=PUT" method="POST">
                     <label>Editar Usuario</label>
 
                     <input name="fullName" type="text" id="fullname"
