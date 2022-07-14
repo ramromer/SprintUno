@@ -36,6 +36,12 @@ let mainController = {
       ],
     })
       .then((product) => {
+        product.productSizes.forEach(size => {
+            if(size == 20){small.checked=true};
+            if(size == 26){medium.checked=true};
+            if(size == 29){large.checked=true};
+        });
+        // procesar data colores tamanios etc
         res.render("./products/detalleProducto", { producto: product });
       })
       .catch((err) => {
@@ -112,57 +118,87 @@ let mainController = {
       });
   },
   editarProducto: (req, res) => {
-    let listaBicisFile = fs.readFileSync(
-      path.join(__dirname, "../data/data.json")
-    );
-    let listaBicis = JSON.parse(listaBicisFile);
-    let reqId = listaBicis.find((element) => element.id == req.params.id);
-    res.render("./products/editarProducto", { producto: reqId });
+
+    db.Product.findOne({ where:{idProduct:req.params.id},
+      include: [
+        { association: "productsImages" },
+        { association: "productColors" },
+        { association: "productSizes" },
+        { association: "productCategories" },
+      ],})
+      .then((product)=>{
+        res.render("./products/editarProducto",{product:product});
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   },
 
-  modificarProducto: (req, res) => {
-    let listaBicisFile = fs.readFileSync(
-      path.join(__dirname, "../data/data.json")
-    );
-    let listaBicis = JSON.parse(listaBicisFile);
-    let reqId = listaBicis.findIndex((element) => element.id == req.params.id);
-    listaBicis[reqId].descripcionDetallada = req.body.descripcionProductoNuevo;
-    listaBicis[reqId].cantidadDisponible = Number(req.body.cantidad);
-    listaBicis[reqId].precio = req.body.precio;
-    if (req.body.colorRed) {
-      listaBicis[reqId].colorDisponible.red = "";
-    } else {
-      listaBicis[reqId].colorDisponible.red = "disabled";
-    }
-    if (req.body.colorWhite) {
-      listaBicis[reqId].colorDisponible.white = "";
-    } else {
-      listaBicis[reqId].colorDisponible.white = "disabled";
-    }
-    if (req.body.colorBlack) {
-      listaBicis[reqId].colorDisponible.black = "";
-    } else {
-      listaBicis[reqId].colorDisponible.black = "disabled";
-    }
-    if (req.body.tamanioS) {
-      listaBicis[reqId].tamanio.S = "";
-    } else {
-      listaBicis[reqId].tamanio.S = "disabled";
-    }
-    if (req.body.tamanioM) {
-      listaBicis[reqId].tamanio.M = "";
-    } else {
-      listaBicis[reqId].tamanio.M = "disabled";
-    }
-    if (req.body.tamanioL) {
-      listaBicis[reqId].tamanio.L = "";
-    } else {
-      listaBicis[reqId].tamanio.L = "disabled";
-    }
-    let salida = JSON.stringify(listaBicis, null, " ");
-    fs.writeFile(path.join(__dirname, "../data/data.json"), salida, () => {});
+  modificarProducto: async (req, res) => {
+    let colors = [];
+    let sizes = [];
+    let categories = [];
 
-    res.redirect(`../detalleproducto/${listaBicis[reqId].id}`);
+    let colorsArray = [
+      req.body.colorRed,
+      req.body.colorBlack,
+      req.body.colorWhite,
+    ];
+    let sizesArray = [
+      req.body.tamanioS,
+      req.body.tamanioM,
+      req.body.tamanioL
+    ];
+    let categoriesArray = ["1", "2"];////////////////////////////////////
+    colorsArray = colorsArray.filter(color =>  color !== undefined);
+    sizesArray = sizesArray.filter(size => size !== undefined);
+    categoriesArray= categoriesArray.filter(category => category !== undefined);
+
+    colorsArray.forEach((color) => {
+      colors.push({ idColorFK: color });
+    });
+
+    sizesArray.forEach((size) => {
+      sizes.push({ idSizeFK: size });
+    });
+
+    categoriesArray.forEach((category) => {
+      categories.push({ idCategoryFK: category });
+    });
+
+    let productoNuevo = {
+      title: req.body.nombre,
+      description: req.body.descripcionProductoNuevo,
+      descriptionLong: req.body.descripcionProductoNuevo,
+      stock: req.body.cantidad,
+      price: req.body.precio,
+      // discount: 0, no está en la BD, lo vamos a usar??
+      productCategories: categories,
+      productSizes: sizes,
+      // productColors es el nombre de la relación que quiero incluir al momento de crear el producto
+      productColors: colors,
+      // productsImages es el nombre de la relación que quiero incluir al momento de crear el producto
+      // productsImages: { imageProduct: req.file.filename },
+    };
+
+
+    db.Product.update(productoNuevo, {
+      // debo usar include para agregar los registros que quiero crear en las tablas externas en base al producto
+      where: { idProduct: req.params.id},
+      include: [
+        { model: db.ColorProduct, as: "productColors" }, // se debe llamar el modelo de la tabla donde quiero crear el registros
+        // y cuando la relacion tiene un alias se debe llamar la relación de la tabla actual como as:xxx
+        { model: db.ImageProduct, as: "productsImages" },
+        { model: db.SizeProduct, as: "productSizes" },
+        { model: db.CategoryProduct, as: "productCategories" },
+      ],
+    })
+      .then((product) => {
+        res.render("./products/detalleProducto", { producto: product });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   },
 
   eliminarProducto: (req, res) => {
@@ -243,3 +279,48 @@ function getListaBicisDB() {
 }
 
 module.exports = mainController;
+
+// modificarProducto: (req, res) => {
+  //   let listaBicisFile = fs.readFileSync(
+  //     path.join(__dirname, "../data/data.json")
+  //   );
+  //   let listaBicis = JSON.parse(listaBicisFile);
+  //   let reqId = listaBicis.findIndex((element) => element.id == req.params.id);
+  //   listaBicis[reqId].descripcionDetallada = req.body.descripcionProductoNuevo;
+  //   listaBicis[reqId].cantidadDisponible = Number(req.body.cantidad);
+  //   listaBicis[reqId].precio = req.body.precio;
+  //   if (req.body.colorRed) {
+  //     listaBicis[reqId].colorDisponible.red = "";
+  //   } else {
+  //     listaBicis[reqId].colorDisponible.red = "disabled";
+  //   }
+  //   if (req.body.colorWhite) {
+  //     listaBicis[reqId].colorDisponible.white = "";
+  //   } else {
+  //     listaBicis[reqId].colorDisponible.white = "disabled";
+  //   }
+  //   if (req.body.colorBlack) {
+  //     listaBicis[reqId].colorDisponible.black = "";
+  //   } else {
+  //     listaBicis[reqId].colorDisponible.black = "disabled";
+  //   }
+  //   if (req.body.tamanioS) {
+  //     listaBicis[reqId].tamanio.S = "";
+  //   } else {
+  //     listaBicis[reqId].tamanio.S = "disabled";
+  //   }
+  //   if (req.body.tamanioM) {
+  //     listaBicis[reqId].tamanio.M = "";
+  //   } else {
+  //     listaBicis[reqId].tamanio.M = "disabled";
+  //   }
+  //   if (req.body.tamanioL) {
+  //     listaBicis[reqId].tamanio.L = "";
+  //   } else {
+  //     listaBicis[reqId].tamanio.L = "disabled";
+  //   }
+  //   let salida = JSON.stringify(listaBicis, null, " ");
+  //   fs.writeFile(path.join(__dirname, "../data/data.json"), salida, () => {});
+
+  //   res.redirect(`../detalleproducto/${listaBicis[reqId].id}`);
+  // },
