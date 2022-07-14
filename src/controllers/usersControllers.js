@@ -6,7 +6,40 @@ let usersController = {
   login: (req, res) => {
     return res.render("./users/login.ejs");
   },
-
+  edit: function (req,res){
+    db.User.findByPk(req.params.id)
+      .then(function(Us){
+        console.log(Us.fullname);
+        res.render("./users/userEdit.ejs",{Us:Us});
+      })
+  },
+  update:function(req,res){
+    console.log(req.params.id);
+    let picture;
+    // let key = bcryptjs.hashSync(req.body.key, 10);
+    // if (req.file) {
+    //   picture = req.file.filename;
+    // } else {
+    //   picture = "porDefecto.jpg";
+    // }
+    db.User.update({
+      fullname:req.body.fullName,
+      addres:req.body.fullAddress,
+      email:req.body.email,
+      birthday:req.body.bday,
+      user:req.body.user,
+      // key:key,
+      userImage:picture,
+    },{
+      where: {
+          
+          idUser:req.params.id
+      }
+    })
+      .then( 
+          res.redirect("/")
+      );
+  },
   loginProcess:  (req, res) => {
      db.User.findOne({
       where:{
