@@ -34,6 +34,8 @@ router.post('/register', uploadFile.single('image'), validateUserRegister, users
 /* GET users listing. */
 router.get('/login',guestMiddleware, usersController.login);
 router.get('/register',guestMiddleware, usersController.register);
+router.get('/edit/:id',guestMiddleware, usersController.edit);
+router.put('/edit',guestMiddleware, usersController.update);
 router.get('/profile',authMiddleware,usersController.profile);
 router.get('/logout', usersController.logout);
 router.get('*', usersController.notFound);
