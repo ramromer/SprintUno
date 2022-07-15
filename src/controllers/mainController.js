@@ -36,13 +36,8 @@ let mainController = {
       ],
     })
       .then((product) => {
-        product.productSizes.forEach(size => {
-            if(size == 20){small.checked=true};
-            if(size == 26){medium.checked=true};
-            if(size == 29){large.checked=true};
-        });
-        // procesar data colores tamanios etc
-        res.render("./products/detalleProducto", { producto: product });
+        if (product==undefined){res.render('./products/noExiste')}else{
+        res.render("./products/detalleProducto", { producto: product })};
       })
       .catch((err) => {
         console.log(err);
@@ -155,17 +150,17 @@ let mainController = {
     categoriesArray= categoriesArray.filter(category => category !== undefined);
 
     colorsArray.forEach((color) => {
-      colors.push({ idColorFK: color });
+      colors.push({ idColorFK: color, idProductsFK: req.params.id});
     });
-
+    
     sizesArray.forEach((size) => {
-      sizes.push({ idSizeFK: size });
+      sizes.push({ idSizeFK: size, idProductsFK: req.params.id});
     });
 
     categoriesArray.forEach((category) => {
-      categories.push({ idCategoryFK: category });
-    });
-
+      categories.push({ idCategoryFK: category, idProductsFK: req.params.id});
+    })
+    
     let fotico = req.file;
     let productoNuevo;
     if(fotico){
@@ -206,49 +201,117 @@ let mainController = {
       include: [
         { model: db.ColorProduct, as: "productColors" }, // se debe llamar el modelo de la tabla donde quiero crear el registros
         // y cuando la relacion tiene un alias se debe llamar la relación de la tabla actual como as:xxx
-        // { model: db.ImageProduct, as: "productsImages" },
+        { model: db.ImageProduct, as: "productsImages" },
         { model: db.SizeProduct, as: "productSizes" },
         { model: db.CategoryProduct, as: "productCategories" },
       ],
     })
-      .then((product) => {
-        res.render("./products/detalleProducto", { producto: product });
-      })
+      // .then((product) => {
+      //   res.render("./products/detalleProducto", { producto: product });
+      // })
       .catch((err) => {
         console.log(err);
       });
+//aca borramos la relacion
+      db.ColorProduct.destroy({where: {idProductsFK: req.params.id}, force:true})
+      .catch((err) => {
+        console.log(err);
+      });
+//aca borramos la relacion
+            db.SizeProduct.destroy({where: {idProductsFK: req.params.id}, force:true}).then((e) => {console.log(e)})
+            .catch((err) => {
+              console.log(err);
+            });
+//aca creamos la nueva relacion
+      db.ColorProduct.bulkCreate(colors)
+      .catch((err) => {
+        console.log(err);
+      });
+//aca creamos la nueva relacion
+      console.log('sizes');
+      console.log(sizes);
+      db.SizeProduct.bulkCreate(sizes).then((e) => {console.log(e)})
+      .catch((err) => {
+        console.log(err);
+      });
+                    //borramos o no la foto anterior??
+      if(fotico){
+        db.ImageProduct.update({ imageProduct: req.file.filename }, {where: {idProductsFK: req.params.id}})
+        .then((e) => {console.log(e)})
+            .catch((err) => {
+              console.log(err);
+        });
+      }
+      db.Product.findOne({
+        where: { idProduct: req.params.id },
+        include: [
+          { association: "productsImages" },
+          { association: "productColors" },
+          { association: "productSizes" },
+          { association: "productCategories" },
+        ],
+      })
+        .then((product) => {console.log(product)
+          res.render("./products/detalleProducto", { producto: product });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
   },
 
-  eliminarProducto: (req, res) => {
-    let listaBicisFile = fs.readFileSync(
-      path.join(__dirname, "../data/data.json")
-    );
-    let listaBicis = JSON.parse(listaBicisFile);
+  eliminarProducto: async (req, res) => {
+    db.ColorProduct.destroy({where: {idProductsFK: req.params.id}})
+    .catch((err) => {
+      console.log(err);
+    });
+    db.SizeProduct.destroy({where: {idProductsFK: req.params.id}}).then((e) => {console.log(e)})
+          .catch((err) => {
+            console.log(err);
+          });
+          db.ImageProduct.destroy({where: {idProductsFK: req.params.id}}).then((e) => {console.log(e)})
+          .catch((err) => {
+            console.log(err);
+          });
+          db.CategoryProduct.destroy({where: {idProductsFK: req.params.id}}).then((e) => {console.log(e)})
+          .catch((err) => {
+            console.log(err);
+          });
 
-    let pto = listaBicis.find(function (pr) {
-      return pr.id == req.params.id;
+
+
+    db.Product.destroy({where: {idProduct: req.params.id}}).then((e) => {console.log(e)})
+            .catch((err) => {
+              console.log(err);
     });
-    let i = listaBicis.indexOf(pto);
-    let aBorrar = path.join(
-      __dirname,
-      "../../public/images/" + listaBicis[i].img[0]
-    );
-    fs.unlink(aBorrar, (err) => {
-      if (err) {
-        console.error(err);
-        res.redirect("../editarproducto/" + pto.id);
-        return;
-      } else {
-        listaBicis.splice(i, 1);
-        let salida = JSON.stringify(listaBicis, null, " ");
-        fs.writeFile(
-          path.join(__dirname, "../data/data.json"),
-          salida,
-          () => {}
-        );
-        res.redirect("../productos");
-      }
-    });
+    // let listaBicisFile = fs.readFileSync(
+    //   path.join(__dirname, "../data/data.json")
+    // );
+    // let listaBicis = JSON.parse(listaBicisFile);
+
+    // let pto = listaBicis.find(function (pr) {
+    //   return pr.id == req.params.id;
+    // });
+    // let i = listaBicis.indexOf(pto);
+    // let aBorrar = path.join(
+    //   __dirname,
+    //   "../../public/images/" + listaBicis[i].img[0]
+    // );
+    // fs.unlink(aBorrar, (err) => {
+    //   if (err) {
+    //     console.error(err);
+    //     res.redirect("../editarproducto/" + pto.id);
+    //     return;
+    //   } else {
+    //     listaBicis.splice(i, 1);
+    //     let salida = JSON.stringify(listaBicis, null, " ");
+    //     fs.writeFile(
+    //       path.join(__dirname, "../data/data.json"),
+    //       salida,
+    //       () => {}
+    //     );
+    //     res.redirect("../productos");
+    //   }
+    // });
   },
 
   productos: (req, res) => {
