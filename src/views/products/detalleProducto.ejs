@@ -34,10 +34,6 @@
               <div class="flexContainer">
                 <label>Color:</label>
                 <div class="flexContainer centradoxy space-evenly">
-                  <!-- <%producto.productColors.forEach(color => { %>
-                    <label for="<%=color.color%>"><%=color.color%></label><input type="radio" name="<%=color.color%>" 
-                    value="<%=color.color%>">
-                  <%})%> -->
                   <% producto.productColors.forEach(color => { %>
                     <%if(color.dataValues.idColorFK == 1){%>
                       <label for="colorWhite"> Blanco</label><input type="radio" id='colorWhite' name="color" value="1">
@@ -94,7 +90,6 @@
               </p>
             </div>
           </section>
-
       </main>
       <%- include('../partials/footer.ejs')%>
   </body>

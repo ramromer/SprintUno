@@ -1,23 +1,77 @@
 const fs = require("fs");
 const path = require("path");
 const db = require("../data/models");
+const sequelize = require("Sequelize");
 
 let mainController = {
-
   index: (req, res) => {
     db.Product.findAll({
-      include:[
-              { association: "productsImages" },
-              { association: "productCategory"},
-              { association: "ProductBasket"},
-      ]
-  })
+      include: [
+        { association: "productsImages" },
+        { association: "productCategory" },
+        // { association: "ProductBasket"},
+      ],
+    })
       .then((products) => {
-        console.log("16 prueba basket", products.ProductBasket);
         res.render("index.ejs", { listaBicis: products });
       })
       .catch((err) => {
         console.error(err);
+      });
+  },
+
+  buscar: async (req, res) => {
+    let products = await db.Product.findAll({
+      include: [
+        {
+          association: "productsImages",
+        },
+      ],
+
+      where: {
+        [sequelize.Op.or]: [
+          { title: { [sequelize.Op.like]: `%${req.query.search}%` } },
+          { description: { [sequelize.Op.like]: `%${req.query.search}%` } },
+          { descriptionLong: { [sequelize.Op.like]: `%${req.query.search}%` } },
+        ],
+      },
+    });
+
+    let categories = await db.Product.findAll({
+      include: [
+        {
+          association: "productsImages",
+        },
+
+        {
+          association: "productCategories",
+          required: true,
+
+          include: [
+            {
+              association: "categoryCategoryProducts",
+              required: true,
+              where: {
+                category: {
+                  [sequelize.Op.like]: `%${req.query.search}%`,
+                },
+              },
+            },
+          ],
+        },
+      ],
+    });
+
+    Promise.all([products, categories])
+      .then((list) => {
+        list = list.flat();
+        res.render("./products/products", {
+          listaBicis: list,
+          busqueda: req.query.search,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
       });
   },
 
@@ -36,8 +90,11 @@ let mainController = {
       ],
     })
       .then((product) => {
-        if (product==undefined){res.render('./products/noExiste')}else{
-        res.render("./products/detalleProducto", { producto: product })};
+        if (product == undefined) {
+          res.redirect("./products/noExiste");
+        } else {
+          res.render("./products/detalleProducto", { producto: product });
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -57,15 +114,13 @@ let mainController = {
       req.body.colorBlack,
       req.body.colorWhite,
     ];
-    let sizesArray = [
-      req.body.tamanioS,
-      req.body.tamanioM,
-      req.body.tamanioL
-    ];
-    let categoriesArray = ["1", "2"];////////////////////////////////////
-    colorsArray = colorsArray.filter(color =>  color !== undefined);
-    sizesArray = sizesArray.filter(size => size !== undefined);
-    categoriesArray= categoriesArray.filter(category => category !== undefined);
+    let sizesArray = [req.body.tamanioS, req.body.tamanioM, req.body.tamanioL];
+    let categoriesArray = ["1", "2"]; ////////////////////////////////////
+    colorsArray = colorsArray.filter((color) => color !== undefined);
+    sizesArray = sizesArray.filter((size) => size !== undefined);
+    categoriesArray = categoriesArray.filter(
+      (category) => category !== undefined
+    );
 
     colorsArray.forEach((color) => {
       colors.push({ idColorFK: color });
@@ -94,7 +149,6 @@ let mainController = {
       productsImages: { imageProduct: req.file.filename },
     };
 
-
     db.Product.create(productoNuevo, {
       // debo usar include para agregar los registros que quiero crear en las tablas externas en base al producto
       include: [
@@ -106,23 +160,29 @@ let mainController = {
       ],
     })
       .then((product) => {
-        res.render("./products/detalleProducto", { producto: product });
+        // res.render("./products/detalleProducto", { producto: product });
+        res.redirect(`../../detalleProducto/${product.idProduct}`);
       })
       .catch((err) => {
         console.log(err);
       });
   },
   editarProducto: (req, res) => {
-
-    db.Product.findOne({ where:{idProduct:req.params.id},
+    db.Product.findOne({
+      where: { idProduct: req.params.id },
       include: [
         { association: "productsImages" },
         { association: "productColors" },
         { association: "productSizes" },
         { association: "productCategories" },
-      ],})
-      .then((product)=>{
-        res.render("./products/editarProducto",{product:product});
+      ],
+    })
+      .then((product) => {
+        if (product == undefined) {
+          res.redirect("./products/noExiste");
+        } else {
+          res.render("./products/editarProducto", { product: product });
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -139,31 +199,29 @@ let mainController = {
       req.body.colorBlack,
       req.body.colorWhite,
     ];
-    let sizesArray = [
-      req.body.tamanioS,
-      req.body.tamanioM,
-      req.body.tamanioL
-    ];
-    let categoriesArray = ["1", "2"];////////////////////////////////////
-    colorsArray = colorsArray.filter(color =>  color !== undefined);
-    sizesArray = sizesArray.filter(size => size !== undefined);
-    categoriesArray= categoriesArray.filter(category => category !== undefined);
+    let sizesArray = [req.body.tamanioS, req.body.tamanioM, req.body.tamanioL];
+    let categoriesArray = ["1", "2"]; ////////////////////////////////////
+    colorsArray = colorsArray.filter((color) => color !== undefined);
+    sizesArray = sizesArray.filter((size) => size !== undefined);
+    categoriesArray = categoriesArray.filter(
+      (category) => category !== undefined
+    );
 
     colorsArray.forEach((color) => {
-      colors.push({ idColorFK: color, idProductsFK: req.params.id});
+      colors.push({ idColorFK: color, idProductsFK: req.params.id });
     });
-    
+
     sizesArray.forEach((size) => {
-      sizes.push({ idSizeFK: size, idProductsFK: req.params.id});
+      sizes.push({ idSizeFK: size, idProductsFK: req.params.id });
     });
 
     categoriesArray.forEach((category) => {
-      categories.push({ idCategoryFK: category, idProductsFK: req.params.id});
-    })
-    
+      categories.push({ idCategoryFK: category, idProductsFK: req.params.id });
+    });
+
     let fotico = req.file;
     let productoNuevo;
-    if(fotico){
+    if (fotico) {
       productoNuevo = {
         title: req.body.nombre,
         description: req.body.descripcionProductoNuevo,
@@ -177,8 +235,8 @@ let mainController = {
         productColors: colors,
         // productsImages es el nombre de la relación que quiero incluir al momento de crear el producto
         productsImages: { imageProduct: req.file.filename },
-    };
-    }else{
+      };
+    } else {
       productoNuevo = {
         title: req.body.nombre,
         description: req.body.descripcionProductoNuevo,
@@ -192,12 +250,12 @@ let mainController = {
         productColors: colors,
         // productsImages es el nombre de la relación que quiero incluir al momento de crear el producto
         // productsImages: { imageProduct: req.file.filename },
-      }
+      };
     }
 
     db.Product.update(productoNuevo, {
       // debo usar include para agregar los registros que quiero crear en las tablas externas en base al producto
-      where: { idProduct: req.params.id},
+      where: { idProduct: req.params.id },
       include: [
         { model: db.ColorProduct, as: "productColors" }, // se debe llamar el modelo de la tabla donde quiero crear el registros
         // y cuando la relacion tiene un alias se debe llamar la relación de la tabla actual como as:xxx
@@ -205,84 +263,105 @@ let mainController = {
         { model: db.SizeProduct, as: "productSizes" },
         { model: db.CategoryProduct, as: "productCategories" },
       ],
+    }).catch((err) => {
+      console.log(err);
+    });
+    //aca borramos la relacion
+    db.ColorProduct.destroy({
+      where: { idProductsFK: req.params.id },
+      force: true,
+    }).catch((err) => {
+      console.log(err);
+    });
+    //aca borramos la relacion
+    db.SizeProduct.destroy({
+      where: { idProductsFK: req.params.id },
+      force: true,
     })
-      // .then((product) => {
-      //   res.render("./products/detalleProducto", { producto: product });
-      // })
-      .catch((err) => {
-        console.log(err);
-      });
-//aca borramos la relacion
-      db.ColorProduct.destroy({where: {idProductsFK: req.params.id}, force:true})
-      .catch((err) => {
-        console.log(err);
-      });
-//aca borramos la relacion
-            db.SizeProduct.destroy({where: {idProductsFK: req.params.id}, force:true}).then((e) => {console.log(e)})
-            .catch((err) => {
-              console.log(err);
-            });
-//aca creamos la nueva relacion
-      db.ColorProduct.bulkCreate(colors)
-      .catch((err) => {
-        console.log(err);
-      });
-//aca creamos la nueva relacion
-      console.log('sizes');
-      console.log(sizes);
-      db.SizeProduct.bulkCreate(sizes).then((e) => {console.log(e)})
-      .catch((err) => {
-        console.log(err);
-      });
-                    //borramos o no la foto anterior??
-      if(fotico){
-        db.ImageProduct.update({ imageProduct: req.file.filename }, {where: {idProductsFK: req.params.id}})
-        .then((e) => {console.log(e)})
-            .catch((err) => {
-              console.log(err);
-        });
-      }
-      db.Product.findOne({
-        where: { idProduct: req.params.id },
-        include: [
-          { association: "productsImages" },
-          { association: "productColors" },
-          { association: "productSizes" },
-          { association: "productCategories" },
-        ],
+      .then((e) => {
+        console.log(e);
       })
-        .then((product) => {console.log(product)
-          res.render("./products/detalleProducto", { producto: product });
+      .catch((err) => {
+        console.log(err);
+      });
+    //aca creamos la nueva relacion
+    db.ColorProduct.bulkCreate(colors).catch((err) => {
+      console.log(err);
+    });
+    //aca creamos la nueva relacion
+    db.SizeProduct.bulkCreate(sizes)
+      .then((e) => {
+        console.log(e);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    //borramos o no la foto anterior??
+    if (fotico) {
+      db.ImageProduct.update(
+        { imageProduct: req.file.filename },
+        { where: { idProductsFK: req.params.id } }
+      )
+        .then((e) => {
+          console.log(e);
         })
         .catch((err) => {
           console.log(err);
         });
+    }
+    db.Product.findOne({
+      where: { idProduct: req.params.id },
+      include: [
+        { association: "productsImages" },
+        { association: "productColors" },
+        { association: "productSizes" },
+        { association: "productCategories" },
+      ],
+    })
+      .then((product) => {
+        // res.render("./products/detalleProducto", { producto: product });
+        res.redirect(`../../detalleProducto/${req.params.id}`);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   },
 
   eliminarProducto: async (req, res) => {
-    db.ColorProduct.destroy({where: {idProductsFK: req.params.id}})
-    .catch((err) => {
-      console.log(err);
-    });
-    db.SizeProduct.destroy({where: {idProductsFK: req.params.id}}).then((e) => {console.log(e)})
-          .catch((err) => {
-            console.log(err);
-          });
-          db.ImageProduct.destroy({where: {idProductsFK: req.params.id}}).then((e) => {console.log(e)})
-          .catch((err) => {
-            console.log(err);
-          });
-          db.CategoryProduct.destroy({where: {idProductsFK: req.params.id}}).then((e) => {console.log(e)})
-          .catch((err) => {
-            console.log(err);
-          });
+    db.ColorProduct.destroy({ where: { idProductsFK: req.params.id } }).catch(
+      (err) => {
+        console.log(err);
+      }
+    );
+    db.SizeProduct.destroy({ where: { idProductsFK: req.params.id } })
+      .then((e) => {
+        console.log(e);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    db.ImageProduct.destroy({ where: { idProductsFK: req.params.id } })
+      .then((e) => {
+        console.log(e);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    db.CategoryProduct.destroy({ where: { idProductsFK: req.params.id } })
+      .then((e) => {
+        console.log(e);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
-
-
-    db.Product.destroy({where: {idProduct: req.params.id}}).then((e) => {console.log(e)})
-            .catch((err) => {
-              console.log(err);
-    });
+    db.Product.destroy({ where: { idProduct: req.params.id } })
+      .then((e) => {
+        console.log(e);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     // let listaBicisFile = fs.readFileSync(
     //   path.join(__dirname, "../data/data.json")
     // );
@@ -360,48 +439,3 @@ function getListaBicisDB() {
 }
 
 module.exports = mainController;
-
-// modificarProducto: (req, res) => {
-  //   let listaBicisFile = fs.readFileSync(
-  //     path.join(__dirname, "../data/data.json")
-  //   );
-  //   let listaBicis = JSON.parse(listaBicisFile);
-  //   let reqId = listaBicis.findIndex((element) => element.id == req.params.id);
-  //   listaBicis[reqId].descripcionDetallada = req.body.descripcionProductoNuevo;
-  //   listaBicis[reqId].cantidadDisponible = Number(req.body.cantidad);
-  //   listaBicis[reqId].precio = req.body.precio;
-  //   if (req.body.colorRed) {
-  //     listaBicis[reqId].colorDisponible.red = "";
-  //   } else {
-  //     listaBicis[reqId].colorDisponible.red = "disabled";
-  //   }
-  //   if (req.body.colorWhite) {
-  //     listaBicis[reqId].colorDisponible.white = "";
-  //   } else {
-  //     listaBicis[reqId].colorDisponible.white = "disabled";
-  //   }
-  //   if (req.body.colorBlack) {
-  //     listaBicis[reqId].colorDisponible.black = "";
-  //   } else {
-  //     listaBicis[reqId].colorDisponible.black = "disabled";
-  //   }
-  //   if (req.body.tamanioS) {
-  //     listaBicis[reqId].tamanio.S = "";
-  //   } else {
-  //     listaBicis[reqId].tamanio.S = "disabled";
-  //   }
-  //   if (req.body.tamanioM) {
-  //     listaBicis[reqId].tamanio.M = "";
-  //   } else {
-  //     listaBicis[reqId].tamanio.M = "disabled";
-  //   }
-  //   if (req.body.tamanioL) {
-  //     listaBicis[reqId].tamanio.L = "";
-  //   } else {
-  //     listaBicis[reqId].tamanio.L = "disabled";
-  //   }
-  //   let salida = JSON.stringify(listaBicis, null, " ");
-  //   fs.writeFile(path.join(__dirname, "../data/data.json"), salida, () => {});
-
-  //   res.redirect(`../detalleproducto/${listaBicis[reqId].id}`);
-  // },
