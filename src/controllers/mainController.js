@@ -20,70 +20,129 @@ let mainController = {
   },
 
   buscar: async (req, res) => {
-    let products = await db.Product.findAll({
-      include: [
-        {
-          association: "productsImages",
-        },
-      ],
-      where: {
-        [sequelize.Op.or]: [
-          { title: { [sequelize.Op.like]: `%${req.query.search}%` } },
-          { description: { [sequelize.Op.like]: `%${req.query.search}%` } },
-          { descriptionLong: { [sequelize.Op.like]: `%${req.query.search}%` } },
+    try {
+      let products = await db.Product.findAll({
+        include: [
+          {
+            association: "productsImages",
+          },
         ],
-      },
-    });
-
-    let categories = await db.Product.findAll({
-      include: [
-        {
-          association: "productsImages",
-        },
-
-        {
-          association: "productCategories", // tabla intermedia
-          required: true,
-
-          include: [
+        where: {
+          [sequelize.Op.or]: [
+            { title: { [sequelize.Op.like]: `%${req.query.search}%` } },
+            { description: { [sequelize.Op.like]: `%${req.query.search}%` } },
             {
-              association: "categoryCategoryProducts", // tabla categorias
-              required: true,
-              where: {
-                category: {
-                  // campo donde se busca
-                  [sequelize.Op.like]: `%${req.query.search}%`,
-                },
-              },
+              descriptionLong: { [sequelize.Op.like]: `%${req.query.search}%` },
             },
           ],
         },
-      ],
-    });
-
-    Promise.all([products, categories])
-      .then((list) => {
-        list = list.flat(); // aplanar el array anidado
-        res.render("./products/products", {
-          listaBicis: list,
-          busqueda: req.query.search,
-        });
-      })
-      .catch((err) => {
-        console.log(err);
       });
+
+      let categories = await db.Product.findAll({
+        include: [
+          {
+            association: "productsImages",
+          },
+
+          {
+            association: "productCategories", // tabla intermedia
+            required: true,
+
+            include: [
+              {
+                association: "categoryCategoryProducts", // tabla categorias
+                required: true,
+                where: {
+                  category: {
+                    // campo donde se busca
+                    [sequelize.Op.like]: `%${req.query.search}%`,
+                  },
+                },
+              },
+            ],
+          },
+        ],
+      });
+
+      let list = await Promise.all([products, categories]);
+
+      list = list.flat(); // aplanar el array anidado
+
+      res.render("./products/products", {
+        listaBicis: list,
+        busqueda: req.query.search,
+      });
+    } catch (err) {
+      res.redirect(`../error}`);
+      console.error(err);
+    }
   },
 
-  carrito: (req, res) => {
-    db.Product.findAll({
-      include: [{ association: "productsImages" }],
-    })
-      .then((products) => {
-        res.render("./products/carrito", { listaBicis: products });
-      })
-      .catch((err) => {
-        console.error(err);
+  showCarrito: async (req, res) => {
+    try {
+      let products = await db.Basket.findAll({
+        where: { idUserFK: req.session.userLogged.idUser },
       });
+      if (products.length < 1) {
+        //condición para mostrar mensaje de "no hay productos en tu carrito"
+        res.render("./products/noExiste");
+      }
+      res.render("./products/carrito", { products });
+    } catch (err) {
+      err = err.toString();
+      res.render(`./error`, { error: err.split(",") });
+      console.log(err);
+    }
+  },
+
+  carrito: async (req, res) => {
+    try {
+      let colorProductId = await db.ColorProduct.findOne({
+        where: [{ idColorFK: req.body.color }, { idProductsFK: req.params.id }],
+      });
+
+      let sizeProductId = await db.SizeProduct.findOne({
+        where: [
+          { idSizeFK: req.body.tamanio },
+          { idProductsFK: req.params.id },
+        ],
+      });
+
+      let [color, size] = await Promise.all([colorProductId, sizeProductId]);
+
+      let producto = {
+        idProductFK: req.params.id,
+        idColorProductFK: color.idcolorProduct,
+        idSizeProductFK: size.idSizeProduct,
+        amount: req.body.cantidad,
+        idUserFK: req.session.userLogged.idUser,
+      };
+
+      await db.Basket.create(producto);
+
+      let listaBicis = await db.Basket.findAll({
+        include: [
+          {
+            association: "BasketProduct",
+            include: {
+              association: "productsImages",
+            },
+          },
+        ],
+
+        where: {
+          idUserFK: req.session.userLogged.idUser,
+        },
+      });
+      
+      console.log(listaBicis[0].BasketProduct.productsImages[0].imageProduct);
+
+      res.render(`./products/carrito`, { listaBicis });
+    } catch (err) {
+      err = err.toString();
+      res.render(`./error`, { error: err.split(",") });
+      console.log(err);
+    }
   },
 
   detalleProducto: async (req, res) => {
@@ -108,12 +167,11 @@ let mainController = {
       });
   },
 
-  productoNuevo: (req, res) => {
+  opciones: (req, res) => {
     res.render("./products/agregarOpciones");
   },
 
-  opciones:  (req, res) =>{
-
+  productoNuevo: (req, res) => {
     res.render("./products/productoNuevo");
   },
 
@@ -121,6 +179,7 @@ let mainController = {
     let colors = [];
     let sizes = [];
     let categories = [];
+    let image = [];
 
     let colorsArray = [
       req.body.colorRed,
@@ -147,6 +206,12 @@ let mainController = {
       categories.push({ idCategoryFK: category });
     });
 
+    if (req.file.filename == undefined) {
+      image.push("porDefecto.jpg");
+    } else {
+      image.push(req.file.filename);
+    }
+
     let productoNuevo = {
       title: req.body.nombre,
       description: req.body.descripcionProductoNuevo,
@@ -159,7 +224,7 @@ let mainController = {
       // productColors es el nombre de la relación que quiero incluir al momento de crear el producto
       productColors: colors,
       // productsImages es el nombre de la relación que quiero incluir al momento de crear el producto
-      productsImages: { imageProduct: req.file.filename },
+      productsImages: { imageProduct: image },
     };
 
     db.Product.create(productoNuevo, {
@@ -305,7 +370,6 @@ let mainController = {
     }
 
     res.redirect(`../../detalleProducto/${req.params.id}`);
-
   },
 
   eliminarProducto: async (req, res) => {

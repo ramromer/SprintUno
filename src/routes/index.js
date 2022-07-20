@@ -20,18 +20,19 @@ const loggerProducts = require('../middlewares/products_log');
 
 
 router.get('/', mainController.index);
-router.get('/carrito', mainController.carrito);
 router.get('/detalleproducto/:id', mainController.detalleProducto);
 router.get('/buscar', mainController.buscar);
 router.get('/productos', mainController.productos);
-router.delete('/productos/:id', authMiddleware, mainController.eliminarProducto);
+router.get('/carrito',authMiddleware, mainController.showCarrito);
 router.get('/productonuevo', authMiddleware, mainController.productoNuevo);
 router.get('/opciones', authMiddleware, mainController.opciones);
 router.get('/editarproducto/:id', authMiddleware, mainController.editarProducto);
+router.delete('/productos/:id', authMiddleware, mainController.eliminarProducto);
 router.get('/accesDenied', mainController.accesDenied);
 router.get('/error', mainController.error);
 
 
+router.post('/carrito/:id',authMiddleware, uploadFile.single('image'), mainController.carrito);
 router.post('/productonuevo',authMiddleware, loggerProducts, uploadFile.single('image'), mainController.crearproductoNuevo);
 
 router.put('/editarproducto/:id', authMiddleware, uploadFile.single('image'), mainController.modificarProducto);

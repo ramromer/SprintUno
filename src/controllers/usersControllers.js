@@ -116,12 +116,13 @@ let usersController = {
         user: req.body.user
       }
     }).then((user) => {
+      user= user.dataValues;
       if (user) {
-        user = user.dataValues
         let isOkThePassword = bcryptjs.compareSync(req.body.key, user.key);
         if (isOkThePassword) {
           delete user.key;
           req.session.userLogged = user;
+          console.log(req.session)
           if (req.body.recordarLogin) {
             res.cookie("user", req.body.user, { maxAge: 1000 * 60 * 60 }); // esto es seguro? podemos hashear la info o usar cookies seguras
           }

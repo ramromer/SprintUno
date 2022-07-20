@@ -40,8 +40,8 @@
                         </article> -->
                         <%listaBicis.forEach(bici=> { %>
                         <section class="articulo">             
-                                  <a href="/detalleproducto/<%=bici.idProduct%>" class="product article">
-                                    <img src="/images/<%=bici.productsImages[0].imageProduct%>" alt="<%=bici.alt%>">
+                                  <a href="/detalleproducto/<%=bici.BasketProduct.idProduct%>" class="product article">
+                                    <img src="/images/<%=bici.BasketProduct.productsImages[0].imageProduct%>" alt="<%=bici.alt%>">
                                     <div class="producto-descripcion flexContainer">
                                       <div class="price-bar flexContainer">
                                         <p class="precio" style="text-decoration: line-through">$ <%=bici.price%>
@@ -52,7 +52,7 @@
                                           <%}%>
                                       </div>
                                       <h4 class="description">
-                                        <%=bici.title%>
+                                        <%=bici.BasketProduct.title%>
                                       </h4>
                                     </div>
                                   </a>
