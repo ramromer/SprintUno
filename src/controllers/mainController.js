@@ -325,7 +325,6 @@ let mainController = {
       ],
     })
       .then((product) => {
-        // res.render("./products/detalleProducto", { producto: product });
         res.redirect(`../../detalleProducto/${req.params.id}`);
       })
       .catch((err) => {
@@ -368,44 +367,13 @@ let mainController = {
       .catch((err) => {
         console.log(err);
       });
-    // let listaBicisFile = fs.readFileSync(
-    //   path.join(__dirname, "../data/data.json")
-    // );
-    // let listaBicis = JSON.parse(listaBicisFile);
 
-    // let pto = listaBicis.find(function (pr) {
-    //   return pr.id == req.params.id;
-    // });
-    // let i = listaBicis.indexOf(pto);
-    // let aBorrar = path.join(
-    //   __dirname,
-    //   "../../public/images/" + listaBicis[i].img[0]
-    // );
-    // fs.unlink(aBorrar, (err) => {
-    //   if (err) {
-    //     console.error(err);
-    //     res.redirect("../editarproducto/" + pto.id);
-    //     return;
-    //   } else {
-    //     listaBicis.splice(i, 1);
-    //     let salida = JSON.stringify(listaBicis, null, " ");
-    //     fs.writeFile(
-    //       path.join(__dirname, "../data/data.json"),
-    //       salida,
-    //       () => {}
-    //     );
-    //     res.redirect("../productos");
-    //   }
-    // });
   },
 
   productos: (req, res) => {
     db.Product.findAll({
       include: [
         { association: "productsImages" },
-        // { association: "productColors" },
-        // { association: "productSizes" },
-        // { association: "productCategories" },
       ],
     })
       .then((products) => {
