@@ -20,70 +20,121 @@ let mainController = {
   },
 
   buscar: async (req, res) => {
-    let products = await db.Product.findAll({
-      include: [
-        {
-          association: "productsImages",
-        },
-      ],
-      where: {
-        [sequelize.Op.or]: [
-          { title: { [sequelize.Op.like]: `%${req.query.search}%` } },
-          { description: { [sequelize.Op.like]: `%${req.query.search}%` } },
-          { descriptionLong: { [sequelize.Op.like]: `%${req.query.search}%` } },
+    try {
+      let products = await db.Product.findAll({
+        include: [
+          {
+            association: "productsImages",
+          },
         ],
-      },
-    });
-
-    let categories = await db.Product.findAll({
-      include: [
-        {
-          association: "productsImages",
-        },
-
-        {
-          association: "productCategories", // tabla intermedia
-          required: true,
-
-          include: [
+        where: {
+          [sequelize.Op.or]: [
+            { title: { [sequelize.Op.like]: `%${req.query.search}%` } },
+            { description: { [sequelize.Op.like]: `%${req.query.search}%` } },
             {
-              association: "categoryCategoryProducts", // tabla categorias
-              required: true,
-              where: {
-                category: {
-                  // campo donde se busca
-                  [sequelize.Op.like]: `%${req.query.search}%`,
-                },
-              },
+              descriptionLong: { [sequelize.Op.like]: `%${req.query.search}%` },
             },
           ],
         },
-      ],
-    });
-
-    Promise.all([products, categories])
-      .then((list) => {
-        list = list.flat(); // aplanar el array anidado
-        res.render("./products/products", {
-          listaBicis: list,
-          busqueda: req.query.search,
-        });
-      })
-      .catch((err) => {
-        console.log(err);
       });
+
+      let categories = await db.Product.findAll({
+        include: [
+          {
+            association: "productsImages",
+          },
+
+          {
+            association: "productCategories", // tabla intermedia
+            required: true,
+
+            include: [
+              {
+                association: "categoryCategoryProducts", // tabla categorias
+                required: true,
+                where: {
+                  category: {
+                    // campo donde se busca
+                    [sequelize.Op.like]: `%${req.query.search}%`,
+                  },
+                },
+              },
+            ],
+          },
+        ],
+      });
+
+      let list = await Promise.all([products, categories]);
+
+      list = list.flat(); // aplanar el array anidado
+
+      res.render("./products/products", {
+        listaBicis: list,
+        busqueda: req.query.search,
+      });
+    } catch (err) {
+      res.redirect(`../error}`);
+      console.error(err);
+    }
   },
 
-  carrito: (req, res) => {
-    db.Product.findAll({
-      include: [{ association: "productsImages" }],
-    })
-      .then((products) => {
-        res.render("./products/carrito", { listaBicis: products });
-      })
-      .catch((err) => {
-        console.error(err);
+  showCarrito: async (req, res) => {
+
+    try {
+      
+      let products = await db.Basket.findAll({
+        where: { idUserFK: req.session.idUser },
       });
+
+      res.render("./products/carrito", { products });
+      
+    } catch (err) {
+      res.redirect(`../error}`);
+      console.log(err);
+    }
+   
+  },
+
+  carrito: async (req, res) => {
+    
+    let color= undefined;
+    let size = undefined;
+    console.log(req.body);
+
+    if (req.body.colorRed != undefined) {
+      color = req.body.colorRed
+    }else if (req.body.colorBlack != undefined){
+      color = req.body.colorBlack
+    }else if (req.body.colorWhite != undefined){
+      color = req.body.colorWhite
+    };
+
+    if (req.body.tamanioS !== undefined) {
+      size = req.body.tamanioS
+    }else if (req.body.tamanioM != undefined){
+      size = req.body.tamanioM
+    }else if (req.body.tamanioL != undefined){
+      size = req.body.tamanioL
+    }
+
+    let producto = {
+      idProductFK: req.params.id,
+      idColorProductFK: color,
+      idSizeProductFK: size,
+      amount: req.body.cantidad,
+      idUserFK: req.session.userLogged.idUser,
+    };
+    console.log(producto)
+
+    try {
+      await db.Basket.create(producto);
+
+      res.redirect(`./carrito`);
+      
+    } catch (err) {
+      res.redirect(`../error}`);
+      console.log(err);
+    }
   },
 
   detalleProducto: async (req, res) => {
@@ -112,8 +163,7 @@ let mainController = {
     res.render("./products/agregarOpciones");
   },
 
-  opciones:  (req, res) =>{
-
+  opciones: (req, res) => {
     res.render("./products/productoNuevo");
   },
 
@@ -205,7 +255,7 @@ let mainController = {
     let colors = [];
     let sizes = [];
     let categories = [];
-
+    
     let colorsArray = [
       req.body.colorRed,
       req.body.colorBlack,
@@ -305,7 +355,6 @@ let mainController = {
     }
 
     res.redirect(`../../detalleProducto/${req.params.id}`);
-
   },
 
   eliminarProducto: async (req, res) => {

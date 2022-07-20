@@ -19,7 +19,8 @@
             </section>
           </div>
           <section id="formDetalleProdcuto">
-            <form class="flexContainer" id="infoProducto" action="none" method="post">
+            <form class="flexContainer " id="infoProducto" action="../carrito/5" method="POST" enctype="multipart/form-data">
+
               <div id="tituloProducto" class="flexContainer margin10px">
                 <label>
                   <%= producto.title %>
@@ -54,13 +55,13 @@
                 <div class="flexContainer centradoxy space-evenly">
                   <% producto.productSizes.forEach(size => { %>
                     <%if(size.dataValues.idSizeFK == 1){%>
-                      <label for="tamanioS">Rodado 20</label><input type="radio" name="tamanio" id="tamanioS" value="1">
+                      <label for="tamanioS">Rodado 20</label><input type="checkbox" name="tamanioS" id="tamanioS" value="1">
                     <%};%>
                     <%if(size.dataValues.idSizeFK == 2){%>
-                      <label for="tamanioM">Rodado 26</label><input type="radio" name="tamanio" id="tamanioM" value="2">
+                      <label for="tamanioM">Rodado 26</label><input type="checkbox" name="tamanioM" id="tamanioM" value="2">
                     <%};%>
                     <%if(size.dataValues.idSizeFK == 3){%>
-                      <label for="tamanioL">Rodado 29</label><input type="radio" name="tamanio" id="tamanioL" value="3"> 
+                      <label for="tamanioL">Rodado 29</label><input type="checkbox" name="tamanioL" id="tamanioL" value="3"> 
                     <%};%>
                 <% }) %>
                 </div>
@@ -68,14 +69,15 @@
               <br>
               <br>
               <div class="flexContainer" id="cantidadProducto">
-                <label>Cantidad: </label><input class="textocentrado " type="number">
+                <label>Cantidad: </label>
+                <input id="cantidad" class="textocentrado" value="1" type="number" min="1" max="<%= producto.stock %>">
                 <h4 class="textGray">tenemos <%= producto.stock %> unidades diponibles!</h4>
               </div>
               <div id="containerBtn" class="flexContainer">
-                <button id="btnCompraAhora">Compra ahora</button>
+                <button type="submit" id="btnCompraAhora">Compra ahora</button>
               </div>
               <% if(locals.isLogged){ %>
-                <a id="editarProducto" href="/editarproducto/<%= producto.idProduct %>">
+                <a id="editarProducto" href="/editarproducto/<%= producto.idProduct%>">
                   <i class="fas fa-edit"></i>
                 </a>
                 <%} %>
@@ -90,8 +92,8 @@
               </p>
             </div>
           </section>
-      </main>
-      <%- include('../partials/footer.ejs')%>
+        </main>
+        <%- include('../partials/footer.ejs')%>
   </body>
 
   </html>
