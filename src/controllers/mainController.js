@@ -341,6 +341,16 @@ let mainController = {
     }
 
     try {
+      await db.Basket.destroy({
+        where:{
+          idProductFK:req.params.id  ,
+          idColorProductFK:{[sequelize.Op.notIn]:colorsArray},
+          idSizeProductFK:{[sequelize.Op.notIn]:sizesArray},
+          idUserFK: req.session.userLogged.idUser
+        },
+    },    
+    )
+
       await db.Product.update(productoNuevo, {
         // debo usar include para agregar los registros que quiero crear en las tablas externas en base al producto
         where: { idProduct: req.params.id },
