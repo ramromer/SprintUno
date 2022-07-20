@@ -10,7 +10,7 @@ module.exports={
   },
   "development": {
     "username": "root",
-    "password": "1234",
+    "password": "r00tr00t",
     "database": "Kletadb",
     "host": "127.0.0.1",
     "dialect": "mysql"

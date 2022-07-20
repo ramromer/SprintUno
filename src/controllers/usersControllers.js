@@ -73,56 +73,60 @@ let usersController = {
   login: (req, res) => {
     return res.render("./users/login.ejs");
   },
-  edit: function (req,res){
+  edit: function (req, res) {
     db.User.findByPk(req.params.id)
-      .then(function(Us){
-        res.render("./users/userEdit.ejs",{Us:Us});
-      })
-  },
-   update:function(req,res){
-      let picture;
-      let key = bcryptjs.hashSync(req.body.key, 10);
-      if (req.file) {
-        picture = req.file.filename;
-      } else {
-        picture = "porDefecto.jpg";
-      }
-      db.User.update({
-        fullname:req.body.fullName,
-        addres:req.body.fullAddress,
-        email:req.body.email,
-        birthday:req.body.bday,
-        user:req.body.user,
-        key:key,
-        userImage:picture,
-      },{
-        where: {
-            
-            idUser:req.params.id
+      .then(function (Us) {
+        if (Us!=undefined){
+          res.render("./users/userEdit.ejs", { Us: Us });
+        }else{
+          res.redirect('./users/register.ejs')
         }
       })
-        .then( 
-            res.redirect("/")
-        );
-    },
+  },
+  update: function (req, res) {
+    let picture;
+    let key = bcryptjs.hashSync(req.body.key, 10);
+    if (req.file) {
+      picture = req.file.filename;
+    } else {
+      picture = "porDefecto.jpg";
+    }
+    db.User.update({
+      fullname: req.body.fullName,
+      addres: req.body.fullAddress,
+      email: req.body.email,
+      birthday: req.body.bday,
+      user: req.body.user,
+      key: key,
+      userImage: picture,
+    }, {
+      where: {
 
-  loginProcess:  (req, res) => {
-     db.User.findOne({
-      where:{
+        idUser: req.params.id
+      }
+    })
+      .then(
+        res.redirect("/")
+      );
+  },
+
+  loginProcess: (req, res) => {
+    db.User.findOne({
+      where: {
         user: req.body.user
       }
     }).then((user) => {
       if (user) {
-        user= user.dataValues
+        user = user.dataValues
         let isOkThePassword = bcryptjs.compareSync(req.body.key, user.key);
-        if(isOkThePassword){
+        if (isOkThePassword) {
           delete user.key;
           req.session.userLogged = user;
           if (req.body.recordarLogin) {
             res.cookie("user", req.body.user, { maxAge: 1000 * 60 * 60 }); // esto es seguro? podemos hashear la info o usar cookies seguras
           }
           return res.redirect("/users/profile");
-        }else{
+        } else {
           return res.render("./users/login.ejs", {
             errors: {
               email: {
@@ -138,20 +142,20 @@ let usersController = {
             msg: "La combinación de usuario y contraseña son invalidos o inexistente",
           },
         },
-      });  
-      }).catch(err => console.log(" error al consultar la base de datos", err));
+      });
+    }).catch(err => console.log(" error al consultar la base de datos", err));
 
   },
 
-  profile:  (req, res) => {
+  profile: (req, res) => {
     db.User.findOne({
-      where:{
+      where: {
         user: req.session.userLogged.dataValues.user
       }
     }).then((user) => {
-        return res.render("./users/profile", {user: user.dataValues})
+      return res.render("./users/profile", { user: user.dataValues })
     }).catch(err => console.log("63 error al consultar la base de datos", err));
-  
+
 
   },
   logout: (req, res) => {
@@ -193,10 +197,10 @@ let usersController = {
       };
 
 
-      db.User.create(usuarioNuevo).then(()=> {
+      db.User.create(usuarioNuevo).then(() => {
         return res.redirect(`./login/`)
       }).catch(error => res.send(error))
-      
+
     }
   },
 
