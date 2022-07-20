@@ -79,60 +79,68 @@ let mainController = {
   },
 
   showCarrito: async (req, res) => {
-
     try {
-      
       let products = await db.Basket.findAll({
-        where: { idUserFK: req.session.idUser },
+        where: { idUserFK: req.session.userLogged.idUser },
       });
-
+      if (products.length < 1) {
+        //condición para mostrar mensaje de "no hay productos en tu carrito"
+        res.render("./products/noExiste");
+      }
       res.render("./products/carrito", { products });
-      
     } catch (err) {
-      res.redirect(`../error}`);
+      err = err.toString();
+      res.render(`./error`, { error: err.split(",") });
       console.log(err);
     }
-   
   },
 
   carrito: async (req, res) => {
-    
-    let color= undefined;
-    let size = undefined;
-    console.log(req.body);
-
-    if (req.body.colorRed != undefined) {
-      color = req.body.colorRed
-    }else if (req.body.colorBlack != undefined){
-      color = req.body.colorBlack
-    }else if (req.body.colorWhite != undefined){
-      color = req.body.colorWhite
-    };
-
-    if (req.body.tamanioS !== undefined) {
-      size = req.body.tamanioS
-    }else if (req.body.tamanioM != undefined){
-      size = req.body.tamanioM
-    }else if (req.body.tamanioL != undefined){
-      size = req.body.tamanioL
-    }
-
-    let producto = {
-      idProductFK: req.params.id,
-      idColorProductFK: color,
-      idSizeProductFK: size,
-      amount: req.body.cantidad,
-      idUserFK: req.session.userLogged.idUser,
-    };
-    console.log(producto)
-
     try {
+      let colorProductId = await db.ColorProduct.findOne({
+        where: [{ idColorFK: req.body.color }, { idProductsFK: req.params.id }],
+      });
+
+      let sizeProductId = await db.SizeProduct.findOne({
+        where: [
+          { idSizeFK: req.body.tamanio },
+          { idProductsFK: req.params.id },
+        ],
+      });
+
+      let [color, size] = await Promise.all([colorProductId, sizeProductId]);
+
+      let producto = {
+        idProductFK: req.params.id,
+        idColorProductFK: color.idcolorProduct,
+        idSizeProductFK: size.idSizeProduct,
+        amount: req.body.cantidad,
+        idUserFK: req.session.userLogged.idUser,
+      };
+
       await db.Basket.create(producto);
 
-      res.redirect(`./carrito`);
+      let listaBicis = await db.Basket.findAll({
+        include: [
+          {
+            association: "BasketProduct",
+            include: {
+              association: "productsImages",
+            },
+          },
+        ],
+
+        where: {
+          idUserFK: req.session.userLogged.idUser,
+        },
+      });
       
+      console.log(listaBicis[0].BasketProduct.productsImages[0].imageProduct);
+
+      res.render(`./products/carrito`, { listaBicis });
     } catch (err) {
-      res.redirect(`../error}`);
+      err = err.toString();
+      res.render(`./error`, { error: err.split(",") });
       console.log(err);
     }
   },
@@ -159,11 +167,11 @@ let mainController = {
       });
   },
 
-  productoNuevo: (req, res) => {
+  opciones: (req, res) => {
     res.render("./products/agregarOpciones");
   },
 
-  opciones: (req, res) => {
+  productoNuevo: (req, res) => {
     res.render("./products/productoNuevo");
   },
 
@@ -171,6 +179,7 @@ let mainController = {
     let colors = [];
     let sizes = [];
     let categories = [];
+    let image = [];
 
     let colorsArray = [
       req.body.colorRed,
@@ -197,6 +206,12 @@ let mainController = {
       categories.push({ idCategoryFK: category });
     });
 
+    if (req.file.filename == undefined) {
+      image.push("porDefecto.jpg");
+    } else {
+      image.push(req.file.filename);
+    }
+
     let productoNuevo = {
       title: req.body.nombre,
       description: req.body.descripcionProductoNuevo,
@@ -209,7 +224,7 @@ let mainController = {
       // productColors es el nombre de la relación que quiero incluir al momento de crear el producto
       productColors: colors,
       // productsImages es el nombre de la relación que quiero incluir al momento de crear el producto
-      productsImages: { imageProduct: req.file.filename },
+      productsImages: { imageProduct: image },
     };
 
     db.Product.create(productoNuevo, {
@@ -255,7 +270,7 @@ let mainController = {
     let colors = [];
     let sizes = [];
     let categories = [];
-    
+
     let colorsArray = [
       req.body.colorRed,
       req.body.colorBlack,
