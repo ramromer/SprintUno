@@ -4,11 +4,13 @@ const db = require('../data/models');
 
 let usersController = {
   eliminarUsuario: async (req, res) => {
+    console.log('llego');
     db.User.destroy({ where: { idUser: req.params.id } }).catch(
       (err) => {
         console.log(err);
       }
     );
+    res.redirect('/');
     // db.SizeProduct.destroy({ where: { idProductsFK: req.params.id } })
     //   .then((e) => {
     //     console.log(e);
@@ -74,7 +76,6 @@ let usersController = {
   edit: function (req,res){
     db.User.findByPk(req.params.id)
       .then(function(Us){
-        console.log(Us.fullname);
         res.render("./users/userEdit.ejs",{Us:Us});
       })
   },
@@ -111,14 +112,12 @@ let usersController = {
         user: req.body.user
       }
     }).then((user) => {
-      user= user.dataValues
-      console.log("23 ", user)
       if (user) {
+        user= user.dataValues
         let isOkThePassword = bcryptjs.compareSync(req.body.key, user.key);
         if(isOkThePassword){
           delete user.key;
           req.session.userLogged = user;
-          console.log("44", req.session.userLogged)
           if (req.body.recordarLogin) {
             res.cookie("user", req.body.user, { maxAge: 1000 * 60 * 60 }); // esto es seguro? podemos hashear la info o usar cookies seguras
           }
@@ -136,11 +135,11 @@ let usersController = {
       return res.render("./users/login.ejs", {
         errors: {
           email: {
-            msg: "No se encuentra este email en nuestra base de datos",
+            msg: "La combinación de usuario y contraseña son invalidos o inexistente",
           },
         },
       });  
-      }).catch(err => console.log("51 error al consultar la base de datos", err));
+      }).catch(err => console.log(" error al consultar la base de datos", err));
 
   },
 
@@ -150,7 +149,6 @@ let usersController = {
         user: req.session.userLogged.dataValues.user
       }
     }).then((user) => {
-        console.log("61 ", user.dataValues)
         return res.render("./users/profile", {user: user.dataValues})
     }).catch(err => console.log("63 error al consultar la base de datos", err));
   
@@ -191,7 +189,7 @@ let usersController = {
         user: req.body.user,
         key: key,
         userImage: picture,
-       
+        idUserTypeFK: req.body.userType,
       };
 
 

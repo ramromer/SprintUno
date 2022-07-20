@@ -59,3 +59,12 @@
     opacity: 0.8;
   }
 }
+
+@media (min-width: 361px){
+  #containerSlider{
+    display: block;
+  }
+  #infoProducto{
+    display: block;
+  }
+}

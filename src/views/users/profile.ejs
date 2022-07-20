@@ -8,11 +8,24 @@
                     <div class="row">
                         <div class="col-md-3">
                             <h2>Hi <%= user.fullname %> </h2>
-                            <h2>test</h2>
+                           
                             <img src="/users/avatars/<%= user.userImage%>">
                             <br>
                             <br>
                             <div class="alert alert-success"><%= user.email %> </div>
+                            <br>
+                            <div>
+                                <form action="/users/delete/<%=user.idUser%>?_method=DELETE" method="POST">
+                                    <button type="submit">Eliminar</button>
+                                </form>
+                            </div>
+                            <br>
+                            <div>
+                                <form action="/users/edit/<%=user.idUser%>?_method=PUT" method="">
+                                    <button>Editar</button>
+                                </form>
+                            </div>
+
                         </div>
                     </div>
                 </div>

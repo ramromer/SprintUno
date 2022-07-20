@@ -9,7 +9,6 @@ let mainController = {
       include: [
         { association: "productsImages" },
         { association: "productCategory" },
-        // { association: "ProductBasket"},
       ],
     })
       .then((products) => {
@@ -27,7 +26,6 @@ let mainController = {
           association: "productsImages",
         },
       ],
-
       where: {
         [sequelize.Op.or]: [
           { title: { [sequelize.Op.like]: `%${req.query.search}%` } },
@@ -44,15 +42,15 @@ let mainController = {
         },
 
         {
-          association: "productCategories",
+          association: "productCategories", // tabla intermedia
           required: true,
 
           include: [
             {
-              association: "categoryCategoryProducts",
+              association: "categoryCategoryProducts", // tabla categorias
               required: true,
               where: {
-                category: {
+                category: { // campo donde se busca
                   [sequelize.Op.like]: `%${req.query.search}%`,
                 },
               },
@@ -64,7 +62,7 @@ let mainController = {
 
     Promise.all([products, categories])
       .then((list) => {
-        list = list.flat();
+        list = list.flat(); // aplanar el array anidado 
         res.render("./products/products", {
           listaBicis: list,
           busqueda: req.query.search,
@@ -76,7 +74,15 @@ let mainController = {
   },
 
   carrito: (req, res) => {
-    res.render("./products/carrito");
+    db.Product.findAll({
+      include: [{ association: "productsImages" }],
+    })
+      .then((products) => {
+        res.render("./products/carrito", { listaBicis: products });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   },
 
   detalleProducto: async (req, res) => {
@@ -319,7 +325,6 @@ let mainController = {
       ],
     })
       .then((product) => {
-        // res.render("./products/detalleProducto", { producto: product });
         res.redirect(`../../detalleProducto/${req.params.id}`);
       })
       .catch((err) => {
@@ -362,44 +367,13 @@ let mainController = {
       .catch((err) => {
         console.log(err);
       });
-    // let listaBicisFile = fs.readFileSync(
-    //   path.join(__dirname, "../data/data.json")
-    // );
-    // let listaBicis = JSON.parse(listaBicisFile);
-
-    // let pto = listaBicis.find(function (pr) {
-    //   return pr.id == req.params.id;
-    // });
-    // let i = listaBicis.indexOf(pto);
-    // let aBorrar = path.join(
-    //   __dirname,
-    //   "../../public/images/" + listaBicis[i].img[0]
-    // );
-    // fs.unlink(aBorrar, (err) => {
-    //   if (err) {
-    //     console.error(err);
-    //     res.redirect("../editarproducto/" + pto.id);
-    //     return;
-    //   } else {
-    //     listaBicis.splice(i, 1);
-    //     let salida = JSON.stringify(listaBicis, null, " ");
-    //     fs.writeFile(
-    //       path.join(__dirname, "../data/data.json"),
-    //       salida,
-    //       () => {}
-    //     );
-    //     res.redirect("../productos");
-    //   }
-    // });
+    res.redirect("/")
   },
 
   productos: (req, res) => {
     db.Product.findAll({
       include: [
         { association: "productsImages" },
-        // { association: "productColors" },
-        // { association: "productSizes" },
-        // { association: "productCategories" },
       ],
     })
       .then((products) => {
