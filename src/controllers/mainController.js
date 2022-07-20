@@ -50,7 +50,8 @@ let mainController = {
               association: "categoryCategoryProducts", // tabla categorias
               required: true,
               where: {
-                category: { // campo donde se busca
+                category: {
+                  // campo donde se busca
                   [sequelize.Op.like]: `%${req.query.search}%`,
                 },
               },
@@ -62,7 +63,7 @@ let mainController = {
 
     Promise.all([products, categories])
       .then((list) => {
-        list = list.flat(); // aplanar el array anidado 
+        list = list.flat(); // aplanar el array anidado
         res.render("./products/products", {
           listaBicis: list,
           busqueda: req.query.search,
@@ -166,7 +167,6 @@ let mainController = {
       ],
     })
       .then((product) => {
-        // res.render("./products/detalleProducto", { producto: product });
         res.redirect(`../../detalleProducto/${product.idProduct}`);
       })
       .catch((err) => {
@@ -259,77 +259,62 @@ let mainController = {
       };
     }
 
-    db.Product.update(productoNuevo, {
-      // debo usar include para agregar los registros que quiero crear en las tablas externas en base al producto
-      where: { idProduct: req.params.id },
-      include: [
-        { model: db.ColorProduct, as: "productColors" }, // se debe llamar el modelo de la tabla donde quiero crear el registros
-        // y cuando la relacion tiene un alias se debe llamar la relación de la tabla actual como as:xxx
-        { model: db.ImageProduct, as: "productsImages" },
-        { model: db.SizeProduct, as: "productSizes" },
-        { model: db.CategoryProduct, as: "productCategories" },
-      ],
-    }).catch((err) => {
-      console.log(err);
-    });
-    //aca borramos la relacion
-    db.ColorProduct.destroy({
-      where: { idProductsFK: req.params.id },
-      force: true,
-    }).catch((err) => {
-      console.log(err);
-    });
-    //aca borramos la relacion
-    db.SizeProduct.destroy({
-      where: { idProductsFK: req.params.id },
-      force: true,
-    })
-      .then((e) => {
-        console.log(e);
-      })
-      .catch((err) => {
-        console.log(err);
+    try {
+      await db.Product.update(productoNuevo, {
+        // debo usar include para agregar los registros que quiero crear en las tablas externas en base al producto
+        where: { idProduct: req.params.id },
+        include: [
+          { model: db.ColorProduct, as: "productColors" }, // se debe llamar el modelo de la tabla donde quiero crear el registros
+          // y cuando la relacion tiene un alias se debe llamar la relación de la tabla actual como as:xxx
+          { model: db.ImageProduct, as: "productsImages" },
+          { model: db.SizeProduct, as: "productSizes" },
+          { model: db.CategoryProduct, as: "productCategories" },
+        ],
       });
-    //aca creamos la nueva relacion
-    db.ColorProduct.bulkCreate(colors).catch((err) => {
-      console.log(err);
-    });
-    //aca creamos la nueva relacion
-    db.SizeProduct.bulkCreate(sizes)
-      .then((e) => {
-        console.log(e);
-      })
-      .catch((err) => {
-        console.log(err);
+
+      await db.ColorProduct.destroy({
+        where: { idProductsFK: req.params.id },
+        force: true,
       });
-    //borramos o no la foto anterior??
-    if (fotico) {
-      db.ImageProduct.update(
-        { imageProduct: req.file.filename },
-        { where: { idProductsFK: req.params.id } }
-      )
-        .then((e) => {
-          console.log(e);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+
+      await db.SizeProduct.destroy({
+        where: { idProductsFK: req.params.id },
+        force: true,
+      });
+
+      await db.ColorProduct.bulkCreate(colors);
+
+      await db.SizeProduct.bulkCreate(sizes);
+
+      if (fotico) {
+        //borramos o no la foto anterior??
+        await db.ImageProduct.update(
+          { imageProduct: req.file.filename },
+          { where: { idProductsFK: req.params.id } }
+        );
+      }
+    } catch (err) {
+      res.redirect(`../error}`);
+      console.log(err);
     }
-    db.Product.findOne({
-      where: { idProduct: req.params.id },
-      include: [
-        { association: "productsImages" },
-        { association: "productColors" },
-        { association: "productSizes" },
-        { association: "productCategories" },
-      ],
-    })
-      .then((product) => {
-        res.redirect(`../../detalleProducto/${req.params.id}`);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+
+    res.redirect(`../../detalleProducto/${req.params.id}`);
+
+    // db.Product.findOne({
+    //   where: { idProduct: req.params.id },
+    //   include: [
+    //     { association: "productsImages" },
+    //     { association: "productColors" },
+    //     { association: "productSizes" },
+    //     { association: "productCategories" },
+    //   ],
+    // })
+    //   .then((product) => {
+    //     res.redirect(`../../detalleProducto/${req.params.id}`);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   },
 
   eliminarProducto: async (req, res) => {
@@ -367,14 +352,12 @@ let mainController = {
       .catch((err) => {
         console.log(err);
       });
-    res.redirect("/")
+    res.redirect("/");
   },
 
   productos: (req, res) => {
     db.Product.findAll({
-      include: [
-        { association: "productsImages" },
-      ],
+      include: [{ association: "productsImages" }],
     })
       .then((products) => {
         res.render("./products/products.ejs", { listaBicis: products });
@@ -393,23 +376,5 @@ let mainController = {
     res.render("accesDenied");
   },
 };
-
-function getListaBicis() {
-  let listaBicisFile = fs.readFileSync(
-    path.join(__dirname, "../data/data.json")
-  );
-  let listaBicis = JSON.parse(listaBicisFile);
-  return listaBicis;
-}
-
-function getListaBicisDB() {
-  db.Product.findAll()
-    .then((products) => {
-      return products;
-    })
-    .catch((err) => {
-      console.error(err);
-    });
-}
 
 module.exports = mainController;
