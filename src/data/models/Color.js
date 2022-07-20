@@ -21,13 +21,13 @@ module.exports = (sequelize, dataTypes) => {
 
   const Color = sequelize.define(alias, cols, config);
 
-  // Color.associate = function (models) {
-  //   Color.hasMany(models.ColorProduct, {
-  //       as: "ColorColorProducts",
-  //       foreignKey: "idColorFK",
-  //        timestamps: false,
-  //     });
-  // };
+  Color.associate = function (models) {
+    Color.hasMany(models.ColorProduct, {
+        as: "Colors",
+        foreignKey: "idColorFK",
+         timestamps: false,
+      });
+  };
 
   return Color;
 };

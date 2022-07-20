@@ -5,7 +5,7 @@ module.exports = (sequelize, dataTypes) => {
       type: dataTypes.BIGINT(10),
       primaryKey: true,
       autoIncrement: true,
-      unique: true
+      unique: true,
     },
     title: {
       type: dataTypes.STRING(45),
@@ -26,9 +26,10 @@ module.exports = (sequelize, dataTypes) => {
       type: dataTypes.FLOAT,
       allowNull: false,
     },
-    discount: {
-      type: dataTypes.FLOAT,
-    },
+    // vamos ausar el descuento, falta en la BD y en las vistas de detalle, crear y editar
+    // discount: {
+    //   type: dataTypes.FLOAT,
+    // },
     createdAt: {
       type: dataTypes.DATEONLY,
     },
@@ -47,30 +48,43 @@ module.exports = (sequelize, dataTypes) => {
 
   Product.associate = function (models) {
     Product.hasMany(models.ImageProduct, {
-        as: "productsImages",
-        foreignKey: "idProductsFK",
-        timestamps: true,
-      });
+      as: "productsImages",
+      foreignKey: "idProductsFK",
+      timestamps: true,
+    });
 
-    //   Product.hasMany(models.ColorProduct, {
-    //     as: "ProductColors",
-    //     foreignKey: "idProductsFK",
-    //     timestamps: false,
-    //   });
-    Product.belongsToMany(models.ColorProduct, {
-        as: "productColors",
-        through: "ColorProduct",
-        foreignKey: "idProductsFK",
-        otherKey: "idColorFK",
-        timestamps: false
-    })
-    // Product.hasMany(models.ColorProduct,{
-    //     as: "ProductColors",
-    //     through: "ColorProduct",
-    //     foreignKey: "idProductsFK",
-    //     otherKey: "idColorFK",
-    //     timestamps: false,
-    // })
+    Product.hasMany(models.ColorProduct, {
+      as: "productColors",
+      foreignKey: "idProductsFK",
+      timestamps: false,
+    });
+
+    Product.hasMany(models.SizeProduct, {
+      as: "productSizes",
+      foreignKey: "idProductsFK",
+      timestamps: false,
+    });
+
+    Product.hasMany(models.CategoryProduct, {
+      as: "productCategories",
+      foreignKey: "idProductsFK",
+      timestamps: false,
+    });
+
+    Product.belongsToMany(models.Category, {
+      as: "productCategory",
+      through:"CategoryProduct",
+      foreignKey: "idProductsFK",
+      otherKey:"idCategoryFK",
+      timestamps: false,
+    });
+
+    Product.hasMany(models.Basket, {
+      as: "ProductBasket",
+      foreignKey: "idProductFK",
+      timestamps: false,
+    });
+
   };
 
   return Product;

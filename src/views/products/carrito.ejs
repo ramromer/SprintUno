@@ -11,7 +11,7 @@
                             <i class="fas fa-shopping-cart"></i>
                             <label class="carro" for="">Mi Carrito</label>
                         </div>
-                        <article class="articulo">
+                        <!-- <article class="articulo">
                                 <img src="/images/bicicleta-orbea-rise-m20.jpg" alt="Bicicleta">
                                 <div>
                                     <p>Bicicleta Orbea Rise -M21 (2021 Orbea Days)</p>
@@ -37,7 +37,28 @@
                                     <label for="precio">Precio: $130.000</label> 
                                     <i class="far fa-trash-alt"></i>                 
                             </div>
-                        </article>
+                        </article> -->
+                        <%listaBicis.forEach(bici=> { %>
+                        <section class="articulo">             
+                                  <a href="/detalleproducto/<%=bici.idProduct%>" class="product article">
+                                    <img src="/images/<%=bici.productsImages[0].imageProduct%>" alt="<%=bici.alt%>">
+                                    <div class="producto-descripcion flexContainer">
+                                      <div class="price-bar flexContainer">
+                                        <p class="precio" style="text-decoration: line-through">$ <%=bici.price%>
+                                        </p>
+                                        <%if(bici.descuento){%>
+                                          <p class="descuento">$ <%=bici.price-(bici.price * bici.discount / 100)%>
+                                          </p>
+                                          <%}%>
+                                      </div>
+                                      <h4 class="description">
+                                        <%=bici.title%>
+                                      </h4>
+                                    </div>
+                                  </a>
+                                  
+                          </section>
+                          <%})%>
                         <a class="btn-segcompr" href=""><i class="fas fa-angle-left"></i>Continuar Comprando</a>
                     </div>
                 

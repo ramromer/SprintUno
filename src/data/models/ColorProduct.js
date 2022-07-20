@@ -11,18 +11,10 @@ module.exports = (sequelize, dataTypes) => {
     },
     idColorFK: {
       type: dataTypes.BIGINT(10),
-      // references: {
-      //   model: m.Color,
-      //   key: 'idColor'
-      // },
       allowNull: false
     },
     idProductsFK: {
       type: dataTypes.BIGINT(10),
-      // references: {
-      //   model: m.Product, 
-      //   key: 'idProduct'
-      // },
       allowNull: false
     }
   };
@@ -34,10 +26,26 @@ module.exports = (sequelize, dataTypes) => {
 
   const ColorProduct = sequelize.define(alias, cols, config);
 
-  // ColorProduct.associate = function (models) {
-  //   models.Color.belongsToMany(models.Product, { through: ColorProduct });
-  //   models.Product.belongsToMany(models.Color, { through: ColorProduct });
-  // };
+  
+  ColorProduct.associate = function (models) {
+    
+    ColorProduct.belongsTo(models.Product, {
+      as: "colorProductsProduct", // nombre de la relacion
+      foreignKey: "idProductsFK", // nombre de la FK 
+    });
+
+    ColorProduct.belongsTo(models.Color, {
+      as: "colorProductsColor", // nombre de la relacion
+      foreignKey: "idColorFK", // nombre de la FK 
+    });
+
+    ColorProduct.hasMany(models.Basket, {
+      as: "ColorProductBasket",
+      foreignKey: "idColorProductFK",
+      timestamps: true,
+    }); 
+  
+  }
 
   return ColorProduct;
 };

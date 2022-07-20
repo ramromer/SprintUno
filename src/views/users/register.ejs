@@ -16,7 +16,7 @@
                         </div>
                         <%}%>
                             <input name="fullAddress" type="text" id="fulladdress"
-                                value="<%= locals.oldData? oldData.fullAddress : '11ull' %>" placeholder="Domicilio" />
+                                value="<%= locals.oldData? oldData.fullAddress : null %>" placeholder="Domicilio" />
                             <% if (locals.errores && errores.fullAddress) { %>
                                 <div>
                                     <p>
@@ -88,14 +88,14 @@
                                                                             <%}%>
                                                                     </div>
 
-                                                                    
-                                                                        <label>Tipo de usuario:</label> <br>
-                                                                        <div>
-                                                                            <label for=""> Administrador </label><input type="radio"
-                                                                                name="userType" value="admin">
-                                                                            <label for=""> Usuario </label><input type="radio"
-                                                                                name="userType" value="user">
-                                                                        </div>
+
+                                                                    <label>Tipo de usuario:</label> <br>
+                                                                    <div>
+                                                                        <label for=""> Administrador </label><input
+                                                                            type="radio" name="userType" value="1">
+                                                                        <label for=""> Usuario </label><input
+                                                                            type="radio" name="userType" value="2">
+                                                                    </div>
 
                                                                     <div>
                                                                         <label>Foto de usuari@</label>
@@ -163,7 +163,10 @@
                         }
                     }, false);
                 </script>
-               
+                <script>
+                    
+                </script>
+
             </main>
             <%- include('../partials/footer.ejs')%>
     </body>

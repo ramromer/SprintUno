@@ -22,6 +22,7 @@ const loggerProducts = require('../middlewares/products_log');
 router.get('/', mainController.index);
 router.get('/carrito', mainController.carrito);
 router.get('/detalleproducto/:id', mainController.detalleProducto);
+router.get('/buscar', mainController.buscar);
 router.get('/productos', mainController.productos);
 router.delete('/productos/:id', authMiddleware, mainController.eliminarProducto);
 router.get('/productonuevo', authMiddleware, mainController.productoNuevo);

@@ -7,7 +7,7 @@
 
 
           <section class="">
-            <form class="flexContainer centradoxy bgGray margin10px padding10px" id="infoEP" action="../editarproducto/<%=producto.id%>?_method=PUT" method="POST" enctype="multipart/form-data">
+            <form class="flexContainer centradoxy bgGray margin10px padding10px" id="infoEP" action="../editarproducto/<%=product.idProduct%>?_method=PUT" method="POST" enctype="multipart/form-data">
               <div class="flexContainer" id="containerSliderEP">
                 <!-- <div class="flexContainer centradoxy" id="containerDeleteIMG">
                   <i class="fas fa-trash-alt"></i>
@@ -17,8 +17,8 @@
                   <!-- SLIDER -->
                   <div class="slider-display-container">
                     <button id="btnIzq" type="button" onclick="siguiente(-1)">&#10094;</button>
-                    <%producto.img.forEach(bici=> { %>
-                      <img class="sliderImagen" src="/images/<%= bici %>">
+                    <%product.productsImages.forEach(image=> { %>
+                      <img class="sliderImagen" src="/images/<%= image.imageProduct %>">
                     <%})%>
                     <button id="btnDer" type="button" onclick="siguiente(1)">&#10095;</button>
                   </div>
@@ -33,40 +33,62 @@
               <div id="contenedorInputs" class="flexContainer">
                 <div id="tituloEP" class="flexContainer">
                   <label for="nombreEP"> Nombre del Producto:</label>
-                  <input class="textocentrado" type="text"  autocomplete="off" id="nombreEP" name="nombreEP" disabled placeholder="<%= producto.titulo %>" required/>
+                  <input class="textocentrado" type="text"  autocomplete="off" id="nombreEP" name="nombreEP" disabled placeholder="<%= product.title %>" required/>
                 </div>
                 <div class="flexContainer" id="precioProducto">
                   <label for="precioEP"> Precio:</label>
-                  <input class="textocentrado" type="number" min="1" autocomplete="off" id="precioEP" name="precio" value=<%= producto.precio %> required/>
+                  <input class="textocentrado" type="number" min="1" autocomplete="off" id="precioEP" name="precio" value=<%= product.price %> required/>
 
                 </div>
                 <div class="flexContainer" >
                   <label>Color:</label> 
                   <div class="flexContainer centradoxy space-evenly" >
-                    <label for=""> Rojo</label><input type="checkbox" name="colorRed" value="red" <%if(producto.colorDisponible.red==""){%>checked<%}%>>
-                    <label for=""> Blanco</label><input type="checkbox" name="colorWhite"  value="white" <%if(producto.colorDisponible.white==""){%>checked<%}%>>
-                    <label for=""> Negro</label><input type="checkbox" name="colorBlack" value="black" <%if(producto.colorDisponible.black==""){%>checked<%}%>>
+                    <label for="colorWhite"> Blanco</label><input type="checkbox" id='colorWhite' name="colorWhite" value="1">
+                    <label for="colorRed"> Rojo</label><input type="checkbox" id='colorRed' name="colorRed" value="2">
+                    <label for="colorBlack"> Negro</label><input type="checkbox" id='colorBlack' name="colorBlack" value="3">
+                    <% product.productColors.forEach(color => { %>
+                      <%if(color.dataValues.idColorFK == 1){%>
+                        <script>document.getElementById('colorWhite').checked=true</script>
+                      <%}%>
+                      <%if(color.dataValues.idColorFK == 2){%>
+                        <script>document.getElementById('colorRed').checked=true</script>
+                      <%}%>
+                      <%if(color.dataValues.idColorFK == 3){%>
+                        <script>document.getElementById('colorBlack').checked=true</script>
+                      <%}%>
+                  <% }) %>
                   </div>
                 </div>
                 <div class="flexContainer" >
                   <label>Tamaño: </label>
                   <div class="flexContainer centradoxy space-evenly" >
-                    <label for="">Rodado 20</label><input type="checkbox" name="tamanioS" value="S" <%if(producto.tamanio.S==""){%>checked<%}%>>
-                    <label for="">Rodado 26</label><input type="checkbox" name="tamanioM" value="M" <%if(producto.tamanio.M==""){%>checked<%}%>>
-                    <label for="">Rodado 29</label><input type="checkbox" name="tamanioL" value="L" <%if(producto.tamanio.L==""){%>checked<%}%>>
+                    <label for="tamanioS">Rodado 20</label><input type="checkbox" name="tamanioS" id="tamanioS" value="1">
+                    <label for="tamanioM">Rodado 26</label><input type="checkbox" name="tamanioM" id="tamanioM" value="2">
+                    <label for="tamanioL">Rodado 29</label><input type="checkbox" name="tamanioL" id="tamanioL" value="3">                
+                      <% product.productSizes.forEach(size => { %>
+                          <%if(size.dataValues.idSizeFK == 1){%>
+                            <script>document.getElementById('tamanioS').checked=true;</script>
+                          <%};%>
+                          <%if(size.dataValues.idSizeFK == 2){%>
+                            <script>document.getElementById('tamanioM').checked=true;</script>
+                          <%};%>
+                          <%if(size.dataValues.idSizeFK == 3){%>
+                            <script>document.getElementById('tamanioL').checked=true;</script>
+                          <%};%>
+                      <% }) %>
                   </div>
                   <br>
                   <br>
                 <div class="flexContainer" id="cantidadEP">
                   <label for="cantidadEP"> Cantidad:</label>
-                  <input class="textocentrado" type="number"  autocomplete="off" min="1" id="cantidadEP" name="cantidad" value=<%=producto.cantidadDisponible%>  />
+                  <input class="textocentrado" type="number"  autocomplete="off" min="1" id="cantidadEP" name="cantidad" value=<%=product.stock%>  />
                 </div>
 
 
                 <div id="descripcionProductoNuevo">
 
                 <label for="descripcionProductoNuevo"> Descripción:</label>
-                <textarea id="descripcionProductoNuevo" autocomplete="off" name="descripcionProductoNuevo"><%=producto.descripcionDetallada%> </textarea>
+                <textarea id="descripcionProductoNuevo" autocomplete="off" name="descripcionProductoNuevo"><%=product.description%> </textarea>
 
                 </div>
 
@@ -75,18 +97,16 @@
                   <div>
                   
                 </div>
-<!--                   
-                  <button type="submit" action="../editarproducto/<%=producto.id%>?_method=PUT" method="DELETE" id="btnDEL">BORRAR</button> -->
+                  <!-- <button type="submit" action="../editarproducto/<%=product.id%>?_method=PUT" method="DELETE" id="btnDEL">BORRAR</button> -->
                 </div>
               </div>
 
             </form>
-            <form action="/productos/<%= producto.id%>?_method=DELETE"  method="POST" style="display: inline-flex">
+            <form action="/productos/<%= product.idProduct%>?_method=DELETE"  method="POST" style="display: inline-flex">
               <button type="submit" class="action-button delete">ELIMINAR</button>
             </form> 
 
           </section>
-
       </main>
       <%- include('../partials/footer.ejs')%>
   </body>

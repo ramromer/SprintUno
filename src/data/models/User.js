@@ -15,6 +15,10 @@ module.exports = (sequelize, dataTypes) => {
             type: dataTypes.STRING(45),
             allowNull: false
         },
+        idUserTypeFK:{
+            type: dataTypes.BIGINT(10),
+            allowNull: false
+        },
         email:{
             type: dataTypes.STRING(45),
             allowNull: false
@@ -28,7 +32,7 @@ module.exports = (sequelize, dataTypes) => {
             unique:true,
         },
         key:{
-            type: dataTypes.STRING(45),
+            type: dataTypes.STRING(100),
             allowNull: false
         },
         userImage:{
@@ -43,13 +47,32 @@ module.exports = (sequelize, dataTypes) => {
         }
     };
     let config = {
-        timestamps: true,
+        timestamps: false,
         createdAt: 'createdAt',
         updatedAt: 'updatedAt',
         deletedAt: false
     };
 
-    const User = sequelize.define(alias, cols, config);
+    const User = sequelize.define(alias, cols, config); 
+
+    User.associate = function (models) {
+      User.hasMany(models.Avatar, {
+        as: "userAvatar",
+        foreignKey: "idUserFK",
+        timestamps: true,
+      }); 
+
+      User.hasMany(models.Basket, {
+        as: "userBasket",
+        foreignKey: "idUserFK",
+        timestamps: true,
+      });
+       
+      User.belongsTo(models.UserType, {
+        as: "usersType", // nombre de la relacion
+        foreignKey: "idUserTypeFK", // nombre de la FK 
+      });
     
+    }
     return User;
 }
