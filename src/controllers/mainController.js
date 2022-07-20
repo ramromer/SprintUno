@@ -367,7 +367,7 @@ let mainController = {
       .catch((err) => {
         console.log(err);
       });
-
+    res.redirect("/")
   },
 
   productos: (req, res) => {
