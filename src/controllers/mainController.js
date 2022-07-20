@@ -109,8 +109,14 @@ let mainController = {
   },
 
   productoNuevo: (req, res) => {
+    res.render("./products/agregarOpciones");
+  },
+
+  opciones:  (req, res) =>{
+
     res.render("./products/productoNuevo");
   },
+
   crearproductoNuevo: async (req, res) => {
     let colors = [];
     let sizes = [];
@@ -300,21 +306,6 @@ let mainController = {
 
     res.redirect(`../../detalleProducto/${req.params.id}`);
 
-    // db.Product.findOne({
-    //   where: { idProduct: req.params.id },
-    //   include: [
-    //     { association: "productsImages" },
-    //     { association: "productColors" },
-    //     { association: "productSizes" },
-    //     { association: "productCategories" },
-    //   ],
-    // })
-    //   .then((product) => {
-    //     res.redirect(`../../detalleProducto/${req.params.id}`);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
   },
 
   eliminarProducto: async (req, res) => {

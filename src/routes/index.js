@@ -26,6 +26,7 @@ router.get('/buscar', mainController.buscar);
 router.get('/productos', mainController.productos);
 router.delete('/productos/:id', authMiddleware, mainController.eliminarProducto);
 router.get('/productonuevo', authMiddleware, mainController.productoNuevo);
+router.get('/opciones', authMiddleware, mainController.opciones);
 router.get('/editarproducto/:id', authMiddleware, mainController.editarProducto);
 router.get('/accesDenied', mainController.accesDenied);
 router.get('/error', mainController.error);

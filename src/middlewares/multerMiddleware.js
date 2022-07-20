@@ -1,20 +1,4 @@
-// let multer = require("multer");
-// let path = require("path");
 
-
-
-// let storage = multer.diskStorage({
-//   destination: function (req, file, cb) {
-//     cb(null, "./public/images");
-//   },
-//   filename: function (req, file, cb) {
-//     cb(null, `${Date.now()}_img_${path.extname(file.originalname)}`);
-//   },
-// });
-
-//    let uploadFile = multer({storage:storage}).single('image');
-
-// module.exports = uploadFile;
 
 const upload = async (req, res, next) => {
     try {
