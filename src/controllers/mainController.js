@@ -80,14 +80,26 @@ let mainController = {
 
   showCarrito: async (req, res) => {
     try {
-      let products = await db.Basket.findAll({
-        where: { idUserFK: req.session.userLogged.idUser },
+      let listaBicis = await db.Basket.findAll({
+        include: [
+          {
+            association: "BasketProduct",
+            include: {
+              association: "productsImages",
+            },
+          },
+        ],
+
+        where: {
+          idUserFK: req.session.userLogged.idUser,
+        },
       });
-      if (products.length < 1) {
+      if (listaBicis.length < 1) {
         //condición para mostrar mensaje de "no hay productos en tu carrito"
-        res.render("./products/noExiste");
+        res.redirect("./products/noExiste");
       }
-      res.render("./products/carrito", { products });
+      console.log(listaBicis)
+      res.render("./products/carrito", { listaBicis });
     } catch (err) {
       err = err.toString();
       res.render(`./error`, { error: err.split(",") });
@@ -134,10 +146,8 @@ let mainController = {
           idUserFK: req.session.userLogged.idUser,
         },
       });
-      
-      console.log(listaBicis[0].BasketProduct.productsImages[0].imageProduct);
 
-      res.render(`./products/carrito`, { listaBicis });
+      res.render(`./products/carrito`);
     } catch (err) {
       err = err.toString();
       res.render(`./error`, { error: err.split(",") });
