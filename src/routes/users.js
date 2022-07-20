@@ -36,6 +36,7 @@ router.get('/login',guestMiddleware, usersController.login);
 router.get('/register',guestMiddleware, usersController.register);
 router.get('/edit/:id',authMiddleware, usersController.edit);//Editar usuario
 router.put('/update/:id',authMiddleware, usersController.update);
+router.delete('/delete/:id', authMiddleware, usersController.eliminarUsuario);//eliminar usuario
 router.get('/profile',authMiddleware,usersController.profile);
 router.get('/logout', usersController.logout);
 router.get('*', usersController.notFound);
