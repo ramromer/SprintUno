@@ -1,10 +1,10 @@
 
-Comenzar a hacer: Acordar las tareas a realizar
+Comenzar a hacer: investigaciópn a fondo de temás pendientes.
 
-Hacer más: Usar mas trello
+Hacer más: Realizar más consultas en Slack a nuestros compañeros y profes, por lo general tratamos de sacarlo de forma individual o dentro del grupo
 
-Continuar haciendo: Repartir tareas
+Continuar haciendo: Repartir tareas, iniciar a tiempo, asistir a las citas martes y jueves, coordinar el trabajo, usar GIT.
 
-Hacer menos: Detalles y mas funcionalidad
+Hacer menos:  Detalles y mas funcionalidad (todavia ;) )
 
-Dejar de hacer: Aplazar las tareas
+Dejar de hacer: No consultar a los compañeros al momento de tener una dificultad y hacerlo luego de varios diás

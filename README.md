@@ -1,4 +1,17 @@
 # grupo_3_bicicletas
+
+
+#SPRINT 6 ->
+
+En la carpeta BD se encuentra el query para la creación de la BD con todas sus tablas y datos iniciales,
+en la misma carpeta se encuentra el diagrama UML de la BD.
+
+
+#Trello
+https://trello.com/invite/b/h9j8HBVe/a0d6f050496904645cb38af5422d6424/sprint-6
+
+
+
 Descripcion Parcial y modificable. Incluimos Wireframes
 
 Tematica del sitio y publico objetivo: El sitio buscará ser un ecommerce de bicicletas de competencia.
@@ -41,5 +54,4 @@ NOTAS:
 #Wireframe
 Invite link al board de MIRO (HOME Wireframe): https://miro.com/welcomeonboard/TVpuSHBHYU5wS3lPa0xmUDB3aU1WVnFySXZ2M1BTdXhxWWxpVkRCOVVUWkRBYTFUWEhnV1lJMEtJR3Y3SlJnd3wzNDU4NzY0NTIxNTcwNTg4NTM3?invite_link_id=413006897110
 
-#Trello
- https://trello.com/invite/b/UyxAOhJR/3f84d0bc6da20513574e42a0a951a804/sprint-2
+
