@@ -11,64 +11,7 @@ let usersController = {
       }
     );
     res.redirect('/');
-    // db.SizeProduct.destroy({ where: { idProductsFK: req.params.id } })
-    //   .then((e) => {
-    //     console.log(e);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-    // db.ImageProduct.destroy({ where: { idProductsFK: req.params.id } })
-    //   .then((e) => {
-    //     console.log(e);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-    // db.CategoryProduct.destroy({ where: { idProductsFK: req.params.id } })
-    //   .then((e) => {
-    //     console.log(e);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
 
-    // db.Product.destroy({ where: { idProduct: req.params.id } })
-    //   .then((e) => {
-    //     console.log(e);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-    // let listaBicisFile = fs.readFileSync(
-    //   path.join(__dirname, "../data/data.json")
-    // );
-    // let listaBicis = JSON.parse(listaBicisFile);
-
-    // let pto = listaBicis.find(function (pr) {
-    //   return pr.id == req.params.id;
-    // });
-    // let i = listaBicis.indexOf(pto);
-    // let aBorrar = path.join(
-    //   __dirname,
-    //   "../../public/images/" + listaBicis[i].img[0]
-    // );
-    // fs.unlink(aBorrar, (err) => {
-    //   if (err) {
-    //     console.error(err);
-    //     res.redirect("../editarproducto/" + pto.id);
-    //     return;
-    //   } else {
-    //     listaBicis.splice(i, 1);
-    //     let salida = JSON.stringify(listaBicis, null, " ");
-    //     fs.writeFile(
-    //       path.join(__dirname, "../data/data.json"),
-    //       salida,
-    //       () => {}
-    //     );
-    //     res.redirect("../productos");
-    //   }
-    // });
   },
   login: (req, res) => {
     return res.render("./users/login.ejs");
@@ -116,7 +59,7 @@ let usersController = {
         user: req.body.user
       }
     }).then((user) => {
-      user= user.dataValues;
+      
       if (user) {
         let isOkThePassword = bcryptjs.compareSync(req.body.key, user.key);
         if (isOkThePassword) {
@@ -169,8 +112,22 @@ let usersController = {
   },
 
   registerWrite: (req, res) => {
-
     let errores = validationResult(req);
+ 
+    // db.User.findOne({ 
+    //   where: {
+    //     user: req.body.user
+    //   }
+    // }).then((user)=>{
+    //   if(user){
+    //     res.render("./users/register.ejs", {
+    //       errores: errores.mapped(),
+    //       oldData: req.body,
+  
+    //     });/////////////////enviar validaciones par aavisar
+    //   }
+    // }).catch(err=> console.log(err))
+
     if (errores.errors.length > 0) {
       res.render("./users/register.ejs", {
         errores: errores.mapped(),

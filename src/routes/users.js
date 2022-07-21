@@ -3,6 +3,7 @@ let router = express.Router();
 let usersController = require('../controllers/usersControllers.js');
 let multer = require('multer');
 let path = require('path');
+const db = require('../data/models');
 
 const storage = multer.diskStorage({
     destination:  function(req, file, cb) {
@@ -18,11 +19,33 @@ const validateUserRegister = [
     body('fullName').notEmpty().withMessage('Por favor ingresa tu nombre completo'),
     body('fullAddress').notEmpty().withMessage('Por favor ingresa tu direccion'),
     body('email').isEmail().withMessage('Por favor ingresa un email valido'),
+    body('email').custom((value, {req}) => {
+        return new Promise((resolve, reject) => {
+          db.User.findOne({where:{email:req.body.email}}).then(function( user){
+            
+            if(Boolean(user)) {
+              reject(new Error('El correo ya estgá siendo usado por otro usuario'))
+            }
+            resolve(true)
+          }).catch(err => {console.log(err); reject(new Error('Error en el servidor'))});
+        });
+      }), 
     body('emailRep').isEmail().withMessage('Por favor repite tu email'),
     body('bday').notEmpty().withMessage('Por favor ingrese su fecha de nacimiento'),
     body('user').notEmpty().withMessage('Por favor ingrese un nombre de usuario'),
     body('key').notEmpty().withMessage('Por favor ingrese una contraseña'),
-    body('keyAgain').notEmpty().withMessage('Por favor repita la contraseña elegida'),   
+    body('keyAgain').notEmpty().withMessage('Por favor repita la contraseña elegida'),
+    body('user').custom((value, {req}) => {
+        return new Promise((resolve, reject) => {
+          db.User.findOne({where:{user:req.body.user}}).then(function( user){
+            
+            if(Boolean(user)) {
+              reject(new Error('El usuario ya estgá siendo usado'))
+            }
+            resolve(true)
+          }).catch(err => {console.log(err); reject(new Error('Error en el servidor'))});
+        });
+      })   
 ];
 const guestMiddleware = require('../middlewares/guestMiddleware');
 const authMiddleware = require('../middlewares/authMiddleware');

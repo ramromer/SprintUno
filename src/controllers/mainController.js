@@ -147,7 +147,7 @@ let mainController = {
         },
       });
 
-      res.render(`./products/carrito`);
+      res.render(`./products/carrito`, {listaBicis});
     } catch (err) {
       err = err.toString();
       res.render(`./error`, { error: err.split(",") });
