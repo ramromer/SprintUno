@@ -13,7 +13,17 @@ const storage = multer.diskStorage({
         cb(null,`${Date.now()}_img_${path.extname(file.originalname)}`);
     }
 });
-const uploadFile = multer({storage:storage});
+const uploadFile = multer({
+    storage:storage,
+    fileFilter: (req, file, cb) => {
+        if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg" || file.mimetype == "image/gif") {
+          cb(null, true);
+        } else {
+          cb(null, false);
+          return cb(new Error('Solamente los formatos .gif, .png, .jpg and .jpeg estan permitidos!'));
+        }
+      }    
+});
 
 const authMiddleware = require('../middlewares/authMiddleware');
 const loggerProducts = require('../middlewares/products_log');
