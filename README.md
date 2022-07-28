@@ -1,5 +1,9 @@
 # grupo_3_bicicletas
 
+#SPRINT  ->
+
+Validaciones de formularios en el front y el Back
+
 
 #SPRINT 6 ->
 
@@ -8,7 +12,7 @@ en la misma carpeta se encuentra el diagrama UML de la BD.
 
 
 #Trello
-https://trello.com/invite/b/h9j8HBVe/a0d6f050496904645cb38af5422d6424/sprint-6
+https://trello.com/invite/b/zksJTWeZ/e644fd8c0dcc2dfe13c39ecc13be5a15/sprint7
 
 
 
