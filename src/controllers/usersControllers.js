@@ -56,7 +56,7 @@ let usersController = {
   loginProcess: (req, res) => {
     db.User.findOne({
       where: {
-        user: req.body.user
+        email: req.body.user
       }
     }).then((user) => {
       
