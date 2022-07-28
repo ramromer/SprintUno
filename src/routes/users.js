@@ -47,6 +47,12 @@ const validateUserRegister = [
         });
       }), 
     body('emailRep').isEmail().withMessage('Por favor repite tu email'),
+    body('emailRep').custom((value, {req})=>{
+      if (value !== req.body.email){
+        throw new Error('Los email no coinciden');
+      }
+      return true;
+    }),
     body('bday').notEmpty().withMessage('Por favor ingrese su fecha de nacimiento'),
     body('user').notEmpty().withMessage('Por favor ingrese un nombre de usuario'),
     body('key').notEmpty().withMessage('Por favor ingrese una contraseña'),
