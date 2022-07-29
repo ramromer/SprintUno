@@ -216,10 +216,10 @@ let mainController = {
       categories.push({ idCategoryFK: category });
     });
 
-    if (req.file.filename == undefined) {
-      image.push("porDefecto.jpg");
+    if (req.file) {
+      image=req.file.filename;
     } else {
-      image.push(req.file.filename);
+      image="porDefecto.jpg";
     }
 
     let productoNuevo = {
