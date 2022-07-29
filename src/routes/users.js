@@ -25,6 +25,11 @@ const uploadFile = multer({
     }    
 });
 const {body} = require('express-validator');
+const validateUserLogin = [
+  body('email').notEmpty().withMessage('Por favor ingresa el email con el que te registraste'),
+  body('email').isEmail().withMessage('Por favor ingresa un email valido'),
+]
+
 const validateUserRegister = [
     body('fullName').notEmpty().withMessage('Por favor ingresa tu nombre completo'),
     body('fullName').isLength({min:2}).withMessage('Tu nombre debe al menos tener 2 caracteres'),
@@ -75,7 +80,7 @@ const guestMiddleware = require('../middlewares/guestMiddleware');
 const authMiddleware = require('../middlewares/authMiddleware');
 
 /* POST user */
-router.post('/login',usersController.loginProcess);
+router.post('/login', validateUserLogin, usersController.loginProcess);
 router.post('/register', uploadFile.single('image'), validateUserRegister, usersController.registerWrite);
 
 /* GET users listing. */
