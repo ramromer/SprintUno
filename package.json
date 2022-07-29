@@ -1,5 +1,5 @@
 {
-  "name": "sprinttres",
+  "name": "kleta",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -7,7 +7,6 @@
     "start2": " node ./bin/www"
   },
   "dependencies": {
-    "bcrypt": "^5.0.1",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
