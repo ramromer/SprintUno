@@ -29,6 +29,15 @@ const authMiddleware = require('../middlewares/authMiddleware');
 const loggerProducts = require('../middlewares/products_log');
 
 
+
+const {body} = require('express-validator');
+const validateNewProduct = [
+  body('nombre').notEmpty().withMessage('Debe ingresar un nombre.'),
+  body('precio').notEmpty().withMessage('Debe ingresar un precio.'),
+  body('cantidad').notEmpty().withMessage(''),
+  body('descripcionProductoNuevo').notEmpty().withMessage(''),
+]
+
 router.get('/', mainController.index);
 router.get('/detalleproducto/:id', mainController.detalleProducto);
 router.get('/buscar', mainController.buscar);
@@ -44,7 +53,7 @@ router.get('/error', mainController.error);
 
 
 router.post('/carrito/:id',authMiddleware, uploadFile.single('image'), mainController.carrito);
-router.post('/productonuevo',authMiddleware, loggerProducts, uploadFile.single('image'), mainController.crearproductoNuevo);
+router.post('/productonuevo',authMiddleware, validateNewProduct, loggerProducts, uploadFile.single('image'), mainController.crearproductoNuevo);
 
 router.put('/editarproducto/:id', authMiddleware, uploadFile.single('image'), mainController.modificarProducto);
 
