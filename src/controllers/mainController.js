@@ -98,7 +98,6 @@ let mainController = {
         //condición para mostrar mensaje de "no hay productos en tu carrito"
         res.redirect("./products/noExiste");
       }
-      console.log(listaBicis)
       res.render("./products/carrito", { listaBicis });
     } catch (err) {
       err = err.toString();

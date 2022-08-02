@@ -10,7 +10,7 @@
             <form class="flexContainer bgGray margin10px padding10px" id="infoProductoNuevo" action="/productonuevo" method="POST" enctype="multipart/form-data">
               <div id="uploadImages" class="flexContainer">
                 <label for="avatar">Arrastra y suelta tus imagenes aquí o seleccionalas:</label>
-                <input type="file" id="imagenes" name="image" accept="image/*" />
+                <input type="file" id="imagenes" name="image" accept="image/*" required />  
               </div>
               <div id="contenedorInputs" class="flexContainer">
                 <div id="tituloProductoNuevo" class="flexContainer">
@@ -60,8 +60,10 @@
 
           </section>
 
-      </main>
-      <%- include('../partials/footer.ejs')%>
+        </main>
+        <%- include('../partials/footer.ejs')%>
+        
+        <script src='/js/productoNuevo.js'></script>
   </body>
 
   </html>
