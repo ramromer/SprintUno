@@ -7,62 +7,86 @@
 
 
           <section>
-            <form class="flexContainer bgGray margin10px padding10px" id="infoProductoNuevo" action="/productonuevo" method="POST" enctype="multipart/form-data">
+            <form class="flexContainer bgGray margin10px padding10px" id="infoProductoNuevo" action="/productonuevo"
+              method="POST" enctype="multipart/form-data">
               <div id="uploadImages" class="flexContainer">
                 <label for="avatar">Arrastra y suelta tus imagenes aquí o seleccionalas:</label>
-                <input type="file" id="imagenes" name="image" accept="image/*" required />  
+                <input type="file" id="imagenes" name="image" accept="image/*" required />
               </div>
               <div id="contenedorInputs" class="flexContainer">
                 <div id="tituloProductoNuevo" class="flexContainer">
                   <label for="nombre"> Nombre del Producto:</label>
-                  <input class="textocentrado" type="text"  autocomplete="off" id="nombre" name="nombre" minlength="5" required />
+                  <div class="flexContainer centradoxy">
+                    <input class="textocentrado" type="text" autocomplete="off" id="nombre" name="nombre" minlength="5"
+                      required />
+                    <div class="validationAlert" id="nameAlert">
+                      El nombre es obligatorio
+                    </div>
+                  </div>
                 </div>
                 <div class="flexContainer" id="precioProducto">
-                  <label for="precioNuevo"> Precio:</label> 
-                  <input class="textocentrado" type="number" min="1" autocomplete="off" id="precio" name="precio" />
-                </div>
-                <div class="flexContainer" >
-                  <label>Color:</label> 
-                  <div id = "colors" class="flexContainer centradoxy space-evenly" >
-                    <label for="colorRed"> Rojo</label><input type="checkbox" name="colorRed" value="2">
-                    <label for="colorWhite"> Blanco</label><input type="checkbox" name="colorWhite" value="1">
-                    <label for="colorBlack"> Negro</label><input type="checkbox" name="colorBlack" value="3">
+                  <label for="precioNuevo"> Precio:</label>
+                  <div class="flexContainer centradoxy">
+                    <input class="textocentrado" type="number" min="1" autocomplete="off" id="precio" name="precio" />
+                    <div class="validationAlert" id="priceAlert">
+                      El precio debe ser mayor a cero
+                    </div>
                   </div>
                 </div>
-          
-                <div class="flexContainer" >
+                <div class="flexContainer ">
+                  <label>Color:</label>
+                  <div id="colors" class="flexContainer centradoxy space-evenly">
+                    <label for="colorRed"> Rojo</label><input type="checkbox" id="colorRed" name="colorRed" value="2">
+                    <label for="colorWhite"> Blanco</label><input type="checkbox" id="colorWhite" name="colorWhite"
+                      value="1">
+                    <label for="colorBlack"> Negro</label><input type="checkbox" id="colorBlack" name="colorBlack"
+                      value="3">
+                    <div class="validationAlert" id="colorAlert">
+                      Por favor escoge al menos una opción
+                    </div>
+                  </div>
+                </div>
+                <div>
                   <label>Tamaño: </label>
-                  <div id="sizes" class="flexContainer centradoxy space-evenly" >
-                    <label for="tamanioS">Rodado 20 <input type="checkbox" name="tamanioS" value="1"></label>
-                    <label for="tamanioM">Rodado 26 <input type="checkbox" name="tamanioM" value="2"> </label>
-                    <label for="tamanioL">Rodado 29 <input type="checkbox" name="tamanioL" value="3"> </label>
+                  <div id="sizes" class="flexContainer centradoxy space-evenly">
+                    <label for="tamanioS">Rodado 20 <input type="checkbox" name="tamanioS" id="tamanioS"
+                        value="1"></label>
+                    <label for="tamanioM">Rodado 26 <input type="checkbox" name="tamanioM" id="tamanioM" value="2">
+                    </label>
+                    <label for="tamanioL">Rodado 29 <input type="checkbox" name="tamanioL" id="tamanioL" value="3">
+                    </label>
+                    <div class="validationAlert" id="sizeAlert">
+                      Por favor escoge al menos una opción
+                    </div>
                   </div>
-                  <br>
+                </div>
+                <br>
                 <div class="flexContainer" id="cantidadProductoNuevo">
                   <label for="cantidad"> Cantidad:</label>
-                  <input class="textocentrado" type="number" min="1" autocomplete="off" id="cantidad" name="cantidad" />
+                  <div class="flexContainer centradoxy">
+                    <input class="textocentrado" type="number" min="1" autocomplete="off" id="cantidad"
+                      name="cantidad" />
+                    <div class="validationAlert" id="quantityAlert">
+                      La cantidad debe ser mayor a cero
+                    </div>
+                  </div>
                 </div>
-
-
                 <div id="descripcionProductoNuevo">
 
-                <label for="descripcionProductoNuevo"> Descripción:</label>
-                <textarea id="descripcionProductoNuevo"  autocomplete="off" name="descripcionProductoNuevo"> </textarea>
-
+                  <label for="descripcionProductoNuevo"> Descripción:</label>
+                  <div class="flexContainer centradoxy">
+                    <textarea id="descripcionProductoNuevo" autocomplete="off"
+                      name="descripcionProductoNuevo"> </textarea>
+                  </div>
                 </div>
-
                 <div id="containerBtn" class="flexContainer">
-                  <button type="submit" id="btnProductoNuevo">Guardar</button>
+                  <button type="button" id="btnProductoNuevo">Guardar</button>
                 </div>
-              </div>
-
             </form>
-
           </section>
+      </main>
+      <%- include('../partials/footer.ejs')%>
 
-        </main>
-        <%- include('../partials/footer.ejs')%>
-        
         <script src='/js/productoNuevo.js'></script>
   </body>
 
