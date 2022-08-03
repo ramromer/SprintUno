@@ -106,16 +106,19 @@
                       <div class="validationAlert" id="quantityAlert">
                         La cantidad debe ser mayor a cero
                       </div>
+                    </div>
                   </div>
-                </div>
-
-
-                <div id="descripcionProductoNuevo" class="flexContainer">
-
-                  <label for="descripcionProductoNuevo"> Descripción:</label>
-                  <div class="flexContainer centradoxy">
-                    <textarea id="descripcionProductoNuevo" autocomplete="off"
-                      name="descripcionProductoNuevo"><%=product.description%> </textarea>
+                  
+                  
+                  <div id="descripcionProductoNuevo" class="flexContainer">
+                    
+                    <label for="descripcionEP"> Descripción:</label>
+                    <div class="flexContainer centradoxy">
+                      <textarea id="descripcionEP" autocomplete="off"
+                      name="descripcionEP"><%=product.description%> </textarea>
+                      <div class="validationAlert" id="descriptionAlert">
+                        La descripción debe tener al menos 20 caracteres.
+                      </div>
                   </div>
                 </div>
 

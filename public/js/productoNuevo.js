@@ -4,6 +4,8 @@ window.addEventListener("load", function () {
   let nombre = document.getElementById("nombre");
   let precioEP = document.getElementById("precio");
   let cantidadEP = document.getElementById("cantidad");
+  let descripcionEP = document.getElementById("descripcionPN");
+
 
   let tamanioS = document.getElementById("tamanioS");
   let tamanioM = document.getElementById("tamanioM");
@@ -29,16 +31,11 @@ window.addEventListener("load", function () {
   cantidadEP.addEventListener("blur", mouseLeaveQuantity);
   imagenes.addEventListener("change", onSelectImage);
 
-  let sizeValidate =
-    !tamanioS.checked && !tamanioM.checked && !tamanioL.checked;
-
-  let colorValidate =
-    !colorWhite.checked && !colorRed.checked && !colorBlack.checked;
 
   function beforeSave() {
     if (
-      !sizeValidate &&
-      !colorValidate &&
+      (colorWhite.checked || colorRed.checked || colorBlack.checked)&&
+      (tamanioS.checked || tamanioM.checked || tamanioL.checked) &&
       precioEP.value > 0 &&
       cantidadEP.value > 0 &&
       nombre.value.length > 0 &&
@@ -50,33 +47,32 @@ window.addEventListener("load", function () {
   function onSave() {
     if (nombre.value.length < 1) {
       nameAlert.style.display = "block";
-      btnGuardar.type = "button";
+    }else{
+      nameAlert.style.display = "none";
     }
-    if (sizeValidate) {
+    if (!tamanioS.checked && !tamanioM.checked && !tamanioL.checked) {
       sizeAlert.style.display = "block";
-      btnGuardar.type = "button";
+    }else{
+      sizeAlert.style.display = "none";
     }
-    if (colorValidate) {
+    if (!colorWhite.checked && !colorRed.checked && !colorBlack.checked) {
       colorAlert.style.display = "block";
-      btnGuardar.type = "button";
+    }else{
+      colorAlert.style.display = "none";
     }
     if (precioEP.value < 1) {
       priceAlert.style.display = "block";
-      btnGuardar.type = "button";
     }
     if (cantidadEP.value < 1) {
       quantityAlert.style.display = "block";
-      btnGuardar.type = "button";
     }
     if (imagenes.value.length < 1) {
       quantityAlert.style.display = "block";
-      btnGuardar.type = "button";
     }
   }
 
   function onSelectImage() {
-    console.log("onSelectImage")
-//   imagenes.addEventListener("mouseleave", rememberImage);
+
 if(imagenes.value.length < 1){
     imageAlert.style.display = "block";
    }else{
