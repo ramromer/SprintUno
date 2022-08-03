@@ -1,3 +1,10 @@
+
+.validationAlert{
+  color : red;
+  display: none;
+}
+
+
 #containerSliderEP {
   width: 45%;
 }
@@ -41,4 +48,6 @@
 #nombreEP {
   color: black;
 }
+
+
 
