@@ -104,6 +104,22 @@ let usersController = {
     res.clearCookie("user");
     res.redirect("/");
   },
+  askRegister:(req,res) => {
+    db.User.findOne({
+      where: {
+        email: req.params.email,
+      },
+    }).then((user) => {
+      // console.log('user:',user);
+      if (user !==  null){
+        console.log('lo mande');
+        res.send(JSON.stringify(1))  
+      } else {
+        res.send(JSON.stringify(0))
+        console.log('NO lo mande');
+      }
+    }) 
+  },
   register: (req, res) => {
     res.render("./users/register.ejs");
   },
