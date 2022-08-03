@@ -18,20 +18,33 @@ window.addEventListener("load", function () {
   let btnGuardar = document.getElementById("btnEP");
   
   btnGuardar.addEventListener("mouseover", beforeSave);
-  precioEP.addEventListener("mouseleave", mouseLeavePrice)
-  cantidadEP.addEventListener("mouseleave", mouseLeaveQuantity)
+  btnGuardar.addEventListener("click", onSave);
+  precioEP.addEventListener("blur", mouseLeavePrice)
+  cantidadEP.addEventListener("blur", mouseLeaveQuantity)
+
+  let sizeValidate =
+    !tamanioS.checked && 
+    !tamanioM.checked && 
+    !tamanioL.checked;
+
+  let colorValidate =
+    !colorWhite.checked && 
+    !colorRed.checked && 
+    !colorBlack.checked;
 
   function beforeSave() {
-    let sizeValidate =
-      !tamanioS.checked && !tamanioM.checked && !tamanioL.checked;
 
-    let colorValidate =
-      !colorWhite.checked && !colorRed.checked && !colorBlack.checked;
-
-    if (!sizeValidate && !colorValidate && precioEP.value > 0 && cantidadEP.value > 0 ) {
+    if (
+      !sizeValidate && 
+      !colorValidate &&
+      precioEP.value > 0 && 
+      cantidadEP.value > 0 
+      ) {
       btnGuardar.type = "submit";
     }
+  }
 
+  function onSave() {
     if (sizeValidate) {
       sizeAlert.style.display = "block";
       btnGuardar.type = "button";
@@ -54,6 +67,7 @@ window.addEventListener("load", function () {
   function mouseLeavePrice(){
     if (precioEP.value < 1) {
         priceAlert.style.display = "block";
+        btnGuardar.type = "button";
       }
       else{
         priceAlert.style.display = "none";
@@ -63,6 +77,7 @@ window.addEventListener("load", function () {
   function mouseLeaveQuantity(){
     if (cantidadEP.value < 1) {
       quantityAlert.style.display = "block";
+      btnGuardar.type = "button";
       }
       else{
         quantityAlert.style.display = "none";

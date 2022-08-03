@@ -11,7 +11,10 @@
               method="POST" enctype="multipart/form-data">
               <div id="uploadImages" class="flexContainer">
                 <label for="avatar">Arrastra y suelta tus imagenes aquí o seleccionalas:</label>
-                <input type="file" id="imagenes" name="image" accept="image/*" required />
+                <input value="upload" type="file" id="imagenes" name="image" accept="image/*" required />
+                <div class="validationAlert" id="imageAlert">
+                  Recuerda elegir una imagen para tu producto...
+                </div>
               </div>
               <div id="contenedorInputs" class="flexContainer">
                 <div id="tituloProductoNuevo" class="flexContainer">

@@ -1,4 +1,6 @@
 window.addEventListener("load", function () {
+  let imagenes = document.getElementById("imagenes");
+  let uploadImages = document.getElementById("uploadImages");
   let nombre = document.getElementById("nombre");
   let precioEP = document.getElementById("precio");
   let cantidadEP = document.getElementById("cantidad");
@@ -11,6 +13,7 @@ window.addEventListener("load", function () {
   let colorRed = document.getElementById("colorRed");
   let colorBlack = document.getElementById("colorBlack");
 
+  let imageAlert = document.getElementById("imageAlert");
   let nameAlert = document.getElementById("nameAlert");
   let priceAlert = document.getElementById("priceAlert");
   let colorAlert = document.getElementById("colorAlert");
@@ -24,6 +27,7 @@ window.addEventListener("load", function () {
   precioEP.addEventListener("blur", mouseLeavePrice);
   nombre.addEventListener("blur", mouseLeaveName);
   cantidadEP.addEventListener("blur", mouseLeaveQuantity);
+  imagenes.addEventListener("change", onSelectImage);
 
   let sizeValidate =
     !tamanioS.checked && !tamanioM.checked && !tamanioL.checked;
@@ -37,7 +41,8 @@ window.addEventListener("load", function () {
       !colorValidate &&
       precioEP.value > 0 &&
       cantidadEP.value > 0 &&
-      nombre.value.length > 0
+      nombre.value.length > 0 &&
+      imagenes.value.length > 0
     ) {
       btnGuardar.type = "submit";
     }
@@ -63,7 +68,31 @@ window.addEventListener("load", function () {
       quantityAlert.style.display = "block";
       btnGuardar.type = "button";
     }
+    if (imagenes.value.length < 1) {
+      quantityAlert.style.display = "block";
+      btnGuardar.type = "button";
+    }
   }
+
+  function onSelectImage() {
+    console.log("onSelectImage")
+//   imagenes.addEventListener("mouseleave", rememberImage);
+if(imagenes.value.length < 1){
+    imageAlert.style.display = "block";
+   }else{
+    imageAlert.style.display = "none"
+   }
+  }
+
+  function rememberImage() {
+    console.log("rememberImage", imagenes.value)
+
+   if(imagenes.value.length < 1){
+    imageAlert.style.display = "block";
+   }else{
+    imageAlert.style.display = "none"
+   }
+    }
 
   function mouseLeavePrice() {
     if (precioEP.value < 1) {
