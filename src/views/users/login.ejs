@@ -4,42 +4,56 @@
         <%- include('../partials/header.ejs')%>
             <main class="margin10px flexContainer centradoxy" id="mainLogin">
                 <%- include('../partials/navMenu.ejs')%>
-                   
-                    <form  autocomplete="off" class="margin10px bgGray flexContainer" id="form-login" action="/users/login" method="POST">
+
+                    <form autocomplete="off" class="margin10px bgGray flexContainer" id="form-login"
+                        action="/users/login" method="POST">
                         <h1 class="margin10px flexContainer centradoxy"> Ingresa a tu cuenta</h1>
 
                         <div class="flexContainer margin10px centradoxy">
                             <label for="userLogin">Email:</label>
-                            <input class="textocentrado margin10px"  name="user" autocomplete="off" type="email" id="userLogin" placeholder="Email" required pattern="\S+.*"/>
+                            <input class="textocentrado margin10px" name="user" autocomplete="off" type="email"
+                                id="userLogin" placeholder="Email" />
+                            <div class="validationAlert" id="emailAlert">
+                                Por favor ingresa un email 
+                            </div>
+                            <div class="validationAlert" id="emailValidAlert">
+                                Por favor ingresa un email valido
+                            </div>
                         </div>
                         <% if (locals.errors && errors.email) { %>
                             <div class="text-danger">
                                 <%= errors.email.msg %>
                             </div>
-                        <% } %>
-                        <div class="flexContainer margin10px centradoxy">
-                            <label for="passwordLogin">Contraseña:</label>
-                            <input class="textocentrado margin10px"  name="key" autocomplete="off" type="password" id="passworLogin" placeholder="Contraseña"  required/>
-                        </div>
+                            <% } %>
+                                <div class="flexContainer margin10px centradoxy">
+                                    <label for="passwordLogin">Contraseña:</label>
+                                    <input class="textocentrado margin10px" name="key" autocomplete="off"
+                                        type="password" id="passworLogin" placeholder="Contraseña"  />
+                                    <div class="validationAlert" id="passAlert">
+                                        Por favor ingresa una contraseña
+                                    </div>
+                                </div>
 
-                        <a  class="margin10px" href="/users/register">¿Olvisate tu contraseña?</a>
-                        
-                        <div id="botonesLogin" class="flexContainer  margin10px">
-                            <button class="margin10px" type="submit">Entrar</button>
-                            <label for="recordarLogin" class="margin10px ">¿Recordarme?</label>
-                            <input class="centradoxy" type="checkbox" name="recordarLogin" id="recordarLogin">
-                        </div> 
-                        
-                        <div id="checkboxLogin" class="flexContainer centradoxy margin10px">
-                        </div>
+                                <a class="margin10px" href="/users/register">¿Olvisate tu contraseña?</a>
 
-                        <div id="btnRegistro" class="flexContainer centradoxy margin10px">
-                            <a class="margin10px" href="/users/register">¿Aún no te registras?</a>
-                        </div>
+                                <div id="botonesLogin" class="flexContainer  margin10px">
+                                    <button class="margin10px" id="btnLogin" type="button">Entrar</button>
+                                    <label for="recordarLogin" class="margin10px ">¿Recordarme?</label>
+                                    <input class="centradoxy" type="checkbox" name="recordarLogin" id="recordarLogin">
+                                </div>
+
+                                <div id="checkboxLogin" class="flexContainer centradoxy margin10px">
+                                </div>
+
+                                <div id="btnRegistro" class="flexContainer centradoxy margin10px">
+                                    <a class="margin10px" href="/users/register">¿Aún no te registras?</a>
+                                </div>
 
                     </form>
-                </main>
-                <%- include('../partials/footer.ejs')%>
+            </main>
+            <%- include('../partials/footer.ejs')%>
+        <script src="/js/loginUsuario.js"></script>
+
     </body>
 
-</html>
+    </html>

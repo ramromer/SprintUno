@@ -39,7 +39,6 @@ window.addEventListener("load", function () {
       cantidadEP.value > 0 &&
       descripcionEP.value.length > 19
       ) {
-        console.log("sunmit")
       btnGuardar.type = "submit";
     }else{
       btnGuardar.type = "button";
