@@ -16,49 +16,39 @@ window.addEventListener("load", function () {
   btnLogin.addEventListener("click", onSave);
 
   function beforeSave() {
-    if (emailErrorFlag || passErrorFlag) {
-      btnLogin.type = "button";
-    } else {
+    if (!emailErrorFlag && !passErrorFlag) {
       btnLogin.type = "submit";
+    } else {
+      btnLogin.type = "button";
     }
   }
-
   function onSave() {
     if (emailErrorFlag) {
       emailAlert.style.display = "block";
-      btnLogin.type = "button";
-    } else {
-      emailAlert.style.display = "none";
     }
     if (passErrorFlag) {
       passAlert.style.display = "block";
-      btnLogin.type = "button";
-    } else {
-      passAlert.style.display = "none";
     }
   }
 
   function mouseLeaveEmail() {
-    const validRegex =
-    /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    
+    const validRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
     if (userLogin.value < 1) {
-      emailAlert.style.display = "block";
       btnLogin.type = "button";
+      emailAlert.style.display = "block";
       emailErrorFlag = true;
       emailValidAlert.style.display = "none";
     } else {
       emailAlert.style.display = "none";
       if (!userLogin.value.match(validRegex)) {
         emailValidAlert.style.display = "block";
+      emailErrorFlag = true;
       } else {
-      emailValidAlert.style.display = "none";
-
+        emailValidAlert.style.display = "none";
         emailErrorFlag = false;
       }
     }
-   
-
   }
 
   function mouseLeavePass() {
