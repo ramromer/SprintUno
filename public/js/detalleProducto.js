@@ -1,13 +1,14 @@
 window.addEventListener("load", function () {
 
-   window.addEventListener("submit", hit);
+  let cantidad = document.getElementById("cantidad");
+
+  window.addEventListener("submit", hit);
  
 
   function hit() {
-   alert('hit');
+   
   }
 
-  // let userLogin = document.getElementById("userLogin");
   // let passworLogin = document.getElementById("passworLogin");
   // let btnLogin = document.getElementById("btnLogin");
 
