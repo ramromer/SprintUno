@@ -1,10 +1,11 @@
 window.addEventListener("load", function () {
 
-   window.addEventListener("submit", hit);
+
+  window.addEventListener("submit", hit);
  
 
   function hit() {
-   alert('hit');
+   
   }
 
   let minusBtn = document.getElementById("minusBtn");
