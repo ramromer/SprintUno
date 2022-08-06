@@ -79,10 +79,16 @@
               <div class="flexContainer" id="cantidadProducto">
                 <label>Cantidad: </label>
                 <div class="flexContainer centradoxy space-evenly">
-                  <button type="button" id="minusBtn">-</button>
+                  <button type="button" class="arrowInputNumber" id="minusBtn">-</button>
                   <input id="cantidad" name="cantidad" class="textocentrado" value="1" type="number" min="1"
-                    max="<%= producto.stock %>">
-                  <button type="button" id="plusBtn">+</button>
+                    max="<%= producto.stock %>" >
+                  <button type="button" class="arrowInputNumber" id="plusBtn">+</button>
+                  <div class="validationAlert" id="zeroAlert">
+                    La cantidad debe ser mayor a cero
+                  </div>
+                  <div class="validationAlert" id="maxAlert">
+                    La cantidad no debe ser mayor a nuestro stock
+                  </div>
                 </div>
                 <h4 class="textGray">tenemos <%= producto.stock %> unidades diponibles!</h4>
               </div>

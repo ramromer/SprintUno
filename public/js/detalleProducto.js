@@ -1,64 +1,67 @@
+
 window.addEventListener("load", function () {
 
 
-  window.addEventListener("submit", hit);
- 
-
-  function hit() {
-   
-  }
+  // window.addEventListener("submit", hit);
+  // function hit() {
+  // }
 
   let minusBtn = document.getElementById("minusBtn");
   let cantidad = document.getElementById("cantidad");
   let plusBtn = document.getElementById("plusBtn");
-
-
+  let zeroAlert = document.getElementById("zeroAlert");
+  let maxAlert = document.getElementById("maxAlert");
 
   minusBtn.addEventListener("click", minusBtnFunction);
-  cantidad.addEventListener("mouseover", mouseLeavesCantidad);
+  cantidad.addEventListener("change", cantidadChange);
   plusBtn.addEventListener("click", plusBtnFunction);
 
+  cantidad.value = 1;
+
   function minusBtnFunction() {
-    if (cantidad.value<= 1) {
+    if (cantidad.value <= 1) {
       cantidad.value = 1;
+      zeroAlert.style.display = "none";
     } else {
+      if(parseInt(cantidad.value) > parseInt(cantidad.max) ){
+        cantidad.value = cantidad.max;
+        maxAlert.style.display = "none";
+        return
+        }
       cantidad.value -= 1;
+      zeroAlert.style.display = "none";
     }
   }
   function plusBtnFunction() {
 
-    if (parseInt(cantidad.value) >= parseInt(cantidad.max)) {
+    if (parseInt(cantidad.value) >= parseInt(cantidad.max) ) {
       cantidad.value = cantidad.max;
+      maxAlert.style.display = "none";
     } else {
-      cantidad.value = parseInt(cantidad.value)+1;
+      if(parseInt(cantidad.value) <= 0 ){
+      cantidad.value = 1;
+      zeroAlert.style.display = "none";
+      return
+      }
+      cantidad.value = parseInt(cantidad.value) + 1;
+      maxAlert.style.display = "none";
     }
   }
 
-  function mouseLeavesCantidad() {
-    // const validRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-
-    // if (userLogin.value < 1) {
-
-    // } else {
-    //   emailAlert.style.display = "none";
-    //   if (!userLogin.value.match(validRegex)) {
-    //     emailValidAlert.style.display = "block";
-    //   emailErrorFlag = true;
-    //   } else {
-    //     emailValidAlert.style.display = "none";
-    //     emailErrorFlag = false;
-    //   }
-    // }
+  function cantidadChange() {
+    if ( isNaN(parseInt(cantidad.value))){
+      cantidad.value = 1;
+    }
+    if (parseInt(cantidad.value) <= 0 ) {
+      zeroAlert.style.display = "block"
+    } else if ( parseInt(cantidad.value) > parseInt(cantidad.max)){
+      maxAlert.style.display = "block";
+    }
+    else{
+      zeroAlert.style.display = "none"
+      maxAlert.style.display = "none";
+    }
   }
 
-  // function mouseLeavePass() {
-  //   if (passworLogin.value.length < 1) {
-  //     passAlert.style.display = "block";
-  //     btnLogin.type = "button";
-  //     passErrorFlag = true;
-  //   } else {
-  //     passErrorFlag = false;
-  //     passAlert.style.display = "none";
-  //   }
-  // }
+
 });
