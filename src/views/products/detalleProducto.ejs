@@ -39,13 +39,13 @@
                  
                   <% producto.productColors.forEach(color=> { %>
                     <%if(color.dataValues.idColorFK==1){%>
-                      <label for="colorWhite"> Blanco</label><input type="radio" id='colorWhite' name="color" value="1">
+                      <label for="colorWhite"> Blanco</label><input type="radio" id='colorWhite' name="color" value="1" checked="true">
                     <%}%>
                     <%if(color.dataValues.idColorFK==2){%>
-                      <label for="colorRed"> Rojo</label><input type="radio" id='colorRed' name="color" value="2">
+                      <label for="colorRed"> Rojo</label><input type="radio" id='colorRed' name="color" value="2" checked="true">
                     <%}%>
                     <%if(color.dataValues.idColorFK==3){%>
-                      <label for="colorBlack"> Negro</label><input type="radio" id='colorBlack' name="color"
+                      <label for="colorBlack"> Negro</label><input type="radio" id='colorBlack' name="color" checked="true"
                         value="3">
                     <%}%>
                   <% }) %>
@@ -58,15 +58,15 @@
                 <div class="flexContainer centradoxy space-evenly">
                   <% producto.productSizes.forEach(size=> { %>
                     <%if(size.dataValues.idSizeFK==1){%>
-                      <label for="tamanioS">Rodado 20</label><input type="radio" name="tamanio" id="tamanioS"
+                      <label for="tamanioS">Rodado 20</label><input type="radio" name="tamanio" id="tamanioS" checked="true"
                         value="1">
                       <%};%>
                         <%if(size.dataValues.idSizeFK==2){%>
-                          <label for="tamanioM">Rodado 26</label><input type="radio" name="tamanio" id="tamanioM"
+                          <label for="tamanioM">Rodado 26</label><input type="radio" name="tamanio" id="tamanioM" checked="true"
                             value="2">
                           <%};%>
                             <%if(size.dataValues.idSizeFK==3){%>
-                              <label for="tamanioL">Rodado 29</label><input type="radio" name="tamanio"
+                              <label for="tamanioL">Rodado 29</label><input type="radio" name="tamanio" checked="true"
                                 id="tamanioL" value="3">
                               <%};%>
                                 <% }) %>
@@ -100,6 +100,7 @@
           </section>
       </main>
       <%- include('../partials/footer.ejs')%>
+      <script src="/js/detalleProducto.js"></script>
   </body>
 
   </html>
