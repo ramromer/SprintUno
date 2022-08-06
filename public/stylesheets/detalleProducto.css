@@ -89,6 +89,18 @@
   border-right: 15px solid black; 
 }
 
+/* Custom input Number */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] {
+  -moz-appearance: textfield;
+}
+/* end custom input */
+
+
 #containerSlider {
   width: 60%;
   height: 20rem;

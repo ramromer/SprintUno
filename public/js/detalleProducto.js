@@ -7,57 +7,48 @@ window.addEventListener("load", function () {
    alert('hit');
   }
 
-  // let userLogin = document.getElementById("userLogin");
-  // let passworLogin = document.getElementById("passworLogin");
-  // let btnLogin = document.getElementById("btnLogin");
+  let minusBtn = document.getElementById("minusBtn");
+  let cantidad = document.getElementById("cantidad");
+  let plusBtn = document.getElementById("plusBtn");
 
-  // let emailAlert = document.getElementById("emailAlert");
-  // let emailValidAlert = document.getElementById("emailValidAlert");
-  // let passAlert = document.getElementById("passAlert");
 
-  // let emailErrorFlag = true;
-  // let passErrorFlag = true;
 
-  // userLogin.addEventListener("blur", mouseLeaveEmail);
-  // passworLogin.addEventListener("blur", mouseLeavePass);
-  // btnLogin.addEventListener("mouseover", beforeSave);
-  // btnLogin.addEventListener("click", onSave);
+  minusBtn.addEventListener("click", minusBtnFunction);
+  cantidad.addEventListener("mouseover", mouseLeavesCantidad);
+  plusBtn.addEventListener("click", plusBtnFunction);
 
-  // function beforeSave() {
-  //   if (!emailErrorFlag && !passErrorFlag) {
-  //     btnLogin.type = "submit";
-  //   } else {
-  //     btnLogin.type = "button";
-  //   }
-  // }
-  // function onSave() {
-  //   if (emailErrorFlag) {
-  //     emailAlert.style.display = "block";
-  //   }
-  //   if (passErrorFlag) {
-  //     passAlert.style.display = "block";
-  //   }
-  // }
+  function minusBtnFunction() {
+    if (cantidad.value<= 1) {
+      cantidad.value = 1;
+    } else {
+      cantidad.value -= 1;
+    }
+  }
+  function plusBtnFunction() {
 
-  // function mouseLeaveEmail() {
-  //   const validRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if (parseInt(cantidad.value) >= parseInt(cantidad.max)) {
+      cantidad.value = cantidad.max;
+    } else {
+      cantidad.value = parseInt(cantidad.value)+1;
+    }
+  }
 
-  //   if (userLogin.value < 1) {
-  //     btnLogin.type = "button";
-  //     emailAlert.style.display = "block";
-  //     emailErrorFlag = true;
-  //     emailValidAlert.style.display = "none";
-  //   } else {
-  //     emailAlert.style.display = "none";
-  //     if (!userLogin.value.match(validRegex)) {
-  //       emailValidAlert.style.display = "block";
-  //     emailErrorFlag = true;
-  //     } else {
-  //       emailValidAlert.style.display = "none";
-  //       emailErrorFlag = false;
-  //     }
-  //   }
-  // }
+  function mouseLeavesCantidad() {
+    // const validRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+    // if (userLogin.value < 1) {
+
+    // } else {
+    //   emailAlert.style.display = "none";
+    //   if (!userLogin.value.match(validRegex)) {
+    //     emailValidAlert.style.display = "block";
+    //   emailErrorFlag = true;
+    //   } else {
+    //     emailValidAlert.style.display = "none";
+    //     emailErrorFlag = false;
+    //   }
+    // }
+  }
 
   // function mouseLeavePass() {
   //   if (passworLogin.value.length < 1) {
