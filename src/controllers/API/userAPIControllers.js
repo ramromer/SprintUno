@@ -3,199 +3,56 @@ const sequelize = require("Sequelize");
 
 let usersController = {
     getUsers: async (req, res) => {
-      console.log("llego");
-      db.User.destroy({ where: { idUser: req.params.id } }).catch((err) => {
-        console.log(err);
-      });
-      res.redirect("/");
+        try {
+            let users = await db.User.findAndCountAll({
+
+                attributes: [
+                    ["idUser", "id"],
+                    ["fullname", "name"],
+                    "email"],
+                raw: true,
+            });
+
+            if (users === null) {
+                res.status(204).send()
+            } else {
+                for (let i = 0; i < users.rows.length; i++) {
+                    users.rows[i].detail = [process.env.URL_Server || process.env.URL_DEV] + `${process.env.PORT}/api/users/${users.rows[i].id}`
+                }
+                res.status(200).send({ data: {count: users.count, users: users.rows} });
+            }
+        } catch (err) {
+            res.status(500).send({ error: err.toString() });
+        }
     },
     getUser: async (req, res) => {
         try {
             let user = await db.User.findOne({
-              where: {
-                   idUser: [req.params.id || ""],
-              },
-              attributes: [
-                ["idUser", "id"],
-                ["fullname", "name"],
-                "email",
-                ["userImage", "detail"]
-              ],
-              raw: true,
+                where: {
+                    idUser: [req.params.id || ""],
+                },
+                attributes: [
+                    ["idUser", "id"],
+                    ["fullname", "name"],
+                    "email",
+                    "addres",
+                    "birthday",
+                    "user",
+                ],
+                raw: true,
             });
-      
+
             if (user === null) {
-              res.send( { data: "id not found " });
+                res.status(204).send()
             } else {
-                res.send(  { data: user });
+                user.image_url = [process.env.URL_Server || process.env.URL_DEV] + `${process.env.PORT}/users/image/${user.id}`
+                res.status(200).send({ data: user });
             }
-          } catch (err) {
-            res.send(  { error: { code: 500, data: err.toString() } });
-          }
-    },
-    edit: function (req, res) {
-      db.User.findByPk(req.params.id).then(function (Us) {
-        if (Us != undefined) {
-          res.render("./users/userEdit.ejs", { Us: Us });
-        } else {
-          res.redirect("./users/register.ejs");
+        } catch (err) {
+            res.status(500).send({ error: err.toString() });
         }
-      });
     },
-    update: function (req, res) {
-      let picture;
-      let key = bcryptjs.hashSync(req.body.key, 10);
-      if (req.file) {
-        picture = req.file.filename;
-      } else {
-        picture = "porDefecto.jpg";
-      }
-      db.User.update(
-        {
-          fullname: req.body.fullName,
-          addres: req.body.fullAddress,
-          email: req.body.email,
-          birthday: req.body.bday,
-          user: req.body.user,
-          key: key,
-          userImage: picture,
-        },
-        {
-          where: {
-            idUser: req.params.id,
-          },
-        }
-      ).then(res.redirect("/"));
-    },
-  
-    loginProcess: (req, res) => {
-      db.User.findOne({
-        where: {
-          email: req.body.user,
-        },
-      }).then((user) => {
-        if (user) {
-          let isOkThePassword = bcryptjs.compareSync(req.body.key, user.key);
-          if (isOkThePassword) {
-            delete user.key;
-            req.session.userLogged = user;
-  
-            if (req.body.recordarLogin == true) {
-               res.cookie("user", req.body.user, { maxAge: 1000 * 60 * 60 }); // esto es seguro? podemos hashear la info o usar cookies seguras
-            }
-            res.redirect("/users/profile");
-          } else {
-            return res.render("./users/login.ejs", {
-              errors: {
-                email: {
-                  msg: "Las credenciales son inválidas",
-                },
-              },
-            });
-          }
-        } else {
-          res.render("./users/login.ejs", {
-              errors: {
-                email: {
-                  msg: "La combinación de usuario y contraseña son invalidos o inexistente",
-                },
-              },
-            })
-            .catch((err) =>
-              console.log(" error al consultar la base de datos", err)
-            );
-        }
-      });
-    },
-  
-    profile: (req, res) => {
-      db.User.findOne({
-        where: {
-          email: req.session.userLogged.email,
-        },
-      })
-        .then((user) => {
-          return res.render("./users/profile", { user: user.dataValues });
-        })
-        .catch((err) => console.log(" error al consultar la base de datos", err));
-    },
-    logout: (req, res) => {
-      req.session.destroy();
-      res.clearCookie("user");
-      res.redirect("/");
-    },
-    askRegister:(req,res) => {
-      db.User.findOne({
-        where: {
-          email: req.params.email,
-        },
-      }).then((user) => {
-        // console.log('user:',user);
-        if (user !==  null){
-          console.log('lo mande');
-          res.send(JSON.stringify(1))  
-        } else {
-          res.send(JSON.stringify(0))
-          console.log('NO lo mande');
-        }
-      }) 
-    },
-    register: (req, res) => {
-      res.render("./users/register.ejs");
-    },
-  
-    registerWrite: (req, res) => {
-      let errores = validationResult(req);
-  
-      // db.User.findOne({
-      //   where: {
-      //     user: req.body.user
-      //   }
-      // }).then((user)=>{
-      //   if(user){
-      //     res.render("./users/register.ejs", {
-      //       errores: errores.mapped(),
-      //       oldData: req.body,
-  
-      //     });/////////////////enviar validaciones par aavisar
-      //   }
-      // }).catch(err=> console.log(err))
-  
-      if (errores.errors.length > 0) {
-        res.render("./users/register.ejs", {
-          errores: errores.mapped(),
-          oldData: req.body,
-        });
-      } else {
-        let picture;
-        let key = bcryptjs.hashSync(req.body.key, 10);
-        if (req.file) {
-          picture = req.file.filename;
-        } else {
-          picture = "porDefecto.jpg";
-        }
-        let usuarioNuevo = {
-          fullname: req.body.fullName,
-          addres: req.body.fullAddress,
-          email: req.body.email,
-          birthday: req.body.bday,
-          user: req.body.user,
-          key: key,
-          userImage: picture,
-          idUserTypeFK: req.body.userType,
-        };
-  
-        db.User.create(usuarioNuevo)
-          .then(() => {
-            return res.redirect(`./login/`);
-          })
-          .catch((error) => res.send(error));
-      }
-    },
-  
-    notFound: (req, res) => {
-      res.render("notFound");
-    },
-  };
+
+};
 
 module.exports = usersController;

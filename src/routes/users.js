@@ -91,6 +91,7 @@ router.get('/edit/:id',authMiddleware, usersController.edit);//Editar usuario
 router.put('/update/:id',authMiddleware, usersController.update);
 router.delete('/delete/:id', authMiddleware, usersController.eliminarUsuario);//eliminar usuario
 router.get('/profile',authMiddleware,usersController.profile);
+router.get('/image/:id',usersController.image);
 router.get('/logout', usersController.logout);
 router.get('*', usersController.notFound);
 

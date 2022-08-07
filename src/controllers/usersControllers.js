@@ -61,7 +61,7 @@ let usersController = {
           req.session.userLogged = user;
 
           if (req.body.recordarLogin == true) {
-             res.cookie("user", req.body.user, { maxAge: 1000 * 60 * 60 }); // esto es seguro? podemos hashear la info o usar cookies seguras
+            res.cookie("user", req.body.user, { maxAge: 1000 * 60 * 60 }); // esto es seguro? podemos hashear la info o usar cookies seguras
           }
           res.redirect("/users/profile");
         } else {
@@ -75,12 +75,12 @@ let usersController = {
         }
       } else {
         res.render("./users/login.ejs", {
-            errors: {
-              email: {
-                msg: "La combinación de usuario y contraseña son invalidos o inexistente",
-              },
+          errors: {
+            email: {
+              msg: "La combinación de usuario y contraseña son invalidos o inexistente",
             },
-          })
+          },
+        })
           .catch((err) =>
             console.log(" error al consultar la base de datos", err)
           );
@@ -99,26 +99,51 @@ let usersController = {
       })
       .catch((err) => console.log(" error al consultar la base de datos", err));
   },
+  image: (req, res) => {
+    db.User.findOne({
+      where: {
+        idUser: req.params.id,
+      },
+      attributes: [
+        ["userImage", "image"]
+      ],
+      raw: true,
+    })
+      .then((user) => {
+        if (user == null) {
+          return res.render("notFound");
+        }
+        let options = {
+          root: __dirname + "../../../public/users/avatars/"
+        }
+        return res.sendFile(`${user.image}`, options, function (err) {
+          if (err) {
+            res.send(err);
+          }
+        })
+      })
+      .catch((err) => console.log(" error al consultar la base de datos", err));
+  },
   logout: (req, res) => {
     req.session.destroy();
     res.clearCookie("user");
     res.redirect("/");
   },
-  askRegister:(req,res) => {
+  askRegister: (req, res) => {
     db.User.findOne({
       where: {
         email: req.params.email,
       },
     }).then((user) => {
       // console.log('user:',user);
-      if (user !==  null){
+      if (user !== null) {
         console.log('lo mande');
-        res.send(JSON.stringify(1))  
+        res.send(JSON.stringify(1))
       } else {
         res.send(JSON.stringify(0))
         console.log('NO lo mande');
       }
-    }) 
+    })
   },
   register: (req, res) => {
     res.render("./users/register.ejs");
@@ -126,20 +151,6 @@ let usersController = {
 
   registerWrite: (req, res) => {
     let errores = validationResult(req);
-
-    // db.User.findOne({
-    //   where: {
-    //     user: req.body.user
-    //   }
-    // }).then((user)=>{
-    //   if(user){
-    //     res.render("./users/register.ejs", {
-    //       errores: errores.mapped(),
-    //       oldData: req.body,
-
-    //     });/////////////////enviar validaciones par aavisar
-    //   }
-    // }).catch(err=> console.log(err))
 
     if (errores.errors.length > 0) {
       res.render("./users/register.ejs", {
