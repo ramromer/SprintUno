@@ -4,6 +4,6 @@ let productsApiController = require('../../controllers/API/productsApiController
 const db = require('../../data/models');
 
 router.get('/products', productsApiController.getProducts);
-// router.get('/products/:id', productsController.getProducts);
+router.get('/products/:id', productsApiController.getProduct);
 
 module.exports = router;
