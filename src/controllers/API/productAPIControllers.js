@@ -1,7 +1,4 @@
 const db = require("../../data/models");
-const sequelize = require("Sequelize");
-const CategoryProduct = require("../../data/models/CategoryProduct");
-const Product = require("../../data/models/Product");
 
 let productsController = {
     getProducts: async (req, res) => {
@@ -19,7 +16,8 @@ let productsController = {
                         through: {
                             attributes: []
                         }
-                    }
+                    },
+                    
                 ],
             });
 
