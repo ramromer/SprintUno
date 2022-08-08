@@ -10,7 +10,11 @@ let session = require("express-session");
 let indexRouter = require("./routes/index");
 let usersRouter = require("./routes/users");
 let usersAPIRouter = require("./routes/API/userAPI.js");
+<<<<<<< HEAD
 let productsAPIRouter = require("./routes/API/productAPI.js");
+=======
+let productsAPIRouter = require("./routes/API/productsApi.js");
+>>>>>>> a870e9b2bbd27735fb5c2946670b91a9a667d202
 let app = express();
 
 const methodOverride = require("method-override");
@@ -35,7 +39,12 @@ app.use(userLoggedMiddleware);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false })); //URL encode  - Para que nos pueda llegar la información desde el formulario al req.body
 app.use("/users", usersRouter);
+<<<<<<< HEAD
 app.use("/api", usersAPIRouter, productsAPIRouter);  
+=======
+app.use("/api", usersAPIRouter);  
+app.use("/api", productsAPIRouter); 
+>>>>>>> a870e9b2bbd27735fb5c2946670b91a9a667d202
 app.use("/", indexRouter);
 
 app.use(function (err, req, res, next) {
