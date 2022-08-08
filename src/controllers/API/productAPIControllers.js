@@ -6,8 +6,8 @@ let productsController = {
       const { page, size } = req.query;
 
       const getPagination = (page, size) => {
-        const limit = size ? +size : 10;
-        const offset = page ? page * limit : 0;
+        const limit = size ? +size : 3;
+        const offset = page ? page * limit : 1;
         return { limit, offset };
       };
 
@@ -42,22 +42,43 @@ let productsController = {
       } else {
         products = getPagingData(products, page, limit);
         products = JSON.parse(JSON.stringify(products, null, 2));
-        
+
+        if (page == undefined) {
+          products.next =
+            [process.env.URL_Server || process.env.URL_DEV] +
+            `${process.env.PORT}/api/products?page=${2}`;
+        } else if (page < products.totalPages) {
+          products.next =
+            [process.env.URL_Server || process.env.URL_DEV] +
+            `${process.env.PORT}/api/products?page=${parseInt(page) + 1}`;
+          products.previus =
+            [process.env.URL_Server || process.env.URL_DEV] +
+            `${process.env.PORT}/api/products?page=${page - 1}`;
+        } else if (page == products.totalPages) {
+          products.previus =
+            [process.env.URL_Server || process.env.URL_DEV] +
+            `${process.env.PORT}/api/products?page=${page - 1}`;
+        } else {
+          products.previus =
+            [process.env.URL_Server || process.env.URL_DEV] +
+            `${process.env.PORT}/api/products?page=${products.totalPages}`;
+        }
+
         for (let i = 0; i < products.rows.length; i++) {
           products.rows[i].detail =
             [process.env.URL_Server || process.env.URL_DEV] +
             `${process.env.PORT}/api/products/${products.rows[i].id}`;
         }
-        res
-          .status(200)
-          .send({
-            data: {
-              count: products.count,
-              products: products.rows,
-              totalPages: products.totalPages,
-              currentPage: products.currentPage,
-            },
-          });
+        res.status(200).send({
+          data: {
+            count: products.count,
+            products: products.rows,
+            totalPages: products.totalPages,
+            currentPage: products.currentPage,
+            nextPage: products.next,
+            previusPage: products.previus,
+          },
+        });
       }
     } catch (err) {
       res.status(500).send({ error: err.toString() });

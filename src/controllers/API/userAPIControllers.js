@@ -5,7 +5,7 @@ let usersController = {
     try {
       const { page, size } = req.query;
       const getPagination = (page, size) => {
-        const limit = size ? +size : 5;
+        const limit = size ? +size : 2;
         const offset = page ? page * limit : 0;
         return { limit, offset };
       };
@@ -31,6 +31,17 @@ let usersController = {
       } else {
         users = getPagingData(users, page, limit);
         users = JSON.parse(JSON.stringify(users, null, 2));
+         
+            if( page == undefined){
+            users.next =  [process.env.URL_Server || process.env.URL_DEV] +`${process.env.PORT}/api/users?page=${2}`;
+            } else if(page < users.totalPages){
+            users.next =  [process.env.URL_Server || process.env.URL_DEV] +`${process.env.PORT}/api/users?page=${parseInt(page)+1}`;
+            users.previus = [process.env.URL_Server || process.env.URL_DEV] +`${process.env.PORT}/api/users?page=${page-1}`;
+            } else if(page== users.totalPages){
+            users.previus = [process.env.URL_Server || process.env.URL_DEV] +`${process.env.PORT}/api/users?page=${page-1}`;
+            } else{
+            users.previus = [process.env.URL_Server || process.env.URL_DEV] +`${process.env.PORT}/api/users?page=${users.totalPages}`;
+            } 
 
         for (let i = 0; i < users.rows.length; i++) {
           users.rows[i].detail =
@@ -43,6 +54,8 @@ let usersController = {
             users: users.rows,
             totalPages: users.totalPages,
             currentPage: users.currentPage,
+            nextPage: users.next,
+            previusPage: users.previus,
           },
         });
       }
