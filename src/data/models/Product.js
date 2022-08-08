@@ -54,7 +54,7 @@ module.exports = (sequelize, dataTypes) => {
     });
 
     Product.hasMany(models.ColorProduct, {
-      as: "productColors",
+      as: "product_ColorProduct",
       foreignKey: "idProductsFK",
       timestamps: false,
     });
@@ -76,6 +76,20 @@ module.exports = (sequelize, dataTypes) => {
       through:"CategoryProduct",
       foreignKey: "idProductsFK",
       otherKey:"idCategoryFK",
+      timestamps: false,
+    });
+    Product.belongsToMany(models.Size, {
+      as: "Product_Size",
+      through:"SizeProduct",
+      foreignKey: "idProductsFK",
+      otherKey:"idSizeFK",
+      timestamps: false,
+    });
+    Product.belongsToMany(models.Color, {
+      as: "product_Color",
+      through:"ColorProduct",
+      foreignKey: "idProductsFK",
+      otherKey:"idColorFK",
       timestamps: false,
     });
 

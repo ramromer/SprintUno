@@ -100,29 +100,16 @@ let usersController = {
       .catch((err) => console.log(" error al consultar la base de datos", err));
   },
   image: (req, res) => {
-    db.User.findOne({
-      where: {
-        idUser: req.params.id,
-      },
-      attributes: [
-        ["userImage", "image"]
-      ],
-      raw: true,
-    })
-      .then((user) => {
-        if (user == null) {
-          return res.render("notFound");
-        }
+
         let options = {
           root: __dirname + "../../../public/users/avatars/"
         }
-        return res.sendFile(`${user.image}`, options, function (err) {
+        return res.sendFile(req.params.file, options, function (err) {
           if (err) {
             res.send(err);
           }
         })
-      })
-      .catch((err) => console.log(" error al consultar la base de datos", err));
+      
   },
   logout: (req, res) => {
     req.session.destroy();

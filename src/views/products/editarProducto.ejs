@@ -57,7 +57,7 @@
                     <label for="colorRed"> Rojo</label><input type="checkbox" id='colorRed' name="colorRed" value="2">
                     <label for="colorBlack"> Negro</label><input type="checkbox" id='colorBlack' name="colorBlack"
                       value="3">
-                    <% product.productColors.forEach(color=> { %>
+                    <% product.product_ColorProduct.forEach(color=> { %>
                       <%if(color.dataValues.idColorFK==1){%>
                         <script>document.getElementById('colorWhite').checked = true</script>
                         <%}%>

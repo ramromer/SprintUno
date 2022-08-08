@@ -42,6 +42,7 @@ router.get('/', mainController.index);
 router.get('/detalleproducto/:id', mainController.detalleProducto);
 router.get('/buscar', mainController.buscar);
 router.get('/productos', mainController.productos);
+router.get('/products/image/:file',mainController.image);
 router.get('/carrito',authMiddleware, mainController.showCarrito);
 // router.get('/productonuevo', authMiddleware, mainController.productoNuevo);
 router.get('/productonuevo', mainController.productoNuevo);

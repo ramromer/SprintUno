@@ -2,6 +2,8 @@ const fs = require("fs");
 const path = require("path");
 const db = require("../data/models");
 const sequelize = require("Sequelize");
+const { where } = require("Sequelize");
+const { Console } = require("console");
 
 let mainController = {
   index: (req, res) => {
@@ -91,7 +93,7 @@ let mainController = {
         ],
 
         where: {
-          idUserFK: req.session.userLogged.idUser,
+          idProductFK: req.session.userLogged.idUser,
         },
       });
       if (listaBicis.length < 1) {
@@ -159,7 +161,7 @@ let mainController = {
       where: { idProduct: req.params.id },
       include: [
         { association: "productsImages" },
-        { association: "productColors" },
+        { association: "product_ColorProduct" },
         { association: "productSizes" },
         { association: "productCategories" },
       ],
@@ -230,8 +232,8 @@ let mainController = {
       // discount: 0, no está en la BD, lo vamos a usar??
       productCategories: categories,
       productSizes: sizes,
-      // productColors es el nombre de la relación que quiero incluir al momento de crear el producto
-      productColors: colors,
+      // product_ColorProduct es el nombre de la relación que quiero incluir al momento de crear el producto
+      product_ColorProduct: colors,
       // productsImages es el nombre de la relación que quiero incluir al momento de crear el producto
       productsImages: { imageProduct: image },
     };
@@ -239,7 +241,7 @@ let mainController = {
     db.Product.create(productoNuevo, {
       // debo usar include para agregar los registros que quiero crear en las tablas externas en base al producto
       include: [
-        { model: db.ColorProduct, as: "productColors" }, // se debe llamar el modelo de la tabla donde quiero crear el registros
+        { model: db.ColorProduct, as: "product_ColorProduct" }, // se debe llamar el modelo de la tabla donde quiero crear el registros
         // y cuando la relacion tiene un alias se debe llamar la relación de la tabla actual como as:xxx
         { model: db.ImageProduct, as: "productsImages" },
         { model: db.SizeProduct, as: "productSizes" },
@@ -258,7 +260,7 @@ let mainController = {
       where: { idProduct: req.params.id },
       include: [
         { association: "productsImages" },
-        { association: "productColors" },
+        { association: "product_ColorProduct" },
         { association: "productSizes" },
         { association: "productCategories" },
       ],
@@ -317,8 +319,8 @@ let mainController = {
         // discount: 0, no está en la BD, lo vamos a usar??
         productCategories: categories,
         productSizes: sizes,
-        // productColors es el nombre de la relación que quiero incluir al momento de crear el producto
-        productColors: colors,
+        // product_ColorProduct es el nombre de la relación que quiero incluir al momento de crear el producto
+        product_ColorProduct: colors,
         // productsImages es el nombre de la relación que quiero incluir al momento de crear el producto
         productsImages: { imageProduct: req.file.filename },
       };
@@ -332,8 +334,8 @@ let mainController = {
         // discount: 0, no está en la BD, lo vamos a usar??
         productCategories: categories,
         productSizes: sizes,
-        // productColors es el nombre de la relación que quiero incluir al momento de crear el producto
-        productColors: colors,
+        // product_ColorProduct es el nombre de la relación que quiero incluir al momento de crear el producto
+        product_ColorProduct: colors,
         // productsImages es el nombre de la relación que quiero incluir al momento de crear el producto
         // productsImages: { imageProduct: req.file.filename },
       };
@@ -354,7 +356,7 @@ let mainController = {
         // debo usar include para agregar los registros que quiero crear en las tablas externas en base al producto
         where: { idProduct: req.params.id },
         include: [
-          { model: db.ColorProduct, as: "productColors" }, // se debe llamar el modelo de la tabla donde quiero crear el registros
+          { model: db.ColorProduct, as: "product_ColorProduct" }, // se debe llamar el modelo de la tabla donde quiero crear el registros
           // y cuando la relacion tiene un alias se debe llamar la relación de la tabla actual como as:xxx
           { model: db.ImageProduct, as: "productsImages" },
           { model: db.SizeProduct, as: "productSizes" },
@@ -439,6 +441,18 @@ let mainController = {
       .catch((err) => {
         console.error(err);
       });
+  },
+  image: (req, res) => {
+    
+        let options = {
+          root: __dirname + "../../../public/images/"
+        }
+        return res.sendFile(req.params.file, options, function (err) {
+          if (err) {
+            res.send(err);
+          }
+        })
+      
   },
   error: (req, res) => {
     res.render("error");

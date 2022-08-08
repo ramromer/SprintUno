@@ -38,6 +38,7 @@ let usersController = {
                     "addres",
                     "birthday",
                     "user",
+                    "userimage"
                 ],
                 raw: true,
             });
@@ -45,7 +46,7 @@ let usersController = {
             if (user === null) {
                 res.status(204).send()
             } else {
-                user.image_url = [process.env.URL_Server || process.env.URL_DEV] + `${process.env.PORT}/users/image/${user.id}`
+                user.image_url = [process.env.URL_Server || process.env.URL_DEV] + `${process.env.PORT}/users/image/${user.userimage}`
                 res.status(200).send({ data: user });
             }
         } catch (err) {
