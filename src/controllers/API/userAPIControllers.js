@@ -4,44 +4,55 @@ let usersController = {
   getUsers: async (req, res) => {
     try {
       const { page, size } = req.query;
+
       const getPagination = (page, size) => {
-        const limit = size ? +size : 2;
+        const limit = size ? +size : 10;
         const offset = page ? page * limit : 0;
         return { limit, offset };
       };
 
-      const { limit, offset } = getPagination(page, size);
+
       const getPagingData = (data, page, limit) => {
         const { count, rows } = data;
-        const currentPage = page ? +page : 1;
-        const totalPages = Math.ceil(count / limit);
+        const currentPage = page ? +page : 0;
+        const totalPages = Math.ceil(count / limit)== Infinity ? 1 : Math.ceil(count / limit);
         return { count, rows, totalPages, currentPage };
       };
 
-      let users = await db.User.findAndCountAll({
+      const { limit, offset } = getPagination(page, size);
+
+      let queryObject = {
         limit,
         offset,
         attributes: [["idUser", "id"], ["fullname", "name"], "email"],
         distinct: "idUser",
         order: [["idUser", "ASC"]],
-      });
+      }
+
+      if(size==0){
+        delete  queryObject.limit
+        delete  queryObject.offset
+        }
+
+      let users = await db.User.findAndCountAll(queryObject);
 
       if (users === null) {
         res.status(204).send();
       } else {
         users = getPagingData(users, page, limit);
         users = JSON.parse(JSON.stringify(users, null, 2));
-         
-            if( page == undefined){
-            users.next =  [process.env.URL_Server || process.env.URL_DEV] +`${process.env.PORT}/api/users?page=${2}`;
-            } else if(page < users.totalPages){
-            users.next =  [process.env.URL_Server || process.env.URL_DEV] +`${process.env.PORT}/api/users?page=${parseInt(page)+1}`;
-            users.previus = [process.env.URL_Server || process.env.URL_DEV] +`${process.env.PORT}/api/users?page=${page-1}`;
-            } else if(page== users.totalPages){
-            users.previus = [process.env.URL_Server || process.env.URL_DEV] +`${process.env.PORT}/api/users?page=${page-1}`;
-            } else{
-            users.previus = [process.env.URL_Server || process.env.URL_DEV] +`${process.env.PORT}/api/users?page=${users.totalPages}`;
-            } 
+
+        if(!(users.totalPages == 1 || page >= users.totalPages-1)){
+            users.next =
+            [process.env.URL_Server || process.env.URL_DEV] +
+            `${process.env.PORT}/api/users?size=${limit}&page=${parseInt(page ? page:0) + 1}`;
+        }
+
+        if(!(users.totalPages == 1 ||page >= users.totalPages || page == undefined || page == 0)){
+            users.previus =
+                [process.env.URL_Server || process.env.URL_DEV] +
+                `${process.env.PORT}/api/users?size=${limit}&page=${page - 1}`;
+        }
 
         for (let i = 0; i < users.rows.length; i++) {
           users.rows[i].detail =

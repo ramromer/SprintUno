@@ -4,23 +4,23 @@ let productsController = {
   getProducts: async (req, res) => {
     try {
       const { page, size } = req.query;
+     
+        const getPagination = (page, size) => {
+          const limit = size ? +size : 10;
+          const offset = page ? page * limit : 0;
+          return { limit, offset };
+        };
+        
+        const getPagingData = (data, page, limit) => {
+          const { count, rows } = data;
+          const currentPage = page ? +page : 0;
+          const totalPages = Math.ceil(count / limit)== Infinity ? 1 : Math.ceil(count / limit);
+          return { count, rows, totalPages, currentPage };
+        };
+        
+        const { limit, offset } = getPagination(page, size);
 
-      const getPagination = (page, size) => {
-        const limit = size ? +size : 3;
-        const offset = page ? page * limit : 1;
-        return { limit, offset };
-      };
-
-      const getPagingData = (data, page, limit) => {
-        const { count, rows } = data;
-        const currentPage = page ? +page : 1;
-        const totalPages = Math.ceil(count / limit);
-        return { count, rows, totalPages, currentPage };
-      };
-
-      const { limit, offset } = getPagination(page, size);
-
-      let products = await db.Product.findAndCountAll({
+      let queryObject = {
         limit,
         offset,
         attributes: [["idProduct", "id"], ["title", "name"], "description"],
@@ -35,34 +35,44 @@ let productsController = {
         ],
         distinct: "idProduct",
         order: [["idProduct", "ASC"]],
-      });
+      }
+
+      if(size==0){
+        delete  queryObject.limit
+        delete  queryObject.offset
+        }
+
+      let products = await db.Product.findAndCountAll(queryObject);
 
       if (products === null) {
         res.status(204).send();
       } else {
+        
         products = getPagingData(products, page, limit);
         products = JSON.parse(JSON.stringify(products, null, 2));
 
-        if (page == undefined) {
-          products.next =
-            [process.env.URL_Server || process.env.URL_DEV] +
-            `${process.env.PORT}/api/products?page=${2}`;
-        } else if (page < products.totalPages) {
-          products.next =
-            [process.env.URL_Server || process.env.URL_DEV] +
-            `${process.env.PORT}/api/products?page=${parseInt(page) + 1}`;
+          
+          if (!(products.totalPages == 1 || page >= products.totalPages - 1)) {
+            products.next =
+              [process.env.URL_Server || process.env.URL_DEV] +
+              `${process.env.PORT}/api/products?size=${limit}&page=${
+                parseInt(page ? page : 0) + 1
+              }`;
+          }
+        if (
+          !(
+            products.totalPages == 1 ||
+            page >= products.totalPages ||
+            page == undefined ||
+            page == 0
+          )
+        ) {
           products.previus =
             [process.env.URL_Server || process.env.URL_DEV] +
-            `${process.env.PORT}/api/products?page=${page - 1}`;
-        } else if (page == products.totalPages) {
-          products.previus =
-            [process.env.URL_Server || process.env.URL_DEV] +
-            `${process.env.PORT}/api/products?page=${page - 1}`;
-        } else {
-          products.previus =
-            [process.env.URL_Server || process.env.URL_DEV] +
-            `${process.env.PORT}/api/products?page=${products.totalPages}`;
+            `${process.env.PORT}/api/products?size=${limit}&page=${page - 1}`;
         }
+      
+
 
         for (let i = 0; i < products.rows.length; i++) {
           products.rows[i].detail =
