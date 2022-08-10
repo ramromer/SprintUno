@@ -11,6 +11,7 @@ let indexRouter = require("./routes/index");
 let usersRouter = require("./routes/users");
 let usersAPIRouter = require("./routes/API/userAPI.js");
 let productsAPIRouter = require("./routes/API/productAPI.js");
+let categoryAPIRouter = require("./routes/API/categoryAPI.js");
 let app = express();
 
 const methodOverride = require("method-override");
@@ -44,7 +45,7 @@ app.use(userLoggedMiddleware);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false })); //URL encode  - Para que nos pueda llegar la información desde el formulario al req.body
 app.use("/users", usersRouter);
-app.use("/api", usersAPIRouter, productsAPIRouter);  
+app.use("/api", usersAPIRouter, productsAPIRouter, categoryAPIRouter);  
 app.use("/", indexRouter);
 
 app.use(function (err, req, res, next) {

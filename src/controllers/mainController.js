@@ -2,8 +2,6 @@ const fs = require("fs");
 const path = require("path");
 const db = require("../data/models");
 const sequelize = require("Sequelize");
-const { where } = require("Sequelize");
-const { Console } = require("console");
 
 let mainController = {
   index: (req, res) => {

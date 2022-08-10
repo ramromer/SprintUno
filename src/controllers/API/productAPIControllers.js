@@ -3,9 +3,18 @@ const db = require("../../data/models");
 let productsController = {
   getProducts: async (req, res) => {
     try {
-      let orderBy="ASC"
-      
-      let { page, size, order } = req.query;
+      let orderBy="ASC";
+      let optionalWhere = {};
+            
+      let { page, size, order, category } = req.query;
+
+      if(category != undefined){
+        optionalWhere = 
+      {
+        "idCategory": `${category}`
+      }
+      }
+
         if(order!= undefined){
           order = order.toUpperCase();
 
@@ -41,6 +50,7 @@ let productsController = {
             through: {
               attributes: [],
             },
+            where:optionalWhere
           },
         ],
         distinct: "idProduct",
@@ -158,6 +168,12 @@ let productsController = {
       res.status(500).send({ error: err.toString() });
     }
   },
+
+
+
+  
 };
 
 module.exports = productsController;
+
+

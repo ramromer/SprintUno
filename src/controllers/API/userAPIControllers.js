@@ -3,9 +3,20 @@ const db = require("../../data/models");
 let usersController = {
   getUsers: async (req, res) => {
     try {
-      const { page, size } = req.query;
+      let orderBy="ASC"
+      
+      let { page, size, order } = req.query;
+        if(order!= undefined){
+          order = order.toUpperCase();
 
-      const getPagination = (page, size) => {
+          if(order != "ASC" && order != "DESC"){
+            orderBy="ASC"
+          }else{
+            orderBy = order
+          }
+        }
+
+      let getPagination = (page, size) => {
         const limit = size ? +size : 10;
         const offset = page ? page * limit : 0;
         return { limit, offset };
@@ -26,7 +37,7 @@ let usersController = {
         offset,
         attributes: [["idUser", "id"], ["fullname", "name"], "email"],
         distinct: "idUser",
-        order: [["idUser", "ASC"]],
+        order: [["idUser", orderBy]],
       }
 
       if(size==0){
