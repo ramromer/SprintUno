@@ -3,8 +3,18 @@ const db = require("../../data/models");
 let productsController = {
   getProducts: async (req, res) => {
     try {
-      const { page, size } = req.query;
-     
+      let orderBy="ASC"
+      
+      let { page, size, order } = req.query;
+        if(order!= undefined){
+          order = order.toUpperCase();
+
+          if(order != "ASC" && order != "DESC"){
+            orderBy="ASC"
+          }else{
+            orderBy = order
+          }
+        }
         const getPagination = (page, size) => {
           const limit = size ? +size : 10;
           const offset = page ? page * limit : 0;
@@ -34,7 +44,7 @@ let productsController = {
           },
         ],
         distinct: "idProduct",
-        order: [["idProduct", "ASC"]],
+        order: [["idProduct", orderBy]],
       }
 
       if(size==0){
@@ -80,14 +90,14 @@ let productsController = {
             `${process.env.PORT}/api/products/${products.rows[i].id}`;
         }
         res.status(200).send({
-          data: {
+          data:{           
             count: products.count,
             products: products.rows,
             totalPages: products.totalPages,
             currentPage: products.currentPage,
             nextPage: products.next,
             previusPage: products.previus,
-          },
+          }
         });
       }
     } catch (err) {

@@ -35,7 +35,7 @@ const validateNewProduct = [
   body('nombre').notEmpty().withMessage('Debe ingresar un nombre.'),
   body('precio').notEmpty().withMessage('Debe ingresar un precio.'),
   body('cantidad').notEmpty().withMessage(''),
-  body('descripcionProductoNuevo').notEmpty().withMessage(''),
+  body('descripcionPN').notEmpty().withMessage(''),
 ]
 
 router.get('/', mainController.index);
@@ -44,11 +44,9 @@ router.get('/buscar', mainController.buscar);
 router.get('/productos', mainController.productos);
 router.get('/products/image/:file',mainController.image);
 router.get('/carrito',authMiddleware, mainController.showCarrito);
-// router.get('/productonuevo', authMiddleware, mainController.productoNuevo);
-router.get('/productonuevo', mainController.productoNuevo);
+ router.get('/productonuevo', authMiddleware, mainController.productoNuevo);
 router.get('/opciones', authMiddleware, mainController.opciones);
-// router.get('/editarproducto/:id', authMiddleware, mainController.editarProducto); // esta es la original, debo descomentar
-router.get('/editarproducto/:id', mainController.editarProducto);
+router.get('/editarproducto/:id', authMiddleware, mainController.editarProducto); 
 router.delete('/productos/:id', authMiddleware, mainController.eliminarProducto);
 router.get('/accesDenied', mainController.accesDenied);
 router.get('/error', mainController.error);
