@@ -4,6 +4,7 @@ const db = require("../../data/models");
 let categoryController = {
   getCategories: async (req, res) => {
     try {
+      let countCategories = 0;
       let queryObject = {
         /* No se puede paginar al usar un group by en este ORM, tendriamos que hacer un literal Query */
         group: ["idCategory"],
@@ -24,15 +25,17 @@ let categoryController = {
       } else {
         categories = JSON.parse(JSON.stringify(categories, null, 2));
 
+
         for (let i = 0; i < categories.rows.length; i++) {
           categories.rows[i].products_in = categories.count[i].count;
-
+          countCategories += categories.count[i].count
           categories.rows[i].detail =
             [process.env.URL_Server || process.env.URL_DEV] +
             `${process.env.PORT}/api/categories/${categories.rows[i].id}`;
         }
         res.status(200).send({
           data: {
+            count: countCategories,
             categories: categories.rows,
           },
         });
