@@ -10,9 +10,9 @@ window.addEventListener("load", function () {
   let emailErrorFlag = true;
   let passErrorFlag = true;
 
-  userLogin.addEventListener("blur", mouseLeaveEmail);
-  passworLogin.addEventListener("blur", mouseLeavePass);
-  btnLogin.addEventListener("mouseover", beforeSave);
+  userLogin.addEventListener("focusout", mouseLeaveEmail);
+  passworLogin.addEventListener("focusout", mouseLeavePass);
+  btnLogin.addEventListener("focusin", beforeSave);
   btnLogin.addEventListener("click", onSave);
 
   function beforeSave() {
