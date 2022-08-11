@@ -1,10 +1,11 @@
 const db = require("../../data/models");
+const { Op } = require("sequelize");
 
 let productsController = {
   getProducts: async (req, res) => {
     try {
       let orderBy="ASC";
-      let optionalWhere = {};
+      let optionalWhere = {"idCategory":{[Op.not]:null}};
             
       let { page, size, order, category } = req.query;
 
@@ -50,7 +51,7 @@ let productsController = {
             through: {
               attributes: [],
             },
-            where:optionalWhere
+             where:optionalWhere
           },
         ],
         distinct: "idProduct",
