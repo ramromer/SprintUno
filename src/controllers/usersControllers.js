@@ -117,12 +117,13 @@ let usersController = {
     res.redirect("/");
   },
   askRegister: (req, res) => {
+ 
+
     db.User.findOne({
       where: {
         email: req.params.email,
       },
     }).then((user) => {
-      // console.log('user:',user);
       if (user !== null) {
         console.log('lo mande');
         res.send(JSON.stringify(1))
@@ -130,7 +131,7 @@ let usersController = {
         res.send(JSON.stringify(0))
         console.log('NO lo mande');
       }
-    })
+    }).catch((err) => console.log(err))
   },
   register: (req, res) => {
     res.render("./users/register.ejs");

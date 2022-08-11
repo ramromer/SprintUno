@@ -1,12 +1,11 @@
 window.addEventListener("load", function () {
   if (document.URL.startsWith("http://localhost")) {
-    url = `http://localhost:3000`;
+    url = `http://localhost:3010`;
   } else {
     url = ""; // cambiar al deploy
   }
 
   let email = document.getElementById("email");
-  let yaexiste = document.getElementById("yaexisteemail");
   let button = document.getElementById("submitBtn");
   let eye1 = document.getElementById("eye");
   let eye2 = document.getElementById("eye2");
@@ -14,29 +13,12 @@ window.addEventListener("load", function () {
   let pass2 = document.getElementById("drowssap1");
 
   let pwShown = 0;
+  
   var pwShown1 = 0;
 
   eye1.addEventListener("click", eyeFunc);
   eye2.addEventListener("click", eye2Func);
-  email.addEventListener("focusout", () => {
-    askRegister(email.value);
-  });
 
-  function askRegister(checking) {
-    fetch(`${url}/users/register/${checking}`)
-      .then((res) => {
-        return res.json();
-      })
-      .then((respuesta) => {
-        if (respuesta == 1) {
-          yaexiste.style.display = "block";
-          button.disabled = true;
-        } else {
-          yaexiste.style.display = "none";
-          button.disabled = false;
-        }
-      });
-  }
 
   function eyeFunc() {
     if (pwShown == 0) {

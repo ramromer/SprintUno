@@ -26,10 +26,10 @@ window.addEventListener("load", function () {
 
   btnGuardar.addEventListener("mouseover", beforeSave);
   btnGuardar.addEventListener("click", onSave);
-  precioEP.addEventListener("blur", mouseLeavePrice);
-  nombre.addEventListener("blur", mouseLeaveName);
-  cantidadEP.addEventListener("blur", mouseLeaveQuantity);
-  descripcionEP.addEventListener("blur", mouseLeaveDescription);
+  precioEP.addEventListener("focusout", mouseLeavePrice);
+  nombre.addEventListener("focusout", mouseLeaveName);
+  cantidadEP.addEventListener("focusout", mouseLeaveQuantity);
+  descripcionEP.addEventListener("focusout", mouseLeaveDescription);
   imagenes.addEventListener("change", onSelectImage);
 
   function beforeSave() {

@@ -22,12 +22,12 @@ window.addEventListener("load", function () {
   
   let imageOkFlag = false;
 
-  btnGuardar.addEventListener("mouseover", beforeSave);
+  btnGuardar.addEventListener("focusin", beforeSave);
   btnGuardar.addEventListener("click", onSave);
-  precioEP.addEventListener("blur", mouseLeavePrice)
-  cantidadEP.addEventListener("blur", mouseLeaveQuantity)
+  precioEP.addEventListener("focusout", mouseLeavePrice)
+  cantidadEP.addEventListener("focusout", mouseLeaveQuantity)
   imagenes.addEventListener("change", onSelectImage);
-  descripcionEP.addEventListener("blur", mouseLeaveDescription)
+  descripcionEP.addEventListener("focusout", mouseLeaveDescription)
 
 
   function beforeSave() {
@@ -109,7 +109,6 @@ window.addEventListener("load", function () {
     let format = imageFormat[imageFormat.length - 1];
     let acceptedFormats = ["jpg", "jpeg", "png", "gif"];
     
-
     acceptedFormats.forEach((formatInArray) => {
       if (format == formatInArray) {
         imageOkFlag = true;

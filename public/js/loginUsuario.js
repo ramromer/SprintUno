@@ -22,6 +22,7 @@ window.addEventListener("load", function () {
       btnLogin.type = "button";
     }
   }
+  
   function onSave() {
     if (emailErrorFlag) {
       emailAlert.style.display = "block";
