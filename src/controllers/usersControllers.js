@@ -23,29 +23,29 @@ let usersController = {
     });
   },
   update: function (req, res) {
-    let picture;
-    let key = bcryptjs.hashSync(req.body.key, 10);
+    console.log(req.body)
+   
+    let queryUserUpdate = {
+      fullname: req.body.fullName,
+      addres: req.body.fullAddress,
+      email: req.body.email,
+      birthday: req.body.bday,
+      user: req.body.user,
+    };
     if (req.file) {
-      picture = req.file.filename;
-    } else {
-      picture = "porDefecto.jpg";
+      queryUserUpdate.userImage = req.file.filename;
     }
-    db.User.update(
-      {
-        fullname: req.body.fullName,
-        addres: req.body.fullAddress,
-        email: req.body.email,
-        birthday: req.body.bday,
-        user: req.body.user,
-        key: key,
-        userImage: picture,
+
+    if ((req.body.key = !undefined)) {
+      queryUserUpdate.key = bcryptjs.hashSync(req.body.key, 10);
+    }
+    db.User.update({
+      queryUserUpdate,
+
+      where: {
+        idUser: req.params.id,
       },
-      {
-        where: {
-          idUser: req.params.id,
-        },
-      }
-    ).then(res.redirect("/"));
+    }).then(res.redirect("/")).catch((err) => console.log(err));
   },
 
   loginProcess: (req, res) => {
@@ -74,13 +74,14 @@ let usersController = {
           });
         }
       } else {
-        res.render("./users/login.ejs", {
-          errors: {
-            email: {
-              msg: "La combinación de usuario y contraseña son invalidos o inexistente",
+        res
+          .render("./users/login.ejs", {
+            errors: {
+              email: {
+                msg: "La combinación de usuario y contraseña son invalidos o inexistente",
+              },
             },
-          },
-        })
+          })
           .catch((err) =>
             console.log(" error al consultar la base de datos", err)
           );
@@ -100,16 +101,14 @@ let usersController = {
       .catch((err) => console.log(" error al consultar la base de datos", err));
   },
   image: (req, res) => {
-
-        let options = {
-          root: __dirname + "../../../public/users/avatars/"
-        }
-        return res.sendFile(req.params.file, options, function (err) {
-          if (err) {
-            res.send(err);
-          }
-        })
-      
+    let options = {
+      root: __dirname + "../../../public/users/avatars/",
+    };
+    return res.sendFile(req.params.file, options, function (err) {
+      if (err) {
+        res.send(err);
+      }
+    });
   },
   logout: (req, res) => {
     req.session.destroy();
@@ -117,21 +116,21 @@ let usersController = {
     res.redirect("/");
   },
   askRegister: (req, res) => {
- 
-
     db.User.findOne({
       where: {
         email: req.params.email,
       },
-    }).then((user) => {
-      if (user !== null) {
-        console.log('lo mande');
-        res.send(JSON.stringify(1))
-      } else {
-        res.send(JSON.stringify(0))
-        console.log('NO lo mande');
-      }
-    }).catch((err) => console.log(err))
+    })
+      .then((user) => {
+        if (user !== null) {
+          console.log("lo mande");
+          res.send(JSON.stringify(1));
+        } else {
+          res.send(JSON.stringify(0));
+          console.log("NO lo mande");
+        }
+      })
+      .catch((err) => console.log(err));
   },
   register: (req, res) => {
     res.render("./users/register.ejs");

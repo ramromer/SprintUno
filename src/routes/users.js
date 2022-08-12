@@ -87,7 +87,8 @@ router.post('/register', uploadFile.single('image'), validateUserRegister, users
 router.get('/login',guestMiddleware, usersController.login);
 router.get('/register/:email', usersController.askRegister);
 router.get('/register',guestMiddleware, usersController.register);
-router.get('/edit/:id',authMiddleware, usersController.edit);//Editar usuario
+// router.get('/edit/:id',authMiddleware, usersController.edit);//Editar usuario
+router.get('/edit/:id', usersController.edit);//Editar usuario
 router.put('/update/:id',authMiddleware, usersController.update);
 router.delete('/delete/:id', authMiddleware, usersController.eliminarUsuario);//eliminar usuario
 router.get('/profile',authMiddleware,usersController.profile);

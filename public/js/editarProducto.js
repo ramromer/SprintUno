@@ -42,7 +42,6 @@ window.addEventListener("load", function () {
       btnGuardar.type = "submit";
     }else{
       btnGuardar.type = "button";
-
     }
   }
 
@@ -63,6 +62,7 @@ window.addEventListener("load", function () {
       colorAlert.style.display = "none";
     }
     if (precioEP.value < 1) {
+      priceAlert.style.display = "block";
     }
     if (cantidadEP.value < 1) {
       quantityAlert.style.display = "block";
