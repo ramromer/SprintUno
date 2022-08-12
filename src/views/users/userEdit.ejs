@@ -3,7 +3,8 @@
     <body>
         <%- include('../partials/header.ejs')%>
             <main id="mainRegister">
-                <form id="form-register" action="/users/update/<%=Us.idUser%>?_method=PUT" method="POST">
+                <form id="form-register" action="/users/update/<%=Us.idUser%>?_method=PUT" method="POST" enctype="multipart/form-data">
+                    
                     <label>Editar Usuario</label>
 
                     <input name="fullName" type="text" id="fullname" value="<%= Us.fullname %>" />
@@ -58,8 +59,8 @@
                        <%}%>
                    </div>
                             <div>
-                                <input name="key" type="password" id="drowssap0" placeholder="Contraseña" /><i
-                                    class="fa fa-eye" id="eye"></i>
+                                <input name="key" type="password" id="key" placeholder="Contraseña" autocomplete="new-password"/>
+                                <i class="fa fa-eye" id="eye"></i>
                                 <% if (locals.errores && errores.key) { %>
                                     <p>
                                         <%=errores.key.msg %>
@@ -67,8 +68,8 @@
                                     <%}%>
                             </div>
                             <div>
-                                <input name="keyAgain" type="password" id="drowssap1"
-                                    placeholder="Confirmar contraseña" /><i class="fa fa-eye" id="eye2"></i>
+                                <input name="keyAgain" type="password" id="keyAgain" placeholder="Confirmar contraseña" autocomplete="new-password"/>
+                                    <i class="fa fa-eye" id="eye2"></i>
                                 <p id="passRepErr">Las contraseñas no coinciden.
                                 </p>
                             </div>

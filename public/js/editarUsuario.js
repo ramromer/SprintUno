@@ -6,14 +6,14 @@ window.addEventListener("load", function () {
   }
   let pwShown = 0;
   let pwShown1 = 0;
-
+try{
 
   let button = document.getElementById("submitBtn");
   let eye1 = document.getElementById("eye");
   let eye2 = document.getElementById("eye2");
-  let pass1 = document.getElementById("drowssap0");
-  let pass2 = document.getElementById("drowssap1");
-
+  let pass1 = document.getElementById("key");
+  let pass2 = document.getElementById("keyAgain");
+  
   let fullnameAlert = document.getElementById("fullnameAlert");
   let fullAddressAlert = document.getElementById("fullAddressAlert");
   let bDayAlert = document.getElementById("bDayAlert");
@@ -24,10 +24,11 @@ window.addEventListener("load", function () {
   let fullAddress = document.getElementById("fulladdress");
   let bDay = document.getElementById("bday");
   let user = document.getElementById("user");
-  let fullNameFlag = false;
-  let fullAddressFlag = false;
-  let userFlag = false;
-  let bDayFlag = false;
+  let fullNameFlag = true;
+  let fullAddressFlag = true;
+  let userFlag = true;
+  let bDayFlag = true;
+
 
   fullName.addEventListener("focusout", fullNameFunction);
   fullAddress.addEventListener("focusout", fullAddressFunction);
@@ -36,39 +37,42 @@ window.addEventListener("load", function () {
   pass1.addEventListener("focusout", mouseLeavePass);
   eye1.addEventListener("click", eyeFunc);
   eye2.addEventListener("click", eye2Func);
+  button.addEventListener("focusin", beforeSave);
+  button.addEventListener("click", onSave);
 
   function fullNameFunction() {
     if (fullName.value.length < 5) {
       fullnameAlert.style.display = "block";
-	  button.type = "button";
-	  fullNameFlag = false;
+      button.type = "button";
+      fullNameFlag = false;
     } else {
       fullnameAlert.style.display = "none";
-	  button.type = "submit";
-	  fullNameFlag = true;
+      button.type = "submit";
+      fullNameFlag = true;
     }
   }
 
   function fullAddressFunction() {
     if (fullAddress.value.length < 5) {
       fullAddressAlert.style.display = "block";
-	  button.type = "button";
-	  fullAddressFlag = false;
+      button.type = "button";
+      fullAddressFlag = false;
     } else {
       fullAddressAlert.style.display = "none";
-	  button.type = "submit";
-	  fullAddressFlag = true;
+      button.type = "submit";
+      fullAddressFlag = true;
     }
   }
 
   function bDayFunction() {
     // First check for the pattern
     if (/^(\d{2}|\d{1})\/(\d{2}|\d{1})\/\d{4}$/.test(bDay.value)) {
-		bDayAlert.style.display = "block";
-		button.type = "button";
+      bDayAlert.style.display = "block";
+      button.type = "button";
+      bDayFlag = false;
       return;
     }
-	
+
     let parts = bDay.value.split("-");
     let day = parseInt(parts[2], 10);
     let month = parseInt(parts[1], 10);
@@ -76,8 +80,9 @@ window.addEventListener("load", function () {
 
     // Check the ranges of month and year
     if (year < 1800 || year > 2022 || month == 0 || month > 12) {
-		bDayAlert.style.display = "block";
-		button.type = "button";
+      bDayAlert.style.display = "block";
+      button.type = "button";
+      bDayFlag = false;
       return;
     }
 
@@ -88,65 +93,77 @@ window.addEventListener("load", function () {
       monthLength[1] = 29;
     }
     if (day <= 0 && day > monthLength[month - 1]) {
-		bDayAlert.style.display = "block";
-		button.type = "button";
+      bDayAlert.style.display = "block";
+      button.type = "button";
+      bDayFlag = false;
       return;
     }
 
     bDayAlert.style.display = "none";
-	button.type = "submit";
+    button.type = "submit";
+    bDayFlag = true;
   }
 
   function userFunction() {
     if (user.value.length < 5) {
       userAlert.style.display = "block";
-	  userFlag =false;
+      userFlag = false;
     } else {
       userAlert.style.display = "none";
-	  userFlag =true;
+      userFlag = true;
+    }
+  }
+
+  function mouseLeavePass() {
+    pass2.addEventListener("change", pass2Function);
+    pass1.addEventListener("change", pass2Function);
+
+    if (pass1.value.length < 8) {
+      passAlert2.style.display = "block";
+    } else {
+      passAlert2.style.display = "none";
     }
   }
 
   function pass2Function() {
-
-
     if (pass2.value != pass1.value) {
-		passAlert.style.display = "block";
+      passAlert.style.display = "block";
     } else {
-		passAlert.style.display = "none";
+      passAlert.style.display = "none";
     }
   }
 
   function beforeSave() {
-    if (!emailErrorFlag && !passErrorFlag) {
-      btnLogin.type = "submit";
+    if (!fullNameFlag || !fullAddressFlag || !userFlag || !bDayFlag) {
+      button.type = "button";
     } else {
-      btnLogin.type = "button";
+      button.type = "submit";
     }
   }
 
   function onSave() {
-    if (emailErrorFlag) {
-      emailAlert.style.display = "block";
-    }
-    if (passErrorFlag) {
-      passAlert.style.display = "block";
-    }
-  }
-
-
-  function mouseLeavePass() {
-
-	pass2.addEventListener("change", pass2Function);
-    pass1.addEventListener("change", pass2Function);
-
-    if (pass1.value.length < 8) {
-		passAlert2.style.display = "block";
-    //   button.type = "button";
-    //   passErrorFlag = true;
+    if (!fullNameFlag) {
+      fullnameAlert.style.display = "block";
     } else {
-    //   passErrorFlag = false;
-	passAlert2.style.display = "none";
+      fullnameAlert.style.display = "none";
+    }
+
+    if (!fullAddressFlag) {
+      fullAddressAlert.style.display = "block";
+    } else {
+      fullAddressAlert.style.display = "none";
+    }
+
+    if (!userFlag) {
+      userAlert.style.display = "block";
+    } else {
+      userAlert.style.display = "none";
+    }
+
+    if (!bDayFlag) {
+      bDayAlert.style.display = "block";
+    } else {
+      bDayAlert.style.display = "none";
     }
   }
 
@@ -177,4 +194,5 @@ window.addEventListener("load", function () {
       pass2.setAttribute("type", "password");
     }
   }
+}catch(err){console.log(err)}
 });

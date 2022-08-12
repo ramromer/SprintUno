@@ -8,6 +8,8 @@
         display: block!important;
         margin-left: auto;
         margin-right: auto;
+        aspect-ratio: auto;
+        height: 20vh;
 }
 
 /* botones al final */

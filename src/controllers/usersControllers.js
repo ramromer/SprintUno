@@ -23,29 +23,32 @@ let usersController = {
     });
   },
   update: function (req, res) {
-    console.log(req.body)
-   
     let queryUserUpdate = {
       fullname: req.body.fullName,
       addres: req.body.fullAddress,
-      email: req.body.email,
       birthday: req.body.bday,
       user: req.body.user,
     };
+
     if (req.file) {
       queryUserUpdate.userImage = req.file.filename;
     }
-
-    if ((req.body.key = !undefined)) {
-      queryUserUpdate.key = bcryptjs.hashSync(req.body.key, 10);
+    console.log(req.body)
+    if ((req.body.key !=undefined)) {
+      console.log(typeof req.body.key, " ", req.body.key)
+       queryUserUpdate.key = bcryptjs.hashSync(req.body.key, 10);
     }
-    db.User.update({
-      queryUserUpdate,
-
+    console.log(queryUserUpdate);
+    db.User.update(queryUserUpdate, {
       where: {
-        idUser: req.params.id,
-      },
-    }).then(res.redirect("/")).catch((err) => console.log(err));
+        idUser: "114"
+      }
+    })
+      .then((result) => {
+        console.log(result);
+        res.redirect("/");
+      })
+      .catch((err) => console.log(err));
   },
 
   loginProcess: (req, res) => {

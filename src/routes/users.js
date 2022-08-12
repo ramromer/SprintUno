@@ -83,14 +83,17 @@ const authMiddleware = require('../middlewares/authMiddleware');
 router.post('/login', validateUserLogin, usersController.loginProcess);
 router.post('/register', uploadFile.single('image'), validateUserRegister, usersController.registerWrite);
 
+/* PUT user */
+router.put('/update/:id',authMiddleware,  uploadFile.single('image'),usersController.update);
+
+/* DELETE user */
+router.delete('/delete/:id', authMiddleware, usersController.eliminarUsuario);//eliminar usuario
+
 /* GET users listing. */
 router.get('/login',guestMiddleware, usersController.login);
 router.get('/register/:email', usersController.askRegister);
 router.get('/register',guestMiddleware, usersController.register);
-// router.get('/edit/:id',authMiddleware, usersController.edit);//Editar usuario
-router.get('/edit/:id', usersController.edit);//Editar usuario
-router.put('/update/:id',authMiddleware, usersController.update);
-router.delete('/delete/:id', authMiddleware, usersController.eliminarUsuario);//eliminar usuario
+router.get('/edit/:id',authMiddleware, usersController.edit);//Editar usuario
 router.get('/profile',authMiddleware,usersController.profile);
 router.get('/image/:file',usersController.image);
 router.get('/logout', usersController.logout);
