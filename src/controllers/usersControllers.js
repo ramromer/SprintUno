@@ -23,32 +23,48 @@ let usersController = {
     });
   },
   update: function (req, res) {
+    // let errores = validationResult(req);
+
+    // if (errores.errors.length > 0) {
+    //   console.log(errores.errors)
+    //   return 
+// }
+
     let queryUserUpdate = {
-      fullname: req.body.fullName,
-      addres: req.body.fullAddress,
-      birthday: req.body.bday,
-      user: req.body.user,
     };
 
+    if (req.user) {
+      queryUserUpdate.user = req.body.user;
+    }
+    if (req.bday) {
+      queryUserUpdate.birthday = req.body.bday;
+    }
+    if (req.fullAddress) {
+      queryUserUpdate.addres = req.body.fullAddress;
+    }
+    if (req.fullName) {
+      queryUserUpdate.userImage = req.body.fullName;
+    }
     if (req.file) {
       queryUserUpdate.userImage = req.file.filename;
     }
-    console.log(req.body)
     if ((req.body.key !=undefined)) {
-      console.log(typeof req.body.key, " ", req.body.key)
        queryUserUpdate.key = bcryptjs.hashSync(req.body.key, 10);
     }
-    console.log(queryUserUpdate);
-    db.User.update(queryUserUpdate, {
-      where: {
-        idUser: "114"
-      }
-    })
-      .then((result) => {
-        console.log(result);
-        res.redirect("/");
+    if(queryUserUpdate.length > 0){
+      db.User.update(queryUserUpdate, {
+        where: {
+          idUser: req.params.id
+        }
       })
-      .catch((err) => console.log(err));
+        .then((result) => {
+          res.redirect("/");
+        })
+        .catch((err) => console.log(err));
+    }else{
+      res.redirect("/");
+    }
+
   },
 
   loginProcess: (req, res) => {

@@ -55,6 +55,17 @@ const validateUserRegister = [
     }),
     body('bday').notEmpty().withMessage('Por favor ingrese su fecha de nacimiento'),
     body('user').notEmpty().withMessage('Por favor ingrese un nombre de usuario'),
+    body('user').custom((value, {req}) => {
+      return new Promise((resolve, reject) => {
+        db.User.findOne({where:{user:req.body.user}}).then(function( user){
+          
+          if(Boolean(user)) {
+            reject(new Error('El usuario ya estgá siendo usado por otra persona'))
+          }
+          resolve(true)
+        }).catch(err => {console.log(err); reject(new Error('Error en el servidor'))});
+      });
+    }), 
     body('key').notEmpty().withMessage('Por favor ingrese una contraseña'),
     body('key').isLength({min:8}).withMessage('Tu contraseña debe al menos tener 8 caracteres'),
     body('keyAgain').notEmpty().withMessage('Por favor repita la contraseña elegida'),
@@ -76,6 +87,33 @@ const validateUserRegister = [
         });
       })   
 ];
+const validateUserUpdate = [
+  body('fullName').notEmpty().withMessage('Por favor ingresa tu nombre completo'),
+  body('fullName').isLength({min:5}).withMessage('Tu nombre debe al menos tener 5 caracteres'),
+  body('fullAddress').notEmpty().withMessage('Por favor ingresa tu direccion'),
+  body('fullAddress').isLength({min:5}).withMessage('Tu dirección debe al menos tener 5 caracteres'),
+  body('bday').notEmpty().withMessage('Por favor ingrese su fecha de nacimiento'),
+  body('user').notEmpty().withMessage('Por favor ingrese un nombre de usuario'),
+  body('user').isLength({min:5}).withMessage('Tu usuario debe al menos tener 5 caracteres'),
+  // body('key').isLength({min:8}).withMessage('Tu contraseña debe al menos tener 8 caracteres'),
+  body('key').custom((value, {req})=>{
+    if (value.length>0){
+      if(value.length < 8){
+
+        throw new Error('Tu contraseña debe al menos tener 8 caracteres');
+      }
+    }
+    return true;
+  }),
+  body('keyAgain').custom((value, {req})=>{
+    if (value !== req.body.key){
+      throw new Error('Las contraseñas no coinciden');
+    }
+    return true;
+  }),
+
+];
+
 const guestMiddleware = require('../middlewares/guestMiddleware');
 const authMiddleware = require('../middlewares/authMiddleware');
 
@@ -84,7 +122,7 @@ router.post('/login', validateUserLogin, usersController.loginProcess);
 router.post('/register', uploadFile.single('image'), validateUserRegister, usersController.registerWrite);
 
 /* PUT user */
-router.put('/update/:id',authMiddleware,  uploadFile.single('image'),usersController.update);
+router.put('/update/:id',authMiddleware, uploadFile.single('image'), validateUserUpdate, usersController.update);
 
 /* DELETE user */
 router.delete('/delete/:id', authMiddleware, usersController.eliminarUsuario);//eliminar usuario

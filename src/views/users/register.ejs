@@ -8,44 +8,72 @@
 
                     <input name="fullName" type="text" id="fullname"
                         value="<%= locals.oldData? oldData.fullName : null %>" placeholder="Nombre y Apellido" />
+
+                    <div class="validationAlert" id="fullnameAlert">
+                        Tu nombre debe tener al menos 5 caracteres
+                    </div>
                     <% if (locals.errores && errores.fullName) { %>
-                        <div>
-                            <p>
-                                <%=errores.fullName.msg %>
-                            </p>
-                        </div>
+                        <p>
+                            <%=errores.fullName.msg %>
+                        </p>
+
                         <%}%>
                             <input name="fullAddress" type="text" id="fulladdress"
                                 value="<%= locals.oldData? oldData.fullAddress : null %>" placeholder="Domicilio" />
+
+                            <div class="validationAlert" id="fullAddressAlert">
+                                Tu direccion debe tener al menos 5 caracteres
+                            </div>
                             <% if (locals.errores && errores.fullAddress) { %>
-                                <div>
-                                    <p>
-                                        <%=errores.fullAddress.msg %>
-                                    </p>
-                                </div>
+                                <p>
+                                    <%=errores.fullAddress.msg %>
+                                </p>
+
                                 <%}%>
                                     <input name="email" type="email" id="email"
                                         value="<%= locals.oldData? oldData.email : null %>" placeholder="E-mail" />
                                     <p id="yaexisteemail">Ya existe otro usuario con ese email. Por favor registrese con
                                         uno distinto, o ingrese <a href="/users/login">aqui</a>.</p>
+                                    <div>
+                                        <div class="validationAlert" id="emailAlert">
+                                            Por favor ingresa un email
+                                        </div>
+                                        <div class="validationAlert" id="emailValidAlert">
+                                            Por favor ingresa un email valido
+                                        </div>
+                                    </div>
                                     <% if (locals.errores && errores.email) { %>
                                         <p>
                                             <%=errores.email.msg %>
                                         </p>
                                         <%}%>
                                             <input name="emailRep" type="email" id="emailRep"
-                                                value="<%= locals.oldData? oldData.emailRep : null %>"
+                                                value="<%= locals.oldData? oldData.emailRep : '' %>"
                                                 placeholder="Repita su E-mail" />
+                                            <div>
+
+                                                <div class="validationAlert" id="emailEqualAlert">
+                                                    Las direcciones de correo no coinciden.
+                                                </div>
+                                            </div>
                                             <p id="emailRepErr">Las direcciones de correo no coinciden.</p>
                                             <% if (locals.errores && errores.emailRep) { %>
                                                 <p>
                                                     <%=errores.emailRep.msg %>
                                                 </p>
                                                 <%}%>
-
+                                                    <div class="validationAlert" id="emailAlert">
+                                                        Por favor ingresa un email
+                                                    </div>
+                                                    <div class="validationAlert" id="emailAlert2">
+                                                        los email no coinciden
+                                                    </div>
                                                     <label for="bday">Fecha de Nacimiento</label>
                                                     <input name="bday" type="date" id="bday"
                                                         value="<%= locals.oldData? oldData.bday : null %>" />
+                                                    <div class="validationAlert" id="bDayAlert">
+                                                        Por favor escoge una fecha valida
+                                                    </div>
                                                     <% if (locals.errores && errores.bday) { %>
                                                         <p>
                                                             <%=errores.bday.msg %>
@@ -59,66 +87,70 @@
                                                             <p id="yaexiste">Ya existe otro usuario con ese nombre. Por
                                                                 favor escriba uno distinto, o ingrese <a
                                                                     href="/users/login">aqui</a>.</p>
-                                                            <% if (locals.errores && errores.user) { %>
-                                                                <p>
-                                                                    <%=errores.user.msg %>
+                                                            <div>
+                                                                <div class="validationAlert" id="userAlert">
+                                                                    Tu usuario debe tener al menos 5 caracteres
+                                                                </div>
+                                                                <% if (locals.errores && errores.user) { %>
+                                                                    <p>
+                                                                        <%=errores.user.msg %>
+                                                                    </p>
+                                                                    <%}%>
+                                                            </div>
+                                                            <div>
+                                                                <input name="key" type="password" id="key"
+                                                                    placeholder="Contraseña" /><i class="fa fa-eye"
+                                                                    id="eye"></i>
+                                                                <% if (locals.errores && errores.key) { %>
+                                                                    <p>
+                                                                        <%=errores.key.msg %>
+                                                                    </p>
+                                                                    <%}%>
+                                                            </div>
+                                                            <div>
+                                                                <input name="keyAgain" type="password" id="keyAgain"
+                                                                    placeholder="Confirmar contraseña" /><i
+                                                                    class="fa fa-eye" id="eye2"></i>
+                                                                <p id="passRepErr">Las contraseñas no coinciden.
                                                                 </p>
-                                                                <%}%>
-                                                                    <div>
-                                                                        <input name="key" type="password" id="drowssap0"
-                                                                            placeholder="Contraseña" /><i
-                                                                            class="fa fa-eye" id="eye"></i>
-                                                                        <% if (locals.errores && errores.key) { %>
-                                                                            <p>
-                                                                                <%=errores.key.msg %>
-                                                                            </p>
-                                                                            <%}%>
-                                                                    </div>
-                                                                    <div>
-                                                                        <input name="keyAgain" type="password"
-                                                                            id="drowssap1"
-                                                                            placeholder="Confirmar contraseña" /><i
-                                                                            class="fa fa-eye" id="eye2"></i>
-                                                                        <p id="passRepErr">Las contraseñas no coinciden.
-                                                                        </p>
-                                                                        <% if (locals.errores && errores.keyAgain) { %>
-                                                                            <p>
-                                                                                <%=errores.keyAgain.msg %>
-                                                                            </p>
-                                                                            <%}%>
-                                                                    </div>
 
+                                                                <% if (locals.errores && errores.keyAgain) { %>
+                                                                    <p>
+                                                                        <%=errores.keyAgain.msg %>
+                                                                    </p>
+                                                                    <%}%>
+                                                            </div>
+                                                            <div>
+                                                                <div class="validationAlert" id="passAlert">
+                                                                    Las contraseñas no coinciden.
+                                                                </div>
+                                                                <div class="validationAlert" id="passAlert2">
+                                                                    La contraseña debe tener al menos 8 caracteres.
+                                                                </div>
+                                                            </div>
 
-                                                                    <label>Tipo de usuario:</label> <br>
-                                                                    <div>
-                                                                        <label for=""> Administrador </label><input
-                                                                            type="radio" name="userType" value="1">
-                                                                        <label for=""> Usuario </label><input
-                                                                            type="radio" name="userType" value="2">
-                                                                    </div>
+                                                            <label>Tipo de usuario:</label> <br>
+                                                            <div>
+                                                                <label for=""> Administrador </label><input type="radio"
+                                                                    name="userType" value="1">
+                                                                <label for=""> Usuario </label><input type="radio"
+                                                                    name="userType" checked="true" value="2">
+                                                            </div>
 
-                                                                    <div>
-                                                                        <label>Foto de usuari@</label>
-                                                                        <input name="image" type="file" id="profilepic"
-                                                                            accept=".jpg, .jpeg, .png, .gif" single>
-                                                                    </div>
-                                                                    <div class="button-register">
-                                                                        <input id="submitBtn" type="submit"
-                                                                            value="Enviar">
-                                                                        <input type="reset" value="Borrar">
-                                                                    </div>
+                                                            <div>
+                                                                <label>Foto de usuari@</label>
+                                                                <input name="image" type="file" id="profilepic"
+                                                                    accept=".jpg, .jpeg, .png, .gif" single>
+                                                            </div>
+                                                            <div class="button-register">
+                                                                <input id="submitBtn" type="submit" value="Enviar">
+                                                                <input type="reset" value="Borrar">
+                                                            </div>
                 </form>
-                <!-- username/email taken stuff -->
-                <script>
-                  
-                    
-                </script>
-
-
             </main>
             <%- include('../partials/footer.ejs')%>
-        <script src="/js/registroUsuario.js"></script>
+                <script src="/js/registroUsuario.js"></script>
 
     </body>
 
-    </html>
+</html>
