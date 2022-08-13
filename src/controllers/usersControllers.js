@@ -4,7 +4,6 @@ const db = require("../data/models");
 
 let usersController = {
   eliminarUsuario: async (req, res) => {
-    console.log("llego");
     db.User.destroy({ where: { idUser: req.params.id } }).catch((err) => {
       console.log(err);
     });

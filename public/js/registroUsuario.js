@@ -28,16 +28,6 @@ window.addEventListener("load", function () {
   let emailRep = document.getElementById("emailRep");
   let bDay = document.getElementById("bday");
   let user = document.getElementById("user");
-  let fullNameFlag = false;
-  let fullAddressFlag = false;
-  let userFlag = false;
-  let bDayFlag = false;
-  let passFlag1 = false;
-  let passFlag2 = false;
-  let emailFlag1 = false;
-  let emailFlag2 = false;
-  let emailFlag3 = false;
-
 
   fullName.addEventListener("focusout", fullNameFunction);
   fullAddress.addEventListener("focusout", fullAddressFunction);
@@ -47,19 +37,16 @@ window.addEventListener("load", function () {
   pass1.addEventListener("focusout", mouseLeavePass);
   eye1.addEventListener("click", eyeFunc);
   eye2.addEventListener("click", eye2Func);
-  button.addEventListener("mouseover", beforeSave);
   button.addEventListener("click", onSave);
 
   function fullNameFunction() {
     if (fullName.value.length < 5) {
       fullnameAlert.style.display = "block";
       button.type = "button";
-      fullNameFlag = false;
       return false;
        
     } else {
       fullnameAlert.style.display = "none";
-      fullNameFlag = true;
       return true;
 
     }
@@ -69,11 +56,9 @@ window.addEventListener("load", function () {
     if (fullAddress.value.length < 5) {
       fullAddressAlert.style.display = "block";
       button.type = "button";
-      fullAddressFlag = false;
       return false;
     } else {
       fullAddressAlert.style.display = "none";
-      fullAddressFlag = true;
       return true;
 
     }
@@ -85,7 +70,6 @@ window.addEventListener("load", function () {
 
       bDayAlert.style.display = "block";
       button.type = "button";
-      bDayFlag = false;
       return false;
       
     }
@@ -99,7 +83,6 @@ window.addEventListener("load", function () {
     if (year < 1800 || year > 2022 || month == 0 || month > 12) {
       bDayAlert.style.display = "block";
       button.type = "button";
-      bDayFlag = false;
       return false;
        
     }
@@ -113,7 +96,6 @@ window.addEventListener("load", function () {
     if (day <= 0 && day > monthLength[month - 1]) {
       bDayAlert.style.display = "block";
       button.type = "button";
-      bDayFlag = false;
       return false;
       
     }
@@ -125,12 +107,10 @@ window.addEventListener("load", function () {
   function userFunction() {
     if (user.value.length < 5) {
       userAlert.style.display = "block";
-      userFlag = false;
       return false;
        
     } else {
       userAlert.style.display = "none";
-      userFlag = true;
       
       return true;
     }
@@ -143,10 +123,9 @@ window.addEventListener("load", function () {
 
     const validRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
-    if (email.value < 1) {
+    if (email.value.length < 1) {
       button.type = "button";
       emailAlert.style.display = "block";
-      emailFlag1 = false;
       emailValidAlert.style.display = "none";
       return false;
        
@@ -154,13 +133,9 @@ window.addEventListener("load", function () {
       emailAlert.style.display = "none";
       if (!email.value.match(validRegex)) {
         emailValidAlert.style.display = "block";
-      emailFlag2 = false;
       return false;
-       
       } else {
         emailValidAlert.style.display = "none";
-        emailFlag2 = true;
-         
       return true;
       }
     }
@@ -170,11 +145,9 @@ window.addEventListener("load", function () {
    
     if (email.value != emailRep.value) {
       emailEqualAlert.style.display = "block";
-      emailFlag3= false;
       return false;
     } else {
       emailEqualAlert.style.display = "none";
-      emailFlag3= true;
       return true;
     }
   }
@@ -185,13 +158,10 @@ window.addEventListener("load", function () {
 
     if (pass1.value.length < 8) {
       passAlert2.style.display = "block";
-      passFlag1= false;
       return false;
        
     } else {
       passAlert2.style.display = "none";
-      passFlag1= true;
-       
       return true;
     }
   }
@@ -199,45 +169,34 @@ window.addEventListener("load", function () {
   function pass2Function() {
     if (pass2.value != pass1.value) {
       passAlert.style.display = "block";
-      passFlag2= false;
       return false;
        
     } else {
       passAlert.style.display = "none";
-      passFlag2= true;
-       
       return true;
     }
   }
-
-  function beforeSave() {
-    if(validEmailFunction()&&
-    mouseLeavePass()&&
-    fullNameFunction()&&
-    fullAddressFunction()&&
-    userFunction()&&
-    bDayFunction()){
-    // if (fullNameFlag &&
-    //    fullAddressFlag &&
-    //    userFlag &&
-    //    bDayFlag &&
-    //    passFlag1 &&
-    //    passFlag2 &&
-    //    emailFlag3 && 
-    //    emailFlag2 &&
-    //    emailFlag1) {
-        console.log("submit")
-      button.type = "submit";
-    } else {
-      console.log("button")
-
-      button.type = "button";
-    }
+  function btnAlert(){
+    button.classList.add("shakebtn");
+      setTimeout(() => {  button.classList.remove("shakebtn"); }, 1000);
   }
-
   function onSave() {
     
+    if(mouseLeavePass(),
+    validEmailFunction(),
+    fullNameFunction(),
+    fullAddressFunction(),
+    userFunction(),
+    bDayFunction()){
+      button.type = "submit";
+      button.click()
+
+    } else {
+      button.type = "button";
+      btnAlert();
+    }
   }
+ 
 
   function eyeFunc() {
     if (pwShown == 0) {

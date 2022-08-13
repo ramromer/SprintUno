@@ -3,8 +3,9 @@
     <body>
         <%- include('../partials/header.ejs')%>
             <main id="mainRegister">
-                <form id="form-register" action="/users/update/<%=Us.idUser%>?_method=PUT" method="POST" enctype="multipart/form-data">
-                    
+                <form id="form-register" action="/users/update/<%=Us.idUser%>?_method=PUT" method="POST"
+                    enctype="multipart/form-data">
+
                     <label>Editar Usuario</label>
 
                     <input name="fullName" type="text" id="fullname" value="<%= Us.fullname %>" />
@@ -48,56 +49,61 @@
                     <input name="user" type="text" id="user" value="<%= Us.user %>" placeholder="Nombre de usuario" />
                     <p id="yaexiste">Ya existe otro usuario con ese nombre. Por
                         favor escriba uno distinto, o ingrese <a href="/users/login">aqui</a>.</p>
-                   <div>
-                    <div class="validationAlert" id="userAlert">
-                        Tu usuario debe tener al menos 5 caracteres
+                    <div>
+                        <div class="validationAlert" id="userAlert">
+                            Tu usuario debe tener al menos 5 caracteres
+                        </div>
+                        <% if (locals.errores && errores.user) { %>
+                            <p>
+                                <%=errores.user.msg %>
+                            </p>
+                            <%}%>
                     </div>
-                       <% if (locals.errores && errores.user) { %>
-                       <p>
-                           <%=errores.user.msg %>
-                       </p>
-                       <%}%>
-                   </div>
-                            <div>
-                                <input name="key" type="password" id="key" placeholder="Contraseña" autocomplete="new-password"/>
-                                <i class="fa fa-eye" id="eye"></i>
-                                <% if (locals.errores && errores.key) { %>
-                                    <p>
-                                        <%=errores.key.msg %>
-                                    </p>
-                                    <%}%>
-                            </div>
-                            <div>
-                                <input name="keyAgain" type="password" id="keyAgain" placeholder="Confirmar contraseña" autocomplete="new-password"/>
-                                    <i class="fa fa-eye" id="eye2"></i>
-                                <p id="passRepErr">Las contraseñas no coinciden.
-                                </p>
-                            </div>
-                                <div>
-                                    <div class="validationAlert" id="passAlert">
-                                        Las contraseñas no coinciden.
-                                    </div>
-                                    <div class="validationAlert" id="passAlert2">
-                                        La contraseña debe tener al menos 8 caracteres.
-                                    </div>
-                                    <% if (locals.errores && errores.keyAgain) { %>
-                                        <p>
-                                            <%=errores.keyAgain.msg %>
-                                        </p>
-                                        <%}%>
-                                </div>
+                    <div>
+                        <input name="key" type="password" id="key" placeholder="Contraseña"
+                            autocomplete="new-password" />
+                        <i class="fa fa-eye" id="eye"></i>
+                        <% if (locals.errores && errores.key) { %>
+                            <p>
+                                <%=errores.key.msg %>
+                            </p>
+                            <%}%>
+                    </div>
+                    <div>
+                        <input name="keyAgain" type="password" id="keyAgain" placeholder="Confirmar contraseña"
+                            autocomplete="new-password" />
+                        <i class="fa fa-eye" id="eye2"></i>
+                        <p id="passRepErr">Las contraseñas no coinciden.
+                        </p>
+                    </div>
+                    <div>
+                        <div class="validationAlert" id="passAlert">
+                            Las contraseñas no coinciden.
+                        </div>
+                        <div class="validationAlert" id="passAlert2">
+                            La contraseña debe tener al menos 8 caracteres.
+                        </div>
+                        <% if (locals.errores && errores.keyAgain) { %>
+                            <p>
+                                <%=errores.keyAgain.msg %>
+                            </p>
+                            <%}%>
+                    </div>
 
-                            <div>
-                                <label>Foto de usuari@</label>
-                                <input name="image" type="file" id="profilepic" accept=".jpg, .jpeg, .png, .bmp" single>
-                                <div class="validationAlert" id="imageAlert">
-                                    Escoja un formato valido de imagen
-                                  </div>
-                            </div>
-                            <div class="button-register">
-                                <input id="submitBtn" type="button" value="Editar">
-                                <input type="reset" value="Limpiar">
-                            </div>
+                    <div>
+                        <label>Foto de usuari@</label>
+                        <input name="image" type="file" id="profilepic" accept=".jpg, .jpeg, .png, .gif"
+                            style="display: none;" single>
+                        <input type="button" class="margin10px" value="Buscar..."
+                            onclick="document.getElementById('profilepic').click();" />
+                        <div class="validationAlert" id="imageAlert">
+                            Escoja un formato valido de imagen
+                        </div>
+                    </div>
+                    <div class="button-register">
+                        <a href="/"><input type="button" class="btnDanger" value="Cancelar"></a>
+                        <input id="submitBtn"  class="btnSuccess" type="button" value="Editar">
+                    </div>
                 </form>
             </main>
             <%- include('../partials/footer.ejs')%>

@@ -140,11 +140,19 @@
                                                             <div>
                                                                 <label>Foto de usuari@</label>
                                                                 <input name="image" type="file" id="profilepic"
-                                                                    accept=".jpg, .jpeg, .png, .gif" single>
+                                                                    accept=".jpg, .jpeg, .png, .gif"
+                                                                    style="display: none;" single>
+                                                                <input type="button" class="margin10px"
+                                                                    value="Buscar..."
+                                                                    onclick="document.getElementById('profilepic').click();" />
                                                             </div>
                                                             <div class="button-register">
-                                                                <input id="submitBtn" type="submit" value="Enviar">
-                                                                <input type="reset" value="Borrar">
+                                                                <a href="/">
+                                                                    <input type="button" class="btnDanger"
+                                                                        value="Cancelar">
+                                                                </a>
+                                                                <input class="btnSuccess" id="submitBtn" type="button"
+                                                                    value="Enviar">
                                                             </div>
                 </form>
             </main>
@@ -153,4 +161,4 @@
 
     </body>
 
-</html>
+    </html>

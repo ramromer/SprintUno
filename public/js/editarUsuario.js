@@ -6,14 +6,13 @@ window.addEventListener("load", function () {
   }
   let pwShown = 0;
   let pwShown1 = 0;
-try{
 
   let button = document.getElementById("submitBtn");
   let eye1 = document.getElementById("eye");
   let eye2 = document.getElementById("eye2");
   let pass1 = document.getElementById("key");
   let pass2 = document.getElementById("keyAgain");
-  
+
   let fullnameAlert = document.getElementById("fullnameAlert");
   let fullAddressAlert = document.getElementById("fullAddressAlert");
   let bDayAlert = document.getElementById("bDayAlert");
@@ -24,11 +23,6 @@ try{
   let fullAddress = document.getElementById("fulladdress");
   let bDay = document.getElementById("bday");
   let user = document.getElementById("user");
-  let fullNameFlag = true;
-  let fullAddressFlag = true;
-  let userFlag = true;
-  let bDayFlag = true;
-
 
   fullName.addEventListener("focusout", fullNameFunction);
   fullAddress.addEventListener("focusout", fullAddressFunction);
@@ -37,18 +31,16 @@ try{
   pass1.addEventListener("focusout", mouseLeavePass);
   eye1.addEventListener("click", eyeFunc);
   eye2.addEventListener("click", eye2Func);
-  button.addEventListener("focusin", beforeSave);
   button.addEventListener("click", onSave);
 
   function fullNameFunction() {
     if (fullName.value.length < 5) {
       fullnameAlert.style.display = "block";
       button.type = "button";
-      fullNameFlag = false;
+      return false;
     } else {
       fullnameAlert.style.display = "none";
-      button.type = "submit";
-      fullNameFlag = true;
+      return true;
     }
   }
 
@@ -56,21 +48,22 @@ try{
     if (fullAddress.value.length < 5) {
       fullAddressAlert.style.display = "block";
       button.type = "button";
-      fullAddressFlag = false;
+      return false;
     } else {
       fullAddressAlert.style.display = "none";
-      button.type = "submit";
-      fullAddressFlag = true;
+      return true;
     }
   }
 
   function bDayFunction() {
     // First check for the pattern
-    if (/^(\d{2}|\d{1})\/(\d{2}|\d{1})\/\d{4}$/.test(bDay.value)) {
+    if (
+      /^(\d{2}|\d{1})\/(\d{2}|\d{1})\/\d{4}$/.test(bDay.value) ||
+      !bDay.valueAsNumber
+    ) {
       bDayAlert.style.display = "block";
       button.type = "button";
-      bDayFlag = false;
-      return;
+      return false;
     }
 
     let parts = bDay.value.split("-");
@@ -82,8 +75,7 @@ try{
     if (year < 1800 || year > 2022 || month == 0 || month > 12) {
       bDayAlert.style.display = "block";
       button.type = "button";
-      bDayFlag = false;
-      return;
+      return false;
     }
 
     let monthLength = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
@@ -95,22 +87,20 @@ try{
     if (day <= 0 && day > monthLength[month - 1]) {
       bDayAlert.style.display = "block";
       button.type = "button";
-      bDayFlag = false;
-      return;
+      return false;
     }
 
     bDayAlert.style.display = "none";
-    button.type = "submit";
-    bDayFlag = true;
+    return true;
   }
 
   function userFunction() {
     if (user.value.length < 5) {
       userAlert.style.display = "block";
-      userFlag = false;
+      return false;
     } else {
       userAlert.style.display = "none";
-      userFlag = true;
+      return true;
     }
   }
 
@@ -120,50 +110,41 @@ try{
 
     if (pass1.value.length < 8) {
       passAlert2.style.display = "block";
+      return false;
     } else {
       passAlert2.style.display = "none";
+      return true;
     }
   }
 
   function pass2Function() {
     if (pass2.value != pass1.value) {
       passAlert.style.display = "block";
+      return false;
     } else {
       passAlert.style.display = "none";
+      return true;
     }
   }
 
-  function beforeSave() {
-    if (!fullNameFlag || !fullAddressFlag || !userFlag || !bDayFlag) {
+  function btnAlert() {
+    button.classList.add("shakebtn");
+    setTimeout(() => {
+      button.classList.remove("shakebtn");
+    }, 1000);
+  }
+  function onSave() {
+    if (
+      (mouseLeavePass(),
+      fullNameFunction(),
+      fullAddressFunction(),
+      userFunction(),
+      bDayFunction())
+    ) {
       button.type = "button";
+      btnAlert();
     } else {
       button.type = "submit";
-    }
-  }
-
-  function onSave() {
-    if (!fullNameFlag) {
-      fullnameAlert.style.display = "block";
-    } else {
-      fullnameAlert.style.display = "none";
-    }
-
-    if (!fullAddressFlag) {
-      fullAddressAlert.style.display = "block";
-    } else {
-      fullAddressAlert.style.display = "none";
-    }
-
-    if (!userFlag) {
-      userAlert.style.display = "block";
-    } else {
-      userAlert.style.display = "none";
-    }
-
-    if (!bDayFlag) {
-      bDayAlert.style.display = "block";
-    } else {
-      bDayAlert.style.display = "none";
     }
   }
 
@@ -194,5 +175,4 @@ try{
       pass2.setAttribute("type", "password");
     }
   }
-}catch(err){console.log(err)}
 });

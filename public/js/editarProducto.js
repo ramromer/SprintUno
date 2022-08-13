@@ -19,7 +19,6 @@ window.addEventListener("load", function () {
   let btnGuardar = document.getElementById("btnEP");
   
 
-  btnGuardar.addEventListener("focusin", beforeSave);
   btnGuardar.addEventListener("click", onSave);
   precioEP.addEventListener("focusout", mouseLeavePrice)
   cantidadEP.addEventListener("focusout", mouseLeaveQuantity)
@@ -35,12 +34,23 @@ window.addEventListener("load", function () {
       descripcionEP.value.length > 19
       ) {
       btnGuardar.type = "submit";
+      return true;
     }else{
       btnGuardar.type = "button";
+      return false;
     }
   }
-
+  
+  function btnAlert(){
+    btnGuardar.classList.add("shakebtn");
+      setTimeout(() => {  btnGuardar.classList.remove("shakebtn"); }, 1000);
+  }
+  
   function onSave() {
+  
+    if(!beforeSave()){
+      btnAlert();
+    }
     
     if (!tamanioS.checked && !tamanioM.checked && !tamanioL.checked) {
       sizeAlert.style.display = "block";

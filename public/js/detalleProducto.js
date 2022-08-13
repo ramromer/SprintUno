@@ -1,11 +1,6 @@
 
 window.addEventListener("load", function () {
 
-
-  // window.addEventListener("submit", hit);
-  // function hit() {
-  // }
-
   let minusBtn = document.getElementById("minusBtn");
   let cantidad = document.getElementById("cantidad");
   let plusBtn = document.getElementById("plusBtn");

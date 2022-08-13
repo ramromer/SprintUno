@@ -26,8 +26,12 @@ window.addEventListener("load", function () {
   function onSave() {
     if (emailErrorFlag) {
       emailAlert.style.display = "block";
+      btnLogin.classList.add("shakebtn");
+      setTimeout(() => {  btnLogin.classList.remove("shakebtn"); }, 1000);
     }
     if (passErrorFlag) {
+      btnLogin.classList.add("shakebtn");
+      setTimeout(() => {  btnLogin.classList.remove("shakebtn"); }, 1000);
       passAlert.style.display = "block";
     }
   }

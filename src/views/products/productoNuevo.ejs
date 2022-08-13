@@ -9,9 +9,10 @@
           <section>
             <form class="flexContainer bgGray margin10px padding10px" id="infoProductoNuevo" action="/productonuevo"
               method="POST" enctype="multipart/form-data">
-              <div id="uploadImages" class="flexContainer">
+              <div id="uploadImages" class="flexContainer direction-column">
                 <label for="avatar">Arrastra y suelta tus imagenes aquí o seleccionalas:</label>
-                <input value="upload" type="file" id="imagenes" name="image" accept="image/*" required />
+                <input type="file" value="upload" id="imagenes" name="image" accept="image/*" required  style="display: none;" />
+                <input type="button" class="margin10px btnSuccess" value="Buscar..." onclick="document.getElementById('imagenes').click();" />
                 <div class="validationAlert" id="imageAlert">
                   Escoja un formato valido de imagen
                 </div>
@@ -85,7 +86,7 @@
                   </div>
                 </div>
                 <div id="containerBtn" class="flexContainer">
-                  <button type="button" id="btnProductoNuevo">Guardar</button>
+                  <button type="button" class="btnSuccess" id="btnProductoNuevo">Guardar</button>
                 </div>
             </form>
           </section>

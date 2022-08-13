@@ -24,7 +24,6 @@ window.addEventListener("load", function () {
 
   let imageOkFlag = false;
 
-  btnGuardar.addEventListener("mouseover", beforeSave);
   btnGuardar.addEventListener("click", onSave);
   precioEP.addEventListener("focusout", mouseLeavePrice);
   nombre.addEventListener("focusout", mouseLeaveName);
@@ -44,9 +43,24 @@ window.addEventListener("load", function () {
       descripcionEP.value.length > 19
     ) {
       btnGuardar.type = "submit";
+      return true;
+    }else{
+      btnGuardar.type = "button";
+      return false;
     }
   }
+
+  function btnAlert(){
+    btnGuardar.classList.add("shakebtn");
+      setTimeout(() => {  btnGuardar.classList.remove("shakebtn"); }, 1000);
+  }
+  
   function onSave() {
+
+    if(!beforeSave()){
+      btnAlert();
+    }
+
     if (!imageOkFlag) {
       imageAlert.style.display = "block";
     } else {
