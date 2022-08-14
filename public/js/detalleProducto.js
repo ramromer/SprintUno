@@ -27,6 +27,7 @@ window.addEventListener("load", function () {
       zeroAlert.style.display = "none";
     }
   }
+  
   function plusBtnFunction() {
 
     if (parseInt(cantidad.value) >= parseInt(cantidad.max) ) {
@@ -57,6 +58,5 @@ window.addEventListener("load", function () {
       maxAlert.style.display = "none";
     }
   }
-
 
 });

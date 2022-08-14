@@ -12,7 +12,7 @@ window.addEventListener("load", function () {
   let eye2 = document.getElementById("eye2");
   let pass1 = document.getElementById("key");
   let pass2 = document.getElementById("keyAgain");
-  
+
   let fullnameAlert = document.getElementById("fullnameAlert");
   let fullAddressAlert = document.getElementById("fullAddressAlert");
   let emailAlert = document.getElementById("emailAlert");
@@ -28,50 +28,65 @@ window.addEventListener("load", function () {
   let emailRep = document.getElementById("emailRep");
   let bDay = document.getElementById("bday");
   let user = document.getElementById("user");
+  let usedEmail = document.getElementById("usedEmail");
 
   fullName.addEventListener("focusout", fullNameFunction);
   fullAddress.addEventListener("focusout", fullAddressFunction);
-  email.addEventListener("focusout", validEmailFunction);
   bDay.addEventListener("focusout", bDayFunction);
   user.addEventListener("focusout", userFunction);
   pass1.addEventListener("focusout", mouseLeavePass);
   eye1.addEventListener("click", eyeFunc);
   eye2.addEventListener("click", eye2Func);
   button.addEventListener("click", onSave);
+  email.addEventListener("focusout", validEmailFunction);
+  email.addEventListener("blur", () => {
+    askRegister(email.value);
+  });
+
+  function askRegister(checking) {
+    fetch(`${url}/users/register/${checking}`)
+      .then((res) => {
+        return res.json();
+      })
+      .then((respuesta) => {
+        if (respuesta >= 1) {
+          usedEmail.style.display = "block";
+          return;
+        } else {
+          usedEmail.style.display = "none";
+          return;
+        }
+      });
+  }
 
   function fullNameFunction() {
     if (fullName.value.length < 5) {
       fullnameAlert.style.display = "block";
-      button.type = "button";
       return false;
-       
     } else {
       fullnameAlert.style.display = "none";
       return true;
-
     }
   }
 
   function fullAddressFunction() {
     if (fullAddress.value.length < 5) {
       fullAddressAlert.style.display = "block";
-      button.type = "button";
       return false;
     } else {
       fullAddressAlert.style.display = "none";
       return true;
-
     }
   }
 
   function bDayFunction() {
     // First check for the pattern
-    if (/^(\d{2}|\d{1})\/(\d{2}|\d{1})\/\d{4}$/.test(bDay.value)|| !bDay.valueAsNumber  ) {
-
+    if (
+      /^(\d{2}|\d{1})\/(\d{2}|\d{1})\/\d{4}$/.test(bDay.value) ||
+      !bDay.valueAsNumber
+    ) {
       bDayAlert.style.display = "block";
-      button.type = "button";
       return false;
-      
     }
 
     let parts = bDay.value.split("-");
@@ -82,9 +97,7 @@ window.addEventListener("load", function () {
     // Check the ranges of month and year
     if (year < 1800 || year > 2022 || month == 0 || month > 12) {
       bDayAlert.style.display = "block";
-      button.type = "button";
       return false;
-       
     }
 
     let monthLength = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
@@ -95,9 +108,7 @@ window.addEventListener("load", function () {
     }
     if (day <= 0 && day > monthLength[month - 1]) {
       bDayAlert.style.display = "block";
-      button.type = "button";
       return false;
-      
     }
 
     bDayAlert.style.display = "none";
@@ -108,41 +119,35 @@ window.addEventListener("load", function () {
     if (user.value.length < 5) {
       userAlert.style.display = "block";
       return false;
-       
     } else {
       userAlert.style.display = "none";
-      
       return true;
     }
   }
 
   function validEmailFunction() {
-
     emailRep.addEventListener("change", validEmail2Function);
     email.addEventListener("change", validEmail2Function);
 
     const validRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
     if (email.value.length < 1) {
-      button.type = "button";
       emailAlert.style.display = "block";
       emailValidAlert.style.display = "none";
       return false;
-       
     } else {
       emailAlert.style.display = "none";
       if (!email.value.match(validRegex)) {
         emailValidAlert.style.display = "block";
-      return false;
+        return false;
       } else {
         emailValidAlert.style.display = "none";
-      return true;
+        return true;
       }
     }
   }
 
   function validEmail2Function() {
-   
     if (email.value != emailRep.value) {
       emailEqualAlert.style.display = "block";
       return false;
@@ -159,7 +164,6 @@ window.addEventListener("load", function () {
     if (pass1.value.length < 8) {
       passAlert2.style.display = "block";
       return false;
-       
     } else {
       passAlert2.style.display = "none";
       return true;
@@ -170,33 +174,46 @@ window.addEventListener("load", function () {
     if (pass2.value != pass1.value) {
       passAlert.style.display = "block";
       return false;
-       
     } else {
       passAlert.style.display = "none";
       return true;
     }
   }
-  function btnAlert(){
-    button.classList.add("shakebtn");
-      setTimeout(() => {  button.classList.remove("shakebtn"); }, 1000);
-  }
-  function onSave() {
-    
-    if(mouseLeavePass(),
-    validEmailFunction(),
-    fullNameFunction(),
-    fullAddressFunction(),
-    userFunction(),
-    bDayFunction()){
-      button.type = "submit";
-      button.click()
 
+  function btnAlert() {
+    button.classList.add("shakebtn");
+    setTimeout(() => {
+      button.classList.remove("shakebtn");
+    }, 1000);
+  }
+
+  function onSave() {
+    if (evalFunction()) {
+      button.type = "submit";
+      button.click();
     } else {
       button.type = "button";
       btnAlert();
     }
   }
- 
+
+  function evalFunction() {
+    let functionsArray = [
+      mouseLeavePass(),
+      pass2Function(),
+      validEmailFunction(),
+      fullNameFunction(),
+      fullAddressFunction(),
+      userFunction(),
+      bDayFunction(),
+    ];
+    let validation = true;
+
+    functionsArray.forEach((element) => {
+      validation = element && validation;
+    });
+    return validation;
+  }
 
   function eyeFunc() {
     if (pwShown == 0) {

@@ -2,7 +2,7 @@ window.addEventListener("load", function () {
   let precioEP = document.getElementById("precioEP");
   let cantidadEP = document.getElementById("cantidadEP");
   let descripcionEP = document.getElementById("descripcionEP");
-
+  let imagenes = document.getElementById("imagenes");
   let tamanioS = document.getElementById("tamanioS");
   let tamanioM = document.getElementById("tamanioM");
   let tamanioL = document.getElementById("tamanioL");
@@ -11,97 +11,127 @@ window.addEventListener("load", function () {
   let colorRed = document.getElementById("colorRed");
   let colorBlack = document.getElementById("colorBlack");
 
+  let imageAlert = document.getElementById("imageAlert");
   let priceAlert = document.getElementById("priceAlert");
   let colorAlert = document.getElementById("colorAlert");
   let sizeAlert = document.getElementById("sizeAlert");
   let quantityAlert = document.getElementById("quantityAlert");
   let descriptionAlert = document.getElementById("descriptionAlert");
-  let btnGuardar = document.getElementById("btnEP");
-  
+  let button = document.getElementById("btnEP");
 
-  btnGuardar.addEventListener("click", onSave);
-  precioEP.addEventListener("focusout", mouseLeavePrice)
-  cantidadEP.addEventListener("focusout", mouseLeaveQuantity)
-  descripcionEP.addEventListener("focusout", mouseLeaveDescription)
+  button.addEventListener("click", onSave);
+  precioEP.addEventListener("focusout", mouseLeavePrice);
+  cantidadEP.addEventListener("focusout", mouseLeaveQuantity);
+  descripcionEP.addEventListener("focusout", mouseLeaveDescription);
 
+  function onSave() {
+    if (evalFunction()) {
+      button.type = "submit";
+      button.click();
+    } else {
+      button.type = "button";
+      btnAlert();
+    }
+  }
+  function evalFunction() {
+    let functionsArray = [
+      mouseLeavePrice(),
+      onSelectImage(),
+      mouseLeaveQuantity(),
+      mouseLeaveDescription(),
+      oneColor(),
+      oneSize(),
+    ];
+    let validation = true;
 
-  function beforeSave() {
-    if (
-      (colorWhite.checked || colorRed.checked || colorBlack.checked)&&
-      (tamanioS.checked || tamanioM.checked || tamanioL.checked) &&
-      precioEP.value > 0 && 
-      cantidadEP.value > 0 &&
-      descripcionEP.value.length > 19
-      ) {
-      btnGuardar.type = "submit";
+    functionsArray.forEach((element) => {
+      validation = element && validation;
+    });
+    return validation;
+  }
+
+  function btnAlert() {
+    button.classList.add("shakebtn");
+    setTimeout(() => {
+      button.classList.remove("shakebtn");
+    }, 1000);
+  }
+
+  function oneColor() {
+    if (colorWhite.checked || colorRed.checked || colorBlack.checked) {
+      colorAlert.style.display = "none";
+      // console.log("true color");
       return true;
-    }else{
-      btnGuardar.type = "button";
+    } else {
+      // console.log("false color");
+      colorAlert.style.display = "block";
       return false;
     }
   }
-  
-  function btnAlert(){
-    btnGuardar.classList.add("shakebtn");
-      setTimeout(() => {  btnGuardar.classList.remove("shakebtn"); }, 1000);
-  }
-  
-  function onSave() {
-  
-    if(!beforeSave()){
-      btnAlert();
-    }
-    
-    if (!tamanioS.checked && !tamanioM.checked && !tamanioL.checked) {
-      sizeAlert.style.display = "block";
-    }else{
+
+  function oneSize() {
+    if (tamanioS.checked || tamanioM.checked || tamanioL.checked) {
       sizeAlert.style.display = "none";
+      return true;
+    } else {
+      sizeAlert.style.display = "block";
+      return false;
     }
-    if (!colorWhite.checked && !colorRed.checked && !colorBlack.checked) {
-      colorAlert.style.display = "block";
-    }else{
-      colorAlert.style.display = "none";
+  }
+
+  function onSelectImage() {
+    if (imagenes.value.length < 1) {
+      imageAlert.style.display = "none";
+      return true; // not image upload mandatory in edit product
     }
+    let imageName = imagenes.value;
+    let imageFormat = imageName.split(".");
+    let format = imageFormat[imageFormat.length - 1];
+    format = format.toLowerCase();
+    let acceptedFormats = ["jpg", "jpeg", "png", "webp"];
+    let formatValid = false;
+    acceptedFormats.forEach((formatInArray) => {
+      if (format == formatInArray) {
+        formatValid = true;
+      }
+    });
+    if (formatValid) {
+      imageAlert.style.display = "none";
+      return true;
+    } else {
+      imageAlert.style.display = "block";
+      return false;
+    }
+  }
+
+  function mouseLeavePrice() {
     if (precioEP.value < 1) {
       priceAlert.style.display = "block";
+
+      return false;
+    } else {
+      priceAlert.style.display = "none";
+      return true;
     }
-    if (cantidadEP.value < 1) {
-      quantityAlert.style.display = "block";
-    }
+  }
+
+  function mouseLeaveDescription() {
     if (descripcionEP.value.length < 20) {
       descriptionAlert.style.display = "block";
+      return false;
+    } else {
+      descriptionAlert.style.display = "none";
+      return true;
     }
-
   }
 
-  function mouseLeavePrice(){
-    if (precioEP.value < 1) {
-        priceAlert.style.display = "block";
-        btnGuardar.type = "button";
-      }
-      else{
-        priceAlert.style.display = "none";
-      }
-  }
-
-  function mouseLeaveDescription(){
-    if (descripcionEP.value.length < 20) {
-        descriptionAlert.style.display = "block";
-        btnGuardar.type = "button";
-      }
-      else{
-        descriptionAlert.style.display = "none";
-      }
-  }
-
-  function mouseLeaveQuantity(){
+  function mouseLeaveQuantity() {
     if (cantidadEP.value < 1) {
       quantityAlert.style.display = "block";
-      btnGuardar.type = "button";
-      }
-      else{
-        quantityAlert.style.display = "none";
-      }
+      return false;
+    } else {
+      quantityAlert.style.display = "none";
+      return true;
+    }
   }
-
 });

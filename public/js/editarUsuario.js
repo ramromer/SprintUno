@@ -14,6 +14,7 @@ window.addEventListener("load", function () {
   let pass2 = document.getElementById("keyAgain");
 
   let fullnameAlert = document.getElementById("fullnameAlert");
+  let imagenes = document.getElementById("profilepic");
   let fullAddressAlert = document.getElementById("fullAddressAlert");
   let bDayAlert = document.getElementById("bDayAlert");
   let userAlert = document.getElementById("userAlert");
@@ -36,7 +37,6 @@ window.addEventListener("load", function () {
   function fullNameFunction() {
     if (fullName.value.length < 5) {
       fullnameAlert.style.display = "block";
-      button.type = "button";
       return false;
     } else {
       fullnameAlert.style.display = "none";
@@ -47,7 +47,6 @@ window.addEventListener("load", function () {
   function fullAddressFunction() {
     if (fullAddress.value.length < 5) {
       fullAddressAlert.style.display = "block";
-      button.type = "button";
       return false;
     } else {
       fullAddressAlert.style.display = "none";
@@ -62,7 +61,6 @@ window.addEventListener("load", function () {
       !bDay.valueAsNumber
     ) {
       bDayAlert.style.display = "block";
-      button.type = "button";
       return false;
     }
 
@@ -74,7 +72,6 @@ window.addEventListener("load", function () {
     // Check the ranges of month and year
     if (year < 1800 || year > 2022 || month == 0 || month > 12) {
       bDayAlert.style.display = "block";
-      button.type = "button";
       return false;
     }
 
@@ -86,7 +83,6 @@ window.addEventListener("load", function () {
     }
     if (day <= 0 && day > monthLength[month - 1]) {
       bDayAlert.style.display = "block";
-      button.type = "button";
       return false;
     }
 
@@ -105,6 +101,13 @@ window.addEventListener("load", function () {
   }
 
   function mouseLeavePass() {
+    console.log(typeof pass1.value.length);
+    console.log(pass1.value.length);
+    if (pass1.value.length == 0) {
+      passAlert2.style.display = "none";
+      return true;
+    }
+
     pass2.addEventListener("change", pass2Function);
     pass1.addEventListener("change", pass2Function);
 
@@ -133,19 +136,58 @@ window.addEventListener("load", function () {
       button.classList.remove("shakebtn");
     }, 1000);
   }
+
+  function onSelectImage() {
+    if (imagenes.value.length < 1) {
+      imageAlert.style.display = "none";
+      return true; // not image upload mandatory in edit product
+    }
+    let imageName = imagenes.value;
+    let imageFormat = imageName.split(".");
+    let format = imageFormat[imageFormat.length - 1];
+    format = format.toLowerCase();
+    let acceptedFormats = ["jpg", "jpeg", "png", "webp"];
+    let formatValid = false;
+    acceptedFormats.forEach((formatInArray) => {
+      if (format == formatInArray) {
+        formatValid = true;
+      }
+    });
+    if (formatValid) {
+      imageAlert.style.display = "none";
+      return true;
+    } else {
+      imageAlert.style.display = "block";
+      return false;
+    }
+  }
+
   function onSave() {
-    if (
-      (mouseLeavePass(),
+    if (evalFunction()) {
+      button.type = "submit";
+      button.click();
+    } else {
+      button.type = "button";
+      btnAlert();
+    }
+  }
+
+  function evalFunction() {
+    let functionsArray = [
+      onSelectImage(),
+      mouseLeavePass(),
+      pass2Function(),
       fullNameFunction(),
       fullAddressFunction(),
       userFunction(),
-      bDayFunction())
-    ) {
-      button.type = "button";
-      btnAlert();
-    } else {
-      button.type = "submit";
-    }
+      bDayFunction(),
+    ];
+    let validation = true;
+
+    functionsArray.forEach((element) => {
+      validation = element && validation;
+    });
+    return validation;
   }
 
   function eyeFunc() {

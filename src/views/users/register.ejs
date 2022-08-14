@@ -41,6 +41,8 @@
                                         <div class="validationAlert" id="emailValidAlert">
                                             Por favor ingresa un email valido
                                         </div>
+                                        <div id="usedEmail" class="validationAlert">Ya existe otro usuario con ese email. Por favor registrese con
+                                            uno distinto, o ingrese <a href="/users/login">aqui</a>.</div>
                                     </div>
                                     <% if (locals.errores && errores.email) { %>
                                         <p>
