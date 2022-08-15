@@ -1,10 +1,10 @@
 
-Comenzar a hacer: investigaciópn a fondo de temás pendientes.
+Comenzar a hacer: Trabajar un poco mas en los detalles. Realizar tests en cada vista.
 
-Hacer más: Realizar más consultas en Slack a nuestros compañeros y profes, por lo general tratamos de sacarlo de forma individual o dentro del grupo
+Hacer más: Ocuparse de los detalles, y un poco mas del diseño.
 
-Continuar haciendo: Repartir tareas, iniciar a tiempo, asistir a las citas martes y jueves, coordinar el trabajo, usar GIT.
+Continuar haciendo: Repartir tareas, iniciar a tiempo, asistir a las citas martes y jueves, coordinar el trabajo, usar GIT y Trello.
 
-Hacer menos:  Detalles y mas funcionalidad (todavia ;) )
+Hacer menos: Dedicar demasiado tiempo (individual) a la resolucion de alguna traba.
 
 Dejar de hacer: No consultar a los compañeros al momento de tener una dificultad y hacerlo luego de varios diás
