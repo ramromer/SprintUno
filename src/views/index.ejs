@@ -4,22 +4,8 @@
     <%- include('partials/header.ejs')%>
       <main id="mainIndex">
         <%- include('partials/navMenu.ejs')%>
-        <section id="slider">
-          <!-- SLIDER -->
-          <div class="slider-display-container">
-            <button type="button" id="btnIzq" onclick="siguiente(-1)">&#10094;</button>
-            <%data.products.forEach(bici=> { %>
-              <%bici.productsImages.forEach(img=> { %>
-                <!-- <a href="/detalleproducto/<%=bici.idProduct%>" class="product article"> -->
-                  <img class="sliderImagen" src="/images/<%=img.imageProduct%>" style="width:100%">
-                <!-- </a> -->
-                <%})%>
-                  <%})%>
-                    <button type="button" id="btnDer" onclick="siguiente(1)">&#10095;</button>
-          </div>
-          <!-- SLIDER SCRIPT (MUST INCLUDE)-->
-          <%- include('partials/slider.ejs')%>
-        </section>
+        <%- include('partials/slider.ejs')%>
+
           <h3 class="sections">Nuestras bicis</h3>
           <section class="containerTarjetas margin10px" >
                 <%data.products.forEach(bici=> { %>
@@ -73,6 +59,8 @@
      
       </main>
       <%- include('partials/footer.ejs')%>
+  <script src="/js/slider.js"></script>
+
   </body>
 
   </html>

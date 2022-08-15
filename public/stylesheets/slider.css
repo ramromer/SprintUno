@@ -1,70 +1,87 @@
 #slider {
   justify-content: center;
   height: 100%;
+  background-color: rgba(255, 255, 255, 0) !important;
+  margin: auto  0px;
 }
+
 .slider-display-container {
-  max-width: 70%;
+  margin: 0px;
+  position: relative;
+  overflow: hidden;
+}
+
+#mySlides {
+  /* height: calc(100vh - 2rem); */
+  height: 30vh;
+  width: 100%;
   display: flex;
-  align-items: center;
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: scroll;
+  scroll-behavior: smooth;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
 }
+
 .sliderImagen {
-  display: none;
-  aspect-ratio: 1/1;
-  height: 20em;
+  aspect-ratio: 1;
+  flex: 1 0 100%;
 }
 
-#btnIzq {
-  opacity: 0.5;
-  transform: translate(0%, -50%);
+#slides-container::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+#prev,
+#next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -22px;
+  padding: 16px;
+  color: orange;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
 }
 
-#btnIzq:hover {
-  animation: movIzq 800ms infinite ease-in-out;
+/* Position the "next button" to the right */
+#next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
 }
 
-#btnDer {
-  opacity: 0.5;
-  transform: translate(0%, -50%);
-}
-#btnDer:hover {
-  animation: movDer 800ms infinite ease-in-out;
+/* On hover, add a black background color with a little bit see-through */
+#prev:hover,
+#next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
-@keyframes movIzq {
-  0% {
-    left: 18%;
-    opacity: 0.8;
-  }
-  50% {
-    left: 17.5%;
-    opacity: 0.6;
-  }
-  100% {
-    left: 18%;
-    opacity: 0.8;
-  }
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+.active,
+.dot:hover {
+  background-color: #717171;
 }
 
-@keyframes movDer {
-  0% {
-    right: 18%;
-    opacity: 0.8;
-  }
-  50% {
-    right: 17.5%;
-    opacity: 0.6;
-  }
-  100% {
-    right: 18%;
-    opacity: 0.8;
-  }
-}
-
-@media (min-width: 361px){
-  #containerSlider{
+@media (min-width: 361px) {
+  #containerSlider {
     display: block;
   }
-  #infoProducto{
+  #infoProducto {
     display: block;
   }
 }
