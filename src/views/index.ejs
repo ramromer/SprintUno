@@ -4,13 +4,25 @@
     <%- include('partials/header.ejs')%>
       <main id="mainIndex">
         <%- include('partials/navMenu.ejs')%>
-
+        <section id="slider">
+          <!-- SLIDER -->
+          <div class="slider-display-container">
+            <button type="button" id="btnIzq" onclick="siguiente(-1)">&#10094;</button>
+            <%data.products.forEach(bici=> { %>
+              <%bici.productsImages.forEach(img=> { %>
+                <!-- <a href="/detalleproducto/<%=bici.idProduct%>" class="product article"> -->
+                  <img class="sliderImagen" src="/images/<%=img.imageProduct%>" style="width:100%">
+                <!-- </a> -->
+                <%})%>
+                  <%})%>
+                    <button type="button" id="btnDer" onclick="siguiente(1)">&#10095;</button>
+          </div>
+          <!-- SLIDER SCRIPT (MUST INCLUDE)-->
+          <%- include('partials/slider.ejs')%>
+        </section>
           <h3 class="sections">Nuestras bicis</h3>
-          <section class="containerTarjetas">
-            <% let biciVisited=[]%>
-              <% listaBicis.forEach( product=> { product.productCategory.forEach(categoryObj => {if(categoryObj.category
-                == "visited"){ biciVisited.push(product) }})})%>
-                <%biciVisited.forEach(bici=> { %>
+          <section class="containerTarjetas margin10px" >
+                <%data.products.forEach(bici=> { %>
                   <a href="/detalleproducto/<%=bici.idProduct%>" class="product article">
                     <img src="/images/<%=bici.productsImages[0].imageProduct%>" alt="<%=bici.alt%>">
                     <div class="producto-descripcion flexContainer">
@@ -29,12 +41,13 @@
                     </div>
                   </a>
                   <%})%>
-          </section>
+                </section>
+               
 
-          <h3 class="sections">Nuestras ofertas para vos!</h3>
+          <!-- <h3 class="sections">Nuestras ofertas para vos!</h3>
           <section class="containerTarjetas">
             <% let biciDiscount=[]%>
-              <% listaBicis.forEach( product=> { product.productCategory.forEach(categoryObj => {if(categoryObj.category
+              <% data.products.forEach( product=> { product.productCategory.forEach(categoryObj => {if(categoryObj.category
                 == "discount"){ biciDiscount.push(product) }})})%>
 
                 <%biciDiscount.forEach(bici=> { %>
@@ -55,24 +68,9 @@
                     </div>
                   </a>
                   <%})%>
-          </section>
-          <h3 class="sections">DESTACADOS</h3>
-          <section id="slider">
-            <!-- SLIDER -->
-            <div class="slider-display-container">
-              <button type="button" id="btnIzq" onclick="siguiente(-1)">&#10094;</button>
-              <%listaBicis.forEach(bici=> { %>
-                <%bici.productsImages.forEach(img=> { %>
-                  <!-- <a href="/detalleproducto/<%=bici.idProduct%>" class="product article"> -->
-                    <img class="sliderImagen" src="/images/<%=img.imageProduct%>" style="width:100%">
-                  <!-- </a> -->
-                  <%})%>
-                    <%})%>
-                      <button type="button" id="btnDer" onclick="siguiente(1)">&#10095;</button>
-            </div>
-            <!-- SLIDER SCRIPT (MUST INCLUDE)-->
-            <%- include('partials/slider.ejs')%>
-          </section>
+          </section> -->
+          <%- include('partials/pagination.ejs')%>
+     
       </main>
       <%- include('partials/footer.ejs')%>
   </body>

@@ -62,7 +62,7 @@ let productsController = {
         delete  queryObject.limit
         delete  queryObject.offset
         }
-
+console.log(queryObject)
       let products = await db.Product.findAndCountAll(queryObject);
 
       if (products === null) {
@@ -71,17 +71,15 @@ let productsController = {
         
         products = getPagingData(products, page, limit);
         products = JSON.parse(JSON.stringify(products, null, 2));
-
           
-          if (!(products.totalPages == 1 || page >= products.totalPages - 1)) {
+        if (!(products.totalPages == 1 || page >= products.totalPages - 1)) {
             products.next =
               [process.env.URL_Server || process.env.URL_DEV] +
               `${process.env.PORT}/api/products?size=${limit}&page=${
                 parseInt(page ? page : 0) + 1
               }`;
           }
-        if (
-          !(
+        if (!(
             products.totalPages == 1 ||
             page >= products.totalPages ||
             page == undefined ||
@@ -93,8 +91,6 @@ let productsController = {
             `${process.env.PORT}/api/products?size=${limit}&page=${page - 1}`;
         }
       
-
-
         for (let i = 0; i < products.rows.length; i++) {
           products.rows[i].detail =
             [process.env.URL_Server || process.env.URL_DEV] +

@@ -1,18 +1,22 @@
 footer {
-
   justify-content: flex-end;
   background-color: rgb(28, 114, 147);
   margin-top: 20px;
   color: white;
   position: relative;
   bottom: 0px;
-  width: 100%; 
-  }
+  width: 100%;
+}
+footer div a:link {
+  text-decoration: none;
+  color: white;
+  font-size: 10px;
+}
 
-  footer a{
-    align-items: center;
-  }
-  footer i {
-    margin: 5px;
-    margin-left: 10px;
-  }
+footer a {
+  align-items: center;
+}
+footer i {
+  margin: 5px;
+  margin-left: 10px;
+}

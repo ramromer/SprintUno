@@ -1,24 +1,74 @@
-const fs = require("fs");
-const path = require("path");
 const db = require("../data/models");
 const sequelize = require("Sequelize");
 
 let mainController = {
-  index: (req, res) => {
-    db.Product.findAll({
-      include: [
-        { association: "productsImages" },
-        { association: "productCategory" },
-      ],
-    })
-      .then((products) => {
-        res.render("index.ejs", { listaBicis: products });
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  },
 
+  index: async (req, res) => {
+    try {
+
+       let { page, size } = req.query;
+
+      const getPagination = (page, size ) => {
+        const limit = size ? +size : 8;
+        const offset = page ? page * limit : 0;
+        return { limit, offset };
+      };
+
+      const getPagingData = (data, page, limit) => {
+        const { count, rows } = data;
+        const currentPage = page ? +page : 0;
+        const totalPages =
+          Math.ceil(count / limit) == Infinity ? 1 : Math.ceil(count / limit);
+        return { count, rows, totalPages, currentPage };
+      };
+
+      const { limit, offset } = getPagination(page, size);
+
+      let queryObject = {
+        limit,
+        offset,
+        include: [
+          { association: "productsImages" },
+          { association: "productCategory" },
+        ],
+        distinct: "idProduct",
+      };
+
+      let products = await db.Product.findAndCountAll(queryObject);
+
+      if (products === null) {
+        res.status(204).send();
+      } else {
+        products = getPagingData(products, page, limit);
+         
+        if (!(products.totalPages == 1 || page >= products.totalPages - 1)) {
+          products.next = parseInt(page ? page : 0) + 1
+            
+        }
+      if (!(
+          products.totalPages == 0 ||
+          page >= products.totalPages ||
+          page == undefined ||
+          page == 0
+        )
+      ) {
+        products.previus = page - 1;
+      }
+    
+        res.render("index.ejs",{
+          data: {
+            products: products.rows,
+            totalPages: products.totalPages,
+            currentPage: products.currentPage,
+            previus : products.previus,
+            next: products.next,
+          },
+        });
+      }
+    } catch (err) {
+      res.status(500).send({ error: err.toString() });
+    }
+  },
   buscar: async (req, res) => {
     try {
       let products = await db.Product.findAll({
@@ -146,7 +196,7 @@ let mainController = {
         },
       });
 
-      res.render(`./products/carrito`, {listaBicis});
+      res.render(`./products/carrito`, { listaBicis });
     } catch (err) {
       err = err.toString();
       res.render(`./error`, { error: err.split(",") });
@@ -216,9 +266,9 @@ let mainController = {
     });
 
     if (req.file) {
-      image=req.file.filename;
+      image = req.file.filename;
     } else {
-      image="porDefecto.jpg";
+      image = "porDefecto.jpg";
     }
 
     let productoNuevo = {
@@ -341,14 +391,13 @@ let mainController = {
 
     try {
       await db.Basket.destroy({
-        where:{
-          idProductFK:req.params.id  ,
-          idColorProductFK:{[sequelize.Op.notIn]:colorsArray},
-          idSizeProductFK:{[sequelize.Op.notIn]:sizesArray},
-          idUserFK: req.session.userLogged.idUser
+        where: {
+          idProductFK: req.params.id,
+          idColorProductFK: { [sequelize.Op.notIn]: colorsArray },
+          idSizeProductFK: { [sequelize.Op.notIn]: sizesArray },
+          idUserFK: req.session.userLogged.idUser,
         },
-    },    
-    )
+      });
 
       await db.Product.update(productoNuevo, {
         // debo usar include para agregar los registros que quiero crear en las tablas externas en base al producto
@@ -441,16 +490,14 @@ let mainController = {
       });
   },
   image: (req, res) => {
-    
-        let options = {
-          root: __dirname + "../../../public/images/"
-        }
-        return res.sendFile(req.params.file, options, function (err) {
-          if (err) {
-            res.send(err);
-          }
-        })
-      
+    let options = {
+      root: __dirname + "../../../public/images/",
+    };
+    return res.sendFile(req.params.file, options, function (err) {
+      if (err) {
+        res.send(err);
+      }
+    });
   },
   error: (req, res) => {
     res.render("error");
