@@ -310,8 +310,8 @@ let mainController = {
     if (fotico) {
       productoNuevo = {
         title: req.body.nombre,
-        description: req.body.descripcionProductoNuevo,
-        descriptionLong: req.body.descripcionProductoNuevo,
+        description: req.body.descripcionEP,
+        descriptionLong: req.body.descripcionEP,
         stock: req.body.cantidad,
         price: req.body.precio,
         // discount: 0, no está en la BD, lo vamos a usar??
@@ -325,8 +325,8 @@ let mainController = {
     } else {
       productoNuevo = {
         title: req.body.nombre,
-        description: req.body.descripcionProductoNuevo,
-        descriptionLong: req.body.descripcionProductoNuevo,
+        description: req.body.descripcionEP,
+        descriptionLong: req.body.descripcionEP,
         stock: req.body.cantidad,
         price: req.body.precio,
         // discount: 0, no está en la BD, lo vamos a usar??
