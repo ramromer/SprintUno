@@ -144,6 +144,7 @@ let mainController = {
           idUserFK: req.session.userLogged.idUser,
         },
       });
+    
       if (listaBicis.length < 1) {
         //condición para mostrar mensaje de "no hay productos en tu carrito"
         res.render(`./products/carritoVacio`);

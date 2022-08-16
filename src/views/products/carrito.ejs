@@ -12,6 +12,7 @@
                                     <i class="fas fa-shopping-cart"></i>
                                     <label class="carro" for="">Mi Carrito</label>
                                 </div>
+                                <%let totalCarrito=0%>
                                 <%listaBicis.forEach(bici=> { %>
                                     <section class="articulo">
                                         <a href="/detalleproducto/<%=bici.BasketProduct.idProduct%>"
@@ -21,10 +22,12 @@
                                             <div class="producto-descripcion flexContainer">
                                                 <div class="price-bar flexContainer">
                                                     <p class="precio" style="text-decoration: line-through">$
-                                                        <%=bici.price%>
+                                                        <%=bici.BasketProduct.price%>
                                                     </p>
-                                                    <%if(bici.descuento){%>
-                                                        <p class="descuento">$ <%=bici.price-(bici.price * bici.discount
+                                                    <% totalCarrito+= bici.BasketProduct.price%>
+
+                                                    <%if(bici.BasketProduct.descuento){%>
+                                                        <p class="descuento">$ <%=bici.BasketProduct.price-(bici.BasketProduct.price * bici.BasketProduct.discount
                                                                 / 100)%>
                                                         </p>
                                                         <%}%>
@@ -55,13 +58,13 @@
                                 </div>
                                 <div class="detalle-cart">
                                     <p class="products">Productos</p>
-                                    <p class="products-pr">$ 280000</p>
+                                    <p class="products-pr">$ <%=totalCarrito%></p>
                                     <p class="envio">Envio</p>
                                     <p class="envio-tipo">Gratis</p>
                                 </div>
                                 <div class="total">
                                     <h4>Total</h4>
-                                    <h4>$ 280000</h4>
+                                    <h4>$ <%=totalCarrito%></h4>
                                 </div>
 
                                 <form action="/carritoVaciar/?_method=DELETE" method="POST"
