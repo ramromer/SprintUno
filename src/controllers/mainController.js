@@ -141,21 +141,30 @@ let mainController = {
         ],
 
         where: {
-          idProductFK: req.session.userLogged.idUser,
+          idUserFK: req.session.userLogged.idUser,
         },
       });
       if (listaBicis.length < 1) {
         //condición para mostrar mensaje de "no hay productos en tu carrito"
         res.redirect("./products/noExiste");
       }
-      res.render("./products/carrito", { listaBicis });
+      res.render(`./products/carrito`, { listaBicis });
     } catch (err) {
       err = err.toString();
       res.render(`./error`, { error: err.split(",") });
       console.log(err);
     }
   },
-
+  carritoVaciar: async (req,res) =>{
+    try{
+      await db.Basket.destroy({where: [{idUserFK: req.session.userLogged.idUser}]})
+      res.redirect('/')
+    } catch (err) {
+      err = err.toString();
+      res.render(`./error`, { error: err.split(",") });
+      console.log(err);
+    }
+  },
   carrito: async (req, res) => {
     try {
       let colorProductId = await db.ColorProduct.findOne({

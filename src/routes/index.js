@@ -4,7 +4,6 @@ let mainController = require('../controllers/mainController.js');
 let multer = require('multer');
 let path = require('path');
 
-
 const storage = multer.diskStorage({
     destination:  function(req, file, cb) {
         cb(null,'./public/images');
@@ -13,6 +12,7 @@ const storage = multer.diskStorage({
         cb(null,`${Date.now()}_img_${path.extname(file.originalname)}`);
     }
 });
+
 const uploadFile = multer({
     storage:storage,
     fileFilter: (req, file, cb) => {
@@ -54,8 +54,8 @@ router.post('/productonuevo',authMiddleware, validateNewProduct, loggerProducts,
 router.put('/editarproducto/:id', authMiddleware, uploadFile.single('image'), mainController.modificarProducto);
 
 router.delete('/productos/:id', authMiddleware, mainController.eliminarProducto);
+router.delete('/carritoVaciar/',authMiddleware, mainController.carritoVaciar);
 
 router.get('*', mainController.notFound);
-
 
 module.exports = router;
