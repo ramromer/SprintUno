@@ -52,6 +52,7 @@ router.get('/accesDenied', mainController.accesDenied);
 router.get('/error', mainController.error);
 
 
+router.delete('/carritoVaciar/',authMiddleware, mainController.carritoVaciar);
 router.post('/carrito/:id',authMiddleware, uploadFile.single('image'), mainController.carrito);
 router.post('/productonuevo',authMiddleware, validateNewProduct, loggerProducts, uploadFile.single('image'), mainController.crearproductoNuevo);
 
