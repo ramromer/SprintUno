@@ -1,71 +1,84 @@
 <%- include('../partials/head.ejs')%>
+
     <body>
         <%- include('../partials/header.ejs')%>
-        <main>
-            <%- include('../partials/navMenu.ejs')%>
-            <section>
-                <div class="body-cart">
-                    <div class="detalle-compra">
-                        <div class="carrito">
-                        
-                            <i class="fas fa-shopping-cart"></i>
-                            <label class="carro" for="">Mi Carrito</label>
-                        </div>
-                        <%listaBicis.forEach(bici=> { %>
-                        <section class="articulo">             
-                                  <a href="/detalleproducto/<%=bici.BasketProduct.idProduct%>" class="product article">
-                                    <img src="/images/<%=bici.BasketProduct.productsImages[0].imageProduct%>" alt="<%=bici.alt%>">
-                                    <div class="producto-descripcion flexContainer">
-                                      <div class="price-bar flexContainer">
-                                        <p class="precio" style="text-decoration: line-through">$ <%=bici.price%>
-                                        </p>
-                                        <%if(bici.descuento){%>
-                                          <p class="descuento">$ <%=bici.price-(bici.price * bici.discount / 100)%>
-                                          </p>
-                                          <%}%>
-                                      </div>
-                                      <h4 class="description">
-                                        <%=bici.BasketProduct.title%>
-                                      </h4>
-                                    </div>
-                                  </a>
-                                  
-                          </section>
-                          <%})%>
-                        <a class="btn-segcompr" href=""><i class="fas fa-angle-left"></i>Continuar Comprando</a>
-                    </div>
-                
-                    
-                
-                    <div class="detalle-pago"> 
-                        <div class="resumen">
-                            <i class="fas fa-shopping-bag"></i><p>RESUMEN</p>
-                        </div>
-                        <div class="detalle-cart">
-                                <p class="products">Productos</p>
-                                <p class="products-pr">$ 280000</p>
-                                <p class="envio">Envio</p>
-                                <p class="envio-tipo">Gratis</p>
-                        </div>
-                        <div class="total">
-                            <h4>Total</h4>
-                            <h4>$ 280000</h4>
-                        </div>
-                        
-                        <form action="/carritoVaciar/?_method=DELETE" method="POST"
-                            style="display: inline-flex">
-                            <button type="submit">Comprar ahora</button>
-                        </form>
+            <main>
+                <%- include('../partials/navMenu.ejs')%>
+                    <section>
+                        <div class="body-cart">
+                            <div class="detalle-compra">
+                                <div class="carrito">
 
-                        <div class="promocion">
-                            <p>¿Tienes un código promocional?</p>
-                        </div> 
-                    </div>
+                                    <i class="fas fa-shopping-cart"></i>
+                                    <label class="carro" for="">Mi Carrito</label>
+                                </div>
+                                <%listaBicis.forEach(bici=> { %>
+                                    <section class="articulo">
+                                        <a href="/detalleproducto/<%=bici.BasketProduct.idProduct%>"
+                                            class="product article">
+                                            <img src="/images/<%=bici.BasketProduct.productsImages[0].imageProduct%>"
+                                                alt="<%=bici.alt%>">
+                                            <div class="producto-descripcion flexContainer">
+                                                <div class="price-bar flexContainer">
+                                                    <p class="precio" style="text-decoration: line-through">$
+                                                        <%=bici.price%>
+                                                    </p>
+                                                    <%if(bici.descuento){%>
+                                                        <p class="descuento">$ <%=bici.price-(bici.price * bici.discount
+                                                                / 100)%>
+                                                        </p>
+                                                        <%}%>
+                                                </div>
+                                                <h4 class="description">
+                                                    <%=bici.BasketProduct.title%>
+                                                </h4>
+                                                
+                                                <form action="/carritoquitar/<%=bici.BasketProduct.idProduct%>?_method=DELETE" method="POST"
+                                                    style="display: inline-flex">
+                                                    <button type="submit">Elimiar Producto</button>
+                                                </form>
+                                            </div>
+                                        </a>
 
-                </div>
-                
-            </section>
-        </main>
-        <%- include('../partials/footer.ejs')%>
+                                    </section>
+                                    <%})%>
+                                        <a class="btn-segcompr" href=""><i class="fas fa-angle-left"></i>Continuar
+                                            Comprando</a>
+                            </div>
+
+
+
+                            <div class="detalle-pago">
+                                <div class="resumen">
+                                    <i class="fas fa-shopping-bag"></i>
+                                    <p>RESUMEN</p>
+                                </div>
+                                <div class="detalle-cart">
+                                    <p class="products">Productos</p>
+                                    <p class="products-pr">$ 280000</p>
+                                    <p class="envio">Envio</p>
+                                    <p class="envio-tipo">Gratis</p>
+                                </div>
+                                <div class="total">
+                                    <h4>Total</h4>
+                                    <h4>$ 280000</h4>
+                                </div>
+
+                                <form action="/carritoVaciar/?_method=DELETE" method="POST"
+                                    style="display: inline-flex">
+                                    <button type="submit">Comprar ahora</button>
+                                </form>
+
+                                <div class="promocion">
+                                    <p>¿Tienes un código promocional?</p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </section>
+            </main>
+            <%- include('../partials/footer.ejs')%>
     </body>
+
     </html>

@@ -165,6 +165,16 @@ let mainController = {
       console.log(err);
     }
   },
+  carritoRemover: async (req,res) =>{
+    try{
+      await db.Basket.destroy({where: [{idUserFK: req.session.userLogged.idUser},{idProductFK: req.params.id}]})
+      res.redirect('/carrito')
+    } catch (err) {
+      err = err.toString();
+      res.render(`./error`, { error: err.split(",") });
+      console.log(err);
+    }
+  },
   carrito: async (req, res) => {
     try {
       let colorProductId = await db.ColorProduct.findOne({
