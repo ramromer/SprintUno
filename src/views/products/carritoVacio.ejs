@@ -1,0 +1,89 @@
+<%- include('../partials/head.ejs')%>
+    <body>
+        <%- include('../partials/header.ejs')%>
+        <main>
+            <%- include('../partials/navMenu.ejs')%>
+            <section>
+                <div class="body-cart">
+                    <div class="detalle-compra">
+                        <div class="carrito">
+                        
+                            <i class="fas fa-shopping-cart"></i>
+                            <label class="carro" for="">Mi Carrito</label>
+                        </div>
+                        <!-- <article class="articulo">
+                                <img src="/images/bicicleta-orbea-rise-m20.jpg" alt="Bicicleta">
+                                <div>
+                                    <p>Bicicleta Orbea Rise -M21 (2021 Orbea Days)</p>
+
+                                    <label for="cantidad">Cantidad</label>
+                                    
+                                    <input type="number" name="cantidad" id="cantidad">
+
+                                    <label for="precio">Precio: $150.000</label>
+                                    <i class="far fa-trash-alt"></i>
+                                </div>
+                        </article>
+
+                        <article  class="articulo">
+                            <img src="/images/bicicleta-orbea-rise-m21.jpg" alt="Bicicleta">
+                            <div>
+                                <p>Bicicleta Orbea Rise M20 (2021 Orbea Days)</p>
+
+                                    <label for="cantidad">Cantidad</label>
+                                    
+                                    <input type="number" name="cantidad" id="cantidad">
+
+                                    <label for="precio">Precio: $130.000</label> 
+                                    <i class="far fa-trash-alt"></i>                 
+                            </div>
+                        </article> -->
+                    
+                        <section class="articulo">            
+                            
+                                    <div class="producto-descripcion flexContainer">
+                                      <h4 class="description">
+                                        TU CARRITO ESTA VACIO
+                                      </h4>
+                                    </div>
+                                  </a>
+                                  
+                          </section>
+                        
+                        <a class="btn-segcompr" href="/"><i class="fas fa-angle-left"></i>Agregar productos</a>
+                    </div>
+                
+                    
+                
+                    <div class="detalle-pago"> 
+                        <div class="resumen">
+                            <i class="fas fa-shopping-bag"></i><p>RESUMEN</p>
+                        </div>
+                        <div class="detalle-cart">
+                                <p class="products">Productos</p>
+                                <p class="products-pr">$ 0</p>
+                                <p class="envio">Envio</p>
+                                <p class="envio-tipo">Gratis</p>
+                        </div>
+                        <div class="total">
+                            <h4>Total</h4>
+                            <h4>$ 0</h4>
+                        </div>
+                        
+                        <form action="/carritoVaciar/?_method=DELETE" method="POST"
+                            style="display: inline-flex">
+                            <button type="submit" disabled="true">Comprar ahora</button>
+                        </form>
+
+                        <div class="promocion">
+                            <p>¿Tienes un código promocional?</p>
+                        </div> 
+                    </div>
+
+                </div>
+                
+            </section>
+        </main>
+        <%- include('../partials/footer.ejs')%>
+    </body>
+    </html>
