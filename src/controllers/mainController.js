@@ -146,7 +146,7 @@ let mainController = {
       });
       if (listaBicis.length < 1) {
         //condición para mostrar mensaje de "no hay productos en tu carrito"
-        res.redirect("./products/noExiste");
+        res.render(`./products/carritoVacio`);
       }
       res.render(`./products/carrito`, { listaBicis });
     } catch (err) {
