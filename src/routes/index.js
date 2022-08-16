@@ -28,8 +28,6 @@ const uploadFile = multer({
 const authMiddleware = require('../middlewares/authMiddleware');
 const loggerProducts = require('../middlewares/products_log');
 
-
-
 const {body} = require('express-validator');
 const validateNewProduct = [
   body('nombre').notEmpty().withMessage('Debe ingresar un nombre.'),
@@ -44,21 +42,20 @@ router.get('/buscar', mainController.buscar);
 router.get('/productos', mainController.productos);
 router.get('/products/image/:file',mainController.image);
 router.get('/carrito',authMiddleware, mainController.showCarrito);
- router.get('/productonuevo', authMiddleware, mainController.productoNuevo);
+router.get('/productonuevo', authMiddleware, mainController.productoNuevo);
 router.get('/opciones', authMiddleware, mainController.opciones);
 router.get('/editarproducto/:id', authMiddleware, mainController.editarProducto); 
-router.delete('/productos/:id', authMiddleware, mainController.eliminarProducto);
 router.get('/accesDenied', mainController.accesDenied);
 router.get('/error', mainController.error);
 
-
 router.post('/carrito/:id',authMiddleware, uploadFile.single('image'), mainController.carrito);
-router.post('/productonuevo',authMiddleware, validateNewProduct, loggerProducts, uploadFile.single('image'), mainController.crearproductoNuevo);
+router.post('/productonuevo',authMiddleware, validateNewProduct, loggerProducts, uploadFile.single('image'), mainController.crearProductoNuevo);
 
 router.put('/editarproducto/:id', authMiddleware, uploadFile.single('image'), mainController.modificarProducto);
 
-router.get('*', mainController.notFound);
+router.delete('/productos/:id', authMiddleware, mainController.eliminarProducto);
 
+router.get('*', mainController.notFound);
 
 
 module.exports = router;
