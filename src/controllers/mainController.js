@@ -235,6 +235,7 @@ let mainController = {
       });
   },
 
+  // in progress
   opciones: (req, res) => {
     res.render("./products/agregarOpciones");
   },
@@ -243,7 +244,7 @@ let mainController = {
     res.render("./products/productoNuevo");
   },
 
-  crearproductoNuevo: async (req, res) => {
+  crearProductoNuevo: async (req, res) => {
     let colors = [];
     let sizes = [];
     let categories = [];
@@ -282,8 +283,8 @@ let mainController = {
 
     let productoNuevo = {
       title: req.body.nombre,
-      description: req.body.descripcionProductoNuevo,
-      descriptionLong: req.body.descripcionProductoNuevo,
+      description: req.body.descripcionPN,
+      descriptionLong: req.body.descripcionPN,
       stock: req.body.cantidad,
       price: req.body.precio,
       // discount: 0, no está en la BD, lo vamos a usar??
