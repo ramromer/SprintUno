@@ -1,0 +1,17 @@
+<section id="slider">
+     <div class="slider-display-container"><!--class="slider-wrapper" -->
+        <ul id="mySlides" ><!--slides-container"  -->
+            <% for (let i=1; i <=5; i++ ) { %>
+                <li class="sliderImagen"> <img   src="/images/banner/<%=i%>.jpeg" style="width:100%"></li><!-- class="slide" -->
+            <%}%>
+        </ul>
+        <a   id="prev" style="display:none">&#10094;</a>
+        <a   id="next" style="display:none">&#10095;</a>
+   
+    <!-- <div style="text-align:center">
+        <% for (let e=1; e <=5; e++ ) { %>
+            <span class="dot" onclick="currentSlide('<%=e%>')"></span>
+        <%}%>
+    </div> -->
+</div>
+</section>
