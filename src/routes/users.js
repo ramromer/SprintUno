@@ -119,7 +119,7 @@ const authMiddleware = require('../middlewares/authMiddleware');
 
 /* POST user */
 router.post('/login', validateUserLogin, usersController.loginProcess);
-router.post('/register', uploadFile.single('image'), validateUserRegister, usersController.registerWrite);
+router.post('/register', uploadFile.single('image'), validateUserRegister, usersController.registerWrite); //crear usuario
 
 /* PUT user */
 router.put('/update/:id',authMiddleware, uploadFile.single('image'), validateUserUpdate, usersController.update);
@@ -130,7 +130,7 @@ router.delete('/delete/:id', authMiddleware, usersController.eliminarUsuario);//
 /* GET users listing. */
 router.get('/login',guestMiddleware, usersController.login);
 router.get('/register/:email', usersController.askRegister);
-router.get('/register',guestMiddleware, usersController.register);
+router.get('/register',guestMiddleware, usersController.register);//crear usuario
 router.get('/edit/:id',authMiddleware, usersController.edit);//Editar usuario
 router.get('/profile',authMiddleware,usersController.profile);
 router.get('/image/:file',usersController.image);
