@@ -1,119 +1,109 @@
 <%- include('../partials/head.ejs')%>
 
+
   <body>
     <%- include('../partials/header.ejs')%>
       <main class="flexContainer">
         <%- include('../partials/navMenu.ejs')%>
-          <div id="containerSlider">
-            <section class="flexContainer" id="slider">
-              <!-- SLIDER -->
-              <div class="slider-display-container">
-                <button type="button" id="btnIzq" onclick="siguiente(-1)">&#10094;</button>
-                <%producto.productsImages.forEach(image=> { %>
-                  <img class="sliderImagen" src="/images/<%= image.imageProduct %>">
-                  <%})%>
-                    <button type="button" id="btnDer" onclick="siguiente(1)">&#10095;</button>
-              </div>
-              <!-- SLIDER SCRIPT (MUST INCLUDE)-->
-              <%- include('../partials/slider.ejs')%>
+          <%- include('../partials/slider.ejs')%>
+            <section id="formDetalleProdcuto">
+              <form class="flexContainer " id="infoProducto" action="/carrito/<%= producto.idProduct%>" method="POST"
+                enctype="multipart/form-data">
+
+                <div id="tituloProducto" class="flexContainer margin10px">
+                  <label>
+                    <%= producto.title %>
+                  </label>
+
+                </div>
+                <div class="flexContainer" id="precioProducto">
+                  <label for="precioDP">Precio: </label>
+                  <h4 class="margin10px flexContainer centradoxy" id="precioDP">$<%= producto.price %>
+                  </h4>
+                </div>
+                <div class="flexContainer">
+                  <label>Color:</label>
+                  <div class="flexContainer centradoxy space-evenly">
+
+                    <% producto.product_ColorProduct.forEach(color=> { %>
+                      <%if(color.dataValues.idColorFK==1){%>
+                        <label for="colorWhite"> Blanco</label><input type="radio" id='colorWhite' name="color"
+                          value="1" checked="true">
+                        <%}%>
+                          <%if(color.dataValues.idColorFK==2){%>
+                            <label for="colorRed"> Rojo</label><input type="radio" id='colorRed' name="color" value="2"
+                              checked="true">
+                            <%}%>
+                              <%if(color.dataValues.idColorFK==3){%>
+                                <label for="colorBlack"> Negro</label><input type="radio" id='colorBlack' name="color"
+                                  checked="true" value="3">
+                                <%}%>
+                                  <% }) %>
+                  </div>
+                </div>
+                <br>
+                <br>
+                <div class="flexContainer">
+                  <label>Tamaño: </label>
+                  <div class="flexContainer centradoxy space-evenly">
+                    <% producto.productSizes.forEach(size=> { %>
+                      <%if(size.dataValues.idSizeFK==1){%>
+                        <label for="tamanioS">Rodado 20</label><input type="radio" name="tamanio" id="tamanioS"
+                          checked="true" value="1">
+                        <%};%>
+                          <%if(size.dataValues.idSizeFK==2){%>
+                            <label for="tamanioM">Rodado 26</label><input type="radio" name="tamanio" id="tamanioM"
+                              checked="true" value="2">
+                            <%};%>
+                              <%if(size.dataValues.idSizeFK==3){%>
+                                <label for="tamanioL">Rodado 29</label><input type="radio" name="tamanio" checked="true"
+                                  id="tamanioL" value="3">
+                                <%};%>
+                                  <% }) %>
+                  </div>
+                </div>
+                <br>
+                <br>
+                <div class="flexContainer" id="cantidadProducto">
+                  <label>Cantidad: </label>
+                  <div class="flexContainer centradoxy space-evenly">
+                    <button type="button" class="arrowInputNumber" id="minusBtn">-</button>
+                    <input id="cantidad" name="cantidad" class="textocentrado" value="1" type="number" min="1"
+                      max="<%= producto.stock %>">
+                    <button type="button" class="arrowInputNumber" id="plusBtn">+</button>
+                    <div class="validationAlert" id="zeroAlert">
+                      La cantidad debe ser mayor a cero
+                    </div>
+                    <div class="validationAlert" id="maxAlert">
+                      La cantidad no debe ser mayor a nuestro stock
+                    </div>
+                  </div>
+                  <h4 class="textGray">tenemos <%= producto.stock %> unidades diponibles!</h4>
+                </div>
+                <div id="containerBtn" class="flexContainer">
+                  <button type="submit" class="btnSuccess" id="btnCompraAhora">Compra ahora</button>
+                </div>
+                <% if(locals.isLogged){ %>
+                  <a id="editarProducto" href="/editarproducto/<%= producto.idProduct%>">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                  <%} %>
+              </form>
+
             </section>
-          </div>
-          <section id="formDetalleProdcuto">
-            <form class="flexContainer " id="infoProducto" action="/carrito/<%= producto.idProduct%>" method="POST"
-              enctype="multipart/form-data">
-
-              <div id="tituloProducto" class="flexContainer margin10px">
-                <label>
-                  <%= producto.title %>
-                </label>
-
+            <section id="descripcionProducto">
+              <div id="">
+                <h4>Descripción</h4>
+                <p>
+                  <%= producto.description %>
+                </p>
               </div>
-              <div class="flexContainer" id="precioProducto">
-                <label for="precioDP">Precio: </label>
-                <h4 class="margin10px flexContainer centradoxy" id="precioDP">$<%= producto.price %>
-                </h4>
-              </div>
-              <div class="flexContainer">
-                <label>Color:</label>
-                <div class="flexContainer centradoxy space-evenly">
-
-                  <% producto.product_ColorProduct.forEach(color=> { %>
-                    <%if(color.dataValues.idColorFK==1){%>
-                      <label for="colorWhite"> Blanco</label><input type="radio" id='colorWhite' name="color" value="1"
-                        checked="true">
-                      <%}%>
-                        <%if(color.dataValues.idColorFK==2){%>
-                          <label for="colorRed"> Rojo</label><input type="radio" id='colorRed' name="color" value="2"
-                            checked="true">
-                          <%}%>
-                            <%if(color.dataValues.idColorFK==3){%>
-                              <label for="colorBlack"> Negro</label><input type="radio" id='colorBlack' name="color"
-                                checked="true" value="3">
-                              <%}%>
-                                <% }) %>
-                </div>
-              </div>
-              <br>
-              <br>
-              <div class="flexContainer">
-                <label>Tamaño: </label>
-                <div class="flexContainer centradoxy space-evenly">
-                  <% producto.productSizes.forEach(size=> { %>
-                    <%if(size.dataValues.idSizeFK==1){%>
-                      <label for="tamanioS">Rodado 20</label><input type="radio" name="tamanio" id="tamanioS"
-                        checked="true" value="1">
-                      <%};%>
-                        <%if(size.dataValues.idSizeFK==2){%>
-                          <label for="tamanioM">Rodado 26</label><input type="radio" name="tamanio" id="tamanioM"
-                            checked="true" value="2">
-                          <%};%>
-                            <%if(size.dataValues.idSizeFK==3){%>
-                              <label for="tamanioL">Rodado 29</label><input type="radio" name="tamanio" checked="true"
-                                id="tamanioL" value="3">
-                              <%};%>
-                                <% }) %>
-                </div>
-              </div>
-              <br>
-              <br>
-              <div class="flexContainer" id="cantidadProducto">
-                <label>Cantidad: </label>
-                <div class="flexContainer centradoxy space-evenly">
-                  <button type="button" class="arrowInputNumber" id="minusBtn">-</button>
-                  <input id="cantidad" name="cantidad" class="textocentrado" value="1" type="number" min="1"
-                    max="<%= producto.stock %>" >
-                  <button type="button" class="arrowInputNumber" id="plusBtn">+</button>
-                  <div class="validationAlert" id="zeroAlert">
-                    La cantidad debe ser mayor a cero
-                  </div>
-                  <div class="validationAlert" id="maxAlert">
-                    La cantidad no debe ser mayor a nuestro stock
-                  </div>
-                </div>
-                <h4 class="textGray">tenemos <%= producto.stock %> unidades diponibles!</h4>
-              </div>
-              <div id="containerBtn" class="flexContainer">
-                <button type="submit" class="btnSuccess"id="btnCompraAhora">Compra ahora</button>
-              </div>
-              <% if(locals.isLogged){ %>
-                <a id="editarProducto" href="/editarproducto/<%= producto.idProduct%>">
-                  <i class="fas fa-edit"></i>
-                </a>
-                <%} %>
-            </form>
-
-          </section>
-          <section id="descripcionProducto">
-            <div id="">
-              <h4>Descripción</h4>
-              <p>
-                <%= producto.description %>
-              </p>
-            </div>
-          </section>
+            </section>
       </main>
       <%- include('../partials/footer.ejs')%>
         <script src="/js/detalleProducto.js"></script>
+        <script src="/js/slider.js"></script>
+
   </body>
 
   </html>

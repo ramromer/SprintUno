@@ -144,9 +144,10 @@ let mainController = {
           idUserFK: req.session.userLogged.idUser,
         },
       });
+    
       if (listaBicis.length < 1) {
         //condición para mostrar mensaje de "no hay productos en tu carrito"
-        res.redirect("./products/noExiste");
+        res.render(`./products/carritoVacio`);
       }
       res.render(`./products/carrito`, { listaBicis });
     } catch (err) {
@@ -159,6 +160,16 @@ let mainController = {
     try{
       await db.Basket.destroy({where: [{idUserFK: req.session.userLogged.idUser}]})
       res.redirect('/')
+    } catch (err) {
+      err = err.toString();
+      res.render(`./error`, { error: err.split(",") });
+      console.log(err);
+    }
+  },
+  carritoRemover: async (req,res) =>{
+    try{
+      await db.Basket.destroy({where: [{idUserFK: req.session.userLogged.idUser},{idProductFK: req.params.id}]})
+      res.redirect('/carrito')
     } catch (err) {
       err = err.toString();
       res.render(`./error`, { error: err.split(",") });
@@ -235,6 +246,7 @@ let mainController = {
       });
   },
 
+  // in progress
   opciones: (req, res) => {
     res.render("./products/agregarOpciones");
   },
@@ -243,7 +255,7 @@ let mainController = {
     res.render("./products/productoNuevo");
   },
 
-  crearproductoNuevo: async (req, res) => {
+  crearProductoNuevo: async (req, res) => {
     let colors = [];
     let sizes = [];
     let categories = [];
@@ -282,8 +294,8 @@ let mainController = {
 
     let productoNuevo = {
       title: req.body.nombre,
-      description: req.body.descripcionProductoNuevo,
-      descriptionLong: req.body.descripcionProductoNuevo,
+      description: req.body.descripcionPN,
+      descriptionLong: req.body.descripcionPN,
       stock: req.body.cantidad,
       price: req.body.precio,
       // discount: 0, no está en la BD, lo vamos a usar??

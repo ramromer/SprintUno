@@ -1,3 +1,4 @@
+
 module.exports={
   "developmentRemote": {
     "username": "uxqfkay4mojjyps6",
@@ -9,9 +10,11 @@ module.exports={
 
   },
   "development": {
-    "username": "root",
-    "password": "",
-    "database": "Kletadb",
+
+    "username":"root",
+     "password": `${process.env.DB_KEY}`,
+     "database": "kletaDB",
+
     "host": "127.0.0.1",
     "dialect": "mysql"
   },

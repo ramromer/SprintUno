@@ -4,63 +4,33 @@
     <%- include('partials/header.ejs')%>
       <main id="mainIndex">
         <%- include('partials/navMenu.ejs')%>
-        <%- include('partials/slider.ejs')%>
+          <%- include('partials/banner.ejs')%>
 
-          <h3 class="sections">Nuestras bicis</h3>
-          <section class="containerTarjetas margin10px" >
-                <%data.products.forEach(bici=> { %>
-                  <a href="/detalleproducto/<%=bici.idProduct%>" class="product article">
-                    <img src="/images/<%=bici.productsImages[0].imageProduct%>" alt="<%=bici.alt%>">
-                    <div class="producto-descripcion flexContainer">
-                      <div class="price-bar flexContainer">
-                        <p class="precio">$ <%=bici.price%>
+            <h3 class="sections">Nuestras bicis</h3>
+            <section class="containerTarjetas margin10px">
+              <%data.products.forEach(bici=> { %>
+                <a href="/detalleproducto/<%=bici.idProduct%>" class="product article">
+                  <img src="/images/<%=bici.productsImages[0].imageProduct%>" alt="<%=bici.alt%>">
+                  <div class="producto-descripcion flexContainer">
+                    <div class="price-bar flexContainer">
+                      <p class="precio">$ <%=bici.price%>
+                      </p>
+                      <%if(bici.descuento){%>
+                        <p class="descuento">
+                          <%=bici.descuento%>
                         </p>
-                        <%if(bici.descuento){%>
-                          <p class="descuento">
-                            <%=bici.descuento%>
-                          </p>
-                          <%}%>
-                      </div>
-                      <h4 class="description">
-                        <%=bici.title%>
-                      </h4>
+                        <%}%>
                     </div>
-                  </a>
-                  <%})%>
-                </section>
-               
-
-          <!-- <h3 class="sections">Nuestras ofertas para vos!</h3>
-          <section class="containerTarjetas">
-            <% let biciDiscount=[]%>
-              <% data.products.forEach( product=> { product.productCategory.forEach(categoryObj => {if(categoryObj.category
-                == "discount"){ biciDiscount.push(product) }})})%>
-
-                <%biciDiscount.forEach(bici=> { %>
-                  <a href="/detalleproducto/<%=bici.idProduct%>" class="product article">
-                    <img src="/images/<%=bici.productsImages[0].imageProduct%>" alt="<%=bici.alt%>">
-                    <div class="producto-descripcion flexContainer">
-                      <div class="price-bar flexContainer">
-                        <p class="precio" style="text-decoration: line-through">$ <%=bici.price%>
-                        </p>
-                        <%if(bici.descuento){%>
-                          <p class="descuento">$ <%=bici.price-(bici.price * bici.discount / 100)%>
-                          </p>
-                          <%}%>
-                      </div>
-                      <h4 class="description">
-                        <%=bici.title%>
-                      </h4>
-                    </div>
-                  </a>
-                  <%})%>
-          </section> -->
-          <%- include('partials/pagination.ejs')%>
-     
+                    <h4 class="description">
+                      <%=bici.title%>
+                    </h4>
+                  </div>
+                </a>
+                <%})%>
+            </section>
+            <%- include('partials/pagination.ejs')%>
       </main>
       <%- include('partials/footer.ejs')%>
-  <script src="/js/slider.js"></script>
-
+        <script src="/js/banner.js"></script>
   </body>
-
   </html>

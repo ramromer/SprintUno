@@ -1,0 +1,62 @@
+<%- include('../partials/head.ejs')%>
+
+    <body>
+        <%- include('../partials/header.ejs')%>
+        <main>
+            <%- include('../partials/navMenu.ejs')%>
+            <section>
+                <div class="body-cart">
+                    <div class="detalle-compra">
+                        <div class="carrito">
+                        
+                            <i class="fas fa-shopping-cart"></i>
+                            <label class="carro" for="">Mi Carrito</label>
+                        </div>
+                        <section class="articulo">            
+                            
+                                    <div class="producto-descripcion flexContainer">
+                                      <h4 class="description">
+                                        TU CARRITO ESTA VACIO
+                                      </h4>
+                                    </div>
+                                  </a>
+                                  
+                          </section>
+                        
+                        <a class="btn-segcompr" href="/"><i class="fas fa-angle-left"></i>Agregar productos</a>
+                    </div>
+                
+                    
+                
+                    <div class="detalle-pago"> 
+                        <div class="resumen">
+                            <i class="fas fa-shopping-bag"></i><p>RESUMEN</p>
+                        </div>
+                        <div class="detalle-cart">
+                                <p class="products">Productos</p>
+                                <p class="products-pr">$ 0</p>
+                                <p class="envio">Envio</p>
+                                <p class="envio-tipo">Gratis</p>
+                        </div>
+                        <div class="total">
+                            <h4>Total</h4>
+                            <h4>$ 0</h4>
+                        </div>
+                        
+                        <form action="/carritoVaciar/?_method=DELETE" method="POST"
+                            style="display: inline-flex">
+                            <button type="submit" disabled="true">Comprar ahora</button>
+                        </form>
+
+                        <div class="promocion">
+                            <p>¿Tienes un código promocional?</p>
+                        </div> 
+                    </div>
+
+                </div>
+                
+            </section>
+        </main>
+        <%- include('../partials/footer.ejs')%>
+    </body>
+    </html>

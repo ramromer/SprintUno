@@ -1,17 +1,12 @@
-<section id="slider">
-     <div class="slider-display-container"><!--class="slider-wrapper" -->
-        <ul id="mySlides" ><!--slides-container"  -->
-            <% for (let i=1; i <=6; i++ ) { %>
-                <li class="sliderImagen"> <img   src="/images/banner/<%=i%>.jpg" style="width:100%"></li><!-- class="slide" -->
-            <%}%>
-        </ul>
-        <a   id="prev" >&#10094;</a>
-        <a   id="next" >&#10095;</a>
-   
-    <div style="text-align:center">
-        <% for (let e=1; e <=6; e++ ) { %>
-            <span class="dot" onclick="currentSlide('<%=e%>')"></span>
-        <%}%>
+<section class="flexContainer" id="slider">
+    <!-- SLIDER -->
+    <div class="slider-display-container">
+      <button type="button" id="btnIzq" onclick="siguiente(-1)">&#10094;</button>
+      <%producto.productsImages.forEach(image=> { %>
+        <img class="sliderImagen" src="/images/<%= image.imageProduct %>">
+        <%})%>
+          <button type="button" id="btnDer" onclick="siguiente(1)">&#10095;</button>
     </div>
+    <!-- SLIDER SCRIPT (MUST INCLUDE)-->
+  </section>
 </div>
-</section>
