@@ -44,7 +44,7 @@ router.get('/buscar', mainController.buscar);
 router.get('/productos', mainController.productos);
 router.get('/products/image/:file',mainController.image);
 router.get('/carrito',authMiddleware, mainController.showCarrito);
- router.get('/productonuevo', authMiddleware, mainController.productoNuevo);
+router.get('/productonuevo', authMiddleware, mainController.productoNuevo);
 router.get('/opciones', authMiddleware, mainController.opciones);
 router.get('/editarproducto/:id', authMiddleware, mainController.editarProducto); 
 router.delete('/productos/:id', authMiddleware, mainController.eliminarProducto);
