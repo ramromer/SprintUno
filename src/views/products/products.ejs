@@ -1,4 +1,5 @@
 
+  <%- include('../partials/head.ejs')%>
   <body>
     <%- include('../partials/header.ejs')%>
       <main id="mainIndex">
@@ -6,7 +7,7 @@
         
         <h3 class="sections">Resultados para la busqueda "<%=busqueda%>"</h3>
         <section class="containerTarjetas">
-          
+          <%if (listaBicis.length > 0) { %>
             <%listaBicis.forEach(bici=> { %>
             <a href="/detalleproducto/<%=bici.idProduct%>" class="product article">
                 <img src="/images/<%= bici.productsImages[0].imageProduct%>" alt="Image not found">
@@ -21,6 +22,10 @@
                 </div>
               </a>
           <%})%>
+          <% }else{ %>
+            <p>NO se encontraron resultados</p>
+          <%}%>
+
         </section>
       </main>
       <%- include('../partials/footer.ejs')%>

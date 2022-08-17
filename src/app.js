@@ -8,7 +8,7 @@ let logger = require("morgan");
 let userLoggedMiddleware = require("./middlewares/userLoggedMiddleware");
 let session = require("express-session");
 let indexRouter = require("./routes/index");
-let usersRouter = require("./routes/users");
+let usersRouter = require("./routes/users"); //ruta usuarios
 let usersAPIRouter = require("./routes/API/userAPI.js");
 let productsAPIRouter = require("./routes/API/productAPI.js");
 let categoryAPIRouter = require("./routes/API/categoryAPI.js");
@@ -44,7 +44,7 @@ app.use(express.static(path.join(__dirname, "../public")));
 app.use(userLoggedMiddleware);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false })); //URL encode  - Para que nos pueda llegar la información desde el formulario al req.body
-app.use("/users", usersRouter);
+app.use("/users", usersRouter); //rutas de usuarios
 app.use("/api", usersAPIRouter, productsAPIRouter, categoryAPIRouter);  
 app.use("/", indexRouter);
 
