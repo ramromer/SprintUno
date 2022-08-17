@@ -8,12 +8,13 @@
     align-items: center;
   }
   .sliderImagen {
-    display: none;
+    
     aspect-ratio: 1/1;
     height: 20em;
   }
   
   #btnIzq {
+    display: none;
     opacity: 0.5;
     transform: translate(0%, -50%);
   }
@@ -23,6 +24,8 @@
   }
   
   #btnDer {
+    display: none;
+
     opacity: 0.5;
     transform: translate(0%, -50%);
   }

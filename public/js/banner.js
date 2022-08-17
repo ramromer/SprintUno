@@ -1,6 +1,6 @@
 
 const slidesContainer = document.getElementById("mySlides");
-const slide = document.querySelector(".sliderImagen");
+const slide = document.querySelector(".bannerImagen");
 const prevButton = document.getElementById("prev");
 const nextButton = document.getElementById("next");
  

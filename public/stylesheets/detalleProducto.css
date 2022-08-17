@@ -18,17 +18,6 @@
   flex-wrap: wrap;
 }
 
-/* .iconCircle {
-    border-radius: 50%;
-    border: 1px solid;
-    width: 30px;
-    height: 30px;
-    margin-left: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  } */
-
 .iconCircle {
   height: 30px;
   width: 29px;

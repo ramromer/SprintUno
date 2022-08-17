@@ -1,12 +1,15 @@
 #banner {
   justify-content: center;
   height: 100%;
+  width: 100% !important;
   background-color: rgba(255, 255, 255, 0) !important;
-  margin: auto  0px;
+  margin: 0px;
 }
 
 .banner-display-container {
   margin: 0px;
+  width: 100% !important;
+
   position: relative;
   overflow: hidden;
 }

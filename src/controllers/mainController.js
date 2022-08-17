@@ -238,7 +238,7 @@ let mainController = {
         if (product == undefined) {
           res.redirect("./products/noExiste");
         } else {
-          res.render("./products/detalleProducto", { producto: product });
+          res.render("./products/detalleProducto", { product: product });
         }
       })
       .catch((err) => {
