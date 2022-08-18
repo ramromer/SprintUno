@@ -1,6 +1,6 @@
 <div class="pagination margin10px">
   <% if(data.previus >= 0 ){%>
-    <a href="http://localhost:3010/?page=<%=data.previus%>">&laquo;</a>
+    <a class="arrow" href="http://localhost:3010/?page=<%=data.previus%>">&laquo;</a>
   <%}%>
   <% for (let e =0; e <data.totalPages;  e++ ) { %>
     <% if(e == data.currentPage ){ %>
@@ -10,6 +10,6 @@
     <%}%>
   <%}%>
   <% if(data.next ){%>
-    <a href="http://localhost:3010/?page=<%=data.next%>">&raquo;</a>
+    <a class="arrow" href="http://localhost:3010/?page=<%=data.next%>">&raquo;</a>
   <%}%>
 </div>
